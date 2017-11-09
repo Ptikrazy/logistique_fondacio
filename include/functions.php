@@ -108,7 +108,7 @@ function get_participant($id) {
 
 function get_transports($camp, $aller_retour, $prepa, $moyen_transport, $ville) {
 
-    global $bdd, $dates_camp;
+    global $bdd;
 
     $data = array();
     $req = 'SELECT id_participant, nom, prenom, type, tel_portable, mere_portable, pere_portable, '.$aller_retour.'_transport AS transport, '.$aller_retour.'_heure AS heure, '.$aller_retour.'_ville AS ville, '.$aller_retour.'_date AS date FROM participants WHERE camp = '.$camp;

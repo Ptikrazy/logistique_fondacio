@@ -15,7 +15,7 @@ require_once 'include/head.php';
 
 <?php
 
-$donnees = alertes_transports('arrivees');
+/*$donnees = alertes_transports('arrivees');
 echo '<h4>Arrivées en train du jour ('.date('d/m/Y').')</h4>';
 echo '<ul>';
 foreach ($donnees as $data) {
@@ -71,7 +71,7 @@ echo '<ul>';
 foreach ($donnees as $data) {
     echo '<li><b>'.$data['nom'].'</b> '.$data['prenom'].': <b><span style="color: red">'.convert_date($data['retour_date']).'</span></b> ('.$data['tel_portable'].')</li>';
 }
-echo '</ul>';
+echo '</ul>';*/
 
 ?>
 
