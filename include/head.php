@@ -8,11 +8,13 @@
 
         <link href="/include/css/bootstrap-4.0.0.min.css" rel="stylesheet">
         <link href="/include/css/swal2.min.css" rel="stylesheet">
+        <link href="/include/css/multistepForm.css" rel="stylesheet">
 
         <script src="/include/js/jquery-3.2.1.slim.min.js"></script>
         <script src="/include/js/popper-1.12.3.min.js"></script>
         <script src="/include/js/bootstrap-4.0.0.min.js"></script>
         <script src="/include/js/swal2.min.js"></script>
+        <script src="/include/js/multistepForm.js"></script>
     </head>
 
     <body>
@@ -21,15 +23,16 @@
         <a class="navbar-brand" href="/">Logistique Fondacio</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="participants.php">Participants</a></li>
                 <li class="nav-item"><a class="nav-link" href="remplissage.php">Remplissage</a></li>
                 <li class="nav-item"><a class="nav-link" href="exports.php">Exports</a></li>
                 <li class="nav-item"><a class="nav-link" href="transports.php">Transports</a></li>
                 <li class="nav-item"><a class="nav-link" href="activites.php">Activités</a></li>
-                <li class="nav-item"><a class="nav-link" href="inscriptions.php">Inscriptions</a></li>
+                <li class="nav-item"><a class="nav-link" href="inscriptions.php">Inscriptions</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="inscription.php">Inscription</a></li>
                 <li class="nav-item"><a class="nav-link" href="administration.php">Administration</a></li>
-                <li class="nav-item"><a class="nav-link" href="aide.php">Aide</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="aide.php">Aide</a></li> -->
             </ul>
         </div>
     </nav>
