@@ -5,11 +5,11 @@ require_once 'include/init.php';
 $title = 'Administration';
 require_once 'include/head.php';
 
-if (isset($_POST['submit'])) {
+if (!empty($_POST['login'])) {
 
-    if (!check_password($_POST['login'], $_POST['password'])) {
+    if (check_password($_POST['login'], $_POST['password'])) {
 
-        echo 'coucou';
+        echo 'Page d\'administration en travaux.';
 
     }
 
