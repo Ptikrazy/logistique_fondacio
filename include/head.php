@@ -1,41 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <title><?php echo $title; ?></title>
 
-        <link href="/include/css/jquery-ui.min.css" rel="stylesheet">
-        <link href="/include/css/bootstrap-3.3.7.min.css" rel="stylesheet">
+        <link href="/include/css/bootstrap-4.0.0.min.css" rel="stylesheet">
         <link href="/include/css/swal2.min.css" rel="stylesheet">
-        <script src="/include/js/jquery-3.1.1.min.js"></script>
-        <script src="/include/js/jquery-ui.min.js"></script>
-        <script src="/include/js/bootstrap-3.3.7.min.js"></script>
+
+        <script src="/include/js/jquery-3.2.1.slim.min.js"></script>
+        <script src="/include/js/popper-1.12.3.min.js"></script>
+        <script src="/include/js/bootstrap-4.0.0.min.js"></script>
         <script src="/include/js/swal2.min.js"></script>
     </head>
+
     <body>
-      <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="index.php">Base Fondacio</a>
-          </div>
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="index.php">Accueil</a></li>
-              <li><a href="participants.php">Participants</a></li>
-              <li><a href="remplissage.php">Remplissage</a></li>
-              <li><a href="exports.php">Exports</a></li>
-              <li><a href="transports.php">Transports</a></li>
-              <li><a href="activites.php">Activités</a></li>
-              <li><a href="inscriptions.php">Inscriptions</a></li>
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">Logistique Fondacio</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="participants.php">Participants</a></li>
+                <li class="nav-item"><a class="nav-link" href="remplissage.php">Remplissage</a></li>
+                <li class="nav-item"><a class="nav-link" href="exports.php">Exports</a></li>
+                <li class="nav-item"><a class="nav-link" href="transports.php">Transports</a></li>
+                <li class="nav-item"><a class="nav-link" href="activites.php">Activités</a></li>
+                <li class="nav-item"><a class="nav-link" href="inscriptions.php">Inscriptions</a></li>
+                <li class="nav-item"><a class="nav-link" href="administration.php">Administration</a></li>
+                <li class="nav-item"><a class="nav-link" href="aide.php">Aide</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="aide.php">Aide</a></li>
-            </ul>
-          </div>
         </div>
-      </nav>
+    </nav>
       <br><br><br>
       <div class="container">

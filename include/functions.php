@@ -1,11 +1,29 @@
 <?php
 
+/// NEW ///
+
 function print_rh($data) {
 
     echo "<pre>\n";
     print_r($data);
     echo "</pre>\n";
 
+}
+
+function redirect($url) {
+
+    global $db;
+
+    if(!headers_sent()) {
+        header('Location: '.$url);
+        exit();
+    }
+
+    else {
+        echo '<script type="text/javascript">window.location.href=\''.$url.'\'</script>';
+        exit();
+    }
+    die();
 }
 
 function convert_date($date) {
@@ -25,6 +43,26 @@ function age($date) {
     : (date("Y") - $birthDate[0]));
 
 }
+
+function check_password($login, $password) {
+
+    global $bdd;
+
+    $req = 'SELECT password FROM utilisateurs WHERE login = "'.$login.'"';
+    $res = $bdd->query($req);
+    $data = $res->fetchColumn();
+    $res->closeCursor();
+
+    return password_verify($password, $data);
+
+}
+
+
+
+
+
+
+/// OLD ///
 
 function count_participants($filtres) {
 
