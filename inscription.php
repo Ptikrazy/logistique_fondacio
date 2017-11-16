@@ -33,12 +33,12 @@ require_once 'include/head.php';
             <div class="col-sm-3">
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="civilite" id="civiliteH" value="H" required> Mr
+                        <input class="form-check-input" type="radio" name="civilite" id="civiliteF" value="F"> Mme
                     </label>
                 </div>
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="civilite" id="civiliteF" value="F"> Mme
+                        <input class="form-check-input" type="radio" name="civilite" id="civiliteH" value="H" required> Mr
                     </label>
                 </div>
             </div>

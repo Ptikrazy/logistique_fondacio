@@ -20,7 +20,7 @@
     <body>
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">Logistique Fondacio</a>
+        <a class="navbar-brand" href="/"><img src="/include/logo.png" width="150" height="30" alt=""></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <!-- <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
