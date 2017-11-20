@@ -8,13 +8,12 @@
 
         <link href="/include/css/bootstrap-4.0.0.min.css" rel="stylesheet">
         <link href="/include/css/swal2.min.css" rel="stylesheet">
-        <link href="/include/css/multistepForm.css" rel="stylesheet">
+        <link href="/include/css/main.css" rel="stylesheet">
 
         <script src="/include/js/jquery-3.2.1.slim.min.js"></script>
         <script src="/include/js/popper-1.12.3.min.js"></script>
         <script src="/include/js/bootstrap-4.0.0.min.js"></script>
         <script src="/include/js/swal2.min.js"></script>
-        <script src="/include/js/multistepForm.js"></script>
     </head>
 
     <body>

@@ -12,8 +12,6 @@ function print_rh($data) {
 
 function redirect($url) {
 
-    global $db;
-
     if(!headers_sent()) {
         header('Location: '.$url);
         exit();
@@ -54,6 +52,19 @@ function check_password($login, $password) {
     $res->closeCursor();
 
     return password_verify($password, $data);
+
+}
+
+function get_infos_login($login) {
+
+    global $bdd;
+
+    $req = 'SELECT id_utilisateur, role FROM utilisateurs WHERE login = "'.$login.'"';
+    $res = $bdd->query($req);
+    $data = $res->fetch();
+    $res->closeCursor();
+
+    return $data;
 
 }
 
