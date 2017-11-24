@@ -111,6 +111,21 @@ function get_villes_bus($aller_retour, $camp) {
 
 }
 
+function get_inscrits($camp) {
+
+    global $bdd;
+
+    $req = 'SELECT id_jeune, nom, prenom, da_a_relancer, da_complet, rgt_recu, desistement FROM jeunes WHERE camp = '.$camp.' ORDER BY nom';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['id_jeune']] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
 
 function enregistrer_inscription($data) {
 

@@ -11,7 +11,7 @@ require_once 'include/head.php';
 
 <h2>Hello! Nous sommes le <?php echo date('d/m/Y'); ?> et la vie est belle sur le camp <?php echo $_SESSION['camp']; ?> ♫</h2><br>
 
-<h3><b>Alertes transport</b></h3>
+<!-- <h3><b>Alertes transport</b></h3> -->
 
 <?php
 
@@ -75,22 +75,22 @@ echo '</ul>';*/
 
 ?>
 
-<h3><b>Anniversaires</b></h3><br>
+<!-- <h3><b>Anniversaires</b></h3><br> -->
 
 <?php
 
-$anniversaires = get_anniversaires();
+/*$anniversaires = get_anniversaires();
 foreach ($anniversaires as $anniv) {
     echo '- '.$anniv['prenom'].' '.$anniv['nom'].' ('.age($anniv['date_naissance']).' ans)<br>';
-}
+}*/
 
 ?>
 
-<h3><b>Statistiques</b></h3><br>
+<!-- <h3><b>Statistiques</b></h3><br> -->
 
 <?php
 
-$filtres = array();
+/*$filtres = array();
 echo '- Nombre total de participants: '.count_participants($filtres).'<br>';
 
 $filtres = array('type' => 'jeune');
@@ -109,7 +109,7 @@ $filtres = array('type' => 'jeune', 'civilite' => 'H');
 echo '- Nombre de jeunes garçons: '.count_participants($filtres).'<br>';
 
 $filtres = array('type' => 'adulte');
-echo '- Nombre d\'adultes: '.count_participants($filtres);
+echo '- Nombre d\'adultes: '.count_participants($filtres);*/
 
 ?>
 
