@@ -138,7 +138,7 @@ function enregistrer_inscription($data) {
     $req .= 'ancien = '.$data['ancien'].', ';
     $req .= 'prepa = '.$data['prepa'].', ';
     $req .= 'civilite = "'.$data['civilite'].'", ';
-    $req .= 'nom = "'.$data['jeune_nom'].'", ';
+    $req .= 'nom = "'.strtoupper($data['jeune_nom']).'", ';
     $req .= 'prenom = "'.$data['jeune_prenom'].'", ';
     $req .= 'adresse = "'.$data['jeune_adresse'].'", ';
     $req .= 'cp = '.$data['code_postal'].', ';
