@@ -18,10 +18,15 @@ require_once 'include/head.php';
             <div class="col-sm-3">
                 <select class="form-control" name="camp" id="camp" required>
                     <option value="" selected></option>
-                    <option value="1">Camp 1</option>
-                    <option value="2">Camp 2</option>
-                    <option value="3">Camp 3</option>
-                    <option value="4">Camp 4</option>
+                    <?php
+
+                    $camps = get_camps();
+
+                    foreach ($camps as $camp) {
+                        echo '<option value="'.$camp['numero'].'">Camp n°'.$camp['numero'].' ('.$camp['regions'].') du '.convert_date($camp['date_debut'], "-", "/").' au '.convert_date($camp['date_fin'], "-", "/").'</option>';
+                    }
+
+                    ?>
                 </select>
             </div>
         </div>
@@ -43,7 +48,7 @@ require_once 'include/head.php';
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la "prépa" <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi 15 juillet 2017 à 14h jusqu'au début du camp, le lundi 17 juillet à 14h. Le coût de la prépa est de 55 euros."></label>
+            <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la "prépa" <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
             <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
@@ -224,7 +229,135 @@ require_once 'include/head.php';
             <div class="col-sm-10">
                 <textarea class="form-control" name="observations" id="observations" rows="3"></textarea>
             </div>
+        </div><br>
+
+        <h4>Transport</h4><br>
+
+        <h5>Aller</h5><br>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="camp">J'arriverai au Mourtis en <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Pour rejoindre le lieu de camp, 3 possibilités: <ul><li>Arriver en voiture</li><li>Venir en train jusqu'à la gare de Montréjeau-Gourdan Polignan, où une navette Fondacio attendra les jeunes pour les conduire sur le lieu de camp</li><li>Prendre le bus organisé par Fondacio</li></ul>"></label>
+            <div class="col-sm-3">
+                <select class="form-control" name="aller_transport" id="aller_transport" required>
+                    <option value="" selected></option>
+                    <option value="voiture">Voiture personnelle</option>
+                    <option value="train">Train</option>
+                    <option value="bus">Bus organisé par Fondacio</option>
+                </select>
+            </div>
         </div>
+
+        <div class="form-group row" id="aller_voiture">
+            <label class="col-form-label col-sm-12">Le camp démarre à 14h, un accueil sera assuré à partir de 13h pour les jeunes arrivant en voiture personnelle.</label>
+        </div>
+
+        <div class="form-group row" id="aller_train">
+            <label class="col-form-label col-sm-2" for="aller_train">Heure d'arrivée <span style="color: red">*</span></label>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="aller_train" id="aller_train11h25" value="11h25"> 11h25 (recommandé)
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="aller_train" id="aller_train14h25" value="11h25"> 14h25 (si impossible à 11h25)
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row" id="aller_bus">
+            <label class="col-form-label col-sm-2" for="aller_bus">Ville de départ</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="aller_bus">
+                    <option value="" id="aller_bus_villes" selected></option>
+                </select>
+            </div>
+        </div>
+
+        <h5>Retour</h5><br>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="camp">Je repartirai du Mourtis en <span style="color: red">*</span></label>
+            <div class="col-sm-3">
+                <select class="form-control" name="retour_transport" id="retour_transport" required>
+                    <option value="" selected></option>
+                    <option value="voiture">Voiture personnelle</option>
+                    <option value="train">Train</option>
+                    <option value="bus">Bus organisé par Fondacio</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row" id="retour_voiture">
+            <label class="col-form-label col-sm-12">Le camp termine dans la nuit du samedi au dimanche à 2h du matin. Un accueil sera assuré pour les jeunes repartant en voiture jusqu'au dimanche à 11h du matin.</label>
+        </div>
+
+        <div class="form-group row" id="retour_train">
+            <label class="col-form-label col-sm-12">Le camp termine dans la nuit du samedi au dimanche à 2h du matin. Nous proposons une navette jusqu'à la gare pour le train de 11h25 le dimanche matin.</label>
+        </div>
+
+        <div class="form-group row" id="retour_bus">
+            <label class="col-form-label col-sm-2" for="retour_bus">Ville d'arrivée</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="retour_bus">
+                    <option value="" id="retour_bus_villes" selected></option>
+                </select>
+            </div>
+        </div>
+
+        <h4>Paiement</h4>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-12">Le coût de revient d’un camp (hébergement, restauration, activités, administratif, encadrement) est de 1000 euros. Fondacio France finance 62% du coût du camp par des dons (parrainage, bénévolat, mécénat). Les 38% restants, soit 380 euros, correspondent au prix demandé aux familles. Selon vos possibilités, nous proposons une participation entre 250 et 1000 euros.<br><br>
+
+            A ce coût s'ajoute le prix du transport:<br>
+            - Le service de navette que nous proposons de la gare de Montréjeau au Mourtis ajoute 15€ par voyage au coût du camp (donc 30€ si vous arrivez et repartez en train)<br>
+            - Le voyage en bus ajoute 80€ par voyage au coût du camp (donc 160€ si vous arrivez et repartez en bus)<br><br>
+
+            Le prix de revient total camp + transport est donc de 380 + x = y euros.<br>
+            La fourchette de participation proposée est donc de (250 + x =) z euros à (1000 + x =) w euros.</label>
+        </div>
+
+        <h4>Attestation (CE)</h4><br>
+
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="attestation_inscription" id="conditions_inscription" value="1"> Je souhaite recevoir pour mon CE une attestation d'inscription, une fois que j'aurais envoyé le dossier d'inscription papier complet
+            </label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" name="attestation_presence" id="conditions_inscription" value="1"> Je souhaite recevoir pour mon CE une attestation de présence et de paiement, après le camp
+            </label>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="ce_nom">Nom du comité d'entreprise</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="ce_nom" id="ce_nom">
+            </div>
+            <label class="col-form-label col-sm-2" for="ce_mail">Courriel du comité d'entreprise</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="ce_mail" id="ce_mail">
+            </div>
+        </div>
+
+        <h4>Conditions d'inscription et d'annulation</h4><br>
+
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" id="conditions_inscription" value="" required><span style="color: red">*</span> Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.
+            </label>
+        </div>
+
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" id="conditions_annulation" value="" required><span style="color: red">*</span> J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.
+            </label>
+        </div><br>
 
         <br>
         <div class="form-group row">
@@ -233,6 +366,90 @@ require_once 'include/head.php';
             </div>
         </div>
     </form>
+
+    <script type="text/javascript">
+
+        $(function() {
+
+            $('#aller_voiture').hide();
+            $('#aller_train').hide();
+            $('#aller_bus').hide();
+            $('#retour_voiture').hide();
+            $('#retour_train').hide();
+            $('#retour_bus').hide();
+
+            $('#aller_transport').change(function() {
+                if (this.value == "voiture") {
+                    $('#aller_voiture').show();
+                    $('#aller_train').hide();
+                    $('#aller_bus').hide();
+                }
+                if (this.value == "train") {
+                    $('#aller_voiture').hide();
+                    $('#aller_train').show();
+                    $('#aller_bus').hide();
+                }
+                if (this.value == "bus") {
+                    $('#aller_voiture').hide();
+                    $('#aller_train').hide();
+                    $('#aller_bus').show();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/ajax/villes_bus.php',
+                        data: {
+                            'camp': $('#camp').find(":selected").val(),
+                            'aller_retour': 'aller'
+                        },
+                        success: function(data){
+                            $("#aller_bus_villes").after(data);
+                        }
+                    });
+                }
+                if (this.value == "") {
+                    $('#aller_voiture').hide();
+                    $('#aller_train').hide();
+                    $('#aller_bus').hide();
+                }
+            });
+
+            $('#retour_transport').change(function() {
+                if (this.value == "voiture") {
+                    $('#retour_voiture').show();
+                    $('#retour_train').hide();
+                    $('#retour_bus').hide();
+                }
+                if (this.value == "train") {
+                    $('#retour_voiture').hide();
+                    $('#retour_train').show();
+                    $('#retour_bus').hide();
+                }
+                if (this.value == "bus") {
+                    $('#retour_voiture').hide();
+                    $('#retour_train').hide();
+                    $('#retour_bus').show();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/ajax/villes_bus.php',
+                        data: {
+                            'camp': $('#camp').find(":selected").val(),
+                            'aller_retour': 'retour'
+                        },
+                        success: function(data){
+                            $("#retour_bus_villes").after(data);
+                        }
+                    });
+                }
+                if (this.value == "") {
+                    $('#retour_voiture').hide();
+                    $('#retour_train').hide();
+                    $('#retour_bus').hide();
+                }
+            });
+        });
+
+    </script>
 
 <?php
 

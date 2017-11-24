@@ -24,10 +24,10 @@ function redirect($url) {
     die();
 }
 
-function convert_date($date) {
+function convert_date($date, $from, $to) {
 
-    $date = explode('-', $date);
-    $date = $date[2].'/'.$date[1].'/'.$date[0];
+    $date = explode($from, $date);
+    $date = $date[2].$to.$date[1].'/'.$date[0];
 
     return($date);
 
@@ -63,6 +63,36 @@ function get_infos_login($login) {
     $res = $bdd->query($req);
     $data = $res->fetch();
     $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_camps() {
+
+    global $bdd;
+
+    $req = 'SELECT * FROM camps ORDER BY numero';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['id_camp']] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_villes_bus($aller_retour, $camp) {
+
+    global $bdd;
+
+    $req = 'SELECT villes_bus_'.$aller_retour.' AS villes FROM camps WHERE numero = '.$camp;
+    $res = $bdd->query($req);
+    $data = $res->fetch();
+    $res->closeCursor();
+
+    $data = explode(';', $data['villes']);
 
     return $data;
 

@@ -55,7 +55,52 @@ if (empty($_SESSION['profil']['id'])) {
 
 else {
 
-    echo 'Salut';
+?>
+
+    <h2>Administration</h2><br>
+
+    <button type="button" class="btn btn-danger">Chargés d'inscription</button><br><br>
+
+    <h3>Liste des camps</h3><br>
+
+    <?php
+
+    $liste_camps = get_camps();
+
+    echo '
+    <form action="" method="POST">
+    <table class="table table-sm table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Région(s)</th>
+                <th scope="col">Date début</th>
+                <th scope="col">Date fin</th>
+                <th scope="col">Date prépa</th>
+            </tr>
+        </thead>
+        <tbody>';
+
+    foreach ($liste_camps as $camp) {
+        echo '
+            <tr>
+                <td>'.$camp['numero'].'</td>
+                <td>'.$camp['regions'].'</td>
+                <td>'.convert_date($camp['date_debut'], '-', '/').'</td>
+                <td>'.convert_date($camp['date_fin'], '-', '/').'</td>
+                <td>'.convert_date($camp['date_prepa'], '-', '/').'</td>
+            </tr>
+        ';
+    }
+
+    echo '
+        </tbody>
+    </table>
+    </form>';
+
+    ?>
+
+<?php
 
 }
 
