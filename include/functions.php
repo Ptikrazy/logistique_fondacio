@@ -83,6 +83,19 @@ function get_camps() {
 
 }
 
+function get_camp($camp) {
+
+    global $bdd;
+
+    $req = 'SELECT * FROM camps WHERE numero = '.$camp;
+    $res = $bdd->query($req);
+    $data = $res->fetch();
+    $res->closeCursor();
+
+    return $data;
+
+}
+
 function get_villes_bus($aller_retour, $camp) {
 
     global $bdd;
@@ -99,7 +112,88 @@ function get_villes_bus($aller_retour, $camp) {
 }
 
 
+function enregistrer_inscription($data) {
 
+    global $bdd;
+
+    $infos_camp = get_camp($data['camp']);
+
+    $req  = 'INSERT INTO jeunes SET ';
+    $req .= 'camp = '.$data['camp'].', ';
+    $req .= 'ancien = '.$data['ancien'].', ';
+    $req .= 'prepa = '.$data['prepa'].', ';
+    $req .= 'civilite = "'.$data['civilite'].'", ';
+    $req .= 'nom = "'.$data['jeune_nom'].'", ';
+    $req .= 'prenom = "'.$data['jeune_prenom'].'", ';
+    $req .= 'adresse = "'.$data['jeune_adresse'].'", ';
+    $req .= 'cp = '.$data['code_postal'].', ';
+    $req .= 'ville = "'.$data['ville'].'", ';
+    $req .= 'pays = "'.$data['pays'].'", ';
+    $req .= 'tel_portable = "'.$data['jeune_tel_portable'].'", ';
+    $req .= 'tel_fixe = "'.$data['tel_fixe'].'", ';
+    $req .= 'mail = "'.$data['jeune_mail'].'", ';
+    $req .= 'date_naissance = "'.$data['date_naissance'].'", ';
+    if (isset($data['etudes'])) {
+        if ($data['etudes'] == 'Autre') {
+            $req .= 'etudes = '.$data['etudes_autre'].', ';
+        }
+        else {
+            $req .= 'etudes = '.$data['etudes'].', ';
+        }
+    }
+    $req .= 'taille = '.$data['taille'].', ';
+    $req .= 'poids = '.$data['poids'].', ';
+    $req .= 'parents_nom = "'.$data['parents_nom'].'", ';
+    $req .= 'parents_prenom = "'.$data['parents_prenom'].'", ';
+    $req .= 'parents_adresse = "'.$data['parents_adresse'].'", ';
+    $req .= 'mere_portable = "'.$data['mere_tel_portable'].'", ';
+    $req .= 'pere_portable = "'.$data['pere_tel_portable'].'", ';
+    $req .= 'parents_mail = "'.$data['parents_mail'].'", ';
+    $req .= 'observations = "'.$data['observations'].'", ';
+    $req .= 'paiement_declare = '.$data['paiement_declare'].', ';
+    if (isset($data['attestation_inscription'])) {
+        $req .= 'attestation_inscription = '.$data['attestation_inscription'].', ';
+    }
+    if (isset($data['attestation_presence'])) {
+        $req .= 'attestation_presence = '.$data['attestation_presence'].', ';
+    }
+    $req .= 'ce_nom = "'.$data['ce_nom'].'", ';
+    $req .= 'ce_mail = "'.$data['ce_mail'].'", ';
+    $req .= 'ce_adresse = "'.$data['ce_adresse'].'", ';
+    if (!empty($data['communication_autre'])) {
+        $req .= 'communication = "'.$data['communication'].' : '.$data['communication_autre'].'", ';
+    }
+    else {
+        $req .= 'communication = "'.$data['communication'].'", ';
+    }
+    $req .= 'aller_transport = "'.$data['aller_transport'].'", ';
+    if ($data['prepa']) {
+        $req .= 'aller_date = "'.$infos_camp['date_prepa'].'", ';
+    }
+    else {
+        $req .= 'aller_date = "'.$infos_camp['date_debut'].'", ';
+    }
+    if ($data['aller_transport'] == 'train') {
+        $req .= 'aller_heure = "'.$data['aller_train'].'", ';
+    }
+    else {
+        $req .= 'aller_heure = "13h", ';
+    }
+    $req .= 'aller_ville = "'.$data['aller_bus'].'", ';
+    $req .= 'retour_transport = "'.$data['retour_transport'].'", ';
+    $req .= 'retour_date = "'.$infos_camp['date_fin'].'", ';
+    if ($data['retour_transport'] == 'bus') {
+        $req .= 'retour_heure = "2h", ';
+    }
+    else {
+        $req .= 'retour_heure = "12h", ';
+    }
+    $req .= 'retour_ville = "'.$data['retour_bus'].'"';
+
+    $res = $bdd->query($req);
+    $res->closeCursor();
+
+}
 
 
 
@@ -267,8 +361,6 @@ function update_participant ($action, $donnees, $id) {
     else {
         $req = 'UPDATE '.$req.' WHERE id_participant = '.$id;
     }
-    print_rh($req);
-    die();
     $res = $bdd->query($req);
     $res->closeCursor();
 

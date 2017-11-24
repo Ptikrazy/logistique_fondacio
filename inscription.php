@@ -5,6 +5,16 @@ require_once 'include/init.php';
 $title = 'Inscription';
 require_once 'include/head.php';
 
+if (!empty($_POST)) {
+
+    enregistrer_inscription($_POST);
+
+    echo '<br><br>Merci, un email de confirmation contenant les informations nécessaires va vous être envoyé.';
+
+}
+
+else {
+
 ?>
 
     <center><h2>Inscription aux camps RSV</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires</center>
@@ -48,7 +58,7 @@ require_once 'include/head.php';
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la "prépa" <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
+            <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
             <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
@@ -82,20 +92,20 @@ require_once 'include/head.php';
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="nom_jeune">Nom du jeune <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="jeune_nom">Nom du jeune <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="nom_jeune" id="nom_jeune" required>
+                <input type="text" class="form-control" name="jeune_nom" id="jeune_nom" required>
             </div>
-            <label class="col-form-label col-sm-2" for="prenom_jeune">Prénom du jeune <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="jeune_prenom">Prénom du jeune <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="prenom_jeune" id="prenom_jeune" required>
+                <input type="text" class="form-control" name="jeune_prenom" id="jeune_prenom" required>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="adresse_jeune">Adresse <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="jeune_adresse">Adresse <span style="color: red">*</span></label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" name="adresse_jeune" id="adresse_jeune" required>
+                <input type="text" class="form-control" name="jeune_adresse" id="jeune_adresse" required>
             </div>
             <label class="col-form-label col-sm-2" for="code_postal">Code postal <span style="color: red">*</span></label>
             <div class="col-sm-2">
@@ -115,9 +125,9 @@ require_once 'include/head.php';
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="tel_portable_jeune">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
+            <label class="col-form-label col-sm-2" for="jeune_tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="tel_portable_jeune" id="tel_portable_jeune" required>
+                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" required>
             </div>
             <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
             <div class="col-sm-3">
@@ -126,9 +136,9 @@ require_once 'include/head.php';
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="mail_jeune">Courriel personnel du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
+            <label class="col-form-label col-sm-2" for="jeune_mail">Courriel personnel du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="mail_jeune" id="mail_jeune" required>
+                <input type="text" class="form-control" name="jeune_mail" id="jeune_mail" required>
             </div>
             <label class="col-form-label col-sm-2" for="date_naissance">Date de naissance <span style="color: red">*</span></label>
             <div class="col-sm-3">
@@ -146,27 +156,27 @@ require_once 'include/head.php';
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="etudes" id="etudes3" value="3ème" required> 3ème
+                        <input class="form-check-input" type="radio" name="etudes" id="etudes3" value="3ème"> 3ème
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="etudes" id="etudes2" value="2nde" required> 2nde
+                        <input class="form-check-input" type="radio" name="etudes" id="etudes2" value="2nde"> 2nde
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="etudes" id="etudes1" value="1ère" required> 1ère
+                        <input class="form-check-input" type="radio" name="etudes" id="etudes1" value="1ère"> 1ère
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="etudes" id="etudesT" value="Terminale" required> Terminale
+                        <input class="form-check-input" type="radio" name="etudes" id="etudesT" value="Terminale"> Terminale
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="etudes" id="etudesA" value="Autre" required> Autre
+                        <input class="form-check-input" type="radio" name="etudes" id="etudesA" value="Autre"> Autre
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
@@ -189,38 +199,38 @@ require_once 'include/head.php';
         <h4>Coordonnées des parents (ou du responsable légal)</h4><br>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="nom_parents">Nom des parents <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="parents_nom">Nom des parents <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="nom_parents" id="nom_parents" required>
+                <input type="text" class="form-control" name="parents_nom" id="parents_nom" required>
             </div>
-            <label class="col-form-label col-sm-2" for="prenom_parents">Prénoms des parents <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="parents_prenom">Prénoms des parents <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="prenom_parents" id="prenom_parents" required>
+                <input type="text" class="form-control" name="parents_prenom" id="parents_prenom" required>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="adresse_jeune">Adresse (seulement si différente de celle du jeune)</label>
+            <label class="col-form-label col-sm-2" for="parents_adresse">Adresse (seulement si différente de celle du jeune)</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="adresse_jeune" id="adresse_jeune">
+                <input type="text" class="form-control" name="parents_adresse" id="parents_adresse">
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="tel_portable_mere">Téléphone portable de la mère <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="mere_tel_portable">Téléphone portable de la mère <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="tel_portable_mere" id="tel_portable_mere" required>
+                <input type="text" class="form-control" name="mere_tel_portable" id="mere_tel_portable" required>
             </div>
-            <label class="col-form-label col-sm-2" for="tel_portable_pere">Téléphone portable du père</label>
+            <label class="col-form-label col-sm-2" for="pere_tel_portable">Téléphone portable du père</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="tel_portable_pere" id="tel_portable_pere">
+                <input type="text" class="form-control" name="pere_tel_portable" id="pere_tel_portable">
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="mail_parents">Courriel des parents <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="parents_mail">Courriel des parents <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="mail_parents" id="mail_parents" required>
+                <input type="text" class="form-control" name="parents_mail" id="parents_mail" required>
             </div>
         </div>
 
@@ -268,7 +278,7 @@ require_once 'include/head.php';
         </div>
 
         <div class="form-group row" id="aller_bus">
-            <label class="col-form-label col-sm-2" for="aller_bus">Ville de départ</label>
+            <label class="col-form-label col-sm-2" for="aller_bus">Ville de départ <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="aller_bus">
                     <option value="" id="aller_bus_villes" selected></option>
@@ -299,7 +309,7 @@ require_once 'include/head.php';
         </div>
 
         <div class="form-group row" id="retour_bus">
-            <label class="col-form-label col-sm-2" for="retour_bus">Ville d'arrivée</label>
+            <label class="col-form-label col-sm-2" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="retour_bus">
                     <option value="" id="retour_bus_villes" selected></option>
@@ -316,8 +326,35 @@ require_once 'include/head.php';
             - Le service de navette que nous proposons de la gare de Montréjeau au Mourtis ajoute 15€ par voyage au coût du camp (donc 30€ si vous arrivez et repartez en train)<br>
             - Le voyage en bus ajoute 80€ par voyage au coût du camp (donc 160€ si vous arrivez et repartez en bus)<br><br>
 
-            Le prix de revient total camp + transport est donc de 380 + x = y euros.<br>
-            La fourchette de participation proposée est donc de (250 + x =) z euros à (1000 + x =) w euros.</label>
+            Si vous décidez de participer à la prépa, son coût de revient (55€) sera également ajouté.<br><br>
+
+            Le prix de revient total camp + transport est donc de 380 + <span class="cout_transport"></span> = <span id="cout_revient"></span> euros.<br>
+            La fourchette de participation proposée est donc de (250 + <span class="cout_transport"></span> + <span class="cout_prepa"></span> =) <span id="cout_fourchette_basse"></span> euros à (1000 + <span class="cout_transport"></span> + <span class="cout_prepa"></span> =) <span id="cout_fourchette_haute"></span> euros.</label>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-4" for="paiement_declare">Je choisis de payer le montant suivant <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Notez bien ce montant, il vous sera redemandé au moment du paiement.."></label>
+            <div class="col-sm-3">
+                <input type="number" class="form-control" name="paiement_declare" id="paiement_declare" required>
+            </div>
+        </div>
+
+        <h5>Modalités de paiement</h5>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-12">Vous pouvez régler la totalité de la somme due (camp + transport éventuel) par chèque (à l'ordre de Fondacio France), par CB en ligne (paiement sécurisé) ou en Chèques Vacances.<br><br>
+
+            Si vous payez par chèque, vous pouvez échelonner vos paiements sur plusieurs mois (au plus tard octobre 2018), en indiquant au dos de chaque chèque la date (fin de mois) d'encaissement souhaitée.<br><br>
+
+            Le camp "Réussir sa vie" est agréé Jeunesse et Sports, et nous acceptons les Aides aux Vacances Enfants de la CAF (dispositif AVE), sous réserve d’une inscription avant le 30 avril 2018. Si tel est le cas, vous devez nous envoyer 2 chèques (ou plus) : l'un correspondant au montant théorique que devra nous verser la CAF (si celle-ci règle directement Fondacio et non la famille) que nous garderons en caution, l'autre (ou les autres) correspondant au solde à régler (montant total dû - participation attendue de la CAF), que nous encaisserons à réception (ou à la date d'encaissement indiquée au dos du chèque).<br><br>
+
+            N’hésitez pas à vérifier si vous pouvez bénéficier d’aides auprès de certains organismes (Conseil Général, CAF, CE, Mairie,...) et à contacter votre Caisse d’Allocations Familiales pour vérifier si elle attribue des aides aux vacances pour les centres de vacances.</label>
+        </div>
+
+        <h5>Bourses</h5>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-12">Nous tenons à ce qu’aucune difficulté financière ne soit un obstacle à la participation d’un jeune. Si votre situation familiale ne vous permet pas de payer le montant minimum indiqué ci-dessus, vous pouvez demander une bourse auprès du Directeur du Camp en remplissant le formulaire de demande de bourse, accessible depuis la page où se trouve le dossier administratif. Une réponse vous sera apportée dans les plus brefs délais.</label>
         </div>
 
         <h4>Attestation (CE)</h4><br>
@@ -345,6 +382,40 @@ require_once 'include/head.php';
             </div>
         </div>
 
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="ce_adresse">Adresse complète du comité d'entreprise</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="ce_adresse" id="ce_adresse">
+            </div>
+        </div>
+
+        <h4>Communication</h4><br>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="camp">J'ai connu ce camp par <span style="color: red">*</span></label>
+            <div class="col-sm-6">
+                <select class="form-control" name="communication" id="communication" required>
+                    <option value="" selected></option>
+                    <option value="Une annonce dans la presse">Une annonce dans la presse (précisez le nom du media dans la zone "Autre")</option>
+                    <option value="Le site Internet de Fondacio France">Le site Internet de Fondacio France</option>
+                    <option value="Ma famille ou des amis de mes parents">Ma famille ou des amis de mes parents</option>
+                    <option value="Un(e) ami(e) m'en a parlé">Un(e) ami(e) m'en a parlé</option>
+                    <option value="Le catalogue Fondacio Jeunes">Le catalogue Fondacio Jeunes</option>
+                    <option value="Un flyer reçu ou trouvé">Un flyer reçu ou trouvé</option>
+                    <option value="Facebook">Facebook</option>
+                    <option value="J'ai déjà fait un camp Réussir sa Vie">J'ai déjà fait un camp Réussir sa Vie</option>
+                    <option value="Autre">Autre (précisez dans la zone "Autre")</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="communication_autre">Autre</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="communication_autre" id="communication_autre">
+            </div>
+        </div><br>
+
         <h4>Conditions d'inscription et d'annulation</h4><br>
 
         <div class="form-check form-check-inline">
@@ -357,9 +428,8 @@ require_once 'include/head.php';
             <label class="form-check-label">
                 <input class="form-check-input" type="checkbox" id="conditions_annulation" value="" required><span style="color: red">*</span> J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.
             </label>
-        </div><br>
+        </div><br><br>
 
-        <br>
         <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Valider l'inscription</button>
@@ -370,6 +440,31 @@ require_once 'include/head.php';
     <script type="text/javascript">
 
         $(function() {
+
+            // Initialisation variable pour le coût
+
+            var cout_transport = 0;
+            var cout_prepa = 0;
+            var cout_transport_aller = 0;
+            var cout_transport_retour = 0;
+
+            // Gestion cout prepa
+
+            $('input[type=radio][name=prepa]').change(function() {
+                if (this.value == 1) {
+                    cout_prepa = 55;
+                }
+                else {
+                    cout_prepa = 0;
+                }
+                $('.cout_transport').text(cout_transport);
+                $('.cout_prepa').text(cout_prepa);
+                $('#cout_revient').text(cout_transport+cout_prepa+380);
+                $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
+                $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+            });
+
+            // Gestion des transports
 
             $('#aller_voiture').hide();
             $('#aller_train').hide();
@@ -388,11 +483,25 @@ require_once 'include/head.php';
                     $('#aller_voiture').hide();
                     $('#aller_train').show();
                     $('#aller_bus').hide();
+                    cout_transport_aller = 15;
+                    cout_transport = cout_transport_aller+cout_transport_retour;
+                    $('.cout_transport').text(cout_transport);
+                    $('.cout_prepa').text(cout_prepa);
+                    $('#cout_revient').text(cout_transport+cout_prepa+380);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
                 }
                 if (this.value == "bus") {
                     $('#aller_voiture').hide();
                     $('#aller_train').hide();
                     $('#aller_bus').show();
+                    cout_transport_aller = 80;
+                    cout_transport = cout_transport_aller+cout_transport_retour;
+                    $('.cout_transport').text(cout_transport);
+                    $('.cout_prepa').text(cout_prepa);
+                    $('#cout_revient').text(cout_transport+cout_prepa+380);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
 
                     $.ajax({
                         type: 'POST',
@@ -410,6 +519,13 @@ require_once 'include/head.php';
                     $('#aller_voiture').hide();
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
+                    cout_transport_aller = 0;
+                    cout_transport = cout_transport_aller+cout_transport_retour;
+                    $('.cout_transport').text(cout_transport);
+                    $('.cout_prepa').text(cout_prepa);
+                    $('#cout_revient').text(cout_transport+cout_prepa+380);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
                 }
             });
 
@@ -423,11 +539,25 @@ require_once 'include/head.php';
                     $('#retour_voiture').hide();
                     $('#retour_train').show();
                     $('#retour_bus').hide();
+                    cout_transport_retour = 15;
+                    cout_transport = cout_transport_aller+cout_transport_retour;
+                    $('.cout_transport').text(cout_transport);
+                    $('.cout_prepa').text(cout_prepa);
+                    $('#cout_revient').text(cout_transport+cout_prepa+380);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
                 }
                 if (this.value == "bus") {
                     $('#retour_voiture').hide();
                     $('#retour_train').hide();
                     $('#retour_bus').show();
+                    cout_transport_retour = 80;
+                    cout_transport = cout_transport_aller+cout_transport_retour;
+                    $('.cout_transport').text(cout_transport);
+                    $('.cout_prepa').text(cout_prepa);
+                    $('#cout_revient').text(cout_transport+cout_prepa+380);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
 
                     $.ajax({
                         type: 'POST',
@@ -445,13 +575,30 @@ require_once 'include/head.php';
                     $('#retour_voiture').hide();
                     $('#retour_train').hide();
                     $('#retour_bus').hide();
+                    cout_transport_retour = 0;
+                    cout_transport = cout_transport_aller+cout_transport_retour;
+                    $('.cout_transport').text(cout_transport);
+                    $('.cout_prepa').text(cout_prepa);
+                    $('#cout_revient').text(cout_transport+cout_prepa+380);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
                 }
             });
+
+            // Calcul du coût
+
+            $('.cout_transport').text(cout_transport);
+            $('.cout_prepa').text(cout_prepa);
+            $('#cout_revient').text(cout_transport+cout_prepa+380);
+            $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
+            $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
         });
 
     </script>
 
 <?php
+
+}
 
 require_once 'include/foot.php';
 
