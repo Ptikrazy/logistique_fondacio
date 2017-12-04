@@ -17,7 +17,7 @@ else {
 
 ?>
 
-    <center><h2>Inscription aux camps RSV</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires</center>
+    <center><h2>Inscription aux camps RSV</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires<br>Les <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" > indiquent qu'une aide est disponible</center>
 
     <form action="" method="POST">
 
@@ -57,7 +57,7 @@ else {
             </div>
         </div>
 
-        <div class="form-group row">
+        <div class="form-group row" id="prepa">
             <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
             <div class="col-sm-3">
                 <div class="form-check form-check-inline">
@@ -67,7 +67,7 @@ else {
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="prepa" id="prepa0" value="0" required> Non
+                        <input class="form-check-input" type="radio" name="prepa" id="prepa0" value="0"> Non
                     </label>
                 </div>
             </div>
@@ -127,7 +127,7 @@ else {
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="jeune_tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" required>
+                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" placeholder="Laissez vide si pas de portable" required>
             </div>
             <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
             <div class="col-sm-3">
@@ -235,7 +235,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="observations">Observations</label>
+            <label class="col-form-label col-sm-2" for="observations">Observations <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
             <div class="col-sm-10">
                 <textarea class="form-control" name="observations" id="observations" rows="3"></textarea>
             </div>
@@ -280,7 +280,7 @@ else {
         <div class="form-group row" id="aller_bus">
             <label class="col-form-label col-sm-2" for="aller_bus">Ville de départ <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <select class="form-control" name="aller_bus">
+                <select class="form-control" name="aller_bus" id="aller_bus_clear">
                     <option value="" id="aller_bus_villes" selected></option>
                 </select>
             </div>
@@ -311,7 +311,7 @@ else {
         <div class="form-group row" id="retour_bus">
             <label class="col-form-label col-sm-2" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <select class="form-control" name="retour_bus">
+                <select class="form-control" name="retour_bus" id="retour_bus_clear">
                     <option value="" id="retour_bus_villes" selected></option>
                 </select>
             </div>
@@ -361,29 +361,29 @@ else {
 
         <div class="form-check form-check-inline">
             <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" name="attestation_inscription" id="conditions_inscription" value="1"> Je souhaite recevoir pour mon CE une attestation d'inscription, une fois que j'aurais envoyé le dossier d'inscription papier complet
+                <input class="form-check-input" type="checkbox" name="attestation_inscription" id="attestation_inscription" value="1"> Je souhaite recevoir pour mon CE une attestation d'inscription, une fois que j'aurais envoyé le dossier d'inscription papier complet
             </label>
         </div>
 
         <div class="form-check form-check-inline">
             <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" name="attestation_presence" id="conditions_inscription" value="1"> Je souhaite recevoir pour mon CE une attestation de présence et de paiement, après le camp
+                <input class="form-check-input" type="checkbox" name="attestation_presence" id="attestation_presence" value="1"> Je souhaite recevoir pour mon CE une attestation de présence et de paiement, après le camp
             </label>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="ce_nom">Nom du comité d'entreprise</label>
+            <label class="col-form-label col-sm-2" for="ce_nom" id="ce_nom_libelle">Nom du comité d'entreprise</label>
             <div class="col-sm-3">
                 <input type="text" class="form-control" name="ce_nom" id="ce_nom">
             </div>
-            <label class="col-form-label col-sm-2" for="ce_mail">Courriel du comité d'entreprise</label>
+            <label class="col-form-label col-sm-2" for="ce_mail"  id="ce_mail_libelle">Courriel du comité d'entreprise</label>
             <div class="col-sm-3">
                 <input type="text" class="form-control" name="ce_mail" id="ce_mail">
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="ce_adresse">Adresse complète du comité d'entreprise</label>
+            <label class="col-form-label col-sm-2" for="ce_adresse"  id="ce_adresse_libelle">Adresse complète du comité d'entreprise</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" name="ce_adresse" id="ce_adresse">
             </div>
@@ -441,12 +441,27 @@ else {
 
         $(function() {
 
+            $('#prepa').hide();
+
             // Initialisation variable pour le coût
 
             var cout_transport = 0;
             var cout_prepa = 0;
             var cout_transport_aller = 0;
             var cout_transport_retour = 0;
+
+            // Affichage prépa
+
+            $('input[type=radio][name=ancien]').change(function() {
+                if (this.value == 1) {
+                    $('#prepa').show();
+                    $('#prepa').prop('required',true);
+                }
+                else {
+                    $('#prepa').hide();
+                    $('#prepa').prop('required',false);
+                }
+            });
 
             // Gestion cout prepa
 
@@ -475,11 +490,15 @@ else {
 
             $('#aller_transport').change(function() {
                 if (this.value == "voiture") {
+                    $('#aller_bus_clear option').remove();
+                    $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
                     $('#aller_voiture').show();
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
                 }
                 if (this.value == "train") {
+                    $('#aller_bus_clear option').remove();
+                    $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
                     $('#aller_voiture').hide();
                     $('#aller_train').show();
                     $('#aller_bus').hide();
@@ -531,11 +550,15 @@ else {
 
             $('#retour_transport').change(function() {
                 if (this.value == "voiture") {
+                    $('#retour_bus_clear option').remove();
+                    $('#retour_bus_clear').append('<option value="" id="retour_bus_villes" selected></option>');
                     $('#retour_voiture').show();
                     $('#retour_train').hide();
                     $('#retour_bus').hide();
                 }
                 if (this.value == "train") {
+                    $('#retour_bus_clear option').remove();
+                    $('#retour_bus_clear').append('<option value="" id="retour_bus_villes" selected></option>');
                     $('#retour_voiture').hide();
                     $('#retour_train').show();
                     $('#retour_bus').hide();
@@ -592,6 +615,46 @@ else {
             $('#cout_revient').text(cout_transport+cout_prepa+380);
             $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
             $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+
+            // CE Obligatoire
+
+            $('#attestation_inscription').change(function() {
+                if($('#attestation_inscription').prop('checked') || $('#attestation_presence').prop('checked')) {
+                    $("#ce_nom").prop('required',true);
+                    $("#ce_mail").prop('required',true);
+                    $("#ce_adresse").prop('required',true);
+                    $("#ce_nom_libelle").html('Nom du comité d\'entreprise <span style="color: red">*</span>');
+                    $("#ce_mail_libelle").html('Courriel du comité d\'entreprise <span style="color: red">*</span>');
+                    $("#ce_adresse_libelle").html('Adresse complète du comité d\'entreprise <span style="color: red">*</span>');
+                }
+                else {
+                    $("#ce_nom").prop('required',false);
+                    $("#ce_mail").prop('required',false);
+                    $("#ce_adresse").prop('required',false);
+                    $("#ce_nom_libelle").html('Nom du comité d\'entreprise');
+                    $("#ce_mail_libelle").html('Courriel du comité d\'entreprise');
+                    $("#ce_adresse_libelle").html('Adresse complète du comité d\'entreprise');
+                };
+            });
+
+            $('#attestation_presence').change(function() {
+                if($('#attestation_inscription').prop('checked') || $('#attestation_presence').prop('checked')) {
+                    $("#ce_nom").prop('required',true);
+                    $("#ce_mail").prop('required',true);
+                    $("#ce_adresse").prop('required',true);
+                    $("#ce_nom_libelle").html('Nom du comité d\'entreprise <span style="color: red">*</span>');
+                    $("#ce_mail_libelle").html('Courriel du comité d\'entreprise <span style="color: red">*</span>');
+                    $("#ce_adresse_libelle").html('Adresse complète du comité d\'entreprise <span style="color: red">*</span>');
+                }
+                else {
+                    $("#ce_nom").prop('required',false);
+                    $("#ce_mail").prop('required',false);
+                    $("#ce_adresse").prop('required',false);
+                    $("#ce_nom_libelle").html('Nom du comité d\'entreprise');
+                    $("#ce_mail_libelle").html('Courriel du comité d\'entreprise');
+                    $("#ce_adresse_libelle").html('Adresse complète du comité d\'entreprise');
+                };
+            });
         });
 
     </script>

@@ -131,12 +131,19 @@ function enregistrer_inscription($data) {
 
     global $bdd;
 
+    // Enregistrement en base
+
     $infos_camp = get_camp($data['camp']);
 
     $req  = 'INSERT INTO jeunes SET ';
     $req .= 'camp = '.$data['camp'].', ';
     $req .= 'ancien = '.$data['ancien'].', ';
-    $req .= 'prepa = '.$data['prepa'].', ';
+    if (isset($data['prepa'])) {
+        $req .= 'prepa = '.$data['prepa'].', ';
+    }
+    else {
+        $req .= 'prepa = 0, ';
+    }
     $req .= 'civilite = "'.$data['civilite'].'", ';
     $req .= 'nom = "'.strtoupper($data['jeune_nom']).'", ';
     $req .= 'prenom = "'.$data['jeune_prenom'].'", ';
@@ -150,10 +157,10 @@ function enregistrer_inscription($data) {
     $req .= 'date_naissance = "'.$data['date_naissance'].'", ';
     if (isset($data['etudes'])) {
         if ($data['etudes'] == 'Autre') {
-            $req .= 'etudes = '.$data['etudes_autre'].', ';
+            $req .= 'etudes = "'.$data['etudes_autre'].'", ';
         }
         else {
-            $req .= 'etudes = '.$data['etudes'].', ';
+            $req .= 'etudes = "'.$data['etudes'].'", ';
         }
     }
     $req .= 'taille = '.$data['taille'].', ';
@@ -182,7 +189,7 @@ function enregistrer_inscription($data) {
         $req .= 'communication = "'.$data['communication'].'", ';
     }
     $req .= 'aller_transport = "'.$data['aller_transport'].'", ';
-    if ($data['prepa']) {
+    if (isset($data['prepa']) &&  $data['prepa']) {
         $req .= 'aller_date = "'.$infos_camp['date_prepa'].'", ';
     }
     else {
@@ -207,6 +214,74 @@ function enregistrer_inscription($data) {
 
     $res = $bdd->query($req);
     $res->closeCursor();
+
+    // Envoi mail
+
+    $str = 'Bonjour,<br><br>
+
+Votre demande d\'inscription pour votre enfant Auguste au camp Réussir sa Vie (camp n°1) qui aura lieu du 10 au 16 juillet 2017 au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
+
+Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
+
+Fondacio camp RSV n°'.$infos_camp['numero'].'<br>
+2 rue de l\'Esvière<br>
+49100 ANGERS<br><br>
+
+Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://fondacio.fr/fondacio/spip.php?article539">en suivant ce lien</a>.<br>
+Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>
+
+Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer votre demande à <a href="mailto:jeunes.camps@fondacio.fr">l\'adresse suivante</a>.<br><br>
+
+Au plaisir d\'accueillir votre enfant cet été au Mourtis !<br><br>
+
+L\'équipe Fondacio Jeunes
+
+PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>
+
+Civilité: '.$data['civilite'].'<br>
+Nom du jeune: '.$data['jeune_nom'].'<br>
+Prénom du jeune: '.$data['jeune_prenom'].'<br>
+Adresse: '.$data['jeune_adresse'].'<br>
+Code postal: '.$data['code_postal'].'<br>
+Ville: '.$data['ville'].'<br>
+Pays: '.$data['pays'].'<br>
+Téléphone portable du jeune: '.$data['jeune_tel_portable'].'<br>
+Téléphone fixe: '.$data['tel_fixe'].'<br>
+Courriel du jeune: '.$data['jeune_mail'].'<br>
+Date de naissance: '.convert_date($data['date_naissance'], '-', '/').'<br>
+Etudes actuelles: '.$data['etudes'].'<br>
+Taille: '.$data['taille'].' cms<br>
+Poids: '.$data['poids'].' kgs<br>
+Nom des parents: '.$data['parents_nom'].'<br>
+Prénom des parents: '.$data['parents_prenom'].'<br>
+Tel portable de la mère: '.$data['mere_tel_portable'].'<br>
+Tel portable du père: '.$data['pere_tel_portable'].'<br>
+Courriel des parents: '.$data['parents_mail'].'<br>
+J\'ai déjà fait un camp "Réussir sa vie": '.$data['ancien'].'<br>
+J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
+if ($data['aller_transport'] == 'bus') {
+    $str .= $data['aller_bus'];
+}
+else if ($data['aller_transport'] == 'train') {
+    $str .= 'navette de '.$data['aller_train'];
+}
+$str .= ')<br>
+Je repartirai du Mourtis en: '.$data['retour_transport'].' (';
+if ($data['retour_transport'] == 'bus') {
+    $str .= $data['retour_bus'];
+}
+$str .= ')<br>
+Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
+J\'ai connu ce camp par: '.$data['communication'];
+
+    $to      = $data['parents_mail'];
+    $subject = 'Votre demande d\'inscription au camp "Réussir sa Vie" n°'.$infos_camp['numero'];
+    $message = $str;
+    $headers = 'From: Fondacio <fondacio.camp'.$infos_camp['numero'].'@gmail.com>' . "\r\n" .
+    'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+    var_dump(mail($to, $subject, $message, $headers));
 
 }
 
