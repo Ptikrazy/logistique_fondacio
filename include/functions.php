@@ -274,14 +274,11 @@ $str .= ')<br>
 Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
 J\'ai connu ce camp par: '.$data['communication'];
 
-    $to      = $data['parents_mail'];
-    $subject = 'Votre demande d\'inscription au camp "Réussir sa Vie" n°'.$infos_camp['numero'];
-    $message = $str;
-    $headers = 'From: Fondacio <fondacio.camp'.$infos_camp['numero'].'@gmail.com>' . "\r\n" .
-    'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com' . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
+    $to      = 'pleplat75@gmail.com';
+    $subject = 'Test';
+    $message = 'Test';
 
-    var_dump(mail($to, $subject, $message, $headers));
+    var_dump(mail($to, $subject, $message));
 
 }
 
