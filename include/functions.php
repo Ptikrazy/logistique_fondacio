@@ -236,10 +236,15 @@ Au plaisir d\'accueillir votre enfant cet été au Mourtis !<br><br>
 
 L\'équipe Fondacio Jeunes
 
-PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>
+PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
 
-Civilité: '.$data['civilite'].'<br>
-Nom du jeune: '.$data['jeune_nom'].'<br>
+if ($data['civilite'] == 'H') {
+    $str .= 'Civilité: Homme<br>';
+}
+else {
+    $str .= 'Civilité: Femme<br>';
+}
+$str .= 'Nom du jeune: '.$data['jeune_nom'].'<br>
 Prénom du jeune: '.$data['jeune_prenom'].'<br>
 Adresse: '.$data['jeune_adresse'].'<br>
 Code postal: '.$data['code_postal'].'<br>
@@ -256,8 +261,14 @@ Nom des parents: '.$data['parents_nom'].'<br>
 Prénom des parents: '.$data['parents_prenom'].'<br>
 Tel portable de la mère: '.$data['mere_tel_portable'].'<br>
 Tel portable du père: '.$data['pere_tel_portable'].'<br>
-Courriel des parents: '.$data['parents_mail'].'<br>
-J\'ai déjà fait un camp "Réussir sa vie": '.$data['ancien'].'<br>
+Courriel des parents: '.$data['parents_mail'].'<br>';
+if ($data['ancien']) {
+    $ancien = 'Oui';
+}
+else {
+    $ancien = 'Non';
+}
+$str .= 'J\'ai déjà fait un camp "Réussir sa vie": '.$ancien.'<br>
 J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
 if ($data['aller_transport'] == 'bus') {
     $str .= $data['aller_bus'];
@@ -274,14 +285,32 @@ $str .= ')<br>
 Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
 J\'ai connu ce camp par: '.$data['communication'];
 
-    $to      = $data['parents_mail'];
-    $subject = 'Votre demande d\'inscription au camp "Réussir sa Vie" n°'.$infos_camp['numero'];
-    $message = $str;
-    $headers = 'From: Fondacio <fondacio.camp'.$infos_camp['numero'].'@gmail.com>' . "\r\n" .
-    'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com' . "\r\n" .
-    'X-Mailer: PHP/' . phpversion();
+    $mail = new PHPMailer\PHPMailer\PHPMailer();
 
-    var_dump(mail($to, $subject, $message, $headers));
+    try {
+        $mail->SMTPDebug = 0;
+        $mail->isSMTP();
+        $mail->Host = 'smtp.sfr.fr';
+        $mail->SMTPAuth = false;
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port = 465;
+
+        //Recipients
+        $mail->setFrom('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
+        $mail->addAddress($data['parents_mail'], $data['parents_prenom'].' '.$data['parents_nom']);
+        $mail->addReplyTo('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
+
+        //Content
+        $mail->isHTML(true);
+        $mail->Subject = utf8_decode('Votre demande d\'inscription au camp "Réussir sa Vie" n°'.$infos_camp['numero']);
+        $mail->Body    = $str;
+
+        $mail->send();
+    }
+    catch (Exception $e) {
+        echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $mail->ErrorInfo;
+    }
 
 }
 
