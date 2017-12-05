@@ -115,11 +115,24 @@ function get_inscrits($camp) {
 
     global $bdd;
 
-    $req = 'SELECT id_jeune, nom, prenom, da_a_relancer, da_complet, rgt_recu, desistement FROM jeunes WHERE camp = '.$camp.' ORDER BY nom';
+    $req = 'SELECT id_jeune, nom, prenom, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes WHERE camp = '.$camp.' ORDER BY nom';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['id_jeune']] = $d;
     }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_infos_administrative($id) {
+
+    global $bdd;
+
+    $req = 'SELECT id_jeune, date_saisie, camp, civilite, nom, prenom, date_naissance, paiement_declare, da_a_relancer, da_relance_envoyee, da_reception, da_fsl, da_ap, da_di, da_bn, da_photo, da_vaccins, da_tpt, da_complet, da_commentaire, da_relance_pieces_manquantes, da_courrier_parents, rgt_recu, rgt_montant, rgt_commentaires, rgt_moyen, desistement FROM jeunes WHERE id_jeune = '.$id;
+    $res = $bdd->query($req);
+    $data = $res->fetch();
     $res->closeCursor();
 
     return $data;
@@ -210,7 +223,8 @@ function enregistrer_inscription($data) {
     else {
         $req .= 'retour_heure = "12h", ';
     }
-    $req .= 'retour_ville = "'.$data['retour_bus'].'"';
+    $req .= 'retour_ville = "'.$data['retour_bus'].'", ';
+    $req .= 'da_a_relancer = "'.date('Y-m-d', strtotime('+2 months')).'"';
 
     $res = $bdd->query($req);
     $res->closeCursor();
@@ -285,7 +299,7 @@ $str .= ')<br>
 Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
 J\'ai connu ce camp par: '.$data['communication'];
 
-    $mail = new PHPMailer\PHPMailer\PHPMailer();
+    /*$mail = new PHPMailer\PHPMailer\PHPMailer();
 
     try {
         $mail->SMTPDebug = 0;
@@ -310,7 +324,32 @@ J\'ai connu ce camp par: '.$data['communication'];
     catch (Exception $e) {
         echo 'Message could not be sent.';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
+    }*/
+
+}
+
+function maj_administratif($id, $data) {
+
+    global $bdd;
+    $req  = 'UPDATE jeunes SET ';
+    end($data);
+    $last = key($data);
+    reset($data);
+    foreach ($data as $champ => $value) {
+        if ($champ == 'desistement' && $value == 'NULL') {
+            $req .= $champ.' = NULL';
+        }
+        else {
+            $req .= $champ.' = "'.$value.'"';
+        }
+
+        if ($champ != $last) {
+            $req .= ', ';
+        }
     }
+    $req .= ' WHERE id_jeune = '.$id;
+    $res = $bdd->query($req);
+    $res->closeCursor();
 
 }
 
