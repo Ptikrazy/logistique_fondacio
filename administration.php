@@ -160,6 +160,7 @@ else {
                     <input type="date" class="form-control" name="da_reception" id="da_reception" value="<?php echo $data['da_reception']; ?>">
                 </div>
             </div>
+
             <div class="form-group row">
                 <div class="col-sm-2">Pièces du dossier recues</div>
                 <div class="col-sm-10">
@@ -252,7 +253,236 @@ else {
 
             <h4>Financier</h4><br>
 
-            In progress<br><br>
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="rgt_recu">Règlement reçu le</label>
+                <div class="col-sm-3">
+                    <input type="date" class="form-control" name="rgt_recu" id="rgt_recu" value="<?php echo $data['rgt_recu']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="rgt_montant">Montant reçu</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="rgt_montant" id="rgt_montant" value="<?php echo $data['rgt_montant']; ?>">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="paiement_declare">Montant déclaré</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="paiement_declare" id="paiement_declare" value="<?php echo $data['paiement_declare']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="solde">Solde</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="solde" id="solde" value="<?php echo $data['rgt_montant']-$data['paiement_declare']; ?>" disabled>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="rgt_commentaire">Commentaires</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="rgt_commentaire" id="rgt_commentaire" value="<?php echo $data['rgt_commentaire']; ?>">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="rgt_moyen">Moyen de règlement</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="rgt_moyen" id="rgt_moyen">
+                        <option value=""></option>
+                        <option value="cb" <?php echo ($data['rgt_moyen'] == 'cb') ? 'selected': ''; ?>>Carte bancaire</option>
+                        <option value="cheque" <?php echo ($data['rgt_moyen'] == 'cheque') ? 'selected': ''; ?>>Chèque(s)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="cheques">
+                <h6>Chèque 1</h6>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque1_montant">Montant</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" name="cheque1_montant" id="cheque1_montant" value="<?php echo $data['cheque1_montant']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque1_numero">Numéro</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" name="cheque1_numero" id="cheque1_numero" value="<?php echo $data['cheque1_numero']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-2" for="cheque1_date_encaissement">Date d'encaissement</label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" name="cheque1_date_encaissement" id="cheque1_date_encaissement" value="<?php echo $data['cheque1_date_encaissement']; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque1_emetteur">Emetteur</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque1_emetteur" id="cheque1_emetteur" value="<?php echo $data['cheque1_emetteur']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque1_banque">Banque</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque1_banque" id="cheque1_banque" value="<?php echo $data['cheque1_banque']; ?>">
+                    </div>
+                </div>
+
+                <h6>Chèque 2</h6>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque2_montant">Montant</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" name="cheque2_montant" id="cheque2_montant" value="<?php echo $data['cheque2_montant']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque2_numero">Numéro</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" name="cheque2_numero" id="cheque2_numero" value="<?php echo $data['cheque2_numero']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-2" for="cheque2_date_encaissement">Date d'encaissement</label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" name="cheque2_date_encaissement" id="cheque2_date_encaissement" value="<?php echo $data['cheque2_date_encaissement']; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque2_emetteur">Emetteur</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque2_emetteur" id="cheque2_emetteur" value="<?php echo $data['cheque2_emetteur']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque2_banque">Banque</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque2_banque" id="cheque2_banque" value="<?php echo $data['cheque2_banque']; ?>">
+                    </div>
+                </div>
+
+                <h6>Chèque 3</h6>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque3_montant">Montant</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" name="cheque3_montant" id="cheque3_montant" value="<?php echo $data['cheque3_montant']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque3_numero">Numéro</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" name="cheque3_numero" id="cheque3_numero" value="<?php echo $data['cheque3_numero']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-2" for="cheque3_date_encaissement">Date d'encaissement</label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" name="cheque3_date_encaissement" id="cheque3_date_encaissement" value="<?php echo $data['cheque3_date_encaissement']; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque3_emetteur">Emetteur</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque3_emetteur" id="cheque3_emetteur" value="<?php echo $data['cheque3_emetteur']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque3_banque">Banque</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque3_banque" id="cheque3_banque" value="<?php echo $data['cheque3_banque']; ?>">
+                    </div>
+                </div>
+
+                <h6>Chèque 4</h6>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque4_montant">Montant</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" name="cheque4_montant" id="cheque4_montant" value="<?php echo $data['cheque4_montant']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque4_numero">Numéro</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" name="cheque4_numero" id="cheque4_numero" value="<?php echo $data['cheque4_numero']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-2" for="cheque4_date_encaissement">Date d'encaissement</label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" name="cheque4_date_encaissement" id="cheque4_date_encaissement" value="<?php echo $data['cheque4_date_encaissement']; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque4_emetteur">Emetteur</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque4_emetteur" id="cheque4_emetteur" value="<?php echo $data['cheque4_emetteur']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque4_banque">Banque</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque4_banque" id="cheque4_banque" value="<?php echo $data['cheque4_banque']; ?>">
+                    </div>
+                </div>
+
+                <h6>Chèque 5</h6>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque5_montant">Montant</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" name="cheque5_montant" id="cheque5_montant" value="<?php echo $data['cheque5_montant']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque5_numero">Numéro</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" name="cheque5_numero" id="cheque5_numero" value="<?php echo $data['cheque5_numero']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-2" for="cheque5_date_encaissement">Date d'encaissement</label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" name="cheque5_date_encaissement" id="cheque5_date_encaissement" value="<?php echo $data['cheque5_date_encaissement']; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque5_emetteur">Emetteur</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque5_emetteur" id="cheque5_emetteur" value="<?php echo $data['cheque5_emetteur']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque5_banque">Banque</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque5_banque" id="cheque5_banque" value="<?php echo $data['cheque5_banque']; ?>">
+                    </div>
+                </div>
+
+                <h6>Chèque 6</h6>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque6_montant">Montant</label>
+                    <div class="col-sm-2">
+                        <input type="number" class="form-control" name="cheque6_montant" id="cheque6_montant" value="<?php echo $data['cheque6_montant']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque6_numero">Numéro</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" name="cheque6_numero" id="cheque6_numero" value="<?php echo $data['cheque6_numero']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-2" for="cheque6_date_encaissement">Date d'encaissement</label>
+                    <div class="col-sm-3">
+                        <input type="date" class="form-control" name="cheque6_date_encaissement" id="cheque6_date_encaissement" value="<?php echo $data['cheque6_date_encaissement']; ?>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-sm-1" for="cheque6_emetteur">Emetteur</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque6_emetteur" id="cheque6_emetteur" value="<?php echo $data['cheque6_emetteur']; ?>">
+                    </div>
+                    <label class="col-form-label col-sm-1" for="cheque6_banque">Banque</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" name="cheque6_banque" id="cheque6_banque" value="<?php echo $data['cheque6_banque']; ?>">
+                    </div>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="cv_montant">Montant Chèques Vacances</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="cv_montant" id="cv_montant" value="<?php echo $data['cv_montant']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="cv_nom">Nom Chèques Vacances</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cv_nom" id="cv_nom" value="<?php echo $data['cv_nom']; ?>">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="caf_rgt">Règlement CAF</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="caf_rgt" id="caf_rgt" value="<?php echo $data['caf_rgt']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="caf_caution">Caution CAF</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="caf_caution" id="caf_caution" value="<?php echo $data['caf_caution']; ?>">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="bourse">Bourse</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="bourse" id="bourse" value="<?php echo $data['bourse']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="autre">Autre (espèces, compte, permanent...)</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="autre" id="autre" value="<?php echo $data['autre']; ?>">
+                </div>
+            </div>
 
             <h4>Transport</h4><br>
 
@@ -708,6 +938,19 @@ else {
                         });
                     }
                 });
+
+                $('#cheques').hide();
+                if ($('#rgt_moyen').val() == 'cheque') {
+                    $('#cheques').show();
+                }
+                $('#rgt_moyen').change(function() {
+                    if (this.value == "cheque") {
+                        $('#cheques').show();
+                    }
+                    else {
+                        $('#cheques').hide();
+                    }
+                });
             });
 
         </script>
@@ -837,6 +1080,7 @@ else {
                 <th scope="col">DA complet</th>
                 <th scope="col">DA à relancer</th>
                 <th scope="col">Règlement reçu</th>
+                <th scope="col">Solde</th>
             </tr>
         </thead>
         <tbody>
@@ -882,6 +1126,7 @@ else {
                         <td>'.$da_complet.'</td>
                         <td>'.convert_date($data['da_a_relancer'], '-', '/').'</td>
                         <td>'.convert_date($data['rgt_recu'], '-', '/').'</td>
+                        <td>'.($data['rgt_montant']-$data['paiement_declare']).'</td>
                     </tr>
                 ';
             }
