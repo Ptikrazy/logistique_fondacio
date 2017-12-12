@@ -259,7 +259,7 @@ function enregistrer_inscription($data) {
 
     $str = 'Bonjour,<br><br>
 
-Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.$infos_camp['date_debut'].' au '.$infos_camp['date_fin'].' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
+Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.date($infos_camp['date_debut'], '-', '/').' au '.date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
 
 Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
@@ -336,7 +336,8 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
     $mail = new PHPMailer\PHPMailer\PHPMailer();
 
     try {
-        $mail->SMTPDebug = 0;
+        $mail->SMTPDebug = 2;
+        $mail->CharSet = 'UTF-8';
         $mail->isSMTP();
         $mail->Host = 'smtp.sfr.fr';
         $mail->SMTPAuth = false;
@@ -344,14 +345,14 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
         $mail->Port = 465;
 
         //Recipients
-        $mail->setFrom('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
+        $mail->setFrom('jeunes.camps@fondacio.fr', 'Fondacio Jeunes');
         $mail->addAddress($data['parents_mail'], $data['parents_prenom'].' '.$data['parents_nom']);
         $mail->addAddress('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
         $mail->addReplyTo('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
 
         //Content
         $mail->isHTML(true);
-        $mail->Subject = utf8_decode('Votre demande d\'inscription au camp "Réussir sa Vie" n°'.$infos_camp['numero']);
+        $mail->Subject = 'Votre demande d\'inscription au camp "Réussir sa Vie" n°'.$infos_camp['numero'];
         $mail->Body    = $str;
 
         $mail->send();
