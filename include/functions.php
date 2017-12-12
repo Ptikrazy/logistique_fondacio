@@ -26,8 +26,13 @@ function redirect($url) {
 
 function convert_date($date, $from, $to) {
 
-    $date = explode($from, $date);
-    $date = $date[2].$to.$date[1].'/'.$date[0];
+    if (empty($date)) {
+        $date = '';
+    }
+    else {
+        $date = explode($from, $date);
+        $date = $date[2].$to.$date[1].'/'.$date[0];
+    }
 
     return($date);
 
@@ -111,11 +116,32 @@ function get_villes_bus($aller_retour, $camp) {
 
 }
 
-function get_inscrits($camp) {
+function get_inscrits($camp, $filtres = array(), $tri = '') {
 
     global $bdd;
 
-    $req = 'SELECT id_jeune, nom, prenom, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes WHERE camp = '.$camp.' ORDER BY nom';
+    $req = 'SELECT id_jeune, nom, prenom, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes WHERE ';
+    if (!empty($filtres)) {
+        foreach ($filtres as $champ => $value) {
+            if (in_array($champ, array('da_a_relancer', 'rgt_recu'))) {
+                $req .= $champ.' IS NOT NULL';
+            }
+            elseif ($champ == 'nom') {
+                $req .= $champ.' LIKE "%'.$value.'%"';
+            }
+            else {
+                $req .= $champ.' = "'.$value.'"';
+            }
+            $req .= ' AND ';
+        }
+    }
+    $req .= 'camp = '.$camp.'';
+    if (!empty($tri)) {
+        $req .= ' ORDER BY '.$tri;
+    }
+    else {
+        $req .= ' ORDER BY id_jeune';
+    }
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['id_jeune']] = $d;
@@ -126,11 +152,11 @@ function get_inscrits($camp) {
 
 }
 
-function get_infos_administrative($id) {
+function get_jeune($id) {
 
     global $bdd;
 
-    $req = 'SELECT id_jeune, date_saisie, camp, civilite, nom, prenom, date_naissance, paiement_declare, da_a_relancer, da_relance_envoyee, da_reception, da_fsl, da_ap, da_di, da_bn, da_photo, da_vaccins, da_tpt, da_complet, da_commentaire, da_relance_pieces_manquantes, da_courrier_parents, rgt_recu, rgt_montant, rgt_commentaires, rgt_moyen, desistement FROM jeunes WHERE id_jeune = '.$id;
+    $req = 'SELECT * FROM jeunes WHERE id_jeune = '.$id;
     $res = $bdd->query($req);
     $data = $res->fetch();
     $res->closeCursor();
@@ -149,7 +175,7 @@ function enregistrer_inscription($data) {
     $infos_camp = get_camp($data['camp']);
 
     $req  = 'INSERT INTO jeunes SET ';
-    $req .= 'camp = '.$data['camp'].', ';
+    $req .= 'camp = '.$infos_camp['numero'].', ';
     $req .= 'ancien = '.$data['ancien'].', ';
     if (isset($data['prepa'])) {
         $req .= 'prepa = '.$data['prepa'].', ';
@@ -233,7 +259,7 @@ function enregistrer_inscription($data) {
 
     $str = 'Bonjour,<br><br>
 
-Votre demande d\'inscription pour votre enfant Auguste au camp Réussir sa Vie (camp n°1) qui aura lieu du 10 au 16 juillet 2017 au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
+Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.$infos_camp['date_debut'].' au '.$infos_camp['date_fin'].' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
 
 Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
@@ -242,9 +268,15 @@ Fondacio camp RSV n°'.$infos_camp['numero'].'<br>
 49100 ANGERS<br><br>
 
 Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://fondacio.fr/fondacio/spip.php?article539">en suivant ce lien</a>.<br>
-Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>
+Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>';
 
-Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer votre demande à <a href="mailto:jeunes.camps@fondacio.fr">l\'adresse suivante</a>.<br><br>
+    if (isset($data['prepa'])) {
+
+        $str .= 'De plus, vous avez inscrit '.$data['jeune_prenom'].' à la prépa du camp. Vous retrouverez toutes les informations à ce ssujet en <a href="http://www.fondacio.fr/fondacio/spip.php?article870">cliquant ici</a>.';
+
+    }
+
+    $str .= 'Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer votre demande à <a href="mailto:jeunes.camps@fondacio.fr">l\'adresse suivante</a>.<br><br>
 
 Au plaisir d\'accueillir votre enfant cet été au Mourtis !<br><br>
 
@@ -297,7 +329,9 @@ if ($data['retour_transport'] == 'bus') {
 }
 $str .= ')<br>
 Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
-J\'ai connu ce camp par: '.$data['communication'];
+J\'ai connu ce camp par: '.$data['communication'].'<br>
+Conditions de participation: Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.<br>
+Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.';
 
     /*$mail = new PHPMailer\PHPMailer\PHPMailer();
 
@@ -336,11 +370,16 @@ function maj_administratif($id, $data) {
     $last = key($data);
     reset($data);
     foreach ($data as $champ => $value) {
-        if ($champ == 'desistement' && $value == 'NULL') {
-            $req .= $champ.' = NULL';
+        if ($champ == 'aller_bus') {
+            $req .= 'aller_ville = "'.$value.'"';
         }
         else {
-            $req .= $champ.' = "'.$value.'"';
+            if ($value == 'NULL') {
+                $req .= $champ.' = NULL';
+            }
+            else {
+                $req .= $champ.' = "'.$value.'"';
+            }
         }
 
         if ($champ != $last) {

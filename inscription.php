@@ -127,7 +127,7 @@ else {
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="jeune_tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" placeholder="Laissez vide si pas de portable" required>
+                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" required>
             </div>
             <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
             <div class="col-sm-3">
@@ -246,7 +246,7 @@ else {
         <h5>Aller</h5><br>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="camp">J'arriverai au Mourtis en <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Pour rejoindre le lieu de camp, 3 possibilités: <ul><li>Arriver en voiture</li><li>Venir en train jusqu'à la gare de Montréjeau-Gourdan Polignan, où une navette Fondacio attendra les jeunes pour les conduire sur le lieu de camp</li><li>Prendre le bus organisé par Fondacio</li></ul>"></label>
+            <label class="col-form-label col-sm-2" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Pour rejoindre le lieu de camp, 3 possibilités: <ul><li>Arriver en voiture</li><li>Venir en train jusqu'à la gare de Montréjeau-Gourdan Polignan, où une navette Fondacio attendra les jeunes pour les conduire sur le lieu de camp</li><li>Prendre le bus organisé par Fondacio</li></ul>"></label>
             <div class="col-sm-3">
                 <select class="form-control" name="aller_transport" id="aller_transport" required>
                     <option value="" selected></option>
@@ -271,7 +271,7 @@ else {
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="aller_train" id="aller_train14h25" value="11h25"> 14h25 (si impossible à 11h25)
+                        <input class="form-check-input" type="radio" name="aller_train" id="aller_train14h25" value="14h25"> 14h25 (si impossible à 11h25)
                     </label>
                 </div>
             </div>
@@ -289,7 +289,7 @@ else {
         <h5>Retour</h5><br>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="camp">Je repartirai du Mourtis en <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="retour_transport">Je repartirai du Mourtis en <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="retour_transport" id="retour_transport" required>
                     <option value="" selected></option>
@@ -320,16 +320,16 @@ else {
         <h4>Paiement</h4>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-12">Le coût de revient d’un camp (hébergement, restauration, activités, administratif, encadrement) est de 1000 euros. Fondacio France finance 62% du coût du camp par des dons (parrainage, bénévolat, mécénat). Les 38% restants, soit 380 euros, correspondent au prix demandé aux familles. Selon vos possibilités, nous proposons une participation entre 250 et 1000 euros.<br><br>
+            <label class="col-form-label col-sm-12">Le coût de revient d’un camp (hébergement, restauration, activités, administratif, encadrement) est de <b>1 000 euros</b>. Fondacio France finance 62% du coût du camp par des dons (parrainage, bénévolat, mécénat). Les 38% restants, soit <b>380 euros</b>, correspondent au prix demandé aux familles. Selon vos possibilités, nous proposons une participation entre <b style="color: red">250 et 1000 euros.</b><br><br>
 
             A ce coût s'ajoute le prix du transport:<br>
-            - Le service de navette que nous proposons de la gare de Montréjeau au Mourtis ajoute 15€ par voyage au coût du camp (donc 30€ si vous arrivez et repartez en train)<br>
-            - Le voyage en bus ajoute 80€ par voyage au coût du camp (donc 160€ si vous arrivez et repartez en bus)<br><br>
+            - Le service de navette que nous proposons de la gare de Montréjeau au Mourtis ajoute <b style="color: green">15€ par voyage</b> au coût du camp (donc 30€ si vous arrivez et repartez en train)<br>
+            - Le voyage en bus ajoute <b style="color: green">80€ par voyage</b> au coût du camp (donc 160€ si vous arrivez et repartez en bus)<br><br>
 
-            Si vous décidez de participer à la prépa, son coût de revient (55€) sera également ajouté.<br><br>
+            Si vous décidez de participer à la <b>prépa</b>, son coût de revient (<b style="color: blue">55€</b>) sera également ajouté.<br><br>
 
-            Le prix de revient total camp + transport est donc de 380 + <span class="cout_transport"></span> = <span id="cout_revient"></span> euros.<br>
-            La fourchette de participation proposée est donc de (250 + <span class="cout_transport"></span> + <span class="cout_prepa"></span> =) <span id="cout_fourchette_basse"></span> euros à (1000 + <span class="cout_transport"></span> + <span class="cout_prepa"></span> =) <span id="cout_fourchette_haute"></span> euros.</label>
+            Le prix de revient total camp + transport est donc de <b>380 + <span class="cout_transport" style="color: green"></span> = <span id="cout_revient" style="color: red"></span> euros.</b><br>
+            La fourchette de participation proposée est donc de <b>(250 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_basse style="color: red""></span> euros à (1000 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_haute" style="color: red"></span> euros.</b></label>
         </div>
 
         <div class="form-group row">
@@ -392,7 +392,7 @@ else {
         <h4>Communication</h4><br>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="camp">J'ai connu ce camp par <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="communication">J'ai connu ce camp par <span style="color: red">*</span></label>
             <div class="col-sm-6">
                 <select class="form-control" name="communication" id="communication" required>
                     <option value="" selected></option>
