@@ -346,7 +346,7 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
         //Recipients
         $mail->setFrom('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
         $mail->addAddress($data['parents_mail'], $data['parents_prenom'].' '.$data['parents_nom']);
-        $mail->addAddress('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio']);
+        $mail->addAddress('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
         $mail->addReplyTo('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
 
         //Content
