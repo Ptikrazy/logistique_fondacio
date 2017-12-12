@@ -328,8 +328,8 @@ else {
 
             Si vous décidez de participer à la <b>prépa</b>, son coût de revient (<b style="color: blue">55€</b>) sera également ajouté.<br><br>
 
-            Le prix de revient total camp + transport est donc de <b>380 + <span class="cout_transport" style="color: green"></span> = <span id="cout_revient" style="color: red"></span> euros.</b><br>
-            La fourchette de participation proposée est donc de <b>(250 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_basse style="color: red""></span> euros à (1000 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_haute" style="color: red"></span> euros.</b></label>
+            Le prix de revient total camp + transport est donc de <b>380 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> = <span id="cout_revient" style="color: red"></span> euros.</b><br>
+            La fourchette de participation proposée est donc de <b>(250 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_basse" style="color: red"></span> euros à (1000 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_haute" style="color: red"></span> euros.</b></label>
         </div>
 
         <div class="form-group row">
