@@ -342,7 +342,7 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
     $to = $data['parents_mail'].', fondacio.camp'.$infos_camp['numero'].'@gmail.com';
     $subject = 'Votre demande d\'inscription au camp "Réussir Sa Vie" n°'.$infos_camp['numero'];
     $headers  = 'MIME-Version: 1.0' . "\r\n";
-    $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
     $headers .= 'To: '.$data['parents_prenom'].' '.$data['parents_nom'].' <'.$data['parents_mail'].'>, fondacio.camp'.$infos_camp['numero'].'@gmail.com'."\r\n".
                 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
                 'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com';

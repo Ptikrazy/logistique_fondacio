@@ -15,10 +15,6 @@ setlocale(LC_TIME, "fr_FR");
 require_once 'bdd.php';
 
 // Require
-require_once dirname(dirname(__FILE__)).'/include/PHPMailer/Exception.php';
-require_once dirname(dirname(__FILE__)).'/include/PHPMailer/PHPMailer.php';
-require_once dirname(dirname(__FILE__)).'/include/PHPMailer/SMTP.php';
-require_once dirname(dirname(__FILE__)).'/include/PHPMailer/OAuth.php';
 require_once 'functions.php';
 
 // Choix du camp
