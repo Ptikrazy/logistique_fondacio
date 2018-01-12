@@ -18,6 +18,8 @@
 
     <body>
 
+    <?php if ($_SERVER['SCRIPT_NAME'] != '/inscription.php') { ?>
+
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href="/"><img src="/include/logo.png" width="150" height="30" alt=""></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -35,5 +37,7 @@
             </ul>
         </div>
     </nav>
+
+    <?php } ?>
       <br><br><br>
       <div class="container">

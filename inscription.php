@@ -42,7 +42,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="ancien">J'ai déjà fait un camp "Réussir sa Vie" <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="ancien">J'ai déjà fait un camp "Réussir Sa Vie" <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
@@ -125,9 +125,9 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="jeune_tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
+            <label class="col-form-label col-sm-2" for="jeune_tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, laisser vide"></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" required>
+                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" placeholder="Si pas de portable, laisser vide" required>
             </div>
             <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
             <div class="col-sm-3">
@@ -320,16 +320,16 @@ else {
         <h4>Paiement</h4>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-12">Le coût de revient d’un camp (hébergement, restauration, activités, administratif, encadrement) est de <b>1 000 euros</b>. Fondacio France finance 62% du coût du camp par des dons (parrainage, bénévolat, mécénat). Les 38% restants, soit <b>380 euros</b>, correspondent au prix demandé aux familles. Selon vos possibilités, nous proposons une participation entre <b style="color: red">250 et 1000 euros.</b><br><br>
+            <label class="col-form-label col-sm-12">Le coût de revient d’un camp (hébergement, restauration, activités, administratif, encadrement) est de <b>1 100 euros</b>. Fondacio France finance 62% du coût du camp par des dons (parrainage, bénévolat, mécénat). Les 38% restants, soit <b>420 euros</b>, correspondent au prix demandé aux familles. Selon vos possibilités, nous proposons une participation entre <b style="color: red">270 et 1 100 euros.</b><br><br>
 
             A ce coût s'ajoute le prix du transport:<br>
-            - Le service de navette que nous proposons de la gare de Montréjeau au Mourtis ajoute <b style="color: green">15€ par voyage</b> au coût du camp (donc 30€ si vous arrivez et repartez en train)<br>
-            - Le voyage en bus ajoute <b style="color: green">80€ par voyage</b> au coût du camp (donc 160€ si vous arrivez et repartez en bus)<br><br>
+            - Le service de navette que nous proposons de la gare de Montréjeau au Mourtis ajoute <b style="color: green">20€ par voyage</b> au coût du camp (donc 40€ si vous arrivez et repartez en train)<br>
+            - Le voyage en bus ajoute <b style="color: green">75€ par voyage</b> au coût du camp (donc 150€ si vous arrivez et repartez en bus)<br><br>
 
-            Si vous décidez de participer à la <b>prépa</b>, son coût de revient (<b style="color: blue">55€</b>) sera également ajouté.<br><br>
+            Si vous décidez de participer à la <b>prépa</b>, son coût de revient (<b style="color: blue">60€</b>) sera également ajouté.<br><br>
 
-            Le prix de revient total camp + transport est donc de <b>380 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> = <span id="cout_revient" style="color: red"></span> euros.</b><br>
-            La fourchette de participation proposée est donc de <b>(250 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_basse" style="color: red"></span> euros à (1000 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_haute" style="color: red"></span> euros.</b></label>
+            Le prix de revient total camp + transport est donc de <b>420 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> = <span id="cout_revient" style="color: red"></span> euros.</b><br>
+            La fourchette de participation proposée est donc de <b>(270 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_basse" style="color: red"></span> euros à (1 100 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_haute" style="color: red"></span> euros.</b></label>
         </div>
 
         <div class="form-group row">
@@ -346,7 +346,7 @@ else {
 
             Si vous payez par chèque, vous pouvez échelonner vos paiements sur plusieurs mois (au plus tard octobre 2018), en indiquant au dos de chaque chèque la date (fin de mois) d'encaissement souhaitée.<br><br>
 
-            Le camp "Réussir sa vie" est agréé Jeunesse et Sports, et nous acceptons les Aides aux Vacances Enfants de la CAF (dispositif AVE), sous réserve d’une inscription avant le 30 avril 2018. Si tel est le cas, vous devez nous envoyer 2 chèques (ou plus) : l'un correspondant au montant théorique que devra nous verser la CAF (si celle-ci règle directement Fondacio et non la famille) que nous garderons en caution, l'autre (ou les autres) correspondant au solde à régler (montant total dû - participation attendue de la CAF), que nous encaisserons à réception (ou à la date d'encaissement indiquée au dos du chèque).<br><br>
+            Le camp "Réussir Sa Vie" est agréé Jeunesse et Sports, et nous acceptons les Aides aux Vacances Enfants de la CAF (dispositif AVE), sous réserve d’une inscription avant le 30 avril 2018. Si tel est le cas, vous devez nous envoyer 2 chèques (ou plus) : l'un correspondant au montant théorique que devra nous verser la CAF (si celle-ci règle directement Fondacio et non la famille) que nous garderons en caution, l'autre (ou les autres) correspondant au solde à régler (montant total dû - participation attendue de la CAF), que nous encaisserons à réception (ou à la date d'encaissement indiquée au dos du chèque).<br><br>
 
             N’hésitez pas à vérifier si vous pouvez bénéficier d’aides auprès de certains organismes (Conseil Général, CAF, CE, Mairie,...) et à contacter votre Caisse d’Allocations Familiales pour vérifier si elle attribue des aides aux vacances pour les centres de vacances.</label>
         </div>
@@ -403,7 +403,7 @@ else {
                     <option value="Le catalogue Fondacio Jeunes">Le catalogue Fondacio Jeunes</option>
                     <option value="Un flyer reçu ou trouvé">Un flyer reçu ou trouvé</option>
                     <option value="Facebook">Facebook</option>
-                    <option value="J'ai déjà fait un camp Réussir sa Vie">J'ai déjà fait un camp Réussir sa Vie</option>
+                    <option value="J'ai déjà fait un camp Réussir Sa Vie">J'ai déjà fait un camp Réussir Sa Vie</option>
                     <option value="Autre">Autre (précisez dans la zone "Autre")</option>
                 </select>
             </div>

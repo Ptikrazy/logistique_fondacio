@@ -123,8 +123,14 @@ function get_inscrits($camp, $filtres = array(), $tri = '') {
     $req = 'SELECT id_jeune, nom, prenom, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes WHERE ';
     if (!empty($filtres)) {
         foreach ($filtres as $champ => $value) {
-            if (in_array($champ, array('da_a_relancer', 'rgt_recu'))) {
+            if ($champ == 'rgt_recu') {
+                $req .= $champ.' IS NULL';
+            }
+            elseif ($champ == 'da_a_relancer') {
                 $req .= $champ.' IS NOT NULL';
+            }
+            elseif ($champ == 'da_complet') {
+                $req .= $champ.' = 0';
             }
             elseif ($champ == 'nom') {
                 $req .= $champ.' LIKE "%'.$value.'%"';
@@ -259,7 +265,7 @@ function enregistrer_inscription($data) {
 
     $str = 'Bonjour,<br><br>
 
-Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.date($infos_camp['date_debut'], '-', '/').' au '.date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
+Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir Sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.date($infos_camp['date_debut'], '-', '/').' au '.date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
 
 Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
@@ -314,7 +320,7 @@ if ($data['ancien']) {
 else {
     $ancien = 'Non';
 }
-$str .= 'J\'ai déjà fait un camp "Réussir sa vie": '.$ancien.'<br>
+$str .= 'J\'ai déjà fait un camp "Réussir Sa Vie": '.$ancien.'<br>
 J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
 if ($data['aller_transport'] == 'bus') {
     $str .= $data['aller_bus'];
@@ -352,7 +358,7 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
 
         //Content
         $mail->isHTML(true);
-        $mail->Subject = 'Votre demande d\'inscription au camp "Réussir sa Vie" n°'.$infos_camp['numero'];
+        $mail->Subject = 'Votre demande d\'inscription au camp "Réussir Sa Vie" n°'.$infos_camp['numero'];
         $mail->Body    = $str;
 
         $mail->send();

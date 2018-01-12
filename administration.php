@@ -590,7 +590,7 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="ancien">J'ai déjà fait un camp "Réussir sa Vie" <span style="color: red">*</span></label>
+                <label class="col-form-label col-sm-2" for="ancien">J'ai déjà fait un camp "Réussir Sa Vie" <span style="color: red">*</span></label>
                 <div class="col-sm-3">
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
@@ -831,8 +831,8 @@ else {
                         <option value="Le catalogue Fondacio Jeunes"  <?php echo ($data['communication'] == 'Le catalogue Fondacio Jeunes') ? 'selected': ''; ?>>Le catalogue Fondacio Jeunes</option>
                         <option value="Un flyer reçu ou trouvé"  <?php echo ($data['communication'] == 'Un flyer reçu ou trouvé') ? 'selected': ''; ?>>Un flyer reçu ou trouvé</option>
                         <option value="Facebook"  <?php echo ($data['communication'] == 'Facebook') ? 'selected': ''; ?>>Facebook</option>
-                        <option value="J'ai déjà fait un camp Réussir sa Vie"  <?php echo ($data['communication'] == 'J\'ai déjà fait un camp Réussir sa Vie') ? 'selected': ''; ?>>J'ai déjà fait un camp Réussir sa Vie</option>
-                        <option value="Autre"  <?php echo (!in_array($data['communication'], array('Une annonce dans la presse', 'Le site Internet de Fondacio France', 'Ma famille ou des amis de mes parents', 'Un(e) ami(e) m\'en a parlé', 'Le catalogue Fondacio Jeunes', 'Un flyer reçu ou trouvé', 'Facebook', 'J\'ai déjà fait un camp Réussir sa Vie'))) ? 'selected': ''; ?>>Autre (précisez dans la zone "Autre")</option>
+                        <option value="J'ai déjà fait un camp Réussir Sa Vie"  <?php echo ($data['communication'] == 'J\'ai déjà fait un camp Réussir Sa Vie') ? 'selected': ''; ?>>J'ai déjà fait un camp Réussir Sa Vie</option>
+                        <option value="Autre"  <?php echo (!in_array($data['communication'], array('Une annonce dans la presse', 'Le site Internet de Fondacio France', 'Ma famille ou des amis de mes parents', 'Un(e) ami(e) m\'en a parlé', 'Le catalogue Fondacio Jeunes', 'Un flyer reçu ou trouvé', 'Facebook', 'J\'ai déjà fait un camp Réussir Sa Vie'))) ? 'selected': ''; ?>>Autre (précisez dans la zone "Autre")</option>
                     </select>
                 </div>
             </div>
@@ -840,7 +840,7 @@ else {
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="communication_autre">Autre</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="communication_autre" id="communication_autre" value="<?php echo (!in_array($data['communication'], array('Une annonce dans la presse', 'Le site Internet de Fondacio France', 'Ma famille ou des amis de mes parents', 'Un(e) ami(e) m\'en a parlé', 'Le catalogue Fondacio Jeunes', 'Un flyer reçu ou trouvé', 'Facebook', 'J\'ai déjà fait un camp Réussir sa Vie'))) ? $data['communication'] : ''; ?>">
+                    <input type="text" class="form-control" name="communication_autre" id="communication_autre" value="<?php echo (!in_array($data['communication'], array('Une annonce dans la presse', 'Le site Internet de Fondacio France', 'Ma famille ou des amis de mes parents', 'Un(e) ami(e) m\'en a parlé', 'Le catalogue Fondacio Jeunes', 'Un flyer reçu ou trouvé', 'Facebook', 'J\'ai déjà fait un camp Réussir Sa Vie'))) ? $data['communication'] : ''; ?>">
                 </div>
             </div><br>
 <?php
@@ -1016,7 +1016,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="da_complet">DA complet ?</label>
+            <label class="col-form-label col-sm-2" for="da_complet">DA incomplet ?</label>
             <div class="col-sm-3">
                 <div class="form-check">
                     <label class="form-check-label">
@@ -1038,7 +1038,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="rgt_recu">Règlement reçu ?</label>
+            <label class="col-form-label col-sm-2" for="rgt_recu">Règlement non reçu ?</label>
             <div class="col-sm-3">
                 <div class="form-check">
                     <label class="form-check-label">
