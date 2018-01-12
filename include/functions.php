@@ -342,17 +342,17 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
     $mail = new PHPMailer\PHPMailer\PHPMailer();
 
     try {
-        //$mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 2;
         $mail->CharSet = 'UTF-8';
 
-        /*$mail->isSMTP();
-        $mail->Host = 'smtp.sfr.fr';
+        $mail->isSMTP();
+        $mail->Host = 'localhost';
         $mail->SMTPAuth = false;
         $mail->SMTPSecure = false;
-        $mail->Port = 25;*/
+        $mail->Port = 25;
 
         //Recipients
-        $mail->FromName('Fondacio Jeunes');
+        $mail->setFrom('jeunes.camps@fondacio.fr', 'Fondacio Jeunes');
         $mail->addAddress($data['parents_mail'], $data['parents_prenom'].' '.$data['parents_nom']);
         $mail->addAddress('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
         $mail->addReplyTo('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
