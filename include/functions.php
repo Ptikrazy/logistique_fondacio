@@ -352,7 +352,7 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
         $mail->Port = 25;*/
 
         //Recipients
-        $mail->setFrom('jeunes.camps@fondacio.fr', 'Fondacio Jeunes');
+        $mail->FromName('Fondacio Jeunes');
         $mail->addAddress($data['parents_mail'], $data['parents_prenom'].' '.$data['parents_nom']);
         $mail->addAddress('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
         $mail->addReplyTo('fondacio.camp'.$infos_camp['numero'].'@gmail.com', 'Fondacio');
