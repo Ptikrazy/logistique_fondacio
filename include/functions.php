@@ -342,7 +342,7 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
     $mail = new PHPMailer\PHPMailer\PHPMailer();
 
     try {
-        $mail->SMTPDebug = 2;
+        //$mail->SMTPDebug = 2;
         $mail->CharSet = 'UTF-8';
 
         /*$mail->isSMTP();
