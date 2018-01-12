@@ -339,7 +339,14 @@ J\'ai connu ce camp par: '.$data['communication'].'<br>
 Conditions de participation: Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.<br>
 Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.';
 
-    $mail = new PHPMailer\PHPMailer\PHPMailer();
+    $to = $data['parents_mail'].', fondacio.camp'.$infos_camp['numero'].'@gmail.com';
+    $subject = 'Votre demande d\'inscription au camp "Réussir Sa Vie" n°'.$infos_camp['numero'];
+    $headers = 'To: '.$data['parents_prenom'].' '.$data['parents_nom'].' <'.$data['parents_mail'].'>, fondacio.camp'.$infos_camp['numero'].'@gmail.com'."\r\n".
+               'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
+               'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com';
+    mail('pleplat75@gmail.com', $subject, $str, $headers);
+
+    /*$mail = new PHPMailer\PHPMailer\PHPMailer();
 
     try {
         $mail->SMTPDebug = 2;
@@ -367,7 +374,7 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
     catch (Exception $e) {
         echo 'Message could not be sent.';
         echo 'Mailer Error: ' . $mail->ErrorInfo;
-    }
+    }*/
 
 }
 
