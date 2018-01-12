@@ -344,11 +344,12 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
     try {
         $mail->SMTPDebug = 2;
         $mail->CharSet = 'UTF-8';
-        $mail->isSMTP();
+
+        /*$mail->isSMTP();
         $mail->Host = 'smtp.sfr.fr';
         $mail->SMTPAuth = false;
         $mail->SMTPSecure = false;
-        $mail->Port = 25;
+        $mail->Port = 25;*/
 
         //Recipients
         $mail->setFrom('jeunes.camps@fondacio.fr', 'Fondacio Jeunes');
