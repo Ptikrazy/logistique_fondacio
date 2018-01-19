@@ -64,7 +64,7 @@ function get_infos_login($login) {
 
     global $bdd;
 
-    $req = 'SELECT id_utilisateur, role FROM utilisateurs WHERE login = "'.$login.'"';
+    $req = 'SELECT id_utilisateur, role, login FROM utilisateurs WHERE login = "'.$login.'"';
     $res = $bdd->query($req);
     $data = $res->fetch();
     $res->closeCursor();
@@ -120,8 +120,15 @@ function get_inscrits($camp, $filtres = array(), $tri = '') {
 
     global $bdd;
 
-    $req = 'SELECT id_jeune, nom, prenom, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes WHERE ';
+    $where = FALSE;
+
+    $req = 'SELECT id_jeune, nom, prenom, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes ';
     if (!empty($filtres)) {
+        $req .= 'WHERE ';
+        $where = TRUE;
+        end($filtres);
+        $last = key($filtres);
+        reset($filtres);
         foreach ($filtres as $champ => $value) {
             if ($champ == 'rgt_recu') {
                 $req .= $champ.' IS NULL';
@@ -138,10 +145,19 @@ function get_inscrits($camp, $filtres = array(), $tri = '') {
             else {
                 $req .= $champ.' = "'.$value.'"';
             }
-            $req .= ' AND ';
+            if ($champ != $last) {
+                $req .= ' AND ';
+            }
         }
     }
-    $req .= 'camp = '.$camp.'';
+    if ($_SESSION['profil']['role'] != 'admin') {
+        if ($where) {
+            $req .= ' AND camp = '.$camp.' ';
+        }
+        else {
+            $req .= ' WHERE camp = '.$camp.' ';
+        }
+    }
     if (!empty($tri)) {
         $req .= ' ORDER BY '.$tri;
     }
@@ -339,12 +355,11 @@ J\'ai connu ce camp par: '.$data['communication'].'<br>
 Conditions de participation: Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.<br>
 Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.';
 
-    $to = $data['parents_mail'].',fondacio.camp'.$infos_camp['numero'].'@gmail.com';
-    $subject = 'Votre demande d\'inscription au camp "Réussir Sa Vie" n°'.$infos_camp['numero'];
+    $to       = $data['parents_mail'].',fondacio.camp'.$infos_camp['numero'].'@gmail.com';
+    $subject  = 'Votre demande d\'inscription au camp "Réussir Sa Vie" n°'.$infos_camp['numero'];
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
-    $headers .= 'To: '.$data['parents_prenom'].' '.$data['parents_nom'].' <'.$data['parents_mail'].'>, fondacio.camp'.$infos_camp['numero'].'@gmail.com'."\r\n".
-                'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
+    $headers .= 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
                 'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com';
     mail($to, $subject, $str, $headers);
 

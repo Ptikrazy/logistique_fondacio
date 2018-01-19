@@ -17,7 +17,4 @@ require_once 'bdd.php';
 // Require
 require_once 'functions.php';
 
-// Choix du camp
-$_SESSION['camp'] = 1;
-
 ?>

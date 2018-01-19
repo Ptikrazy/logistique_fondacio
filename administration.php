@@ -44,6 +44,9 @@ if (empty($_SESSION['profil']['id'])) {
 
         else {
             $login = get_infos_login($_POST['login']);
+            if ($login['role'] == 'charge_insc') {
+                $_SESSION['camp'] = substr($_POST['login'], -1);
+            }
             $_SESSION['profil']['id'] = $login['id_utilisateur'];
             $_SESSION['profil']['role'] = $login['role'];
             redirect('/administration.php');
@@ -65,6 +68,8 @@ else {
             }
 
             $data = get_jeune($_GET['id']);
+
+            $data['rgt_montant'] = $data['cb_montant'] + $data['cheque1_montant'] + $data['cheque2_montant'] + $data['cheque3_montant'] + $data['cheque4_montant'] + $data['cheque5_montant'] + $data['cheque6_montant'] + $data['cv_montant'] + $data['caf_rgt'] + $data['bourse'] + $data['autre'];
 
             if (!empty($_POST)) {
 
@@ -135,6 +140,8 @@ else {
                     $_POST['da_relance_pieces_manquantes '] = 'NULL';
                 }
 
+                $_POST['rgt_montant'] = $_POST['cb_montant'] + $_POST['cheque1_montant'] + $_POST['cheque2_montant'] + $_POST['cheque3_montant'] + $_POST['cheque4_montant'] + $_POST['cheque5_montant'] + $_POST['cheque6_montant'] + $_POST['cv_montant'] + $_POST['caf_rgt'] + $_POST['bourse'] + $_POST['autre'];
+
                 maj_administratif($_GET['id'], $_POST);
                 $_SESSION['edit_ok'] = 1;
                 redirect('/administration.php?action=edit&id='.$_GET['id']);
@@ -180,22 +187,12 @@ else {
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="da_di" id="da_di" value="1" <?php echo ($data['da_di']) ? 'checked': ''; ?>> DI
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?php
-                            if (!$data['ancien']) {
-                                if (age($data['date_naissance']) < 18) {
-                        ?>
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="da_bn" id="da_bn" value="1" <?php echo ($data['da_bn']) ? 'checked': ''; ?>> BN
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?php
-                                }
-                        ?>
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="da_photo" id="da_photo" value="1" <?php echo ($data['da_photo']) ? 'checked': ''; ?>> Photo
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?php
-                            }
-                        ?>
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="da_vaccins" id="da_vaccins" value="1" <?php echo ($data['da_vaccins']) ? 'checked': ''; ?>> Vaccins
                         </label>
@@ -260,14 +257,14 @@ else {
                 </div>
                 <label class="col-form-label col-sm-2" for="rgt_montant">Montant reçu</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="rgt_montant" id="rgt_montant" value="<?php echo $data['rgt_montant']; ?>">
+                    <input type="text" class="form-control" name="rgt_montant" id="rgt_montant" value="<?php echo $data['rgt_montant']; ?>" disabled>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="paiement_declare">Montant déclaré</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="paiement_declare" id="paiement_declare" value="<?php echo $data['paiement_declare']; ?>">
+                    <input type="text" class="form-control" name="paiement_declare" id="paiement_declare" value="<?php echo $data['paiement_declare']; ?>" disabled>
                 </div>
                 <label class="col-form-label col-sm-2" for="solde">Solde</label>
                 <div class="col-sm-3">
@@ -290,6 +287,13 @@ else {
                         <option value="cb" <?php echo ($data['rgt_moyen'] == 'cb') ? 'selected': ''; ?>>Carte bancaire</option>
                         <option value="cheque" <?php echo ($data['rgt_moyen'] == 'cheque') ? 'selected': ''; ?>>Chèque(s)</option>
                     </select>
+                </div>
+            </div>
+
+            <div class="form-group row" id="cb">
+                <label class="col-form-label col-sm-2" for="cb_montant">Montant CB</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="cb_montant" id="cb_montant" value="<?php echo $data['cb_montant']; ?>">
                 </div>
             </div>
 
@@ -474,10 +478,16 @@ else {
             </div>
 
             <div class="form-group row">
+                <?php
+                    if ($_SESSION['profil']['role'] == 'admin') {
+                ?>
                 <label class="col-form-label col-sm-2" for="bourse">Bourse</label>
                 <div class="col-sm-3">
                     <input type="number" class="form-control" name="bourse" id="bourse" value="<?php echo $data['bourse']; ?>">
                 </div>
+                <?php
+                    }
+                ?>
                 <label class="col-form-label col-sm-2" for="autre">Autre (espèces, compte, permanent...)</label>
                 <div class="col-sm-3">
                     <input type="number" class="form-control" name="autre" id="autre" value="<?php echo $data['autre']; ?>">
@@ -940,14 +950,20 @@ else {
                 });
 
                 $('#cheques').hide();
+                $('#cb').hide();
                 if ($('#rgt_moyen').val() == 'cheque') {
                     $('#cheques').show();
+                }
+                if ($('#rgt_moyen').val() == 'cb') {
+                    $('#cb').show();
                 }
                 $('#rgt_moyen').change(function() {
                     if (this.value == "cheque") {
                         $('#cheques').show();
+                        $('#cb').hide();
                     }
                     else {
+                        $('#cb').show();
                         $('#cheques').hide();
                     }
                 });
@@ -1101,7 +1117,7 @@ else {
                 $filtres['rgt_recu'] = $_POST['rgt_recu'];
             }
 
-            $inscrits = get_inscrits(1, $filtres, $_POST['tri']);
+            $inscrits = get_inscrits($_SESSION['camp'], $filtres, $_POST['tri']);
 
             foreach ($inscrits as $id_jeune => $data) {
 
