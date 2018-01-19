@@ -9,7 +9,16 @@ if (!empty($_POST)) {
 
     enregistrer_inscription($_POST);
 
-    echo '<br><br>Merci, un email de confirmation contenant les informations nécessaires va vous être envoyé.';
+    echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée.<br><br>
+
+Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
+
+Fondacio camp RSV<br>
+2 rue de l\'Esvière<br>
+49100 ANGERS<br><br>
+
+Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
+Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.';
 
 }
 
@@ -58,7 +67,7 @@ else {
         </div>
 
         <div class="form-group row" id="prepa">
-            <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
+            <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 60 euros."></label>
             <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
@@ -127,7 +136,7 @@ else {
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="jeune_tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, laisser vide"></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" placeholder="Si pas de portable, laisser vide" required>
+                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" placeholder="Si pas de portable, laisser vide">
             </div>
             <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
             <div class="col-sm-3">
@@ -467,16 +476,16 @@ else {
 
             $('input[type=radio][name=prepa]').change(function() {
                 if (this.value == 1) {
-                    cout_prepa = 55;
+                    cout_prepa = 60;
                 }
                 else {
                     cout_prepa = 0;
                 }
                 $('.cout_transport').text(cout_transport);
                 $('.cout_prepa').text(cout_prepa);
-                $('#cout_revient').text(cout_transport+cout_prepa+380);
-                $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
-                $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+                $('#cout_revient').text(cout_transport+cout_prepa+420);
+                $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+                $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
             });
 
             // Gestion des transports
@@ -495,6 +504,13 @@ else {
                     $('#aller_voiture').show();
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
+                    cout_transport_aller = 0;
+                    cout_transport = cout_transport_aller+cout_transport_retour;
+                    $('.cout_transport').text(cout_transport);
+                    $('.cout_prepa').text(cout_prepa);
+                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
                 if (this.value == "train") {
                     $('#aller_bus_clear option').remove();
@@ -502,25 +518,25 @@ else {
                     $('#aller_voiture').hide();
                     $('#aller_train').show();
                     $('#aller_bus').hide();
-                    cout_transport_aller = 15;
+                    cout_transport_aller = 20;
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+380);
-                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
-                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
                 if (this.value == "bus") {
                     $('#aller_voiture').hide();
                     $('#aller_train').hide();
                     $('#aller_bus').show();
-                    cout_transport_aller = 80;
+                    cout_transport_aller = 75;
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+380);
-                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
-                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
 
                     $.ajax({
                         type: 'POST',
@@ -542,9 +558,9 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+380);
-                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
-                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
             });
 
@@ -555,6 +571,13 @@ else {
                     $('#retour_voiture').show();
                     $('#retour_train').hide();
                     $('#retour_bus').hide();
+                    cout_transport_retour = 0;
+                    cout_transport = cout_transport_aller+cout_transport_retour;
+                    $('.cout_transport').text(cout_transport);
+                    $('.cout_prepa').text(cout_prepa);
+                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
                 if (this.value == "train") {
                     $('#retour_bus_clear option').remove();
@@ -562,25 +585,25 @@ else {
                     $('#retour_voiture').hide();
                     $('#retour_train').show();
                     $('#retour_bus').hide();
-                    cout_transport_retour = 15;
+                    cout_transport_retour = 20;
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+380);
-                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
-                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
                 if (this.value == "bus") {
                     $('#retour_voiture').hide();
                     $('#retour_train').hide();
                     $('#retour_bus').show();
-                    cout_transport_retour = 80;
+                    cout_transport_retour = 75;
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+380);
-                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
-                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
 
                     $.ajax({
                         type: 'POST',
@@ -602,9 +625,9 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+380);
-                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
-                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+                    $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
             });
 
@@ -612,9 +635,9 @@ else {
 
             $('.cout_transport').text(cout_transport);
             $('.cout_prepa').text(cout_prepa);
-            $('#cout_revient').text(cout_transport+cout_prepa+380);
-            $('#cout_fourchette_basse').text(cout_transport+cout_prepa+250);
-            $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1000);
+            $('#cout_revient').text(cout_transport+cout_prepa+420);
+            $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
+            $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
 
             // CE Obligatoire
 

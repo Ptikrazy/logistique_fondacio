@@ -265,7 +265,7 @@ function enregistrer_inscription($data) {
 
     $str = 'Bonjour,<br><br>
 
-Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir Sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.date($infos_camp['date_debut'], '-', '/').' au '.date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
+Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir Sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.convert_date($infos_camp['date_debut'], '-', '/').' au '.convert_date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
 
 Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
@@ -273,7 +273,7 @@ Fondacio camp RSV n°'.$infos_camp['numero'].'<br>
 2 rue de l\'Esvière<br>
 49100 ANGERS<br><br>
 
-Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://fondacio.fr/fondacio/spip.php?article539">en suivant ce lien</a>.<br>
+Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
 Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>';
 
     if (isset($data['prepa'])) {
@@ -291,10 +291,10 @@ L\'équipe Fondacio Jeunes
 PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
 
 if ($data['civilite'] == 'H') {
-    $str .= 'Civilité: Homme<br>';
+    $str .= 'Civilité: M.<br>';
 }
 else {
-    $str .= 'Civilité: Femme<br>';
+    $str .= 'Civilité: Mme<br>';
 }
 $str .= 'Nom du jeune: '.$data['jeune_nom'].'<br>
 Prénom du jeune: '.$data['jeune_prenom'].'<br>
@@ -339,14 +339,14 @@ J\'ai connu ce camp par: '.$data['communication'].'<br>
 Conditions de participation: Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.<br>
 Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.';
 
-    $to = $data['parents_mail'].', fondacio.camp'.$infos_camp['numero'].'@gmail.com';
+    $to = $data['parents_mail'].',fondacio.camp'.$infos_camp['numero'].'@gmail.com';
     $subject = 'Votre demande d\'inscription au camp "Réussir Sa Vie" n°'.$infos_camp['numero'];
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
     $headers .= 'To: '.$data['parents_prenom'].' '.$data['parents_nom'].' <'.$data['parents_mail'].'>, fondacio.camp'.$infos_camp['numero'].'@gmail.com'."\r\n".
                 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
                 'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com';
-    mail('pleplat75@gmail.com', $subject, $str, $headers);
+    mail($to, $subject, $str, $headers);
 
 }
 
