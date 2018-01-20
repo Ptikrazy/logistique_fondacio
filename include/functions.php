@@ -209,7 +209,7 @@ function enregistrer_inscription($data) {
     $req .= 'nom = "'.strtoupper($data['jeune_nom']).'", ';
     $req .= 'prenom = "'.$data['jeune_prenom'].'", ';
     $req .= 'adresse = "'.$data['jeune_adresse'].'", ';
-    $req .= 'cp = '.$data['code_postal'].', ';
+    $req .= 'cp = "'.$data['code_postal'].'", ';
     $req .= 'ville = "'.$data['ville'].'", ';
     $req .= 'pays = "'.$data['pays'].'", ';
     $req .= 'tel_portable = "'.$data['jeune_tel_portable'].'", ';
@@ -294,15 +294,14 @@ Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.f
 
     if (isset($data['prepa'])) {
 
-        $str .= 'De plus, vous avez inscrit '.$data['jeune_prenom'].' à la prépa du camp. Vous retrouverez toutes les informations à ce ssujet en <a href="http://www.fondacio.fr/fondacio/spip.php?article870">cliquant ici</a>.';
+        $str .= 'De plus, vous avez inscrit '.$data['jeune_prenom'].' à la prépa du camp. Merci de lui demander de remplir le formulaire de souhaits en <a href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/souhaits-prepa/">cliquant ici</a>.<br><br>';
 
     }
 
     $str .= 'Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer votre demande à <a href="mailto:jeunes.camps@fondacio.fr">l\'adresse suivante</a>.<br><br>
 
-Au plaisir d\'accueillir votre enfant cet été au Mourtis !<br><br>
-
-L\'équipe Fondacio Jeunes
+Au plaisir d\'accueillir votre enfant cet été au Mourtis !<br>
+L\'équipe de la Mission Jeunes<br><br>
 
 PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
 
@@ -322,27 +321,34 @@ Téléphone portable du jeune: '.$data['jeune_tel_portable'].'<br>
 Téléphone fixe: '.$data['tel_fixe'].'<br>
 Courriel du jeune: '.$data['jeune_mail'].'<br>
 Date de naissance: '.convert_date($data['date_naissance'], '-', '/').'<br>
-Etudes actuelles: '.$data['etudes'].'<br>
-Taille: '.$data['taille'].' cms<br>
-Poids: '.$data['poids'].' kgs<br>
+Etudes actuelles: '.$data['etudes'];
+if (isset($data['etudes_autres'])) {
+    $str .= ' ('.$data['etudes_autres'].')';
+}
+$str .= '<br>Taille: '.$data['taille'].' cm<br>
+Poids: '.$data['poids'].' kg<br>
 Nom des parents: '.$data['parents_nom'].'<br>
 Prénom des parents: '.$data['parents_prenom'].'<br>
 Tel portable de la mère: '.$data['mere_tel_portable'].'<br>
 Tel portable du père: '.$data['pere_tel_portable'].'<br>
-Courriel des parents: '.$data['parents_mail'].'<br>';
+Courriel des parents: '.$data['parents_mail'].'<br>
+Observations: '.$data['observations'].'<br>';
 if ($data['ancien']) {
     $ancien = 'Oui';
 }
 else {
     $ancien = 'Non';
 }
-$str .= 'J\'ai déjà fait un camp "Réussir Sa Vie": '.$ancien.'<br>
-J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
+$str .= 'J\'ai déjà fait un camp "Réussir Sa Vie": '.$ancien.'<br>';
+if ($data['prepa']) {
+    $str .= 'Je suis inscrit à la prépa du camp: Oui<br>';
+}
+$str .= 'J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
 if ($data['aller_transport'] == 'bus') {
     $str .= $data['aller_bus'];
 }
 else if ($data['aller_transport'] == 'train') {
-    $str .= 'navette de '.$data['aller_train'];
+    $str .= 'navette de '.$data['aller_heure'];
 }
 $str .= ')<br>
 Je repartirai du Mourtis en: '.$data['retour_transport'].' (';

@@ -280,24 +280,13 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="rgt_moyen">Moyen de règlement</label>
-                <div class="col-sm-3">
-                    <select class="form-control" name="rgt_moyen" id="rgt_moyen">
-                        <option value=""></option>
-                        <option value="cb" <?php echo ($data['rgt_moyen'] == 'cb') ? 'selected': ''; ?>>Carte bancaire</option>
-                        <option value="cheque" <?php echo ($data['rgt_moyen'] == 'cheque') ? 'selected': ''; ?>>Chèque(s)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-group row" id="cb">
                 <label class="col-form-label col-sm-2" for="cb_montant">Montant CB</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="cb_montant" id="cb_montant" value="<?php echo $data['cb_montant']; ?>">
                 </div>
             </div>
 
-            <div id="cheques">
+            <div>
                 <h6>Chèque 1</h6>
                 <div class="form-group row">
                     <label class="col-form-label col-sm-1" for="cheque1_montant">Montant</label>
@@ -643,7 +632,7 @@ else {
                     </div>
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="civilite" id="civiliteH" value="H" <?php echo ($data['civilite'] == 'H') ? 'checked' : ''; ?> required> Mr
+                            <input class="form-check-input" type="radio" name="civilite" id="civiliteH" value="H" <?php echo ($data['civilite'] == 'H') ? 'checked' : ''; ?> required> M.
                         </label>
                     </div>
                 </div>
@@ -744,11 +733,11 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="taille">Taille (en cms)<span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
+                <label class="col-form-label col-sm-2" for="taille">Taille (en cm)<span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
                 <div class="col-sm-2">
                     <input type="number" class="form-control" name="taille" id="taille" value="<?php echo $data['taille']; ?>" required>
                 </div>
-                <label class="col-form-label col-sm-2" for="poids">Poids (en kgs) <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
+                <label class="col-form-label col-sm-2" for="poids">Poids (en kg) <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
                 <div class="col-sm-2">
                     <input type="number" class="form-control" name="poids" id="poids" value="<?php echo $data['poids']; ?>" required>
                 </div>
@@ -946,25 +935,6 @@ else {
                                 $("#retour_bus_villes").after(data);
                             }
                         });
-                    }
-                });
-
-                $('#cheques').hide();
-                $('#cb').hide();
-                if ($('#rgt_moyen').val() == 'cheque') {
-                    $('#cheques').show();
-                }
-                if ($('#rgt_moyen').val() == 'cb') {
-                    $('#cb').show();
-                }
-                $('#rgt_moyen').change(function() {
-                    if (this.value == "cheque") {
-                        $('#cheques').show();
-                        $('#cb').hide();
-                    }
-                    else {
-                        $('#cb').show();
-                        $('#cheques').hide();
                     }
                 });
             });

@@ -94,7 +94,7 @@ else {
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="civilite" id="civiliteH" value="H" required> Mr
+                        <input class="form-check-input" type="radio" name="civilite" id="civiliteH" value="H" required> M.
                     </label>
                 </div>
             </div>
@@ -195,11 +195,11 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="taille">Taille (en cms)<span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
+            <label class="col-form-label col-sm-2" for="taille">Taille (en cm)<span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
             <div class="col-sm-2">
                 <input type="number" class="form-control" name="taille" id="taille" required>
             </div>
-            <label class="col-form-label col-sm-2" for="poids">Poids (en kgs) <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
+            <label class="col-form-label col-sm-2" for="poids">Poids (en kg) <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
             <div class="col-sm-2">
                 <input type="number" class="form-control" name="poids" id="poids" required>
             </div>
