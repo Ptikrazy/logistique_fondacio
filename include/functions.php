@@ -292,7 +292,7 @@ Fondacio camp RSV n°'.$infos_camp['numero'].'<br>
 Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
 Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>';
 
-    if (isset($data['prepa'])) {
+    if (isset($data['prepa']) && $data['prepa']) {
 
         $str .= 'De plus, vous avez inscrit '.$data['jeune_prenom'].' à la prépa du camp. Merci de lui demander de remplir le formulaire de souhaits en <a href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/souhaits-prepa/">cliquant ici</a>.<br><br>';
 
@@ -340,7 +340,7 @@ else {
     $ancien = 'Non';
 }
 $str .= 'J\'ai déjà fait un camp "Réussir Sa Vie": '.$ancien.'<br>';
-if ($data['prepa']) {
+if (isset($data['prepa']) && $data['prepa']) {
     $str .= 'Je suis inscrit à la prépa du camp: Oui<br>';
 }
 $str .= 'J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
@@ -357,7 +357,17 @@ if ($data['retour_transport'] == 'bus') {
 }
 $str .= ')<br>
 Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
-J\'ai connu ce camp par: '.$data['communication'].'<br>
+J\'ai connu ce camp par: '.$data['communication'];
+if (isset($data['communication_autre'])) {
+    $str .= ' ('.$data['etudes_autres'].')';
+}
+if (isset($data['attestation_inscription'])) {
+    $str .= '<br>Je souhaite recevoir pour mon CE une attestation d\'inscription, une fois que j\'aurais envoyé le dossier d\'inscription papier complet<br>';
+}
+if (isset($data['attestation_presence'])) {
+    $str .= '<br>Je souhaite recevoir pour mon CE une attestation de présence et de paiement, après le camp<br>';
+}
+$str .= '<br>
 Conditions de participation: Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.<br>
 Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.';
 

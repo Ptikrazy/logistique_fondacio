@@ -9,7 +9,7 @@ if (!empty($_POST)) {
 
     enregistrer_inscription($_POST);
 
-    echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée.<br><br>
+    echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée. Un mail de confirmation va vous être envoyé. Attention, il est possible qu\'il arrive dans votre dossier "Spam" ou "Courrier indésirable", pensez à vérifier ce dernier.<br><br>
 
 Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
