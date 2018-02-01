@@ -58,6 +58,23 @@ if (empty($_SESSION['profil']['id'])) {
 
 else {
 
+    if (!empty($_GET['renvoyer_mail'])) {
+        $data = get_jeune($_GET['id']);
+        $data['jeune_prenom'] = $data['prenom'];
+        $data['jeune_nom'] = $data['nom'];
+        $data['jeune_adresse'] = $data['adresse'];
+        $data['code_postal'] = $data['cp'];
+        $data['jeune_tel_portable'] = $data['tel_portable'];
+        $data['jeune_mail'] = $data['mail'];
+        $data['mere_tel_portable'] = $data['mere_portable'];
+        $data['pere_tel_portable'] = $data['pere_portable'];
+        $data['aller_bus'] = $data['aller_ville'];
+        $data['retour_bus'] = $data['retour_ville'];
+        $infos_camp = get_camp($data['camp']);
+
+        send_mail_confirmation($data, $infos_camp);
+    }
+
     if (!empty($_GET['action'])) {
 
         if ($_GET['action'] == 'edit') {
@@ -151,7 +168,7 @@ else {
 ?>
 
             <h2>Fiche de <?php echo $data['prenom'].' '.$data['nom'].' ('.age($data['date_naissance']).' ans)'; ?></h2>
-            <a class="btn btn-secondary" href="administration.php" role="button">Retour</a><br><br>
+            <a class="btn btn-secondary" href="administration.php" role="button">Retour</a>&nbsp;<a class="btn btn-info" href="administration.php?action=edit&id=<?php echo $_GET['id']; ?>&renvoyer_mail=true" role="button">Renvoyer mail</a><br><br>
 
             <h4>Administratif</h4><br>
 
@@ -222,6 +239,45 @@ else {
                     <input type="date" class="form-control" name="da_a_relancer" id="da_a_relancer" value="<?php echo $data['da_a_relancer']; ?>" disabled>
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="ancien">J'ai déjà fait un camp "Réussir Sa Vie" <span style="color: red">*</span></label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="ancien" id="ancien1" value="1" <?php echo ($data['ancien']) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="ancien" id="ancien0" value="0" <?php echo ($data['ancien']) ? '' : 'checked'; ?> required> Non
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row" id="prepa">
+                <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="prepa" id="prepa1" value="1" <?php echo ($data['prepa']) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="prepa" id="prepa0" value="0" <?php echo ($data['prepa']) ? '' : 'checked'; ?>> Non
+                        </label>
+                    </div>
+                </div>
+            </div><br>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="observations">Observations <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="observations" id="observations" rows="3"><?php echo $data['observations']; ?></textarea>
+                </div>
+            </div><br>
 
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="da_courrier_parents">Courrier parents envoyé le</label>
@@ -468,15 +524,15 @@ else {
 
             <div class="form-group row">
                 <?php
+                    $readable = FALSE;
                     if ($_SESSION['profil']['role'] == 'admin') {
+                        $readable = TRUE;
+                    }
                 ?>
                 <label class="col-form-label col-sm-2" for="bourse">Bourse</label>
                 <div class="col-sm-3">
-                    <input type="number" class="form-control" name="bourse" id="bourse" value="<?php echo $data['bourse']; ?>">
+                    <input type="number" class="form-control" name="bourse" id="bourse" value="<?php echo $data['bourse']; ?>" <?php echo ($readable ? '' : 'readonly'); ?>>
                 </div>
-                <?php
-                    }
-                ?>
                 <label class="col-form-label col-sm-2" for="autre">Autre (espèces, compte, permanent...)</label>
                 <div class="col-sm-3">
                     <input type="number" class="form-control" name="autre" id="autre" value="<?php echo $data['autre']; ?>">
@@ -536,6 +592,22 @@ else {
                 </div>
             </div>
 
+            <div class="form-group row" id="retour_train">
+                <label class="col-form-label col-sm-2" for="retour_train">Heure de départ (train)</label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="retour_train" id="retour_train11h25" value="11h25" <?php echo ($data['retour_transport'] == 'train' && $data['retour_heure'] == '11h25') ? 'checked': ''; ?>> 11h25 (recommandé)
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="retour_train" id="retour_train14h25" value="14h25" <?php echo ($data['retour_transport'] == 'train' && $data['retour_heure'] == '14h25') ? 'checked': ''; ?>> 14h25 (si impossible à 11h25)
+                        </label>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group row" id="retour_ville">
                 <label class="col-form-label col-sm-2" for="retour_ville">Ville d'arrivée (bus)</label>
                 <div class="col-sm-3">
@@ -587,38 +659,6 @@ else {
                     </select>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="ancien">J'ai déjà fait un camp "Réussir Sa Vie" <span style="color: red">*</span></label>
-                <div class="col-sm-3">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="ancien" id="ancien1" value="1" <?php echo ($data['ancien']) ? 'checked' : ''; ?>> Oui
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="ancien" id="ancien0" value="0" <?php echo ($data['ancien']) ? '' : 'checked'; ?> required> Non
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row" id="prepa">
-                <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
-                <div class="col-sm-3">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="prepa" id="prepa1" value="1" <?php echo ($data['prepa']) ? 'checked' : ''; ?>> Oui
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="prepa" id="prepa0" value="0" <?php echo ($data['prepa']) ? '' : 'checked'; ?>> Non
-                        </label>
-                    </div>
-                </div>
-            </div><br>
 
             <h4>Informations du jeune</h4><br>
 
@@ -674,7 +714,7 @@ else {
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="tel_portable" id="tel_portable" value="<?php echo $data['tel_portable']; ?>" required>
+                    <input type="text" class="form-control" name="tel_portable" id="tel_portable" value="<?php echo $data['tel_portable']; ?>">
                 </div>
                 <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
                 <div class="col-sm-3">
@@ -871,7 +911,13 @@ else {
                             $("#aller_bus_villes").after(data);
                         }
                     });
+                    $('#aller_train').hide();
                 };
+
+                if ($('#aller_transport').val() == 'train') {
+                    $('#aller_train').show();
+                    $('#aller_ville').hide();
+                }
 
                 $('#aller_transport').change(function() {
                     if (this.value == "voiture") {
@@ -911,6 +957,12 @@ else {
                             $("#retour_bus_villes").after(data);
                         }
                     });
+                    $('#retour_train').hide();
+                }
+
+                if ($('#retour_transport').val() == 'train') {
+                    $('#retour_train').show();
+                    $('#retour_ville').hide();
                 }
 
                 $('#retour_transport').change(function() {

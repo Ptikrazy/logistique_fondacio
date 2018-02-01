@@ -278,18 +278,32 @@ function enregistrer_inscription($data) {
     $res->closeCursor();
 
     // Envoi mail
+    send_mail_confirmation($data, $infos_camp);
+
+}
+
+function send_mail_confirmation($data, $infos_camp) {
 
     $str = 'Bonjour,<br><br>
 
 Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir Sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.convert_date($infos_camp['date_debut'], '-', '/').' au '.convert_date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
 
-Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
+Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>';
 
-Fondacio camp RSV n°'.$infos_camp['numero'].'<br>
-2 rue de l\'Esvière<br>
-49100 ANGERS<br><br>
+    if ($infos_camp['numero'] == 3) {
+        $str .= 'Christine Boulbès<br>
+        Fondacio camp RSV n°3<br>
+        Le Sénèque, Bât. B1<br>
+        2 avenue Georges Brassens<br>
+        13100 AIX-EN-PROVENCE<br><br>';
+    }
+    else {
+        $str .= 'Fondacio camp RSV n°'.$infos_camp['numero'].'<br>
+        2 rue de l\'Esvière<br>
+        49100 ANGERS<br><br>';
+    }
 
-Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
+    $str .= 'Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
 Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>';
 
     if (isset($data['prepa']) && $data['prepa']) {
@@ -305,71 +319,71 @@ L\'équipe de la Mission Jeunes<br><br>
 
 PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
 
-if ($data['civilite'] == 'H') {
-    $str .= 'Civilité: M.<br>';
-}
-else {
-    $str .= 'Civilité: Mme<br>';
-}
-$str .= 'Nom du jeune: '.$data['jeune_nom'].'<br>
-Prénom du jeune: '.$data['jeune_prenom'].'<br>
-Adresse: '.$data['jeune_adresse'].'<br>
-Code postal: '.$data['code_postal'].'<br>
-Ville: '.$data['ville'].'<br>
-Pays: '.$data['pays'].'<br>
-Téléphone portable du jeune: '.$data['jeune_tel_portable'].'<br>
-Téléphone fixe: '.$data['tel_fixe'].'<br>
-Courriel du jeune: '.$data['jeune_mail'].'<br>
-Date de naissance: '.convert_date($data['date_naissance'], '-', '/').'<br>
-Etudes actuelles: '.$data['etudes'];
-if (isset($data['etudes_autres'])) {
-    $str .= ' ('.$data['etudes_autres'].')';
-}
-$str .= '<br>Taille: '.$data['taille'].' cm<br>
-Poids: '.$data['poids'].' kg<br>
-Nom des parents: '.$data['parents_nom'].'<br>
-Prénom des parents: '.$data['parents_prenom'].'<br>
-Tel portable de la mère: '.$data['mere_tel_portable'].'<br>
-Tel portable du père: '.$data['pere_tel_portable'].'<br>
-Courriel des parents: '.$data['parents_mail'].'<br>
-Observations: '.$data['observations'].'<br>';
-if ($data['ancien']) {
-    $ancien = 'Oui';
-}
-else {
-    $ancien = 'Non';
-}
-$str .= 'J\'ai déjà fait un camp "Réussir Sa Vie": '.$ancien.'<br>';
-if (isset($data['prepa']) && $data['prepa']) {
-    $str .= 'Je suis inscrit à la prépa du camp: Oui<br>';
-}
-$str .= 'J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
-if ($data['aller_transport'] == 'bus') {
-    $str .= $data['aller_bus'];
-}
-else if ($data['aller_transport'] == 'train') {
-    $str .= 'navette de '.$data['aller_heure'];
-}
-$str .= ')<br>
-Je repartirai du Mourtis en: '.$data['retour_transport'].' (';
-if ($data['retour_transport'] == 'bus') {
-    $str .= $data['retour_bus'];
-}
-$str .= ')<br>
-Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
-J\'ai connu ce camp par: '.$data['communication'];
-if (isset($data['communication_autre'])) {
-    $str .= ' ('.$data['etudes_autres'].')';
-}
-if (isset($data['attestation_inscription'])) {
-    $str .= '<br>Je souhaite recevoir pour mon CE une attestation d\'inscription, une fois que j\'aurais envoyé le dossier d\'inscription papier complet<br>';
-}
-if (isset($data['attestation_presence'])) {
-    $str .= '<br>Je souhaite recevoir pour mon CE une attestation de présence et de paiement, après le camp<br>';
-}
-$str .= '<br>
-Conditions de participation: Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.<br>
-Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.';
+    if ($data['civilite'] == 'H') {
+        $str .= 'Civilité: M.<br>';
+    }
+    else {
+        $str .= 'Civilité: Mme<br>';
+    }
+    $str .= 'Nom du jeune: '.$data['jeune_nom'].'<br>
+    Prénom du jeune: '.$data['jeune_prenom'].'<br>
+    Adresse: '.$data['jeune_adresse'].'<br>
+    Code postal: '.$data['code_postal'].'<br>
+    Ville: '.$data['ville'].'<br>
+    Pays: '.$data['pays'].'<br>
+    Téléphone portable du jeune: '.$data['jeune_tel_portable'].'<br>
+    Téléphone fixe: '.$data['tel_fixe'].'<br>
+    Courriel du jeune: '.$data['jeune_mail'].'<br>
+    Date de naissance: '.convert_date($data['date_naissance'], '-', '/').'<br>
+    Etudes actuelles: '.$data['etudes'];
+    if (isset($data['etudes_autres'])) {
+        $str .= ' ('.$data['etudes_autres'].')';
+    }
+    $str .= '<br>Taille: '.$data['taille'].' cm<br>
+    Poids: '.$data['poids'].' kg<br>
+    Nom des parents: '.$data['parents_nom'].'<br>
+    Prénom des parents: '.$data['parents_prenom'].'<br>
+    Tel portable de la mère: '.$data['mere_tel_portable'].'<br>
+    Tel portable du père: '.$data['pere_tel_portable'].'<br>
+    Courriel des parents: '.$data['parents_mail'].'<br>
+    Observations: '.$data['observations'].'<br>';
+    if ($data['ancien']) {
+        $ancien = 'Oui';
+    }
+    else {
+        $ancien = 'Non';
+    }
+    $str .= 'J\'ai déjà fait un camp "Réussir Sa Vie": '.$ancien.'<br>';
+    if (isset($data['prepa']) && $data['prepa']) {
+        $str .= 'Je suis inscrit à la prépa du camp: Oui<br>';
+    }
+    $str .= 'J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
+    if ($data['aller_transport'] == 'bus') {
+        $str .= $data['aller_bus'];
+    }
+    else if ($data['aller_transport'] == 'train') {
+        $str .= 'navette de '.$data['aller_heure'];
+    }
+    $str .= ')<br>
+    Je repartirai du Mourtis en: '.$data['retour_transport'].' (';
+    if ($data['retour_transport'] == 'bus') {
+        $str .= $data['retour_bus'];
+    }
+    $str .= ')<br>
+    Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
+    J\'ai connu ce camp par: '.$data['communication'];
+    if (isset($data['communication_autre'])) {
+        $str .= ' ('.$data['etudes_autres'].')';
+    }
+    if (isset($data['attestation_inscription'])) {
+        $str .= '<br>Je souhaite recevoir pour mon CE une attestation d\'inscription, une fois que j\'aurais envoyé le dossier d\'inscription papier complet<br>';
+    }
+    if (isset($data['attestation_presence'])) {
+        $str .= '<br>Je souhaite recevoir pour mon CE une attestation de présence et de paiement, après le camp<br>';
+    }
+    $str .= '<br>
+    Conditions de participation: Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.<br>
+    Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.';
 
     $to       = $data['parents_mail'].',fondacio.camp'.$infos_camp['numero'].'@gmail.com';
     $subject  = 'Votre demande d\'inscription au camp "Réussir Sa Vie" n°'.$infos_camp['numero'];
@@ -377,6 +391,8 @@ Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : 
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
     $headers .= 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
                 'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com';
+    print_r($str);
+    die();
     mail($to, $subject, $str, $headers);
 
 }
