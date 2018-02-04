@@ -391,8 +391,7 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
     $headers .= 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
                 'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com';
-    print_r($str);
-    die();
+
     mail($to, $subject, $str, $headers);
 
 }
