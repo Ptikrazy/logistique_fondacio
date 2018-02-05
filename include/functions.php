@@ -407,6 +407,9 @@ function maj_administratif($id, $data) {
         if ($champ == 'aller_bus') {
             $req .= 'aller_ville = "'.$value.'"';
         }
+        if ($champ == 'aller_train') {
+            $req .= 'aller_heure = "'.$value.'"';
+        }
         else {
             if ($value == 'NULL') {
                 $req .= $champ.' = NULL';

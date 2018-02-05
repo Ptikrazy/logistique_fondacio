@@ -175,6 +175,30 @@ else {
             <form action="" method="POST">
 
             <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="camp">Je m'inscris au camp <span style="color: red">*</span></label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="camp" id="camp" required>
+                        <option value="" selected></option>
+                        <?php
+
+                        $camps = get_camps();
+
+                        foreach ($camps as $camp) {
+                            if ($camp['numero'] == $data['camp']) {
+                                $selected_camp = 'selected';
+                            }
+                            else {
+                                $selected_camp = '';
+                            }
+                            echo '<option value="'.$camp['numero'].'" '.$selected_camp.'>Camp n°'.$camp['numero'].' ('.$camp['regions'].') du '.convert_date($camp['date_debut'], "-", "/").' au '.convert_date($camp['date_fin'], "-", "/").'</option>';
+                        }
+
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="da_reception">Date d'inscription</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="date_saisie" id="date_saisie" value="<?php echo date('d/m/Y H:i:s', strtotime($data['date_saisie'])); ?>" disabled>
@@ -232,7 +256,7 @@ else {
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="parents_mail">Mail des parents</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="parents_mail" id="parents_mail" value="<?php echo $data['parents_mail']; ?>" disabled>
+                    <input type="text" class="form-control" name="parents_mail" id="parents_mail" value="<?php echo $data['parents_mail']; ?>">
                 </div>
                 <label class="col-form-label col-sm-2" for="da_a_relancer">A relancer le</label>
                 <div class="col-sm-3">
@@ -634,32 +658,6 @@ else {
 <?php
             if ($_SESSION['profil']['role'] == 'admin') {
 ?>
-            <h4>Infos camp</h4><br>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="camp">Je m'inscris au camp <span style="color: red">*</span></label>
-                <div class="col-sm-3">
-                    <select class="form-control" name="camp" id="camp" required>
-                        <option value="" selected></option>
-                        <?php
-
-                        $camps = get_camps();
-
-                        foreach ($camps as $camp) {
-                            if ($camp['numero'] == $data['camp']) {
-                                $selected_camp = 'selected';
-                            }
-                            else {
-                                $selected_camp = '';
-                            }
-                            echo '<option value="'.$camp['numero'].'" '.$selected_camp.'>Camp n°'.$camp['numero'].' ('.$camp['regions'].') du '.convert_date($camp['date_debut'], "-", "/").' au '.convert_date($camp['date_fin'], "-", "/").'</option>';
-                        }
-
-                        ?>
-                    </select>
-                </div>
-            </div>
-
             <h4>Informations du jeune</h4><br>
 
             <div class="form-group row">
