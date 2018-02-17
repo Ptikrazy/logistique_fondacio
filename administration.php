@@ -371,7 +371,7 @@ else {
                 <div class="form-group row">
                     <label class="col-form-label col-sm-1" for="cheque1_montant">Montant</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" name="cheque1_montant" id="cheque1_montant" value="<?php echo $data['cheque1_montant']; ?>">
+                        <input type="number" class="form-control" name="cheque1_montant" id="cheque1_montant" step="0.01" value="<?php echo $data['cheque1_montant']; ?>">
                     </div>
                     <label class="col-form-label col-sm-1" for="cheque1_numero">Numéro</label>
                     <div class="col-sm-3">
@@ -397,7 +397,7 @@ else {
                 <div class="form-group row">
                     <label class="col-form-label col-sm-1" for="cheque2_montant">Montant</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" name="cheque2_montant" id="cheque2_montant" value="<?php echo $data['cheque2_montant']; ?>">
+                        <input type="number" class="form-control" name="cheque2_montant" id="cheque2_montant" step="0.01" value="<?php echo $data['cheque2_montant']; ?>">
                     </div>
                     <label class="col-form-label col-sm-1" for="cheque2_numero">Numéro</label>
                     <div class="col-sm-3">
@@ -423,7 +423,7 @@ else {
                 <div class="form-group row">
                     <label class="col-form-label col-sm-1" for="cheque3_montant">Montant</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" name="cheque3_montant" id="cheque3_montant" value="<?php echo $data['cheque3_montant']; ?>">
+                        <input type="number" class="form-control" name="cheque3_montant" id="cheque3_montant" step="0.01" value="<?php echo $data['cheque3_montant']; ?>">
                     </div>
                     <label class="col-form-label col-sm-1" for="cheque3_numero">Numéro</label>
                     <div class="col-sm-3">
@@ -449,7 +449,7 @@ else {
                 <div class="form-group row">
                     <label class="col-form-label col-sm-1" for="cheque4_montant">Montant</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" name="cheque4_montant" id="cheque4_montant" value="<?php echo $data['cheque4_montant']; ?>">
+                        <input type="number" class="form-control" name="cheque4_montant" id="cheque4_montant" step="0.01" value="<?php echo $data['cheque4_montant']; ?>">
                     </div>
                     <label class="col-form-label col-sm-1" for="cheque4_numero">Numéro</label>
                     <div class="col-sm-3">
@@ -475,7 +475,7 @@ else {
                 <div class="form-group row">
                     <label class="col-form-label col-sm-1" for="cheque5_montant">Montant</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" name="cheque5_montant" id="cheque5_montant" value="<?php echo $data['cheque5_montant']; ?>">
+                        <input type="number" class="form-control" name="cheque5_montant" id="cheque5_montant" step="0.01" value="<?php echo $data['cheque5_montant']; ?>">
                     </div>
                     <label class="col-form-label col-sm-1" for="cheque5_numero">Numéro</label>
                     <div class="col-sm-3">
@@ -501,7 +501,7 @@ else {
                 <div class="form-group row">
                     <label class="col-form-label col-sm-1" for="cheque6_montant">Montant</label>
                     <div class="col-sm-2">
-                        <input type="number" class="form-control" name="cheque6_montant" id="cheque6_montant" value="<?php echo $data['cheque6_montant']; ?>">
+                        <input type="number" class="form-control" name="cheque6_montant" id="cheque6_montant" step="0.01" value="<?php echo $data['cheque6_montant']; ?>">
                     </div>
                     <label class="col-form-label col-sm-1" for="cheque6_numero">Numéro</label>
                     <div class="col-sm-3">
