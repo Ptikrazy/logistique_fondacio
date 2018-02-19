@@ -101,6 +101,34 @@ function get_camp($camp) {
 
 }
 
+function get_remplissage_camps() {
+
+    global $bdd;
+
+    $req = 'SELECT camp, COUNT(id_jeune) AS inscrits FROM jeunes WHERE desistement IS NULL GROUP BY camp ORDER BY camp';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['camp']] = $d['inscrits'];
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_totaux_transport($camp, $aller_retour, $transport) {
+
+    global $bdd;
+
+    $req = 'SELECT COUNT(id_jeune) AS total FROM jeunes WHERE desistement IS NULL AND camp = '.$camp.' AND '.$aller_retour.'_transport = "'.$transport.'"';
+    $res = $bdd->query($req);
+    $data = $res->fetchColumn();
+    $res->closeCursor();
+
+    return $data;
+
+}
+
 function get_villes_bus($aller_retour, $camp) {
 
     global $bdd;

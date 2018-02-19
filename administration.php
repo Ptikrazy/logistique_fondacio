@@ -1036,6 +1036,53 @@ else {
         </tbody>
     </table><br>';
 
+    if ($_SESSION['profil']['role'] == 'admin') {
+
+    ?>
+
+        <h3>Remplissage des camps</h3>
+
+        <?php
+
+        $data = get_remplissage_camps();
+
+        echo '
+        <table class="table table-sm table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">N° Camp</th>
+                    <th scope="col">Inscrits</th>
+                    <th scope="col">Aller bus</th>
+                    <th scope="col">Aller train</th>
+                    <th scope="col">Aller voiture</th>
+                    <th scope="col">Retour bus</th>
+                    <th scope="col">Retour train</th>
+                    <th scope="col">Retour voiture</th>
+                </tr>
+            </thead>
+            <tbody>';
+
+        foreach ($data as $camp => $inscrits) {
+            echo '
+                <tr>
+                    <td>'.$camp.'</td>
+                    <td>'.$inscrits.'</td>
+                    <td>'.get_totaux_transport($camp, 'aller', 'bus').'</td>
+                    <td>'.get_totaux_transport($camp, 'aller', 'train').'</td>
+                    <td>'.get_totaux_transport($camp, 'aller', 'voiture').'</td>
+                    <td>'.get_totaux_transport($camp, 'retour', 'bus').'</td>
+                    <td>'.get_totaux_transport($camp, 'retour', 'train').'</td>
+                    <td>'.get_totaux_transport($camp, 'retour', 'voiture').'</td>
+                </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+        </table><br>';
+
+    }
+
     ?>
 
     <h3>Liste des inscrits</h3><br>
