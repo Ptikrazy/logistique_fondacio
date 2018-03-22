@@ -427,6 +427,7 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
 function maj_administratif($id, $data) {
 
     global $bdd;
+
     $req  = 'UPDATE jeunes SET ';
     end($data);
     $last = key($data);
@@ -454,6 +455,22 @@ function maj_administratif($id, $data) {
     $req .= ' WHERE id_jeune = '.$id;
     $res = $bdd->query($req);
     $res->closeCursor();
+
+}
+
+function get_cheques() {
+
+    global $bdd;
+
+    $req = 'SELECT camp, nom, prenom, cheque1_montant, cheque1_numero, cheque1_date_encaissement, cheque2_montant, cheque2_numero, cheque2_date_encaissement, cheque3_montant, cheque3_numero, cheque3_date_encaissement, cheque4_montant, cheque4_numero, cheque4_date_encaissement, cheque5_montant, cheque5_numero, cheque5_date_encaissement, cheque6_montant, cheque6_numero, cheque6_date_encaissement FROM jeunes WHERE cheque1_montant > 0 ORDER BY cheque1_date_encaissement, cheque2_date_encaissement, cheque3_date_encaissement, cheque4_date_encaissement, cheque5_date_encaissement, cheque6_date_encaissement, nom, prenom';
+
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
 
 }
 

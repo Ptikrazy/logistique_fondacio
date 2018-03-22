@@ -1081,6 +1081,73 @@ else {
             </tbody>
         </table><br>';
 
+        ?>
+
+        <h3>Remise des chèques</h3>
+
+        <?php
+
+        $data = get_cheques();
+
+        echo '
+        <table class="table table-sm table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Jeune (camp)</th>
+                    <th scope="col">Chèque 1 (n° - €)</th>
+                    <th scope="col">Chèque 2 (n° - €)</th>
+                    <th scope="col">Chèque 3 (n° - €)</th>
+                    <th scope="col">Chèque 4 (n° - €)</th>
+                    <th scope="col">Chèque 5 (n° - €)</th>
+                    <th scope="col">Chèque 6 (n° - €)</th>
+                </tr>
+            </thead>
+            <tbody>';
+
+        foreach ($data as $d) {
+
+            $ligne1 = '-';
+            $ligne2 = '-';
+            $ligne3 = '-';
+            $ligne4 = '-';
+            $ligne5 = '-';
+            $ligne6 = '-';
+
+            if ($d['cheque1_date_encaissement'] != '0000-00-00') {
+                $ligne1 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
+            }
+            if ($d['cheque2_date_encaissement'] != '0000-00-00') {
+                $ligne2 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
+            }
+            if ($d['cheque3_date_encaissement'] != '0000-00-00') {
+                $ligne3 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
+            }
+            if ($d['cheque4_date_encaissement'] != '0000-00-00') {
+                $ligne4 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
+            }
+            if ($d['cheque5_date_encaissement'] != '0000-00-00') {
+                $ligne5 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
+            }
+            if ($d['cheque6_date_encaissement'] != '0000-00-00') {
+                $ligne6 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
+            }
+            echo '
+                <tr>
+                    <td>'.$d['nom'].' '.$d['prenom'].' ('.$d['camp'].')</td>
+                    <td>'.$ligne1.'</td>
+                    <td>'.$ligne2.'</td>
+                    <td>'.$ligne3.'</td>
+                    <td>'.$ligne4.'</td>
+                    <td>'.$ligne5.'</td>
+                    <td>'.$ligne6.'</td>
+                </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+        </table><br>';
+
     }
 
     ?>
