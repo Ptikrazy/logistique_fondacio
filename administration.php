@@ -1113,22 +1113,22 @@ else {
             $ligne5 = '-';
             $ligne6 = '-';
 
-            if ($d['cheque1_date_encaissement'] != '0000-00-00') {
+            if ($d['cheque1_montant'] > 0) {
                 $ligne1 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
             }
-            if ($d['cheque2_date_encaissement'] != '0000-00-00') {
+            if ($d['cheque2_montant'] > 0) {
                 $ligne2 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
             }
-            if ($d['cheque3_date_encaissement'] != '0000-00-00') {
+            if ($d['cheque3_montant'] > 0) {
                 $ligne3 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
             }
-            if ($d['cheque4_date_encaissement'] != '0000-00-00') {
+            if ($d['cheque4_montant'] > 0) {
                 $ligne4 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
             }
-            if ($d['cheque5_date_encaissement'] != '0000-00-00') {
+            if ($d['cheque5_montant'] > 0) {
                 $ligne5 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
             }
-            if ($d['cheque6_date_encaissement'] != '0000-00-00') {
+            if ($d['cheque6_montant'] > 0) {
                 $ligne6 = convert_date($d['cheque1_date_encaissement'], '-', '/').' ('.$d['cheque1_numero'].' - '.$d['cheque1_montant'].'€)';
             }
             echo '

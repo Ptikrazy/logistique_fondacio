@@ -24,14 +24,13 @@
         <a class="navbar-brand" href="/"><img src="/include/logo.png" width="150" height="30" alt=""></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="participants.php">Participants</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="participants.php">Participants</a></li>
                 <li class="nav-item"><a class="nav-link" href="remplissage.php">Remplissage</a></li>
                 <li class="nav-item"><a class="nav-link" href="exports.php">Exports</a></li>
                 <li class="nav-item"><a class="nav-link" href="transports.php">Transports</a></li>
-                <li class="nav-item"><a class="nav-link" href="activites.php">Activités</a></li>
-                <li class="nav-item"><a class="nav-link" href="inscriptions.php">Inscriptions</a></li>
-                <li class="nav-item"><a class="nav-link" href="inscription.php">Inscription</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="activites/activites.php">Activités</a></li>
+                <li class="nav-item"><a class="nav-link" href="activites/inscriptions.php">Inscriptions</a></li> -->
                 <li class="nav-item"><a class="nav-link" href="administration.php">Administration</a></li>
                 <!-- <li class="nav-item"><a class="nav-link" href="aide.php">Aide</a></li> -->
             </ul>
