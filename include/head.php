@@ -18,7 +18,7 @@
 
     <body>
 
-    <?php if ($_SERVER['SCRIPT_NAME'] != '/inscription.php') { ?>
+    <?php if (!in_array($_SERVER['SCRIPT_NAME'], array('/inscription.php', '/inscription_adultes.php'))) { ?>
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
         <a class="navbar-brand" href="/"><img src="/include/logo.png" width="150" height="30" alt=""></a>
