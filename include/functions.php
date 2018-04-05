@@ -64,7 +64,7 @@ function get_infos_login($login) {
 
     global $bdd;
 
-    $req = 'SELECT id_utilisateur, role, login FROM utilisateurs WHERE login = "'.$login.'"';
+    $req = 'SELECT id_utilisateur, role, login, camp FROM utilisateurs WHERE login = "'.$login.'"';
     $res = $bdd->query($req);
     $data = $res->fetch();
     $res->closeCursor();
@@ -144,7 +144,7 @@ function get_villes_bus($aller_retour, $camp) {
 
 }
 
-function get_inscrits($camp, $filtres = array(), $tri = '') {
+function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
 
     global $bdd;
 
@@ -216,7 +216,7 @@ function get_jeune($id) {
 }
 
 
-function enregistrer_inscription($data) {
+function enregistrer_inscription_jeune($data) {
 
     global $bdd;
 
@@ -306,11 +306,11 @@ function enregistrer_inscription($data) {
     $res->closeCursor();
 
     // Envoi mail
-    send_mail_confirmation($data, $infos_camp);
+    send_mail_confirmation_jeune($data, $infos_camp);
 
 }
 
-function send_mail_confirmation($data, $infos_camp) {
+function send_mail_confirmation_jeune($data, $infos_camp) {
 
     $str = 'Bonjour,<br><br>
 
@@ -424,7 +424,7 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
 
 }
 
-function maj_administratif($id, $data) {
+function maj_administratif_jeune($id, $data) {
 
     global $bdd;
 
@@ -457,6 +457,301 @@ function maj_administratif($id, $data) {
     $res->closeCursor();
 
 }
+
+function enregistrer_inscription_adulte($data) {
+
+    global $bdd;
+
+    // Enregistrement en base
+
+    $infos_camp = get_camp($data['camp']);
+
+    $req  = 'INSERT INTO adultes SET ';
+    $req .= 'camp = '.$infos_camp['numero'].', ';
+    $req .= 'civilite = "'.$data['civilite'].'", ';
+    $req .= 'nom = "'.strtoupper($data['nom']).'", ';
+    $req .= 'nom_usage = "'.strtoupper($data['nom_usage']).'", ';
+    $req .= 'prenom = "'.$data['prenom'].'", ';
+    $req .= 'adresse = "'.$data['adresse'].'", ';
+    $req .= 'cp = "'.$data['cp'].'", ';
+    $req .= 'ville = "'.$data['ville'].'", ';
+    $req .= 'pays = "'.$data['pays'].'", ';
+    $req .= 'tel_portable = "'.$data['tel_portable'].'", ';
+    $req .= 'tel_fixe = "'.$data['tel_fixe'].'", ';
+    $req .= 'mail = "'.$data['mail'].'", ';
+    $req .= 'date_naissance = "'.$data['date_naissance'].'", ';
+    $req .= 'lieu_naissance = "'.$data['lieu_naissance'].'", ';
+    $req .= 'profession = "'.$data['profession'].'", ';
+    $req .= 'allergies = "'.$data['allergies'].'", ';
+    $req .= 'permis = '.$data['permis'].', ';
+    if (isset($data['ok_conduire'])) {
+        $req .= 'ok_conduire = '.$data['ok_conduire'].', ';
+    }
+    if (isset($data['diplome_bafd'])) {
+        $req .= 'diplome_bafd = '.$data['diplome_bafd'].', ';
+    }
+    if (isset($data['diplome_bafa'])) {
+        $req .= 'diplome_bafa = '.$data['diplome_bafa'].', ';
+    }
+    if (isset($data['diplome_secouriste'])) {
+        $req .= 'diplome_secouriste = '.$data['diplome_secouriste'].', ';
+    }
+    if (isset($data['diplome_ps'])) {
+        $req .= 'diplome_ps = "'.$data['diplome_ps'].'", ';
+    }
+    if (isset($data['diplome_autre'])) {
+        $req .= 'diplome_autre = "'.$data['diplome_autre'].'", ';
+    }
+    if (isset($data['stagiaire'])) {
+        $req .= 'stagiaire = "'.$data['stagiaire'].'", ';
+    }
+    $req .= 'appele_par = "'.$data['appele_par'].'", ';
+    $req .= 'we_formation = '.$data['we_formation'].', ';
+    $req .= 'we_formation_refus = "'.$data['we_formation_refus'].'", ';
+    $req .= 'urgence_nom = "'.$data['urgence_nom'].'", ';
+    $req .= 'urgence_prenom = "'.$data['urgence_prenom'].'", ';
+    $req .= 'urgence_portable = "'.$data['urgence_portable'].'", ';
+    $req .= 'urgence_lien = "'.$data['urgence_lien'].'", ';
+    $req .= 'paiement_declare = '.$data['paiement_declare'].', ';
+    $req .= 'aller_transport = "'.$data['aller_transport'].'", ';
+    $req .= 'aller_date = "'.$infos_camp['date_prepa'].'", ';
+    if ($data['aller_transport'] == 'train') {
+        $req .= 'aller_heure = "'.$data['aller_train'].'", ';
+    }
+    else {
+        $req .= 'aller_heure = "13h", ';
+    }
+    $req .= 'aller_ville = "'.$data['aller_bus'].'", ';
+    $req .= 'retour_transport = "'.$data['retour_transport'].'", ';
+    $req .= 'retour_date = "'.$infos_camp['date_fin'].'", ';
+    if ($data['retour_transport'] == 'bus') {
+        $req .= 'retour_heure = "2h", ';
+    }
+    else {
+        $req .= 'retour_heure = "12h", ';
+    }
+    $req .= 'retour_ville = "'.$data['retour_bus'].'", ';
+    if (isset($data['act_arts_plastiques'])) {
+        $req .= 'act_arts_plastiques = '.$data['act_arts_plastiques'].', ';
+    }
+    $req .= 'act_arts_plastiques_p = "'.$data['act_arts_plastiques_p'].'", ';
+    if (isset($data['act_bd'])) {
+        $req .= 'act_bd = '.$data['act_bd'].', ';
+    }
+    if (isset($data['act_orient_pro'])) {
+        $req .= 'act_orient_pro = '.$data['act_orient_pro'].', ';
+    }
+    if (isset($data['act_cinema'])) {
+        $req .= 'act_cinema = '.$data['act_cinema'].', ';
+    }
+    if (isset($data['act_exp_corp'])) {
+        $req .= 'act_exp_corp = '.$data['act_exp_corp'].', ';
+    }
+    $req .= 'act_exp_corp_p = "'.$data['act_exp_corp_p'].'", ';
+    if (isset($data['act_jeux_piste'])) {
+        $req .= 'act_jeux_piste = '.$data['act_jeux_piste'].', ';
+    }
+    if (isset($data['act_illustrations'])) {
+        $req .= 'act_illustrations = '.$data['act_illustrations'].', ';
+    }
+    $req .= 'act_illustrations_p = "'.$data['act_illustrations_p'].'", ';
+    if (isset($data['act_jeux_mem'])) {
+        $req .= 'act_jeux_mem = '.$data['act_jeux_mem'].', ';
+    }
+    if (isset($data['act_musiques'])) {
+        $req .= 'act_musiques = '.$data['act_musiques'].', ';
+    }
+    $req .= 'act_musiques_p = "'.$data['act_musiques_p'].'", ';
+    if (isset($data['act_ecritures'])) {
+        $req .= 'act_ecritures = '.$data['act_ecritures'].', ';
+    }
+    $req .= 'act_ecritures_p = "'.$data['act_ecritures_p'].'", ';
+    if (isset($data['act_danses'])) {
+        $req .= 'act_danses = '.$data['act_danses'].', ';
+    }
+    $req .= 'act_danses_p = "'.$data['act_danses_p'].'", ';
+    if (isset($data['act_arts_rue'])) {
+        $req .= 'act_arts_rue = '.$data['act_arts_rue'].', ';
+    }
+    $req .= 'act_arts_rue_p = "'.$data['act_arts_rue_p'].'", ';
+    if (isset($data['act_bijoux'])) {
+        $req .= 'act_bijoux = '.$data['act_bijoux'].', ';
+    }
+    if (isset($data['act_sculpture'])) {
+        $req .= 'act_sculpture = '.$data['act_sculpture'].', ';
+    }
+    if (isset($data['act_chants'])) {
+        $req .= 'act_chants = '.$data['act_chants'].', ';
+    }
+    $req .= 'act_chants_p = "'.$data['act_chants_p'].'", ';
+    if (isset($data['act_relaxation'])) {
+        $req .= 'act_relaxation = '.$data['act_relaxation'].', ';
+    }
+    if (isset($data['act_sports'])) {
+        $req .= 'act_sports = '.$data['act_sports'].', ';
+    }
+    $req .= 'act_sports_p = "'.$data['act_sports_p'].'", ';
+    if (isset($data['act_imagination'])) {
+        $req .= 'act_imagination = '.$data['act_imagination'].', ';
+    }
+    $req .= 'act_imagination_p = "'.$data['act_imagination_p'].'", ';
+    if (isset($data['act_logique'])) {
+        $req .= 'act_logique = '.$data['act_logique'].', ';
+    }
+    if (isset($data['act_theatres'])) {
+        $req .= 'act_theatres = '.$data['act_theatres'].', ';
+    }
+    $req .= 'act_theatres_p = "'.$data['act_theatres_p'].'", ';
+    if (isset($data['act_strategie'])) {
+        $req .= 'act_strategie = '.$data['act_strategie'].', ';
+    }
+    if (isset($data['act_meditation'])) {
+        $req .= 'act_meditation = '.$data['act_meditation'].', ';
+    }
+    if (isset($data['act_photo'])) {
+        $req .= 'act_photo = '.$data['act_photo'].', ';
+    }
+    if (isset($data['act_arts_cirque'])) {
+        $req .= 'act_arts_cirque = '.$data['act_arts_cirque'].', ';
+    }
+    $req .= 'act_arts_cirque_p = "'.$data['act_arts_cirque_p'].'", ';
+    if (isset($data['act_arts_enigme'])) {
+        $req .= 'act_arts_enigme = '.$data['act_arts_enigme'].', ';
+    }
+    $req .= 'act_autres = "'.$data['act_autres'].'", ';
+    $req .= 'act_rafting = '.$data['act_rafting'].', ';
+    $req .= 'act_canyo = '.$data['act_canyo'].', ';
+    $req .= 'act_descente = '.$data['act_descente'].', ';
+    $req .= 'act_mini_raid = '.$data['act_mini_raid'].', ';
+    $req .= 'act_via_fe = '.$data['act_via_fe'].', ';
+    $req .= 'act_grimp = '.$data['act_grimp'].', ';
+    $req .= 'act_bike_park = '.$data['act_bike_park'].', ';
+    $req .= 'act_speed_chall = '.$data['act_speed_chall'].', ';
+    $req .= 'act_biathlon = '.$data['act_biathlon'].', ';
+    $req .= 'act_piscine = '.$data['act_piscine'].', ';
+    $req .= 'act_sports_co = '.$data['act_sports_co'];
+
+    $res = $bdd->query($req);
+    $res->closeCursor();
+
+    // Envoi mail
+    // send_mail_confirmation_adulte($data, $infos_camp);
+
+}
+
+/*function send_mail_confirmation_adulte($data, $infos_camp) {
+
+    $str = 'Bonjour,<br><br>
+
+Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir Sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.convert_date($infos_camp['date_debut'], '-', '/').' au '.convert_date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
+
+Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>';
+
+    if ($infos_camp['numero'] == 3) {
+        $str .= 'Christine Boulbès<br>
+        Fondacio camp RSV n°3<br>
+        Le Sénèque, Bât. B1<br>
+        2 avenue Georges Brassens<br>
+        13100 AIX-EN-PROVENCE<br><br>';
+    }
+    else {
+        $str .= 'Fondacio camp RSV n°'.$infos_camp['numero'].'<br>
+        2 rue de l\'Esvière<br>
+        49100 ANGERS<br><br>';
+    }
+
+    $str .= 'Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
+Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>';
+
+    if (isset($data['prepa']) && $data['prepa']) {
+
+        $str .= 'De plus, vous avez inscrit '.$data['jeune_prenom'].' à la prépa du camp. Merci de lui demander de remplir le formulaire de souhaits en <a href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/souhaits-prepa/">cliquant ici</a>.<br><br>';
+
+    }
+
+    $str .= 'Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer votre demande à <a href="mailto:jeunes.camps@fondacio.fr">l\'adresse suivante</a>.<br><br>
+
+Au plaisir d\'accueillir votre enfant cet été au Mourtis !<br>
+L\'équipe de la Mission Jeunes<br><br>
+
+PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
+
+    if ($data['civilite'] == 'H') {
+        $str .= 'Civilité: M.<br>';
+    }
+    else {
+        $str .= 'Civilité: Mme<br>';
+    }
+    $str .= 'Nom du jeune: '.$data['jeune_nom'].'<br>
+    Prénom du jeune: '.$data['jeune_prenom'].'<br>
+    Adresse: '.$data['jeune_adresse'].'<br>
+    Code postal: '.$data['code_postal'].'<br>
+    Ville: '.$data['ville'].'<br>
+    Pays: '.$data['pays'].'<br>
+    Téléphone portable du jeune: '.$data['jeune_tel_portable'].'<br>
+    Téléphone fixe: '.$data['tel_fixe'].'<br>
+    Courriel du jeune: '.$data['jeune_mail'].'<br>
+    Date de naissance: '.convert_date($data['date_naissance'], '-', '/').'<br>
+    Etudes actuelles: '.$data['etudes'];
+    if (isset($data['etudes_autres'])) {
+        $str .= ' ('.$data['etudes_autres'].')';
+    }
+    $str .= '<br>Taille: '.$data['taille'].' cm<br>
+    Poids: '.$data['poids'].' kg<br>
+    Nom des parents: '.$data['parents_nom'].'<br>
+    Prénom des parents: '.$data['parents_prenom'].'<br>
+    Tel portable de la mère: '.$data['mere_tel_portable'].'<br>
+    Tel portable du père: '.$data['pere_tel_portable'].'<br>
+    Courriel des parents: '.$data['parents_mail'].'<br>
+    Observations: '.$data['observations'].'<br>';
+    if ($data['ancien']) {
+        $ancien = 'Oui';
+    }
+    else {
+        $ancien = 'Non';
+    }
+    $str .= 'J\'ai déjà fait un camp "Réussir Sa Vie": '.$ancien.'<br>';
+    if (isset($data['prepa']) && $data['prepa']) {
+        $str .= 'Je suis inscrit à la prépa du camp: Oui<br>';
+    }
+    $str .= 'J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
+    if ($data['aller_transport'] == 'bus') {
+        $str .= $data['aller_bus'];
+    }
+    else if ($data['aller_transport'] == 'train') {
+        $str .= 'navette de '.$data['aller_heure'];
+    }
+    $str .= ')<br>
+    Je repartirai du Mourtis en: '.$data['retour_transport'].' (';
+    if ($data['retour_transport'] == 'bus') {
+        $str .= $data['retour_bus'];
+    }
+    $str .= ')<br>
+    Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
+    J\'ai connu ce camp par: '.$data['communication'];
+    if (isset($data['communication_autre'])) {
+        $str .= ' ('.$data['etudes_autres'].')';
+    }
+    if (isset($data['attestation_inscription'])) {
+        $str .= '<br>Je souhaite recevoir pour mon CE une attestation d\'inscription, une fois que j\'aurais envoyé le dossier d\'inscription papier complet<br>';
+    }
+    if (isset($data['attestation_presence'])) {
+        $str .= '<br>Je souhaite recevoir pour mon CE une attestation de présence et de paiement, après le camp<br>';
+    }
+    $str .= '<br>
+    Conditions de participation: Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.<br>
+    Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.';
+
+    $to       = $data['parents_mail'].',fondacio.camp'.$infos_camp['numero'].'@gmail.com';
+    $subject  = 'Votre demande d\'inscription au camp "Réussir Sa Vie" n°'.$infos_camp['numero'];
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
+    $headers .= 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
+                'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com';
+
+    mail($to, $subject, $str, $headers);
+
+}*/
 
 function get_cheques() {
 

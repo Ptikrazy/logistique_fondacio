@@ -44,8 +44,8 @@ if (empty($_SESSION['profil']['id'])) {
 
         else {
             $login = get_infos_login($_POST['login']);
-            if ($login['role'] == 'charge_insc') {
-                $_SESSION['camp'] = substr($_POST['login'], -1);
+            if ($login['role'] != 'admin') {
+                $_SESSION['camp'] = $login['camp'];
             }
             $_SESSION['profil']['id'] = $login['id_utilisateur'];
             $_SESSION['profil']['role'] = $login['role'];
@@ -72,7 +72,7 @@ else {
         $data['retour_bus'] = $data['retour_ville'];
         $infos_camp = get_camp($data['camp']);
 
-        send_mail_confirmation($data, $infos_camp);
+        send_mail_confirmation_jeune($data, $infos_camp);
     }
 
     if (!empty($_GET['action'])) {
@@ -159,7 +159,7 @@ else {
 
                 $_POST['rgt_montant'] = $_POST['cb_montant'] + $_POST['cheque1_montant'] + $_POST['cheque2_montant'] + $_POST['cheque3_montant'] + $_POST['cheque4_montant'] + $_POST['cheque5_montant'] + $_POST['cheque6_montant'] + $_POST['cv_montant'] + $_POST['caf_rgt'] + $_POST['bourse'] + $_POST['autre'];
 
-                maj_administratif($_GET['id'], $_POST);
+                maj_administratif_jeune($_GET['id'], $_POST);
                 $_SESSION['edit_ok'] = 1;
                 redirect('/administration.php?action=edit&id='.$_GET['id']);
 
@@ -1251,7 +1251,7 @@ else {
                 $filtres['rgt_recu'] = $_POST['rgt_recu'];
             }
 
-            $inscrits = get_inscrits($_SESSION['camp'], $filtres, $_POST['tri']);
+            $inscrits = get_inscrits_jeune($_SESSION['camp'], $filtres, $_POST['tri']);
 
             foreach ($inscrits as $id_jeune => $data) {
 

@@ -9,7 +9,7 @@ if (!empty($_POST)) {
 
     enregistrer_inscription_adulte($_POST);
 
-    echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée. Un mail de confirmation va vous être envoyé. Attention, il est possible qu\'il arrive dans votre dossier "Spam" ou "Courrier indésirable", pensez à vérifier ce dernier.<br><br>
+    echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée.<br><br>
 
 Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
@@ -159,7 +159,7 @@ else {
                     </label>
                 </div>
             </div>
-            <label class="col-form-label col-sm-6" for="ok_conduire">J'ai au moins 23 ans, je possède le permis de conduire depuis plus de 3 ans et je me sens capable de conduire en montagne un des véhicules de Fondacio, notamment pour transporter des jeunes <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-6" for="ok_conduire">J'ai au moins 23 ans, je possède le permis de conduire depuis plus de 3 ans et je me sens capable de conduire en montagne un des véhicules de Fondacio, notamment pour transporter des jeunes</label>
             <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
@@ -175,16 +175,31 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="permis">Je possède un ou plusieurs diplôme(s)</label>
-            <div class="col-sm-10">
-                <div class="form-check form-check-inline">
+            <label class="col-form-label col-sm-4" for="permis">Je possède un ou plusieurs diplôme(s)</label>
+            <div class="col-sm-8">
+                <div class="form-check form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="permis" id="permisO" value="1"> Oui
+                        <input class="form-check-input" type="checkbox" name="diplome_bafd" value="1" id="diplome_bafd">Titulaire du BAFA
                     </label>
                 </div>
-                <div class="form-check form-check-inline">
+                <div class="form-check form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="permis" id="permisN" value="0"> Non
+                        <input class="form-check-input" type="checkbox" name="diplome_bafa" value="1" id="diplome_bafa">Titulaire du BAFD
+                    </label>
+                </div>
+                <div class="form-check form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="diplome_secouriste" value="1" id="diplome_secouriste">PSC1 ou PSCE1 ou secouriste
+                    </label>
+                </div>
+                <div class="form-check form-check">
+                    <label class="form-check-label col-sm-8">
+                        <input class="form-check-input" type="checkbox" value="1">Si vous détenez ce diplôme, vous avez un diplôme de premiers secours : infirmier(ère), médecin, chirurgien(ne)-dentiste, pharmacien(ne), détenteur (trice) de l’AFPS, du BN ou le CSST. Si oui précisez lequel ou lesquels : <input type="text" class="form-control" name="diplome_ps" id="diplome_ps">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-check-label col-sm-8">
+                        <input class="form-check-input" type="checkbox" value="1" id="diplome_autre">Autre(s) diplôme(s) : <input type="text" class="form-control" name="diplome_autre" id="diplome_autre">
                     </label>
                 </div>
             </div>
@@ -288,7 +303,7 @@ else {
         </div>
 
         <div class="form-group row" id="aller_train">
-            <label class="col-form-label col-sm-2" for="aller_train">Heure d'arrivée <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Si impossible d'arriver à ces horaires, voir avec le responsable de camp</li></ul>"></label>
+            <label class="col-form-label col-sm-3" for="aller_train">Heure d'arrivée <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Si impossible d'arriver à ces horaires, voir avec le responsable de camp</li></ul>"></label>
             <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
@@ -304,7 +319,7 @@ else {
         </div>
 
         <div class="form-group row" id="aller_bus">
-            <label class="col-form-label col-sm-2" for="aller_bus">Ville de départ <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="aller_bus">Ville de départ <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="aller_bus" id="aller_bus_clear">
                     <option value="" id="aller_bus_villes" selected></option>
@@ -335,7 +350,7 @@ else {
         </div>
 
         <div class="form-group row" id="retour_bus">
-            <label class="col-form-label col-sm-2" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="retour_bus" id="retour_bus_clear">
                     <option value="" id="retour_bus_villes" selected></option>
@@ -346,16 +361,21 @@ else {
         <h4>Paiement</h4>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-12">Le coût de revient d’un camp (hébergement, restauration, activités, administratif, encadrement) est de <b>1 100 euros</b>. Fondacio France finance 62% du coût du camp par des dons (parrainage, bénévolat, mécénat). Les 38% restants, soit <b>420 euros</b>, correspondent au prix demandé aux familles. Selon vos possibilités, nous proposons une participation entre <b style="color: red">270 et 1 100 euros.</b><br><br>
+            <label class="col-form-label col-sm-12">Afin de maintenir un prix le plus bas possible pour qu’un maximum de jeunes puissent participer aux camps, nous invitons les adultes présents sur les camps à participer librement à leurs frais d’hébergement et de nourriture.<br>
+            Pour information, le coût de revient du camp s'élève à <b>420€</b> par jeune (le camp + la prépa revient à <b>480€</b>). A titre indicatif, les frais de restauration et d'hébergement s'élèvent à <b>30€</b> par jour.<br><br>
 
-            A ce coût s'ajoute le prix du transport:<br>
-            - Le service de navette que nous proposons de la gare de Montréjeau au Mourtis ajoute <b style="color: green">20€ par voyage</b> au coût du camp (donc 40€ si vous arrivez et repartez en train)<br>
-            - Le voyage en bus ajoute <b style="color: green">75€ par voyage</b> au coût du camp (donc 150€ si vous arrivez et repartez en bus)<br><br>
+            A ce coût s'ajoute le prix du transport :<br>
+            <b>75€</b> pour un trajet simple en bus<br>
+            <b>150€</b> pour un aller-retour en bus<br>
+            <b>20€</b> pour une navette Montréjeau-Le Mourtis (aller simple)<br>
+            <b>40€</b> pour une navette Montréjeau-Le Mourtis (aller-retour)<br><br>
 
-            Le coût de revient de la <b>prépa</b> (<b style="color: blue">60€</b>) est également ajouté.<br><br>
+            Pour le camp 2 uniquement: nous proposons une fourchette <b>entre 50€ et 100€</b> pour chaque enfant qui correspond aux frais de restauration et des activités qu’ils vivront pendant la semaine.<br><br>
 
-            Le prix de revient total camp + transport est donc de <b>420 + <span class="cout_transport" style="color: green"></span> + <span style="color: blue">60</span> = <span id="cout_revient" style="color: red"></span> euros.</b><br>
-            La fourchette de participation proposée est donc de <b>(270 + <span class="cout_transport" style="color: green"></span> + <span style="color: blue">60</span> =) <span id="cout_fourchette_basse" style="color: red"></span> euros à (1 100 + <span class="cout_transport" style="color: green"></span> + <span style="color: blue">60</span> =) <span id="cout_fourchette_haute" style="color: red"></span> euros.</b></label>
+            A partir de ces repères, chacun est invité à participer de façon tout à fait libre, selon ses moyens et ce qui lui semble juste.<br>
+            Dans le cas où vous ne pourriez pas participer, cela ne remet pas en cause votre présence sur le camp, nous vous invitons à en discuter avec le responsable vous ayant appelé.<br><br>
+
+            Tout versement supérieur au coût de revient servira à financer la participation d'un jeune.</label>
         </div>
 
         <div class="form-group row">
@@ -391,6 +411,519 @@ else {
             </label>
         </div><br><br>
 
+        <h4>Activités</h4><br>
+
+        <h6>Concernant les activités</h6>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-12">Les après-midis des camps Réussir Sa Vie sont consacrées à l’approfondissement et l’exploration des thématiques abordées durant les matinées à travers des activités sportives, créatives ou artistiques.<br>
+            Chaque adulte sera sollicité afin d’animer et d’encadrer ces activités, tout au long de la semaine.<br>
+            Dans l’optique de correspondre à la fois aux besoins des jeunes, aux choix pédagogiques des camps et également aux besoins et aux envies de chacun de vous, merci de remplir les questionnaires suivants.</label>
+        </div>
+
+        <h6>Activités sur site</h6>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-12">Veuillez nous indiquer, parmi la liste suivante, les activités ou hobbies dans lesquels vous vous reconnaissez. Dans la mesure du possible, précisez : (ex : sports : karaté ; escalade ; équitation)</label>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_arts_plastiques" id="act_arts_plastiques" value="1"> Arts plastiques
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_arts_plastiques_p" id="act_arts_plastiques_p">
+                </label>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_bd" id="act_bd" value="1"> Bande dessinée
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_orient_pro" id="act_orient_pro" value="1"> Orientation professionelle
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_cinema" id="act_cinema" value="1"> Cinéma
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_exp_corp" id="act_exp_corp" value="1"> Expressions corporelles
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_exp_corp_p" id="act_exp_corp_p">
+                </label>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_jeux_piste" id="act_jeux_piste" value="1"> Jeux de piste
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_meditation" id="act_meditation" value="1"> Méditation
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_arts_enigme" id="act_arts_enigme" value="1"> Énigmes
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_musiques" id="act_musiques" value="1"> Musiques
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_musiques_p" id="act_musiques_p">
+                </label>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_jeux_mem" id="act_jeux_mem" value="1"> Jeux de mémoire
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_ecritures" id="act_ecritures" value="1"> Écritures/récits
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_ecritures_p" id="act_ecritures_p">
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_danses" id="act_danses" value="1"> Danses
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_danses_p" id="act_danses_p">
+                </label>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_sculpture" id="act_sculpture" value="1"> Sculpture, modelage
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_arts_rue" id="act_arts_rue" value="1"> Arts de la rue
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_arts_rue_p" id="act_arts_rue_p">
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_chants" id="act_chants" value="1"> Chants
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_chants_p" id="act_chants_p">
+                </label>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_bijoux" id="act_bijoux" value="1"> Bijoux (bracelets, colliers etc...)
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_sports" id="act_sports" value="1"> Sports
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_sports_p" id="act_sports_p">
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_imagination" id="act_imagination" value="1"> Imagination
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser le support <input type="text" class="form-control" name="act_imagination_p" id="act_imagination_p">
+                </label>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_relaxation" id="act_relaxation" value="1"> Relaxation
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_theatres" id="act_theatres" value="1"> Théâtres
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_theatres_p" id="act_theatres_p">
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_arts_cirque" id="act_arts_cirque" value="1"> Arts du cirque
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_arts_cirque_p" id="act_arts_cirque_p">
+                </label>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_photo" id="act_photo" value="1"> Photographie
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_illustrations" id="act_illustrations" value="1"> Illustrations
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_illustrations_p" id="act_illustrations_p">
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_logique" id="act_logique" value="1"> Logique
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_strategie" id="act_strategie" value="1"> Stratégie
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Autres <input type="text" class="form-control" name="act_autres" id="act_autres">
+                </label>
+            </div>
+        </div>
+
+        <h6>Activités hors site (niveau débutant)</h6>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_rafting">Rafting <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_rafting" id="act_rafting2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_rafting" id="act_rafting1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_rafting" id="act_rafting0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_canyo">Canyoning <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_canyo" id="act_canyo" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_canyo" id="act_canyo1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_canyo" id="act_canyo0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_descente">Descente VTT <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_descente" id="act_descente2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_descente" id="act_descente1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_descente" id="act_descente0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_mini_raid">Mini raid VTT <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_mini_raid" id="act_mini_raid2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_mini_raid" id="act_mini_raid1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_mini_raid" id="act_mini_raid0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_via_fe">Via Ferrata <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_via_fe" id="act_via_fe2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_via_fe" id="act_via_fe1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_via_fe" id="act_via_fe0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_grimp">Grimp'arbre <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_grimp" id="act_grimp2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_grimp" id="act_grimp1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_grimp" id="act_grimp0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_bike_park">Mourtis Bike Park <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_bike_park" id="act_bike_park2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_bike_park" id="act_bike_park1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_bike_park" id="act_bike_park0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_speed_chall">Mourtis Speed Challenge <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_speed_chall" id="act_speed_chall2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_speed_chall" id="act_speed_chall1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_speed_chall" id="act_speed_chall0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_biathlon">Biathlon <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_biathlon" id="act_biathlon2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_biathlon" id="act_biathlon1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_biathlon" id="act_biathlon0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_piscine">Piscine <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_piscine" id="act_piscine2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_piscine" id="act_piscine1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_piscine" id="act_piscine0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_sports_co">Animation sports co <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Valider l'inscription</button>
@@ -401,12 +934,6 @@ else {
     <script type="text/javascript">
 
         $(function() {
-
-            // Initialisation variable pour le coût
-
-            var cout_transport = 0;
-            var cout_transport_aller = 0;
-            var cout_transport_retour = 0;
 
             // Gestion des transports
 
@@ -424,12 +951,6 @@ else {
                     $('#aller_voiture').show();
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
-                    cout_transport_aller = 0;
-                    cout_transport = cout_transport_aller+cout_transport_retour;
-                    $('.cout_transport').text(cout_transport);
-                    $('#cout_revient').text(cout_transport+60+420);
-                    $('#cout_fourchette_basse').text(cout_transport+60+270);
-                    $('#cout_fourchette_haute').text(cout_transport+60+1100);
                 }
                 if (this.value == "train") {
                     $('#aller_bus_clear option').remove();
@@ -437,23 +958,11 @@ else {
                     $('#aller_voiture').hide();
                     $('#aller_train').show();
                     $('#aller_bus').hide();
-                    cout_transport_aller = 20;
-                    cout_transport = cout_transport_aller+cout_transport_retour;
-                    $('.cout_transport').text(cout_transport);
-                    $('#cout_revient').text(cout_transport+60+420);
-                    $('#cout_fourchette_basse').text(cout_transport+60+270);
-                    $('#cout_fourchette_haute').text(cout_transport+60+1100);
                 }
                 if (this.value == "bus") {
                     $('#aller_voiture').hide();
                     $('#aller_train').hide();
                     $('#aller_bus').show();
-                    cout_transport_aller = 75;
-                    cout_transport = cout_transport_aller+cout_transport_retour;
-                    $('.cout_transport').text(cout_transport);
-                    $('#cout_revient').text(cout_transport+60+420);
-                    $('#cout_fourchette_basse').text(cout_transport+60+270);
-                    $('#cout_fourchette_haute').text(cout_transport+60+1100);
 
                     $.ajax({
                         type: 'POST',
@@ -471,12 +980,6 @@ else {
                     $('#aller_voiture').hide();
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
-                    cout_transport_aller = 0;
-                    cout_transport = cout_transport_aller+cout_transport_retour;
-                    $('.cout_transport').text(cout_transport);
-                    $('#cout_revient').text(cout_transport+60+420);
-                    $('#cout_fourchette_basse').text(cout_transport+60+270);
-                    $('#cout_fourchette_haute').text(cout_transport+60+1100);
                 }
             });
 
@@ -487,12 +990,6 @@ else {
                     $('#retour_voiture').show();
                     $('#retour_train').hide();
                     $('#retour_bus').hide();
-                    cout_transport_retour = 0;
-                    cout_transport = cout_transport_aller+cout_transport_retour;
-                    $('.cout_transport').text(cout_transport);
-                    $('#cout_revient').text(cout_transport+60+420);
-                    $('#cout_fourchette_basse').text(cout_transport+60+270);
-                    $('#cout_fourchette_haute').text(cout_transport+60+1100);
                 }
                 if (this.value == "train") {
                     $('#retour_bus_clear option').remove();
@@ -500,23 +997,11 @@ else {
                     $('#retour_voiture').hide();
                     $('#retour_train').show();
                     $('#retour_bus').hide();
-                    cout_transport_retour = 20;
-                    cout_transport = cout_transport_aller+cout_transport_retour;
-                    $('.cout_transport').text(cout_transport);
-                    $('#cout_revient').text(cout_transport+60+420);
-                    $('#cout_fourchette_basse').text(cout_transport+60+270);
-                    $('#cout_fourchette_haute').text(cout_transport+60+1100);
                 }
                 if (this.value == "bus") {
                     $('#retour_voiture').hide();
                     $('#retour_train').hide();
                     $('#retour_bus').show();
-                    cout_transport_retour = 75;
-                    cout_transport = cout_transport_aller+cout_transport_retour;
-                    $('.cout_transport').text(cout_transport);
-                    $('#cout_revient').text(cout_transport+60+420);
-                    $('#cout_fourchette_basse').text(cout_transport+60+270);
-                    $('#cout_fourchette_haute').text(cout_transport+60+1100);
 
                     $.ajax({
                         type: 'POST',
@@ -534,21 +1019,8 @@ else {
                     $('#retour_voiture').hide();
                     $('#retour_train').hide();
                     $('#retour_bus').hide();
-                    cout_transport_retour = 0;
-                    cout_transport = cout_transport_aller+cout_transport_retour;
-                    $('.cout_transport').text(cout_transport);
-                    $('#cout_revient').text(cout_transport+60+420);
-                    $('#cout_fourchette_basse').text(cout_transport+60+270);
-                    $('#cout_fourchette_haute').text(cout_transport+60+1100);
                 }
             });
-
-            // Calcul du coût
-
-            $('.cout_transport').text(cout_transport);
-            $('#cout_revient').text(cout_transport+60+420);
-            $('#cout_fourchette_basse').text(cout_transport+60+270);
-            $('#cout_fourchette_haute').text(cout_transport+60+1100);
 
         });
 

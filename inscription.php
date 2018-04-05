@@ -7,7 +7,7 @@ require_once 'include/head.php';
 
 if (!empty($_POST)) {
 
-    enregistrer_inscription($_POST);
+    enregistrer_inscription_jeune($_POST);
 
     echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée. Un mail de confirmation va vous être envoyé. Attention, il est possible qu\'il arrive dans votre dossier "Spam" ou "Courrier indésirable", pensez à vérifier ce dernier.<br><br>
 
@@ -287,7 +287,7 @@ else {
         </div>
 
         <div class="form-group row" id="aller_bus">
-            <label class="col-form-label col-sm-2" for="aller_bus">Ville de départ <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="aller_bus">Ville de départ <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="aller_bus" id="aller_bus_clear">
                     <option value="" id="aller_bus_villes" selected></option>
@@ -318,7 +318,7 @@ else {
         </div>
 
         <div class="form-group row" id="retour_bus">
-            <label class="col-form-label col-sm-2" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="retour_bus" id="retour_bus_clear">
                     <option value="" id="retour_bus_villes" selected></option>
