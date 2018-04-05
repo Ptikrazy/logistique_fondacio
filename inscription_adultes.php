@@ -132,9 +132,9 @@ else {
             <div class="col-sm-3">
                 <input type="text" class="form-control" name="lieu_naissance" id="lieu_naissance" required>
             </div>
-            <label class="col-form-label col-sm-2" for="profession">Profession <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="profession">Profession</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="profession" id="profession" required>
+                <input type="text" class="form-control" name="profession" id="profession">
             </div>
         </div>
 
@@ -395,20 +395,6 @@ else {
             Le camp "Réussir Sa Vie" est agréé Jeunesse et Sports, et nous acceptons les Aides aux Vacances Enfants de la CAF (dispositif AVE), sous réserve d’une inscription avant le 30 avril 2018. Si tel est le cas, vous devez nous envoyer 2 chèques (ou plus) : l'un correspondant au montant théorique que devra nous verser la CAF (si celle-ci règle directement Fondacio et non la famille) que nous garderons en caution, l'autre (ou les autres) correspondant au solde à régler (montant total dû - participation attendue de la CAF), que nous encaisserons à réception (ou à la date d'encaissement indiquée au dos du chèque).<br><br>
 
             N’hésitez pas à vérifier si vous pouvez bénéficier d’aides auprès de certains organismes (Conseil Général, CAF, CE, Mairie,...) et à contacter votre Caisse d’Allocations Familiales pour vérifier si elle attribue des aides aux vacances pour les centres de vacances.</label>
-        </div>
-
-        <h4>Conditions d'inscription et d'annulation</h4><br>
-
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" id="conditions_inscription" value="" required><span style="color: red">*</span> Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.
-            </label>
-        </div>
-
-        <div class="form-check form-check-inline">
-            <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" id="conditions_annulation" value="" required><span style="color: red">*</span> J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.
-            </label>
         </div><br><br>
 
         <h4>Activités</h4><br>
