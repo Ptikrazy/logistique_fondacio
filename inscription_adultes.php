@@ -291,6 +291,7 @@ else {
             <div class="col-sm-3">
                 <select class="form-control" name="aller_transport" id="aller_transport" required>
                     <option value="" selected></option>
+                    <option value="sur_place">Je serai déjà sur place</option>
                     <option value="voiture">Voiture personnelle</option>
                     <option value="train">Train</option>
                     <option value="bus">Bus organisé par Fondacio</option>
@@ -334,6 +335,7 @@ else {
             <div class="col-sm-3">
                 <select class="form-control" name="retour_transport" id="retour_transport" required>
                     <option value="" selected></option>
+                    <option value="sur_place">Je reste sur place</option>
                     <option value="voiture">Voiture personnelle</option>
                     <option value="train">Train</option>
                     <option value="bus">Bus organisé par Fondacio</option>
