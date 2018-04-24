@@ -202,6 +202,38 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
 
 }
 
+function get_inscrits_adultes($camp, $filtre = '', $tri = '') {
+
+    global $bdd;
+
+    $req = 'SELECT id_adulte, nom, prenom, camp, desistement FROM adultes ';
+    if (!empty($filtres)) {
+        $req .= 'WHERE nom = "'.$filtre.'"';
+    }
+    if ($_SESSION['profil']['role'] != 'admin') {
+        if ($where) {
+            $req .= ' AND camp = '.$camp.' ';
+        }
+        else {
+            $req .= ' WHERE camp = '.$camp.' ';
+        }
+    }
+    if (!empty($tri)) {
+        $req .= ' ORDER BY '.$tri;
+    }
+    else {
+        $req .= ' ORDER BY id_adulte';
+    }
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['id_adulte']] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
 function get_jeune($id) {
 
     global $bdd;
@@ -214,6 +246,20 @@ function get_jeune($id) {
     return $data;
 
 }
+
+function get_adulte($id) {
+
+    global $bdd;
+
+    $req = 'SELECT * FROM adultes WHERE id_adulte = '.$id;
+    $res = $bdd->query($req);
+    $data = $res->fetch();
+    $res->closeCursor();
+
+    return $data;
+
+}
+
 
 
 function enregistrer_inscription_jeune($data) {
@@ -453,6 +499,40 @@ function maj_administratif_jeune($id, $data) {
         }
     }
     $req .= ' WHERE id_jeune = '.$id;
+    $res = $bdd->query($req);
+    $res->closeCursor();
+
+}
+
+function maj_administratif_adulte($id, $data) {
+
+    global $bdd;
+
+    $req  = 'UPDATE adultes SET ';
+    end($data);
+    $last = key($data);
+    reset($data);
+    foreach ($data as $champ => $value) {
+        if ($champ == 'aller_bus') {
+            $req .= 'aller_ville = "'.$value.'"';
+        }
+        if ($champ == 'aller_train') {
+            $req .= 'aller_heure = "'.$value.'"';
+        }
+        else {
+            if ($value == 'NULL') {
+                $req .= $champ.' = NULL';
+            }
+            else {
+                $req .= $champ.' = "'.$value.'"';
+            }
+        }
+
+        if ($champ != $last) {
+            $req .= ', ';
+        }
+    }
+    $req .= ' WHERE id_adulte = '.$id;
     $res = $bdd->query($req);
     $res->closeCursor();
 

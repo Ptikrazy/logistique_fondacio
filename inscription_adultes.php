@@ -179,12 +179,12 @@ else {
             <div class="col-sm-8">
                 <div class="form-check form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="diplome_bafd" value="1" id="diplome_bafd">Titulaire du BAFA
+                        <input class="form-check-input" type="checkbox" name="diplome_bafd" value="1" id="diplome_bafd">Titulaire du BAFD
                     </label>
                 </div>
                 <div class="form-check form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="diplome_bafa" value="1" id="diplome_bafa">Titulaire du BAFD
+                        <input class="form-check-input" type="checkbox" name="diplome_bafa" value="1" id="diplome_bafa">Titulaire du BAFA
                     </label>
                 </div>
                 <div class="form-check form-check">
