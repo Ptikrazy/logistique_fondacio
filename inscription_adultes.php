@@ -5,20 +5,30 @@ require_once 'include/init.php';
 $title = 'Inscription Adultes';
 require_once 'include/head.php';
 
+
 if (!empty($_POST)) {
 
     enregistrer_inscription_adulte($_POST);
 
-    echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée.<br><br>
+    echo '<br><br>Ton inscription a bien été enregistrée !<br><br>
 
-Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
+Merci d\'envoyer dès que possible :<br><br>
+
+- la <a href="http://bit.ly/2h3CFz1">convention de bénévolat</a> complétée et signée<br>
+- un document attestant que tu es à jour de tes vaccinations (copie du carnet de santé ou certificat médical)<br>
+- <a href="http://bit.ly/2lgyuNs">l\'autorisation de photographie</a> complétée et signée<br>
+- une copie de ton diplôme (BAFA, BAFD, infirmière, médecin, ...) si tu en possèdes un<br>
+- une copie de ton carnet de stage BAFA/BAFD si tu es stagiaire<br>
+- ton règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
 Fondacio camp RSV<br>
-2 rue de l\'Esvière<br>
-49100 ANGERS<br><br>
+Inscription adulte<br>
+23 rue de l\'Ermitage<br>
+78000 VERSAILLES<br><br>
 
-Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
-Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.';
+Si tu souhaites payer en ligne, clique <a href="http://bit.ly/1O6910a">ici</a><br><br>
+
+A bientôt au Mourtis !';
 
 }
 

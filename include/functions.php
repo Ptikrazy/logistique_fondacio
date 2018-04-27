@@ -546,6 +546,7 @@ function enregistrer_inscription_adulte($data) {
 
     $infos_camp = get_camp($data['camp']);
 
+
     $req  = 'INSERT INTO adultes SET ';
     $req .= 'camp = '.$infos_camp['numero'].', ';
     $req .= 'civilite = "'.$data['civilite'].'", ';
@@ -715,46 +716,32 @@ function enregistrer_inscription_adulte($data) {
     $res->closeCursor();
 
     // Envoi mail
-    // send_mail_confirmation_adulte($data, $infos_camp);
+    send_mail_confirmation_adulte($data, $infos_camp);
 
 }
 
-/*function send_mail_confirmation_adulte($data, $infos_camp) {
+function send_mail_confirmation_adulte($data, $infos_camp) {
 
-    $str = 'Bonjour,<br><br>
+    $str = 'Bonjour '.$data['prenom'].',<br><br>
 
-Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir Sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.convert_date($infos_camp['date_debut'], '-', '/').' au '.convert_date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
+Ta demande d\'inscription à l\'un des camps Réussir sa Vie qui aura lieu au Mourtis (31) a bien été enregistrée, et nous t\'en remercions.<br><br>
 
-Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>';
+Pour confirmer ton inscription, merci d\'envoyer le dossier administratif complet, accompagné de ton règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
-    if ($infos_camp['numero'] == 3) {
-        $str .= 'Christine Boulbès<br>
-        Fondacio camp RSV n°3<br>
-        Le Sénèque, Bât. B1<br>
-        2 avenue Georges Brassens<br>
-        13100 AIX-EN-PROVENCE<br><br>';
-    }
-    else {
-        $str .= 'Fondacio camp RSV n°'.$infos_camp['numero'].'<br>
-        2 rue de l\'Esvière<br>
-        49100 ANGERS<br><br>';
-    }
+Fondacio camp RSV<br>
+Inscription adulte<br>
+23 rue de l’Ermitage<br>
+78000 VERSAILLES<br><br>
 
-    $str .= 'Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
-Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>';
+Les éléments du dossier administratif sont téléchargeables sur la <a href="http://fondacio.fr/fondacio/spip.php?article575">page suivante</a>.<br>
+Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>
 
-    if (isset($data['prepa']) && $data['prepa']) {
+Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer ta demande à : jeunes.camps@fondacio.fr<br><br>
 
-        $str .= 'De plus, vous avez inscrit '.$data['jeune_prenom'].' à la prépa du camp. Merci de lui demander de remplir le formulaire de souhaits en <a href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/souhaits-prepa/">cliquant ici</a>.<br><br>';
+A bientôt au Mourtis !<br>
+La mission Jeunes de Fondacio<br><br>
 
-    }
-
-    $str .= 'Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer votre demande à <a href="mailto:jeunes.camps@fondacio.fr">l\'adresse suivante</a>.<br><br>
-
-Au plaisir d\'accueillir votre enfant cet été au Mourtis !<br>
-L\'équipe de la Mission Jeunes<br><br>
-
-PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
+PS : Tu trouveras ci-dessous les infos que tu viens de saisir.<br><br>';
 
     if ($data['civilite'] == 'H') {
         $str .= 'Civilité: M.<br>';
@@ -762,37 +749,72 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
     else {
         $str .= 'Civilité: Mme<br>';
     }
-    $str .= 'Nom du jeune: '.$data['jeune_nom'].'<br>
-    Prénom du jeune: '.$data['jeune_prenom'].'<br>
-    Adresse: '.$data['jeune_adresse'].'<br>
-    Code postal: '.$data['code_postal'].'<br>
+    $str .= 'Nom: '.$data['nom'].'<br>
+    Nom d\'usage: '.$data['nom_usage'].'<br>
+    Prénom: '.$data['prenom'].'<br>
+    Adresse: '.$data['adresse'].'<br>
+    Code postal: '.$data['postal'].'<br>
     Ville: '.$data['ville'].'<br>
     Pays: '.$data['pays'].'<br>
-    Téléphone portable du jeune: '.$data['jeune_tel_portable'].'<br>
+    Téléphone portable: '.$data['tel_portable'].'<br>
     Téléphone fixe: '.$data['tel_fixe'].'<br>
-    Courriel du jeune: '.$data['jeune_mail'].'<br>
+    Mail: '.$data['mail'].'<br>
     Date de naissance: '.convert_date($data['date_naissance'], '-', '/').'<br>
-    Etudes actuelles: '.$data['etudes'];
-    if (isset($data['etudes_autres'])) {
-        $str .= ' ('.$data['etudes_autres'].')';
-    }
-    $str .= '<br>Taille: '.$data['taille'].' cm<br>
-    Poids: '.$data['poids'].' kg<br>
-    Nom des parents: '.$data['parents_nom'].'<br>
-    Prénom des parents: '.$data['parents_prenom'].'<br>
-    Tel portable de la mère: '.$data['mere_tel_portable'].'<br>
-    Tel portable du père: '.$data['pere_tel_portable'].'<br>
-    Courriel des parents: '.$data['parents_mail'].'<br>
-    Observations: '.$data['observations'].'<br>';
-    if ($data['ancien']) {
-        $ancien = 'Oui';
+    Lieu de naissance: '.$data['lieu_naissance'].'<br>
+    Profession: '.$data['profession'].'<br>
+    Allergies/Intolérances: '.$data['allergies'].'<br>';
+    if ($data['permis']) {
+        $str .= 'J\'ai le permis B: Oui<br>';
     }
     else {
-        $ancien = 'Non';
+        $str .= 'J\'ai le permis B: Non<br>';
     }
-    $str .= 'J\'ai déjà fait un camp "Réussir Sa Vie": '.$ancien.'<br>';
-    if (isset($data['prepa']) && $data['prepa']) {
-        $str .= 'Je suis inscrit à la prépa du camp: Oui<br>';
+    if ($data['ok_conduire']) {
+        $str .= 'J\'ai au moins 23 ans, je possède le permis de conduire depuis plus de 3 ans et je me sens capable de conduire en montagne un des véhicules de Fondacio, notamment pour transporter des jeunes: Oui<br>';
+    }
+    else {
+        $str .= 'J\'ai au moins 23 ans, je possède le permis de conduire depuis plus de 3 ans et je me sens capable de conduire en montagne un des véhicules de Fondacio, notamment pour transporter des jeunes: Non<br>';
+    }
+    if ($data['diplome_bafd']) {
+        $str .= 'Je possède le BAFD: Oui<br>';
+    }
+    else {
+        $str .= 'Je possède le BAFD: Non<br>';
+    }
+    if ($data['diplome_bafa']) {
+        $str .= 'Je possède le BAFA: Oui<br>';
+    }
+    else {
+        $str .= 'Je possède le BAFA: Non<br>';
+    }
+    if ($data['diplome_secouriste']) {
+        $str .= 'Je possède le PSC1 ou PSCE1 ou secouriste: Oui<br>';
+    }
+    else {
+        $str .= 'Je possède le PSC1 ou PSCE1 ou secouriste: Non<br>';
+    }
+    if ($data['diplome_ps']) {
+        $str .= 'Je possède un diplôme de premiers secours: Oui<br>';
+    }
+    else {
+        $str .= 'Je possède un diplôme de premiers secours: Non<br>';
+    }
+    if (!empty($data['diplome_autre'])) {
+        $str .= 'Je possède un autre diplôme: '.$data['diplome_autre'].'<br>';
+    }
+    if (!empty($data['stagiaire'])) {
+        $str .= 'Je suis stagiaire BAFA/BAFD: '.$data['stagiaire'].'<br>';
+    }
+    $str .= 'J\'ai été appelé par: '.$data['appele_par'].'
+    Personne à contacter en cas d\'urgence: '.$data['urgence_nom'].'<br>
+    Prénom: '.$data['urgence_prenom'].'<br>
+    Portable: '.$data['urgence_portable'].'<br>
+    Lien: '.$data['urgence_lien'].'<br>';
+    if ($data['we_formation']) {
+        $str .= 'Je serai présent au WE de formation<br>';
+    }
+    else {
+        $str .= 'Je ne serai pas présent au WE de formation ('.$data['we_formation_refus'].')<br>';
     }
     $str .= 'J\'arriverai au Mourtis en: '.$data['aller_transport'].' (';
     if ($data['aller_transport'] == 'bus') {
@@ -808,30 +830,232 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
     }
     $str .= ')<br>
     Je choisis de payer le montant suivant : '.$data['paiement_declare'].' €<br>
-    J\'ai connu ce camp par: '.$data['communication'];
-    if (isset($data['communication_autre'])) {
-        $str .= ' ('.$data['etudes_autres'].')';
+    J\'ai indiqué me reconnaître dans les activités suivantes:<br><br>';
+    if ($data['act_arts_plastiques']) {
+        $str .= 'Arts plastiques ('.$data['act_arts_plastiques_p'].')<br>';
     }
-    if (isset($data['attestation_inscription'])) {
-        $str .= '<br>Je souhaite recevoir pour mon CE une attestation d\'inscription, une fois que j\'aurais envoyé le dossier d\'inscription papier complet<br>';
+    if ($data['act_bd']) {
+        $str .= 'Bande dessinée<br>';
     }
-    if (isset($data['attestation_presence'])) {
-        $str .= '<br>Je souhaite recevoir pour mon CE une attestation de présence et de paiement, après le camp<br>';
+    if ($data['act_orient_pro']) {
+        $str .= 'Orientation professionelle<br>';
     }
-    $str .= '<br>
-    Conditions de participation: Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.<br>
-    Conditions d\'annulation: J’accepte les conditions d’annulation suivantes : pour toute annulation intervenant plus d’un mois avant le départ, les sommes payées seront intégralement remboursées par chèque bancaire ; pour toute annulation intervenant entre 7 jours et 30 jours avant le départ, 50% des sommes versées (transport compris) seront remboursées (100% si raison médicale, sur justificatif) ; pour toute annulation intervenant moins de 7 jours avant le départ (sauf raison médicale avec justificatif), l’intégralité des sommes versées est conservée par Fondacio.';
+    if ($data['act_cinema']) {
+        $str .= 'Cinéma<br>';
+    }
+    if ($data['act_exp_corp']) {
+        $str .= 'Expression corporelle ('.$data['act_exp_corp_p'].')<br>';
+    }
+    if ($data['act_jeux_piste']) {
+        $str .= 'Jeux de piste<br>';
+    }
+    if ($data['act_illustrations']) {
+        $str .= 'Illustrations ('.$data['act_illustrations_p'].')<br>';
+    }
+    if ($data['act_jeux_mem']) {
+        $str .= 'Jeux de mémoire<br>';
+    }
+    if ($data['act_musiques']) {
+        $str .= 'Musiques ('.$data['act_musiques_p'].')<br>';
+    }
+    if ($data['act_ecritures']) {
+        $str .= 'Ecritures ('.$data['act_ecritures_p'].')<br>';
+    }
+    if ($data['act_danses']) {
+        $str .= 'Danses ('.$data['act_danses_p'].')<br>';
+    }
+    if ($data['act_arts_plastiques']) {
+        $str .= 'Arts plastiques ('.$data['act_arts_plastiques_p'].')<br>';
+    }
+    if ($data['act_arts_rue']) {
+        $str .= 'Arts de la rue ('.$data['act_arts_rue_p'].')<br>';
+    }
+    if ($data['act_bijoux']) {
+        $str .= 'Bijoux<br>';
+    }
+    if ($data['act_sculpture']) {
+        $str .= 'Suclpture<br>';
+    }
+    if ($data['act_chants']) {
+        $str .= 'Chants ('.$data['act_chants_p'].')<br>';
+    }
+    if ($data['act_relaxation']) {
+        $str .= 'Relaxation<br>';
+    }
+    if ($data['act_sports']) {
+        $str .= 'Sports ('.$data['act_sports_p'].')<br>';
+    }
+    if ($data['act_imagination']) {
+        $str .= 'Imagination ('.$data['act_imagination'].')<br>';
+    }
+    if ($data['act_logique']) {
+        $str .= 'Logique<br>';
+    }
+    if ($data['act_theatres']) {
+        $str .= 'Théâtres ('.$data['act_theatres_p'].')<br>';
+    }
+    if ($data['act_strategie']) {
+        $str .= 'Stratégie<br>';
+    }
+    if ($data['act_meditation']) {
+        $str .= 'Méditation<br>';
+    }
+    if ($data['act_photo']) {
+        $str .= 'Photo<br>';
+    }
+    if ($data['act_arts_cirque']) {
+        $str .= 'Arts du cirque ('.$data['act_arts_cirque_p'].')<br>';
+    }
+    if ($data['act_arts_enigme']) {
+        $str .= 'Enigmes<br>';
+    }
+    if (!empty($data['act_autres'])) {
+        $str .= 'Autres: '.$data['act_autres'].'<br>';
+    }
+    $str .= '<br>J\'ai répondu comme suit pour les activités sportives:<br><br>';
+    if ($data['act_rafting'] != 0) {
+        if ($data['act_rafting'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Rafting: '.$reponse.'<br>';
+    if ($data['act_canyo'] != 0) {
+        if ($data['act_canyo'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Canyoning: '.$reponse.'<br>';
+    if ($data['act_descente'] != 0) {
+        if ($data['act_descente'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Descente VTT: '.$reponse.'<br>';
+    if ($data['act_mini_raid'] != 0) {
+        if ($data['act_mini_raid'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Mini raid VTT: '.$reponse.'<br>';
+    if ($data['act_via_fe'] != 0) {
+        if ($data['act_via_fe'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Via Ferrata: '.$reponse.'<br>';
+    if ($data['act_grimp'] != 0) {
+        if ($data['act_grimp'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Grimp\'arbre: '.$reponse.'<br>';
+    if ($data['act_bike_park'] != 0) {
+        if ($data['act_bike_park'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Mourtis Bike Park: '.$reponse.'<br>';
+    if ($data['act_speed_chall'] != 0) {
+        if ($data['act_speed_chall'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Mourtis Speed Challenge: '.$reponse.'<br>';
+    if ($data['act_biathlon'] != 0) {
+        if ($data['act_biathlon'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Biathlon: '.$reponse.'<br>';
+    if ($data['act_piscine'] != 0) {
+        if ($data['act_piscine'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Piscine: '.$reponse.'<br>';
+    if ($data['act_sports_co'] != 0) {
+        if ($data['act_sports_co'] == 2) {
+            $reponse = 'Je souhaite le faire';
+        }
+        else {
+            $reponse = 'Je peux le faire';
+        }
+    }
+    else {
+        $reponse = 'Il m\'est impossible de le faire';
+    }
+    $str .= 'Animation sports co: '.$reponse.'<br>';
 
-    $to       = $data['parents_mail'].',fondacio.camp'.$infos_camp['numero'].'@gmail.com';
+    $to       = $data['mail'];
     $subject  = 'Votre demande d\'inscription au camp "Réussir Sa Vie" n°'.$infos_camp['numero'];
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
-    $headers .= 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
+    $headers .= 'From: Fondacio Jeunes <adultes.camps@fondacio.fr>'."\r\n".
                 'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com';
 
     mail($to, $subject, $str, $headers);
 
-}*/
+}
 
 function get_cheques() {
 
