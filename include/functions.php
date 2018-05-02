@@ -206,7 +206,7 @@ function get_inscrits_adultes($camp, $filtre = '', $tri = '') {
 
     global $bdd;
 
-    $req = 'SELECT id_adulte, nom, prenom, camp, desistement FROM adultes ';
+    $req = 'SELECT id_adulte, nom, prenom, camp, paiement_declare, da_complet, rgt_recu, rgt_montant, desistement FROM adultes ';
     if (!empty($filtres)) {
         $req .= 'WHERE nom = "'.$filtre.'"';
     }
