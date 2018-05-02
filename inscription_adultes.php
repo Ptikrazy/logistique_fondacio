@@ -14,9 +14,9 @@ if (!empty($_POST)) {
 
 Merci d\'envoyer dès que possible :<br><br>
 
-- la <a href="http://bit.ly/2h3CFz1">convention de bénévolat</a> complétée et signée<br>
+- la <a href="http://www.jeunes.fondacio.fr/wp-content/uploads/2018/03/Convention-de-b%C3%A9n%C3%A9volat-2018-Fondacio-France.pdf">convention de bénévolat</a> complétée et signée<br>
 - un document attestant que tu es à jour de tes vaccinations (copie du carnet de santé ou certificat médical)<br>
-- <a href="http://bit.ly/2lgyuNs">l\'autorisation de photographie</a> complétée et signée<br>
+- <a href="http://www.jeunes.fondacio.fr/wp-content/uploads/2018/03/RSV_18_-Autorisation_relative_au_droit_a_l_image_-Personne-Majeure.pdf">l\'autorisation de photographie</a> complétée et signée<br>
 - une copie de ton diplôme (BAFA, BAFD, infirmière, médecin, ...) si tu en possèdes un<br>
 - une copie de ton carnet de stage BAFA/BAFD si tu es stagiaire<br>
 - ton règlement (chèque à l\'ordre de Fondacio France) à :<br><br>

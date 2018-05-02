@@ -733,8 +733,8 @@ Inscription adulte<br>
 23 rue de l’Ermitage<br>
 78000 VERSAILLES<br><br>
 
-Les éléments du dossier administratif sont téléchargeables sur la <a href="http://fondacio.fr/fondacio/spip.php?article575">page suivante</a>.<br>
-Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>
+Les éléments du dossier administratif sont téléchargeables sur la <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif-adultes/">page suivante</a>.<br>
+Si vous souhaitez payer en ligne, <a target="_blank" href="http://bit.ly/1O6910a">cliquez ici</a>.<br><br>
 
 Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer ta demande à : jeunes.camps@fondacio.fr<br><br>
 
