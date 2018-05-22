@@ -40,10 +40,11 @@ function convert_date($date, $from, $to) {
 
 function age($date) {
 
-    $birthDate = explode('-', $date);
-    return (date("md", date("U", mktime(0, 0, 0, $birthDate[1], $birthDate[2], $birthDate[0]))) > date("md")
-    ? ((date("Y") - $birthDate[0]) - 1)
-    : (date("Y") - $birthDate[0]));
+    $d1 = new DateTime($date);
+    $d2 = new DateTime('2018-07-07');
+    $diff = $d2->diff($d1);
+
+    return $diff->y;
 
 }
 
@@ -150,7 +151,7 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
 
     $where = FALSE;
 
-    $req = 'SELECT id_jeune, nom, prenom, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes ';
+    $req = 'SELECT id_jeune, nom, prenom, parents_mail, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes ';
     if (!empty($filtres)) {
         $req .= 'WHERE ';
         $where = TRUE;

@@ -1083,8 +1083,9 @@ else {
 
         ?>
 
-        <h3>Remise des chèques</h3>
+        <h3 id="titre_tableau_cheques">Remise des chèques (cliquer pour afficher/masquer)</h3>
 
+        <div id="tableau_cheques">
         <?php
 
         $data = get_cheques();
@@ -1094,12 +1095,12 @@ else {
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">Jeune (camp)</th>
-                    <th scope="col">Chèque 1 (n° - €)</th>
-                    <th scope="col">Chèque 2 (n° - €)</th>
-                    <th scope="col">Chèque 3 (n° - €)</th>
-                    <th scope="col">Chèque 4 (n° - €)</th>
-                    <th scope="col">Chèque 5 (n° - €)</th>
-                    <th scope="col">Chèque 6 (n° - €)</th>
+                    <th scope="col">Ch. 1 (n° - €)</th>
+                    <th scope="col">Ch. 2 (n° - €)</th>
+                    <th scope="col">Ch. 3 (n° - €)</th>
+                    <th scope="col">Ch. 4 (n° - €)</th>
+                    <th scope="col">Ch. 5 (n° - €)</th>
+                    <th scope="col">Ch. 6 (n° - €)</th>
                 </tr>
             </thead>
             <tbody>';
@@ -1151,6 +1152,7 @@ else {
     }
 
     ?>
+    </div><br>
 
     <h3>Liste des inscrits</h3><br>
 
@@ -1208,8 +1210,8 @@ else {
                     <option value="nom" <?php echo (!empty($_POST['tri']) && $_POST['tri'] == 'nom') ? 'selected' : ''; ?>>Nom</option>
                     <option value="prenom" <?php echo (!empty($_POST['tri']) && $_POST['tri'] == 'prenom') ? 'selected' : ''; ?>>Prénom</option>
                     <option value="da_complet" <?php echo (!empty($_POST['tri']) && $_POST['tri'] == 'da_complet') ? 'selected' : ''; ?>>DA Complet</option>
-                    <option value="da_a_relancer" <?php echo (!empty($_POST['tri']) && $_POST['tri'] == 'da_a_relancer') ? 'selected' : ''; ?>>DA à relancer</option>
-                    <option value="rgt_recu" <?php echo (!empty($_POST['tri']) && $_POST['tri'] == 'rgt_recu') ? 'selected' : ''; ?>>Règlement reçu</option>
+                    <option value="da_a_relancer" <?php echo (!empty($_POST['tri']) && $_POST['tri'] == 'da_a_relancer') ? 'selected' : ''; ?>>DA relance</option>
+                    <option value="rgt_recu" <?php echo (!empty($_POST['tri']) && $_POST['tri'] == 'rgt_recu') ? 'selected' : ''; ?>>RGT reçu</option>
                 </select>
             </div>
         </div>
@@ -1227,9 +1229,10 @@ else {
             <tr>
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
+                <th scope="col">Mail parents</th>
                 <th scope="col">DA complet</th>
-                <th scope="col">DA à relancer</th>
-                <th scope="col">Règlement reçu</th>
+                <th scope="col">DA relance</th>
+                <th scope="col">Rgt reçu</th>
                 <th scope="col">Solde</th>
             </tr>
         </thead>
@@ -1273,6 +1276,7 @@ else {
                     <tr bgcolor="'.$color.'">
                         <td><a href="administration.php?action=edit&id='.$id_jeune.'">'.$data['nom'].'</a></td>
                         <td>'.$data['prenom'].'</td>
+                        <td>'.$data['parents_mail'].'</td>
                         <td>'.$da_complet.'</td>
                         <td>'.convert_date($data['da_a_relancer'], '-', '/').'</td>
                         <td>'.convert_date($data['rgt_recu'], '-', '/').'</td>
@@ -1284,6 +1288,17 @@ else {
             ?>
         </tbody>
     </table>
+
+    <script type="text/javascript">
+        $(function() {
+
+            $('#tableau_cheques').hide();
+            $( "#titre_tableau_cheques" ).click(function() {
+                $('#tableau_cheques').toggle();
+            });
+
+        });
+    </script>
 
 <?php
 
