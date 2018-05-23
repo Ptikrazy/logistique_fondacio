@@ -203,13 +203,36 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
 
 }
 
-function get_inscrits_adultes($camp, $filtre = '', $tri = '') {
+function get_inscrits_adultes($camp, $filtres = '', $tri = '') {
 
     global $bdd;
 
-    $req = 'SELECT id_adulte, nom, prenom, camp, paiement_declare, da_complet, rgt_recu, rgt_montant, desistement FROM adultes ';
+    $req = 'SELECT id_adulte, nom, prenom, camp, mail, tel_portable, paiement_declare, da_complet, rgt_recu, rgt_montant, desistement FROM adultes ';
     if (!empty($filtres)) {
-        $req .= 'WHERE nom = "'.$filtre.'"';
+        $req .= 'WHERE ';
+        $where = TRUE;
+        end($filtres);
+        $last = key($filtres);
+        reset($filtres);
+        foreach ($filtres as $champ => $value) {
+            if ($champ == 'nom') {
+                $req .= $champ.' LIKE "%'.$value.'%"';
+            }
+            if ($champ == 'diplome') {
+                if (in_array($value, array('diplome_bafa', 'diplome_bafd', 'diplome_secouriste'))) {
+                    $req .= $value.' = 1';
+                }
+                if (in_array($value, array('diplome_ps', 'diplome_autre'))) {
+                    $req .= $value.' != ""';
+                }
+            }
+            else {
+                $req .= $champ.' = "'.$value.'"';
+            }
+            if ($champ != $last) {
+                $req .= ' AND ';
+            }
+        }
     }
     if ($_SESSION['profil']['role'] != 'admin') {
         if ($where) {

@@ -1359,6 +1359,30 @@ else {
 
     else {
 
+        if (isset($_GET['reset_filtres'])) {
+            unset($_SESSION['filtres_admin_adultes']);
+            redirect('administration_adultes.php');
+        }
+
+        if (!empty($_POST['nom'])) {
+            $_SESSION['filtres_admin_adultes']['nom'] = $_POST['nom'];
+        }
+
+        if (!empty($_POST['camp'])) {
+            $_SESSION['filtres_admin_adultes']['camp'] = $_POST['camp'];
+        }
+
+        if (isset($_POST['we_formation'])) {
+            $_SESSION['filtres_admin_adultes']['we_formation'] = $_POST['we_formation'];
+        }
+
+        if (!empty($_POST['diplome'])) {
+            $_SESSION['filtres_admin_adultes']['diplome'] = $_POST['diplome'];
+        }
+
+        $filtres = $_SESSION['filtres_admin_adultes'];
+        $inscrits = get_inscrits_adultes($_SESSION['camp'], $filtres, $_POST['tri']);
+
 ?>
 
     <h2>Administration</h2><br>
@@ -1372,7 +1396,56 @@ else {
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="nom">Nom</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="nom" id="nom" value="<?php echo $_POST['nom']; ?>">
+                <input type="text" class="form-control" name="nom" id="nom" value="<?php echo $_SESSION['filtres_admin_adultes']['nom']; ?>">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="camp">Camp</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="camp" id="camp">
+                    <option value=""></option>
+                    <?php
+                        $camps = get_camps();
+                        foreach ($camps as $camp) {
+                            $selected = '';
+                            if ($_SESSION['filtres_admin_adultes']['camp'] == $camp['numero']) {
+                                $selected = 'selected';
+                            }
+                            echo '<option value="'.$camp['numero'].'" '.$selected.'>'.$camp['numero'].'</option>';
+                        }
+                    ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="we_formation">WE Formation ?</label>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="we_formation" id="we_formationO" value="1" <?php echo (isset($_SESSION['filtres_admin_adultes']['we_formation']) && $_SESSION['filtres_admin_adultes']['we_formation'] == 1) ? 'checked' : ''; ?>> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="we_formation" id="we_formationN" value="0" <?php echo (isset($_SESSION['filtres_admin_adultes']['we_formation']) && $_SESSION['filtres_admin_adultes']['we_formation'] == 0) ? 'checked' : ''; ?>> Non
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="diplome">Diplome</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="diplome" id="diplome">
+                    <option value=""></option>
+                    <option value="diplome_bafa">BAFA</option>
+                    <option value="diplome_bafd">BAFD</option>
+                    <option value="diplome_secouriste">Secouriste</option>
+                    <option value="diplome_ps">Premiers secours</option>
+                    <option value="diplome_autre">Autre</option>
+                </select>
             </div>
         </div>
 
@@ -1390,8 +1463,11 @@ else {
         </div>
 
         <div class="form-group row">
-            <div class="col-sm-10">
+            <div class="col-sm-2">
                 <button type="submit" class="btn btn-primary">Filtrer / Trier</button>
+            </div>
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-secondary" onclick="location.href = 'administration_adultes.php?reset_filtres';">Reset</button>
             </div>
         </div>
 
@@ -1403,18 +1479,12 @@ else {
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Camp</th>
+                <th scope="col">Mail</th>
+                <th scope="col">Portable</th>
             </tr>
         </thead>
         <tbody>
             <?php
-
-            $filtre = '';
-
-            if (!empty($_POST['nom'])) {
-                $filtre = $_POST['nom'];
-            }
-
-            $inscrits = get_inscrits_adultes($_SESSION['camp'], $filtre, $_POST['tri']);
 
             foreach ($inscrits as $id_adulte => $data) {
 
@@ -1437,6 +1507,8 @@ else {
                         <td><a href="administration_adultes.php?action=edit&id='.$id_adulte.'">'.$data['nom'].'</a></td>
                         <td>'.$data['prenom'].'</td>
                         <td>'.$data['camp'].'</td>
+                        <td>'.$data['mail'].'</td>
+                        <td>'.$data['tel_portable'].'</td>
                     </tr>
                 ';
             }
