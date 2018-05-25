@@ -18,7 +18,7 @@ Voyons tout ça en détails !
 <h2>Onglet "Accueil"</h2>
 <p>L'onglet accueil est le premier sur lequel vous arrivez et contient les choses suivantes:
 <ul>
-    <li>Alertes transport: un récapitulatif des arrivées en train du jour, des personnes n'ayant pas de moyen de retour renseigné et des personnes n'ayant pas d'heure pour leur train de retour (ce n'est pas un bug si vous en avez énormément en début de camp: il n'y a pas de champ dans le formulaire d'inscription pour l'horaire de retour)</li>
+    <li>Alertes transport: un récapitulatif des arrivées en train du jour et des personnes n'ayant pas de moyen de retour renseigné</li>
     <li>Effectifs repas du jour: son nom l'indique, le nombre de repas à servir midi et soir au jour le jour. Ne fonctionne pas forcément pour le moment</li>
     <li>Anniversaires: là aussi l'intitulé parle de lui-même, les anniversaires du jour</li>
     <li>Statistiques: quelques informations sur les effectifs du camp</li></ul></p>

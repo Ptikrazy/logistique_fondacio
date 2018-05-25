@@ -1364,7 +1364,7 @@ else {
                 <button type="submit" class="btn btn-primary">Filtrer / Trier</button>
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-secondary" onclick="location.href = 'administration.php?reset_filtres';">Reset</button>
+                <button type="button" class="btn btn-secondary" onclick="location.href = 'administration.php?reset_filtres';">Reset filtres</button>
             </div>
         </div>
 
