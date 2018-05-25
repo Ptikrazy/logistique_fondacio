@@ -27,7 +27,7 @@
                 <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
                 <!-- <li class="nav-item"><a class="nav-link" href="participants.php">Participants</a></li> -->
                 <li class="nav-item"><a class="nav-link" href="remplissage.php">Remplissage</a></li>
-                <li class="nav-item"><a class="nav-link" href="exports.php">Exports</a></li>
+                <li class="nav-item"><a class="nav-link" href="exports/exports.php">Exports</a></li>
                 <!-- <li class="nav-item"><a class="nav-link" href="transports.php">Transports</a></li>
                 <li class="nav-item"><a class="nav-link" href="activites/activites.php">Activités</a></li>
                 <li class="nav-item"><a class="nav-link" href="activites/inscriptions.php">Inscriptions</a></li> -->
