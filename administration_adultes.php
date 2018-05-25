@@ -44,6 +44,7 @@ if (empty($_SESSION['profil']['id'])) {
 
         else {
             $login = get_infos_login($_POST['login']);
+            $_SESSION['camp'] = 1;
             if ($login['role'] != 'admin') {
                 $_SESSION['camp'] = $login['camp'];
             }
@@ -1380,8 +1381,11 @@ else {
             $_SESSION['filtres_admin_adultes']['diplome'] = $_POST['diplome'];
         }
 
-        $filtres = $_SESSION['filtres_admin_adultes'];
-        $inscrits = get_inscrits_adultes($_SESSION['camp'], $filtres, $_POST['tri']);
+        if (!isset($_POST['tri'])) {
+            $_POST['tri'] = '';
+        }
+
+        $inscrits = get_inscrits_adultes($_SESSION['camp'], $_SESSION['filtres_admin_adultes'], $_POST['tri']);
 
 ?>
 
@@ -1472,6 +1476,8 @@ else {
         </div>
 
     </form>
+
+    Nombre de résultats: <?php echo count($inscrits); ?><br>
 
     <table class="table table-sm table-bordered">
         <thead class="thead-dark">

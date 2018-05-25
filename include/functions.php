@@ -160,13 +160,20 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
         reset($filtres);
         foreach ($filtres as $champ => $value) {
             if ($champ == 'rgt_recu') {
-                $req .= $champ.' IS NULL';
+                if ($value) {
+                    $req .= $champ.' IS NOT NULL';
+                }
+                else {
+                    $req .= $champ.' IS NULL';
+                }
             }
             elseif ($champ == 'da_a_relancer') {
-                $req .= $champ.' IS NOT NULL';
-            }
-            elseif ($champ == 'da_complet') {
-                $req .= $champ.' = 0';
+                if ($value) {
+                    $req .= $champ.' IS NOT NULL';
+                }
+                else {
+                    $req .= $champ.' IS NULL';
+                }
             }
             elseif ($champ == 'nom') {
                 $req .= $champ.' LIKE "%'.$value.'%"';

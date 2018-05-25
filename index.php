@@ -7,9 +7,7 @@ require_once 'include/head.php';
 
 ?>
 
-<h2 style="color: red"><b>Si problème, contacter Pierre: pleplat75@gmail.com / 06 12 19 22 92</b></h2>
-
-<h2>Hello! Nous sommes le <?php echo date('d/m/Y'); ?> et la vie est belle sur le camp <?php echo $_SESSION['camp']; ?> ♫</h2><br>
+<h2 style="color: red"><b>Si problème, contacter Pierre: pleplat75@gmail.com / 06 12 19 22 92</b></h2><br>
 
 <!-- <h3><b>Alertes transport</b></h3> -->
 
