@@ -45,7 +45,7 @@ if (empty($_SESSION['profil']['id'])) {
         else {
             $login = get_infos_login($_POST['login']);
             if ($login['role'] != 'admin') {
-                $_SESSION['camp'] = $login['camp'];
+                $_SESSION['camp_admin'] = $login['camp'];
             }
             $_SESSION['profil']['id'] = $login['id_utilisateur'];
             $_SESSION['profil']['role'] = $login['role'];
@@ -1201,7 +1201,7 @@ else {
         $_POST['tri'] = '';
     }
 
-    $inscrits = get_inscrits_jeune($_SESSION['camp'], $_SESSION['filtres_admin_jeunes'], $_POST['tri']);
+    $inscrits = get_inscrits_jeune($_SESSION['camp_admin'], $_SESSION['filtres_admin_jeunes'], $_POST['tri']);
 
     ?>
 

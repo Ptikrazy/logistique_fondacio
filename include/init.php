@@ -6,15 +6,14 @@ session_start();
 // Error reporting
 error_reporting(1);
 ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 0);
 
 // Date
 setlocale(LC_TIME, "fr_FR");
+// $today = date('Y-m-d');
+$today = '2018-07-09';
 
-// Connexion BDD
+// Chargement des fichiers
 require_once 'bdd.php';
-
-// Require
 require_once 'functions.php';
 
 ?>
