@@ -78,6 +78,21 @@ function get_camps() {
 
     global $bdd;
 
+    $req = 'SELECT * FROM camps ORDER BY numero';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['id_camp']] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_camps_inscrptions() {
+
+    global $bdd;
+
     $req = 'SELECT * FROM camps WHERE numero != 1 ORDER BY numero';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
