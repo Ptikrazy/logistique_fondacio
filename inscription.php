@@ -39,7 +39,7 @@ else {
                     <option value="" selected></option>
                     <?php
 
-                    $camps = get_camps();
+                    $camps = get_camps_inscrptions();
 
                     foreach ($camps as $camp) {
                         echo '<option value="'.$camp['numero'].'">Camp n°'.$camp['numero'].' ('.$camp['regions'].') du '.convert_date($camp['date_debut'], "-", "/").' au '.convert_date($camp['date_fin'], "-", "/").'</option>';
