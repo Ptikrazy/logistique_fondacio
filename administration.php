@@ -1378,6 +1378,7 @@ else {
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Mail parents</th>
+                <th scope="col">Tel mère</th>
                 <th scope="col">DA complet</th>
                 <th scope="col">DA relance</th>
                 <th scope="col">Rgt reçu</th>
@@ -1408,6 +1409,7 @@ else {
                         <td><a href="administration.php?action=edit&id='.$id_jeune.'">'.$data['nom'].'</a></td>
                         <td>'.$data['prenom'].'</td>
                         <td>'.$data['parents_mail'].'</td>
+                        <td>'.$data['mere_portable'].'</td>
                         <td>'.$da_complet.'</td>
                         <td>'.convert_date($data['da_a_relancer'], '-', '/').'</td>
                         <td>'.convert_date($data['rgt_recu'], '-', '/').'</td>

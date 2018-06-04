@@ -166,7 +166,7 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
 
     $where = FALSE;
 
-    $req = 'SELECT id_jeune, nom, prenom, parents_mail, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes ';
+    $req = 'SELECT id_jeune, nom, prenom, parents_mail, mere_portable, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes ';
     if (!empty($filtres)) {
         $req .= 'WHERE ';
         $where = TRUE;
@@ -1127,14 +1127,14 @@ function alertes_transports($raison) {
 
     switch ($raison) {
         case 'arrivees':
-            $req = 'SELECT nom, prenom, tel_portable, aller_heure FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND aller_transport = "train" AND aller_date = "'.$today.'" ORDER BY aller_heure, nom';
+            $req = 'SELECT nom, prenom, tel_portable, aller_heure FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND aller_transport = "train" AND aller_date = "'.$today->format('Y-m-d').'" ORDER BY aller_heure, nom';
             break;
         case 'arrivees_demain':
             $tomorrow = date('Y-m-d', strtotime(' +1 day'));
             $req = 'SELECT nom, prenom, tel_portable, aller_heure FROM participants WHERE aller_transport = "train" AND aller_date = "'.$tomorrow.'" ORDER BY aller_heure, nom';
             break;
         case 'departs':
-            $req = 'SELECT nom, prenom, tel_portable, retour_heure, retour_transport FROM participants WHERE retour_transport != "bus" AND retour_date = "'.$today.'" ORDER BY retour_transport, retour_heure, nom';
+            $req = 'SELECT nom, prenom, tel_portable, retour_heure, retour_transport FROM participants WHERE retour_transport != "bus" AND retour_date = "'.$today->format('Y-m-d').'" ORDER BY retour_transport, retour_heure, nom';
             break;
         case 'departs_demain':
             $tomorrow = date('Y-m-d', strtotime(' +1 day'));

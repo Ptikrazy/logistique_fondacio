@@ -9,8 +9,7 @@ ini_set('display_errors', 1);
 
 // Date
 setlocale(LC_TIME, "fr_FR");
-// $today = date('Y-m-d');
-$today = '2018-07-09';
+$today = new DateTime('2018-07-07');
 
 // Chargement des fichiers
 require_once 'bdd.php';

@@ -5,6 +5,9 @@ require_once 'include/init.php';
 $title = 'Accueil';
 require_once 'include/head.php';
 
+if (empty($_SESSION['camp'])) {
+    $_SESSION['camp'] = 1;
+}
 if (!empty($_POST['camp'])) {
     $_SESSION['camp'] = $_POST['camp'];
 }
@@ -41,7 +44,7 @@ if (!empty($_POST['camp'])) {
 <?php
 
 $donnees = alertes_transports('arrivees');
-echo '<h4>Arrivées en train du jour ('.date('d/m/Y').')</h4>';
+echo '<h4>Arrivées en train du jour ('.$today->format('d/m/Y').')</h4>';
 echo '<table class="table table-sm table-bordered">
         <thead class="thead-dark">
             <tr>

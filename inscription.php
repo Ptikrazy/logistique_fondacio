@@ -32,6 +32,8 @@ else {
 
         <h4>Infos camp</h4><br>
 
+        Les inscriptions pour le camp 1 sont fermées (le camp est complet). Nous vous invitons à vous inscrire sur une autre semaine. Nous ne pouvons malheureusement prendre personne sur liste d’attente.<br><br>
+
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="camp">Je m'inscris au camp <span style="color: red">*</span></label>
             <div class="col-sm-3">
