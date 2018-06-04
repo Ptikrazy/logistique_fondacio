@@ -1081,7 +1081,7 @@ else {
             </tbody>
         </table><br>';
 
-        ?>
+    ?>
 
         <h3 id="titre_tableau_cheques">Remise des chèques (cliquer pour afficher/masquer)</h3>
 
@@ -1147,12 +1147,11 @@ else {
 
         echo '
             </tbody>
-        </table><br>';
+        </table><br></div><br>';
 
     }
 
     ?>
-    </div><br>
 
     <?php
 
@@ -1163,6 +1162,10 @@ else {
 
     if (!empty($_POST['nom'])) {
         $_SESSION['filtres_admin_jeunes']['nom'] = $_POST['nom'];
+    }
+
+    if (!empty($_POST['cp'])) {
+        $_SESSION['filtres_admin_jeunes']['cp'] = $_POST['cp'];
     }
 
     if (!empty($_POST['camp'])) {
@@ -1197,6 +1200,22 @@ else {
         $_SESSION['filtres_admin_jeunes']['ancien'] = $_POST['ancien'];
     }
 
+    if (isset($_POST['observations'])) {
+        $_SESSION['filtres_admin_jeunes']['observations'] = $_POST['observations'];
+    }
+
+    if (isset($_POST['bourse'])) {
+        $_SESSION['filtres_admin_jeunes']['bourse'] = $_POST['bourse'];
+    }
+
+    if (isset($_POST['caf'])) {
+        $_SESSION['filtres_admin_jeunes']['caf'] = $_POST['caf'];
+    }
+
+    if (isset($_POST['attestation'])) {
+        $_SESSION['filtres_admin_jeunes']['attestation'] = $_POST['attestation'];
+    }
+
     if (!isset($_POST['tri'])) {
         $_POST['tri'] = '';
     }
@@ -1212,15 +1231,14 @@ else {
     <h4>Filtres</h4>
 
         <div class="form-group row">
+            <!-- FILTRE NOM -->
             <label class="col-form-label col-sm-2" for="nom">Nom du jeune</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input type="text" class="form-control" name="nom" id="nom" value="<?php echo $_SESSION['filtres_admin_jeunes']['nom']; ?>">
             </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="camp">Camp</label>
-            <div class="col-sm-3">
+            <!-- FILTRE CAMP -->
+            <label class="col-form-label col-sm-1" for="camp">Camp</label>
+            <div class="col-sm-1">
                 <select class="form-control" name="camp" id="camp">
                     <option value=""></option>
                     <?php
@@ -1235,9 +1253,15 @@ else {
                     ?>
                 </select>
             </div>
+            <!-- FILTRE DEPARTEMENT -->
+            <label class="col-form-label col-sm-2" for="cp">Département</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="cp" id="cp" value="<?php echo $_SESSION['filtres_admin_jeunes']['cp']; ?>">
+            </div>
         </div>
 
         <div class="form-group row">
+            <!-- FILTRE TRANSPORT ALLER -->
             <label class="col-form-label col-sm-2" for="aller_transport">Transport aller</label>
             <div class="col-sm-3">
                 <select class="form-control" name="aller_transport" id="aller_transport">
@@ -1248,9 +1272,7 @@ else {
                     <option value="bus" <?php echo (isset($_SESSION['filtres_admin_jeunes']['aller_transport']) && $_SESSION['filtres_admin_jeunes']['aller_transport'] == 'bus') ? 'selected' : ''; ?>>Bus organisé par Fondacio</option>
                 </select>
             </div>
-        </div>
-
-        <div class="form-group row">
+            <!-- FILTRE TRANSPORT RETOUR -->
             <label class="col-form-label col-sm-2" for="retour_transport">Transport retour</label>
             <div class="col-sm-3">
                 <select class="form-control" name="retour_transport" id="retour_transport">
@@ -1264,8 +1286,9 @@ else {
         </div>
 
         <div class="form-group row">
+            <!-- FILTRE DA COMPLET -->
             <label class="col-form-label col-sm-2" for="da_complet">DA complet ?</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="da_complet" id="da_completO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['da_complet']) && $_SESSION['filtres_admin_jeunes']['da_complet'] == 1) ? 'checked' : ''; ?>> Oui
@@ -1277,11 +1300,9 @@ else {
                     </label>
                 </div>
             </div>
-        </div>
-
-        <div class="form-group row">
+            <!-- FILTRE DA A RELANCER -->
             <label class="col-form-label col-sm-2" for="da_a_relancer">DA à relancer ?</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="da_a_relancer" id="da_a_relancerO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['da_a_relancer']) && $_SESSION['filtres_admin_jeunes']['da_a_relancer'] == 1) ? 'checked' : ''; ?>> Oui
@@ -1293,11 +1314,9 @@ else {
                     </label>
                 </div>
             </div>
-        </div>
-
-        <div class="form-group row">
+            <!-- FILTRE RGT RECU -->
             <label class="col-form-label col-sm-2" for="rgt_recu">Rgt reçu ?</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="rgt_recu" id="rgt_recuO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['rgt_recu']) && $_SESSION['filtres_admin_jeunes']['rgt_recu'] == 1) ? 'checked' : ''; ?>> Oui
@@ -1312,8 +1331,9 @@ else {
         </div>
 
         <div class="form-group row">
+            <!-- FILTRE PREPA -->
             <label class="col-form-label col-sm-2" for="prepa">Prépa ?</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="prepa" id="prepaO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['prepa']) && $_SESSION['filtres_admin_jeunes']['prepa'] == 1) ? 'checked' : ''; ?>> Oui
@@ -1325,11 +1345,9 @@ else {
                     </label>
                 </div>
             </div>
-        </div>
-
-        <div class="form-group row">
+            <!-- FILTRE ANCIEN -->
             <label class="col-form-label col-sm-2" for="ancien">Ancien ?</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="ancien" id="ancienO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['ancien']) && $_SESSION['filtres_admin_jeunes']['ancien'] == 1) ? 'checked' : ''; ?>> Oui
@@ -1341,7 +1359,74 @@ else {
                     </label>
                 </div>
             </div>
+            <!-- FILTRE OBSERVATIONS -->
+            <label class="col-form-label col-sm-2" for="observations">Observations ?</label>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="observations" id="observations0" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['observations']) && $_SESSION['filtres_admin_jeunes']['observations'] == 1) ? 'checked' : ''; ?>> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="observations" id="observations0" value="0" <?php echo (isset($_SESSION['filtres_admin_jeunes']['observations']) && $_SESSION['filtres_admin_jeunes']['observations'] == 0) ? 'checked' : ''; ?>> Non
+                    </label>
+                </div>
+            </div>
         </div>
+
+        <?php
+        if ($_SESSION['profil']['role'] == 'admin') {
+        ?>
+
+            <div class="form-group row">
+                <!-- FILTRE BOURSE -->
+                <label class="col-form-label col-sm-2" for="bourse">Bourse ?</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="bourse" id="bourseO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['bourse']) && $_SESSION['filtres_admin_jeunes']['bourse'] == 1) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="bourse" id="bourseN" value="0" <?php echo (isset($_SESSION['filtres_admin_jeunes']['bourse']) && $_SESSION['filtres_admin_jeunes']['bourse'] == 0) ? 'checked' : ''; ?>> Non
+                        </label>
+                    </div>
+                </div>
+                <!-- FILTRE CAF -->
+                <label class="col-form-label col-sm-2" for="caf">Ancien ?</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="caf" id="cafO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['caf']) && $_SESSION['filtres_admin_jeunes']['caf'] == 1) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="caf" id="cafN" value="0" <?php echo (isset($_SESSION['filtres_admin_jeunes']['caf']) && $_SESSION['filtres_admin_jeunes']['caf'] == 0) ? 'checked' : ''; ?>> Non
+                        </label>
+                    </div>
+                </div>
+                <!-- FILTRE ATTESTATION -->
+                <label class="col-form-label col-sm-2" for="attestation">Attestation ?</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="attestation" id="attestation0" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['attestation']) && $_SESSION['filtres_admin_jeunes']['attestation'] == 1) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="attestation" id="attestation0" value="0" <?php echo (isset($_SESSION['filtres_admin_jeunes']['attestation']) && $_SESSION['filtres_admin_jeunes']['attestation'] == 0) ? 'checked' : ''; ?>> Non
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        <?php
+        }
+        ?>
 
     <h4>Tri</h4>
 

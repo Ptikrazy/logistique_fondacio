@@ -174,7 +174,7 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
         $last = key($filtres);
         reset($filtres);
         foreach ($filtres as $champ => $value) {
-            if ($champ == 'rgt_recu') {
+            if (in_array($champ, array('rgt_recu', 'da_a_relancer'))) {
                 if ($value) {
                     $req .= $champ.' IS NOT NULL';
                 }
@@ -182,16 +182,30 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
                     $req .= $champ.' IS NULL';
                 }
             }
-            elseif ($champ == 'da_a_relancer') {
+            elseif (in_array($champ, array('observations'))) {
                 if ($value) {
-                    $req .= $champ.' IS NOT NULL';
+                    $req .= $champ.' != ""';
                 }
                 else {
-                    $req .= $champ.' IS NULL';
+                    $req .= $champ.' = ""';
+                }
+            }
+            elseif (in_array($champ, array('bourse', 'caf'))) {
+                if ($value) {
+                    $req .= $champ.' != 0';
+                }
+                else {
+                    $req .= $champ.' = 0';
                 }
             }
             elseif ($champ == 'nom') {
                 $req .= $champ.' LIKE "%'.$value.'%"';
+            }
+            elseif ($champ == 'cp') {
+                $req .= $champ.' LIKE "'.$value.'%"';
+            }
+            elseif ($champ == 'attestation') {
+                $req .= '(attestation_presence = 1 OR attestation_inscription = 1)';
             }
             else {
                 $req .= $champ.' = "'.$value.'"';
