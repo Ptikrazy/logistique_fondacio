@@ -254,7 +254,7 @@ function get_inscrits_adultes($camp, $filtres = '', $tri = '') {
             if ($champ == 'nom') {
                 $req .= $champ.' LIKE "%'.$value.'%"';
             }
-            if ($champ == 'diplome') {
+            elseif ($champ == 'diplome') {
                 if (in_array($value, array('diplome_bafa', 'diplome_bafd', 'diplome_secouriste'))) {
                     $req .= $value.' = 1';
                 }
@@ -283,7 +283,7 @@ function get_inscrits_adultes($camp, $filtres = '', $tri = '') {
     }
     else {
         $req .= ' ORDER BY id_adulte';
-    }
+    }print_r($req);
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['id_adulte']] = $d;
