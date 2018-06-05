@@ -41,7 +41,7 @@ else {
                     <option value="" selected></option>
                     <?php
 
-                    $camps = get_camps_inscrptions();
+                    $camps = get_camps_inscriptions();
 
                     foreach ($camps as $camp) {
                         echo '<option value="'.$camp['numero'].'">Camp n°'.$camp['numero'].' ('.$camp['regions'].') du '.convert_date($camp['date_debut'], "-", "/").' au '.convert_date($camp['date_fin'], "-", "/").'</option>';
@@ -297,7 +297,7 @@ else {
         </div>
 
         <div class="form-group row" id="aller_bus">
-            <label class="col-form-label col-sm-3" for="aller_bus">Ville de départ <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="aller_bus">Ville de départ <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="aller_bus" id="aller_bus_clear">
                     <option value="" id="aller_bus_villes" selected></option>
@@ -328,7 +328,7 @@ else {
         </div>
 
         <div class="form-group row" id="retour_bus">
-            <label class="col-form-label col-sm-3" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="retour_bus" id="retour_bus_clear">
                     <option value="" id="retour_bus_villes" selected></option>

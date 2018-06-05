@@ -89,7 +89,20 @@ function get_camps() {
 
 }
 
-function get_camps_inscrptions() {
+function get_camp($camp) {
+
+    global $bdd;
+
+    $req = 'SELECT * FROM camps WHERE numero = '.$camp;
+    $res = $bdd->query($req);
+    $data = $res->fetch();
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_camps_inscriptions() {
 
     global $bdd;
 
@@ -98,19 +111,6 @@ function get_camps_inscrptions() {
     while ($d = $res->fetch()) {
         $data[$d['id_camp']] = $d;
     }
-    $res->closeCursor();
-
-    return $data;
-
-}
-
-function get_camp($camp) {
-
-    global $bdd;
-
-    $req = 'SELECT * FROM camps WHERE numero = '.$camp;
-    $res = $bdd->query($req);
-    $data = $res->fetch();
     $res->closeCursor();
 
     return $data;
@@ -132,11 +132,27 @@ function get_remplissage_camps() {
 
 }
 
-function get_totaux_transport($camp, $aller_retour, $transport) {
+function get_totaux_transport($camp, $aller_retour, $transport, $prepa = 2) {
 
     global $bdd;
 
     $req = 'SELECT COUNT(id_jeune) AS total FROM jeunes WHERE desistement IS NULL AND camp = '.$camp.' AND '.$aller_retour.'_transport = "'.$transport.'"';
+    if ($prepa != 2) {
+        $req .= ' AND prepa = '.$prepa;
+    }
+    $res = $bdd->query($req);
+    $data = $res->fetchColumn();
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_totaux_jeunes($camp, $filtre) {
+
+    global $bdd;
+
+    $req = 'SELECT COUNT(id_jeune) AS total FROM jeunes WHERE desistement IS NULL AND camp = '.$camp.' AND '.$filtre;
     $res = $bdd->query($req);
     $data = $res->fetchColumn();
     $res->closeCursor();

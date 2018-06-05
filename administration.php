@@ -1052,6 +1052,8 @@ else {
                 <tr>
                     <th scope="col">N° Camp</th>
                     <th scope="col">Inscrits</th>
+                    <th scope="col">Prépa</th>
+                    <th scope="col">Nouveaux</th>
                     <th scope="col">Aller bus</th>
                     <th scope="col">Aller train</th>
                     <th scope="col">Aller voiture</th>
@@ -1067,12 +1069,47 @@ else {
                 <tr>
                     <td>'.$camp.'</td>
                     <td>'.$inscrits.'</td>
+                    <td>'.get_totaux_jeunes($camp, 'prepa = 1').'</td>
+                    <td>'.get_totaux_jeunes($camp, 'ancien = 0').'</td>
                     <td>'.get_totaux_transport($camp, 'aller', 'bus').'</td>
                     <td>'.get_totaux_transport($camp, 'aller', 'train').'</td>
                     <td>'.get_totaux_transport($camp, 'aller', 'voiture').'</td>
                     <td>'.get_totaux_transport($camp, 'retour', 'bus').'</td>
                     <td>'.get_totaux_transport($camp, 'retour', 'train').'</td>
                     <td>'.get_totaux_transport($camp, 'retour', 'voiture').'</td>
+                </tr>
+            ';
+        }
+
+        echo '
+            </tbody>
+        </table><br>';
+
+        ?>
+
+        <h3>Remplissage des bus</h3>
+
+        <?php
+
+        echo '
+        <table class="table table-sm table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">N° Camp</th>
+                    <th scope="col">Bus aller prépa</th>
+                    <th scope="col">Bus aller camp</th>
+                    <th scope="col">Bus retour</th>
+                </tr>
+            </thead>
+            <tbody>';
+
+        foreach ($data as $camp => $inscrits) {
+            echo '
+                <tr>
+                    <td>'.$camp.'</td>
+                    <td>'.get_totaux_transport($camp, 'aller', 'bus', 1).'</td>
+                    <td>'.get_totaux_transport($camp, 'aller', 'bus', 0).'</td>
+                    <td>'.get_totaux_transport($camp, 'retour', 'bus').'</td>
                 </tr>
             ';
         }
