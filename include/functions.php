@@ -283,7 +283,7 @@ function get_inscrits_adultes($camp, $filtres = '', $tri = '') {
     }
     else {
         $req .= ' ORDER BY id_adulte';
-    }print_r($req);
+    }
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['id_adulte']] = $d;
