@@ -157,6 +157,28 @@ else {
                     $_POST['da_relance_pieces_manquantes '] = 'NULL';
                 }
 
+                if ($_POST['aller_transport'] != $data['aller_transport']) {
+                    if ($_POST['aller_transport'] == 'train') {
+                        $_POST['aller_heure'] = $_POST['aller_train'];
+                        $_POST['aller_ville'] = '';
+                    }
+                    else {
+                        $_POST['aller_heure'] = '13h';
+                        if ($_POST['aller_transport'] == 'voiture') {
+                            $_POST['aller_ville'] = '';
+                        }
+                    }
+                }
+                if ($_POST['retour_transport'] != $data['retour_transport']) {
+                    if ($_POST['retour_transport'] == 'bus') {
+                        $_POST['retour_heure'] = '2h';
+                    }
+                    else {
+                        $_POST['retour_heure'] = '12h';
+                        $_POST['retour_ville'] = '';
+                    }
+                }
+
                 $_POST['rgt_montant'] = $_POST['cb_montant'] + $_POST['cheque1_montant'] + $_POST['cheque2_montant'] + $_POST['cheque3_montant'] + $_POST['cheque4_montant'] + $_POST['cheque5_montant'] + $_POST['cheque6_montant'] + $_POST['cv_montant'] + $_POST['caf_rgt'] + $_POST['bourse'] + $_POST['autre'];
 
                 maj_administratif_jeune($_GET['id'], $_POST);
@@ -896,6 +918,37 @@ else {
 
                 // Gestion des transports
 
+                $('#aller_voiture').hide();
+                $('#aller_train').hide();
+                $('#aller_ville').hide();
+                $('#retour_voiture').hide();
+                $('#retour_train').hide();
+                $('#retour_ville').hide();
+
+                <?php
+
+                if ($data['aller_transport'] == 'voiture') {
+                    echo "$('#aller_voiture').show();";
+                }
+                if ($data['aller_transport'] == 'train') {
+                    echo "$('#aller_train').show();";
+                }
+                if ($data['aller_transport'] == 'bus') {
+                    echo "$('#aller_ville').show();";
+                }
+
+                if ($data['retour_transport'] == 'voiture') {
+                    echo "('#retour_voiture').show();";
+                }
+                if ($data['retour_transport'] == 'train') {
+                    echo "$('#retour_train').show();";
+                }
+                else {
+                    echo "$('#retour_ville').show();";
+                }
+
+                ?>
+
                 if ($('#aller_transport').val() == 'bus') {
                     $.ajax({
                         type: 'POST',
@@ -909,38 +962,7 @@ else {
                             $("#aller_bus_villes").after(data);
                         }
                     });
-                    $('#aller_train').hide();
-                };
-
-                if ($('#aller_transport').val() == 'train') {
-                    $('#aller_train').show();
-                    $('#aller_ville').hide();
                 }
-
-                $('#aller_transport').change(function() {
-                    if (this.value == "voiture") {
-                        $('#aller_bus_clear option').remove();
-                        $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
-                    }
-                    if (this.value == "train") {
-                        $('#aller_bus_clear option').remove();
-                        $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
-                    }
-                    if (this.value == "bus") {
-                        $.ajax({
-                            type: 'POST',
-                            url: '/ajax/villes_bus.php',
-                            data: {
-                                'camp': $('#camp').find(":selected").val(),
-                                'aller_retour': 'aller',
-                                'select_ville': <?php echo (!empty($data['aller_ville'])) ? '\''.$data['aller_ville'].'\'' : '\'\''; ?>
-                            },
-                            success: function(data){
-                                $("#aller_bus_villes").after(data);
-                            }
-                        });
-                    }
-                });
 
                 if ($('#retour_transport').val() == 'bus') {
                     $.ajax({
@@ -955,24 +977,46 @@ else {
                             $("#retour_bus_villes").after(data);
                         }
                     });
-                    $('#retour_train').hide();
                 }
 
-                if ($('#retour_transport').val() == 'train') {
-                    $('#retour_train').show();
-                    $('#retour_ville').hide();
-                }
+                $('#aller_transport').change(function() {
+                    if (this.value == "voiture") {
+                        $('#aller_train').hide();
+                        $('#aller_ville').hide();
+                    }
+                    if (this.value == "train") {
+                        $('#aller_train').show();
+                        $('#aller_ville').hide();
+                    }
+                    if (this.value == "bus") {
+                        $('#aller_ville').show();
+                        $.ajax({
+                            type: 'POST',
+                            url: '/ajax/villes_bus.php',
+                            data: {
+                                'camp': $('#camp').find(":selected").val(),
+                                'aller_retour': 'aller',
+                                'select_ville': <?php echo (!empty($data['aller_ville'])) ? '\''.$data['aller_ville'].'\'' : '\'\''; ?>
+                            },
+                            success: function(data){
+                                $("#aller_bus_villes").after(data);
+                            }
+                        });
+                        $('#aller_train').hide();
+                    }
+                });
 
                 $('#retour_transport').change(function() {
                     if (this.value == "voiture") {
-                        $('#retour_bus_clear option').remove();
-                        $('#retour_bus_clear').append('<option value="" id="retour_bus_villes" selected></option>');
+                        $('#retour_train').hide();
+                        $('#retour_ville').hide();
                     }
                     if (this.value == "train") {
-                        $('#retour_bus_clear option').remove();
-                        $('#retour_bus_clear').append('<option value="" id="retour_bus_villes" selected></option>');
+                        $('#retour_train').show();
+                        $('#retour_ville').hide();
                     }
                     if (this.value == "bus") {
+                        $('#retour_ville').show();
                         $.ajax({
                             type: 'POST',
                             url: '/ajax/villes_bus.php',
