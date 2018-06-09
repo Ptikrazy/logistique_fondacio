@@ -11,7 +11,6 @@ if (empty($_SESSION['camp'])) {
 if (!empty($_POST['camp'])) {
     $_SESSION['camp'] = $_POST['camp'];
 }
-
 ?>
 
 <h2 style="color: red"><b>Si problème, contacter Pierre: pleplat75@gmail.com / 06 12 19 22 92</b></h2><br>
@@ -44,10 +43,11 @@ if (!empty($_POST['camp'])) {
 <?php
 
 $donnees = alertes_transports('arrivees');
-echo '<h4>Arrivées en train du jour ('.$today->format('d/m/Y').')</h4>';
+echo '<h4>Arrivées en train du jour ('.$today->format('d/m/Y').'): '.count($donnees).'</h4>';
 echo '<table class="table table-sm table-bordered">
         <thead class="thead-dark">
             <tr>
+                <th scope="col">Type</th>
                 <th scope="col">Nom</th>
                 <th scope="col">Prénom</th>
                 <th scope="col">Heure d\'arrivée</th>
@@ -56,6 +56,7 @@ echo '<table class="table table-sm table-bordered">
         </thead>';
 foreach ($donnees as $data) {
     echo '<tr>
+            <td>'.$data['type'].'</td>
             <td>'.$data['nom'].'</td>
             <td>'.$data['prenom'].'</td>
             <td color="red">'.$data['aller_heure'].'</td>
@@ -64,55 +65,97 @@ foreach ($donnees as $data) {
 }
 echo '</table>';
 
-/*$donnees = alertes_transports('arrivees_demain');
-echo '<h4>Arrivées en train de demain ('.date('d/m/Y', strtotime(' +1 day')).')</h4>';
-echo '<ul>';
+$donnees = alertes_transports('arrivees_demain');
+echo '<h4>Arrivées en train de demain ('.$tomorrow->format('d/m/Y').'): '.count($donnees).'</h4>';
+echo '<table class="table table-sm table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Heure d\'arrivée</th>
+                <th scope="col">Portable</th>
+            </tr>
+        </thead>';
 foreach ($donnees as $data) {
-    echo '<li><b>'.$data['nom'].'</b> '.$data['prenom'].': <b><span style="color: red">'.$data['aller_heure'].'</span></b> ('.$data['tel_portable'].')</li>';
+    echo '<tr>
+            <td>'.$data['type'].'</td>
+            <td>'.$data['nom'].'</td>
+            <td>'.$data['prenom'].'</td>
+            <td color="red">'.$data['aller_heure'].'</td>
+            <td>'.$data['tel_portable'].'</td>
+          </tr>';
 }
-echo '</ul>';
+echo '</table>';
 
 $donnees = alertes_transports('departs');
-echo '<h4>Départs du jour ('.date('d/m/Y').')</h4>';
-echo '<ul>';
+echo '<h4>Départs en train du jour ('.$today->format('d/m/Y').'): '.count($donnees).'</h4>';
+echo '<table class="table table-sm table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Heure de départ</th>
+                <th scope="col">Portable</th>
+            </tr>
+        </thead>';
 foreach ($donnees as $data) {
-    echo '<li><b>'.$data['nom'].'</b> '.$data['prenom'].': <b><span style="color: red">'.$data['retour_transport'].' '.$data['retour_heure'].'</span></b> ('.$data['tel_portable'].')</li>';
+    echo '<tr>
+            <td>'.$data['type'].'</td>
+            <td>'.$data['nom'].'</td>
+            <td>'.$data['prenom'].'</td>
+            <td color="red">'.$data['retour_heure'].'</td>
+            <td>'.$data['tel_portable'].'</td>
+          </tr>';
 }
-echo '</ul>';
+echo '</table>';
 
 $donnees = alertes_transports('departs_demain');
-echo '<h4>Départs de demain ('.date('d/m/Y', strtotime(' +1 day')).')</h4>';
-echo '<ul>';
+echo '<h4>Départs en train de demain ('.$tomorrow->format('d/m/Y').'): '.count($donnees).'</h4>';
+echo '<table class="table table-sm table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Heure de départ</th>
+                <th scope="col">Portable</th>
+            </tr>
+        </thead>';
 foreach ($donnees as $data) {
-    echo '<li><b>'.$data['nom'].'</b> '.$data['prenom'].': <b><span style="color: red">'.$data['retour_transport'].' '.$data['retour_heure'].'</span></b> ('.$data['tel_portable'].')</li>';
+    echo '<tr>
+            <td>'.$data['type'].'</td>
+            <td>'.$data['nom'].'</td>
+            <td>'.$data['prenom'].'</td>
+            <td color="red">'.$data['retour_heure'].'</td>
+            <td>'.$data['tel_portable'].'</td>
+          </tr>';
 }
-echo '</ul>';
-
-$donnees = alertes_transports('none');
-echo '<h4>Absence de transport retour</h4>';
-echo '<ul>';
-foreach ($donnees as $data) {
-	if ($data['nom'] != 'CHAUFFEUR') {
-    	echo '<li><b>'.$data['nom'].'</b> '.$data['prenom'].' ('.$data['tel_portable'].')</li>';
-    }
-}
-echo '</ul>';
-
-$donnees = alertes_transports('train_heure');
-echo '<h4>Absence d\'heure du train retour</h4>';
-echo '<ul>';
-foreach ($donnees as $data) {
-    echo '<li><b>'.$data['nom'].'</b> '.$data['prenom'].': <b><span style="color: red">'.convert_date($data['retour_date']).'</span></b> ('.$data['tel_portable'].')</li>';
-}
-echo '</ul>';
+echo '</table>';
 
 $donnees = alertes_transports('bus_ville');
-echo '<h4>Absence de ville du bus retour</h4>';
-echo '<ul>';
+echo '<h4>Absence de ville bus retour: '.count($donnees).'</h4>';
+echo '<table class="table table-sm table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Heure de départ</th>
+                <th scope="col">Portable</th>
+            </tr>
+        </thead>';
 foreach ($donnees as $data) {
-    echo '<li><b>'.$data['nom'].'</b> '.$data['prenom'].': <b><span style="color: red">'.convert_date($data['retour_date']).'</span></b> ('.$data['tel_portable'].')</li>';
+    echo '<tr>
+            <td>'.$data['type'].'</td>
+            <td>'.$data['nom'].'</td>
+            <td>'.$data['prenom'].'</td>
+            <td color="red">'.$data['retour_heure'].'</td>
+            <td>'.$data['tel_portable'].'</td>
+          </tr>';
 }
-echo '</ul>';*/
+echo '</table>';
 
 ?>
 
