@@ -1230,6 +1230,50 @@ else {
             </tbody>
         </table><br></div><br>';
 
+        ?>
+
+        <h3 id="titre_tableau_financier">Stats financières (cliquer pour afficher/masquer)</h3>
+
+        <?php
+
+        $data = get_stats_financieres();
+
+        echo '
+        <div id="tableau_financier">
+        <table class="table table-sm table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Global</th>
+                    <th scope="col">0 trajet car</th>
+                    <th scope="col">1 trajet car</th>
+                    <th scope="col">2 trajets car</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="table-dark"><b>Montant déclaré</b></td>
+                    <td>'.number_format($data['montant_declare_global'], 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_declare_sans_car'], 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_declare_un_car'], 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_declare_deux_car'], 2, ',', ' ').'€</td>
+                </tr>
+                <tr>
+                    <td class="table-dark"><b>Montant reçu</b></td>
+                    <td>'.number_format($data['montant_recu_global'], 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_recu_sans_car'], 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_recu_un_car'], 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_recu_deux_car'], 2, ',', ' ').'€</td>
+                </tr>
+                <tr>
+                    <td class="table-dark"><b>Montant bourse</b></td>
+                    <td>'.number_format($data['montant_bourse_global'], 2, ',', ' ').'€</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        ';
+
     }
 
     ?>
@@ -1594,6 +1638,11 @@ else {
             $('#tableau_cheques').hide();
             $( "#titre_tableau_cheques" ).click(function() {
                 $('#tableau_cheques').toggle();
+            });
+
+            $('#tableau_financier').hide();
+            $( "#titre_tableau_financier" ).click(function() {
+                $('#tableau_financier').toggle();
             });
 
         });

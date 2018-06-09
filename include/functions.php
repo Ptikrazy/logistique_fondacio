@@ -1149,6 +1149,67 @@ function get_cheques() {
 
 }
 
+function get_stats_financieres() {
+
+    global $bdd;
+
+    $req = 'SELECT SUM(paiement_declare) AS montant_declare, SUM(rgt_montant) AS montant_recu, SUM(bourse) AS montant_bourse FROM jeunes';
+    $res = $bdd->query($req);
+    $data['jeunes']['global'] = $res->fetch();
+    $res->closeCursor();
+
+    $req = 'SELECT SUM(paiement_declare) AS montant_declare, SUM(rgt_montant) AS montant_recu FROM jeunes WHERE aller_transport != "bus" AND retour_transport != "bus"';
+    $res = $bdd->query($req);
+    $data['jeunes']['sans_car'] = $res->fetch();
+    $res->closeCursor();
+
+    $req = 'SELECT SUM(paiement_declare) AS montant_declare, SUM(rgt_montant) AS montant_recu FROM jeunes WHERE (aller_transport = "bus" AND retour_transport !="bus") OR (aller_transport != "bus" AND retour_transport = "bus")';
+    $res = $bdd->query($req);
+    $data['jeunes']['un_car'] = $res->fetch();
+    $res->closeCursor();
+
+    $req = 'SELECT SUM(paiement_declare) AS montant_declare, SUM(rgt_montant) AS montant_recu FROM jeunes WHERE aller_transport = "bus" AND retour_transport = "bus"';
+    $res = $bdd->query($req);
+    $data['jeunes']['deux_car'] = $res->fetch();
+    $res->closeCursor();
+
+    $req = 'SELECT SUM(paiement_declare) AS montant_declare, SUM(rgt_montant) AS montant_recu, SUM(bourse) AS montant_bourse FROM adultes';
+    $res = $bdd->query($req);
+    $data['adultes']['global'] = $res->fetch();
+    $res->closeCursor();
+
+    $req = 'SELECT SUM(paiement_declare) AS montant_declare, SUM(rgt_montant) AS montant_recu FROM adultes WHERE aller_transport != "bus" AND retour_transport != "bus"';
+    $res = $bdd->query($req);
+    $data['adultes']['sans_car'] = $res->fetch();
+    $res->closeCursor();
+
+    $req = 'SELECT SUM(paiement_declare) AS montant_declare, SUM(rgt_montant) AS montant_recu FROM adultes WHERE (aller_transport = "bus" AND retour_transport !="bus") OR (aller_transport != "bus" AND retour_transport = "bus")';
+    $res = $bdd->query($req);
+    $data['adultes']['un_car'] = $res->fetch();
+    $res->closeCursor();
+
+    $req = 'SELECT SUM(paiement_declare) AS montant_declare, SUM(rgt_montant) AS montant_recu FROM adultes WHERE aller_transport = "bus" AND retour_transport = "bus"';
+    $res = $bdd->query($req);
+    $data['adultes']['deux_car'] = $res->fetch();
+    $res->closeCursor();
+
+    $data['montant_declare_global'] = $data['jeunes']['global']['montant_declare'] + $data['adultes']['global']['montant_declare'];
+    $data['montant_recu_global'] = $data['jeunes']['global']['montant_recu'] + $data['adultes']['global']['montant_recu'];
+    $data['montant_bourse_global'] = $data['jeunes']['global']['montant_bourse'] + $data['adultes']['global']['montant_bourse'];
+
+    $data['montant_declare_sans_car'] = $data['jeunes']['sans_car']['montant_declare'] + $data['adultes']['sans_car']['montant_declare'];
+    $data['montant_recu_sans_car'] = $data['jeunes']['sans_car']['montant_recu'] + $data['adultes']['sans_car']['montant_recu'];
+
+    $data['montant_declare_un_car'] = $data['jeunes']['un_car']['montant_declare'] + $data['adultes']['un_car']['montant_declare'];
+    $data['montant_recu_un_car'] = $data['jeunes']['un_car']['montant_recu'] + $data['adultes']['un_car']['montant_recu'];
+
+    $data['montant_declare_deux_car'] = $data['jeunes']['deux_car']['montant_declare'] + $data['adultes']['deux_car']['montant_declare'];
+    $data['montant_recu_deux_car'] = $data['jeunes']['deux_car']['montant_recu'] + $data['adultes']['deux_car']['montant_recu'];
+
+    return $data;
+
+}
+
 function alertes_transports($raison) {
 
     global $bdd, $today;
