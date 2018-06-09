@@ -170,30 +170,17 @@ foreach ($anniversaires as $anniv) {
 
 ?>
 
-<!-- <h3><b>Statistiques</b></h3><br> -->
+<h3><b>Statistiques</b></h3><br>
 
 <?php
 
-/*$filtres = array();
-echo '- Nombre total de participants: '.count_participants($filtres).'<br>';
-
-$filtres = array('type' => 'jeune');
-echo '- Nombre de jeunes: '.count_participants($filtres).'<br>';
-
-$filtres = array('type' => 'jeune', 'prepa' => 'oui');
-echo '- Nombre de jeunes prépa: '.count_participants($filtres).'<br>';
-
-$filtres = array('type' => 'jeune', 'prepa' => 'non');
-echo '- Nombre de jeunes nouveaux: '.count_participants($filtres).'<br>';
-
-$filtres = array('type' => 'jeune', 'civilite' => 'F');
-echo '- Nombre de jeunes filles: '.count_participants($filtres).'<br>';
-
-$filtres = array('type' => 'jeune', 'civilite' => 'H');
-echo '- Nombre de jeunes garçons: '.count_participants($filtres).'<br>';
-
-$filtres = array('type' => 'adulte');
-echo '- Nombre d\'adultes: '.count_participants($filtres);*/
+echo '- Nombre total de participants: '.(get_totaux_jeunes($_SESSION['camp'], '1') + get_totaux_adultes($_SESSION['camp'], '1')).'<br>';
+echo '- Nombre de jeunes: '.get_totaux_jeunes($_SESSION['camp'], '1').'<br>';
+echo '- Nombre de jeunes prépa: '.get_totaux_jeunes($_SESSION['camp'], 'prepa = 1').'<br>';
+echo '- Nombre de jeunes nouveaux: '.get_totaux_jeunes($_SESSION['camp'], 'ancien = 0').'<br>';
+echo '- Nombre de jeunes filles: '.get_totaux_jeunes($_SESSION['camp'], 'civilite = "F"').'<br>';
+echo '- Nombre de jeunes garçons: '.get_totaux_jeunes($_SESSION['camp'], 'civilite = "H"').'<br>';
+echo '- Nombre d\'adultes: '.get_totaux_adultes($_SESSION['camp'], '1');
 
 ?>
 

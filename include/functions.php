@@ -148,19 +148,6 @@ function get_totaux_transport($camp, $aller_retour, $transport, $prepa = 2) {
 
 }
 
-function get_totaux_jeunes($camp, $filtre) {
-
-    global $bdd;
-
-    $req = 'SELECT COUNT(id_jeune) AS total FROM jeunes WHERE desistement IS NULL AND camp = '.$camp.' AND '.$filtre;
-    $res = $bdd->query($req);
-    $data = $res->fetchColumn();
-    $res->closeCursor();
-
-    return $data;
-
-}
-
 function get_villes_bus($aller_retour, $camp) {
 
     global $bdd;
@@ -171,6 +158,19 @@ function get_villes_bus($aller_retour, $camp) {
     $res->closeCursor();
 
     $data = explode(';', $data['villes']);
+
+    return $data;
+
+}
+
+function get_totaux_jeunes($camp, $filtre) {
+
+    global $bdd;
+
+    $req = 'SELECT COUNT(id_jeune) AS total FROM jeunes WHERE camp = '.$camp.' AND desistement IS NULL AND '.$filtre;
+    $res = $bdd->query($req);
+    $data = $res->fetchColumn();
+    $res->closeCursor();
 
     return $data;
 
@@ -249,6 +249,19 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
     while ($d = $res->fetch()) {
         $data[$d['id_jeune']] = $d;
     }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_totaux_adultes($camp, $filtre) {
+
+    global $bdd;
+
+    $req = 'SELECT COUNT(id_adulte) AS total FROM adultes WHERE camp = '.$camp.' AND desistement IS NULL AND '.$filtre;
+    $res = $bdd->query($req);
+    $data = $res->fetchColumn();
     $res->closeCursor();
 
     return $data;
@@ -335,8 +348,6 @@ function get_adulte($id) {
     return $data;
 
 }
-
-
 
 function enregistrer_inscription_jeune($data) {
 
@@ -575,40 +586,6 @@ function maj_administratif_jeune($id, $data) {
         }
     }
     $req .= ' WHERE id_jeune = '.$id;
-    $res = $bdd->query($req);
-    $res->closeCursor();
-
-}
-
-function maj_administratif_adulte($id, $data) {
-
-    global $bdd;
-
-    $req  = 'UPDATE adultes SET ';
-    end($data);
-    $last = key($data);
-    reset($data);
-    foreach ($data as $champ => $value) {
-        if ($champ == 'aller_bus') {
-            $req .= 'aller_ville = "'.$value.'"';
-        }
-        if ($champ == 'aller_train') {
-            $req .= 'aller_heure = "'.$value.'"';
-        }
-        else {
-            if ($value == 'NULL') {
-                $req .= $champ.' = NULL';
-            }
-            else {
-                $req .= $champ.' = "'.$value.'"';
-            }
-        }
-
-        if ($champ != $last) {
-            $req .= ', ';
-        }
-    }
-    $req .= ' WHERE id_adulte = '.$id;
     $res = $bdd->query($req);
     $res->closeCursor();
 
@@ -1133,6 +1110,40 @@ PS : Tu trouveras ci-dessous les infos que tu viens de saisir.<br><br>';
 
 }
 
+function maj_administratif_adulte($id, $data) {
+
+    global $bdd;
+
+    $req  = 'UPDATE adultes SET ';
+    end($data);
+    $last = key($data);
+    reset($data);
+    foreach ($data as $champ => $value) {
+        if ($champ == 'aller_bus') {
+            $req .= 'aller_ville = "'.$value.'"';
+        }
+        if ($champ == 'aller_train') {
+            $req .= 'aller_heure = "'.$value.'"';
+        }
+        else {
+            if ($value == 'NULL') {
+                $req .= $champ.' = NULL';
+            }
+            else {
+                $req .= $champ.' = "'.$value.'"';
+            }
+        }
+
+        if ($champ != $last) {
+            $req .= ', ';
+        }
+    }
+    $req .= ' WHERE id_adulte = '.$id;
+    $res = $bdd->query($req);
+    $res->closeCursor();
+
+}
+
 function get_cheques() {
 
     global $bdd;
@@ -1278,31 +1289,6 @@ function get_anniversaires() {
 }
 
 /// OLD ///
-
-function count_participants($filtres) {
-
-    global $bdd;
-
-    $req = 'SELECT COUNT(*) FROM participants WHERE camp = '.$_SESSION['camp'];
-    if (!empty($filtres)) {
-        $req .= ' AND';
-        end($filtres);
-        $last = key($filtres);
-        foreach ($filtres as $key => $value) {
-            if (!empty($value)) {
-                $req .= ' '.$key.' = "'.$value.'"';
-                if ($key != $last) {
-                    $req .= ' AND';
-                }
-            }
-        }
-    }
-    $res = $bdd->query($req);
-    $data = $res->fetchColumn();
-    $res->closeCursor();
-
-    return $data;
-}
 
 function get_participants($filtres) {
 
