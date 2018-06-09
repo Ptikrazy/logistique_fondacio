@@ -1258,6 +1258,25 @@ function alertes_transports($raison) {
 
 }
 
+function get_anniversaires() {
+
+    global $bdd;
+
+    $data = array();
+    $today = date('m-d');
+    $req = 'SELECT nom, prenom, date_naissance FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND date_naissance LIKE "%'.$today.'%"
+            UNION
+            SELECT nom, prenom, date_naissance FROM adultes WHERE camp = '.$_SESSION['camp'].' AND date_naissance LIKE "%'.$today.'%"';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
 /// OLD ///
 
 function count_participants($filtres) {
@@ -1470,23 +1489,6 @@ function update_activite ($action, $donnees, $id) {
         $id = $bdd->lastInsertId();
     }
     header('Location: activites.php?action=edit&id_activite='.$id);
-
-}
-
-function get_anniversaires() {
-
-    global $bdd;
-
-    $data = array();
-    $today = date('m-d');
-    $req = 'SELECT id_participant, nom, prenom, date_naissance FROM participants WHERE date_naissance LIKE "%'.$today.'%" AND camp = '.$_SESSION['camp'];
-    $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[$d['id_participant']] = $d;
-    }
-    $res->closeCursor();
-
-    return $data;
 
 }
 

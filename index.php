@@ -159,14 +159,14 @@ echo '</table>';
 
 ?>
 
-<!-- <h3><b>Anniversaires</b></h3><br> -->
+<h3><b>Anniversaires du jour (<?php echo $today->format('d/m/Y'); ?>)</b></h3><br>
 
 <?php
 
-/*$anniversaires = get_anniversaires();
+$anniversaires = get_anniversaires();
 foreach ($anniversaires as $anniv) {
     echo '- '.$anniv['prenom'].' '.$anniv['nom'].' ('.age($anniv['date_naissance']).' ans)<br>';
-}*/
+}
 
 ?>
 
