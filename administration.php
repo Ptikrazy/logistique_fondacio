@@ -1232,7 +1232,7 @@ else {
 
         ?>
 
-        <h3 id="titre_tableau_financier">Stats financières (cliquer pour afficher/masquer)</h3>
+        <h3 id="titre_tableau_financier">Stats financières (cliquer pour afficher/masquer)</h3><br>
 
         <?php
 

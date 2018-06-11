@@ -476,145 +476,159 @@ if (!empty($_GET['action'])) {
 
 else {
 
+    ////////// LISTE DES PARTICIPANTS //////////
+
     $title = 'Participants';
     require_once 'include/head.php';
 
-    ////////// LISTE DES PARTICIPANTS //////////
-
-    if (empty($_POST['camp'])) {
-        $_POST['camp'] = $_SESSION['camp'];
+    if (isset($_GET['reset_filtres'])) {
+        unset($_SESSION['filtres_participants']);
+        redirect('participants.php');
     }
-    $donnees = get_participants($_POST);
-    $_SESSION['participants_legende'] = array('ID', 'Nom', 'Prénom', 'Type', 'Portable', 'Âge', 'Civilité', 'Ancien', 'Prépa', 'Service', 'PG', 'Chambre');
-    $_SESSION['participants_donnees'] = $donnees;
+
+    if (!empty($_POST['nom'])) {
+        $_SESSION['filtres_participants']['nom'] = $_POST['nom'];
+    }
+
+    if (!empty($_POST['type'])) {
+        $_SESSION['filtres_participants']['type'] = $_POST['type'];
+    }
+
+    if (!empty($_POST['civilite'])) {
+        $_SESSION['filtres_participants']['civilite'] = $_POST['civilite'];
+    }
+
+    if (!empty($_POST['aller_transport'])) {
+        $_SESSION['filtres_participants']['aller_transport'] = $_POST['aller_transport'];
+    }
+
+    if (!empty($_POST['retour_transport'])) {
+        $_SESSION['filtres_participants']['retour_transport'] = $_POST['retour_transport'];
+    }
+
+    if (isset($_POST['prepa'])) {
+        $_SESSION['filtres_participants']['prepa'] = $_POST['prepa'];
+    }
+
+    if (isset($_POST['ancien'])) {
+        $_SESSION['filtres_participants']['ancien'] = $_POST['ancien'];
+    }
+
+    $donnees = get_participants($_SESSION['filtres_participants']);
 
 ?>
 
     <h2>Liste des participants</h2>
-    <a class="btn btn-default" href="participants.php?action=add" role="button">Ajouter</a>
-    <a class="btn btn-default" href="export_csv.php?contexte=participants" role="button">Exporter</a>
-    <br>
+    <div class="form-group row">
+        <div class="col-sm-1">
+            <button type="button" class="btn btn-primary" onclick="location.href = 'participants.php?action=add';">Ajouter</button>
+        </div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-secondary" onclick="location.href = 'export_csv.php?contexte=participants';">Exporter</button>
+        </div>
+    </div>
 
-    <h3>Filtres</h3>
+    <h4>Filtres</h4>
 
-    <form class="form-horizontal" action="" method="POST">
-        <div class="form-group">
-            <label for="camp" class="col-md-1 control-label">Camp</label>
-            <div class="col-md-3">
-                <select class="form-control" name="camp">
-                    <option value="1" <?php echo (!empty($_POST['camp']) && $_POST['camp'] == 1) ? 'selected' : ''; ?>>1</option>
-                    <option value="2" <?php echo (!empty($_POST['camp']) && $_POST['camp'] == 2) ? 'selected' : ''; ?>>2</option>
-                    <option value="3" <?php echo (!empty($_POST['camp']) && $_POST['camp'] == 3) ? 'selected' : ''; ?>>3</option>
-                    <option value="4" <?php echo (!empty($_POST['camp']) && $_POST['camp'] == 4) ? 'selected' : ''; ?>>4</option>
-                    <option value="5" <?php echo (!empty($_POST['camp']) && $_POST['camp'] == 5) ? 'selected' : ''; ?>>5</option>
-                </select>
+    <form action="" method="POST">
+        <div class="form-group row">
+            <!-- FILTRE NOM -->
+            <label class="col-form-label col-sm-2" for="nom">Nom</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="nom" id="nom" value="<?php echo $_SESSION['filtres_participants']['nom']; ?>">
+            </div>
+            <!-- FILTRE TYPE -->
+            <label class="col-form-label col-sm-1" for="type">Type</label>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="type" id="typeA" value="Adulte" <?php echo (isset($_SESSION['filtres_participants']['type']) && $_SESSION['filtres_participants']['type'] == 'Adulte') ? 'checked' : ''; ?>> Adulte
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="type" id="typeJ" value="Jeune" <?php echo (isset($_SESSION['filtres_participants']['type']) && $_SESSION['filtres_participants']['type'] == 'Jeune') ? 'checked' : ''; ?>> Jeune
+                    </label>
+                </div>
+            </div>
+            <!-- FILTRE CIVILITE -->
+            <label class="col-form-label col-sm-1" for="civilite">Civilité</label>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="civilite" id="civiliteF" value="F" <?php echo (isset($_SESSION['filtres_participants']['civilite']) && $_SESSION['filtres_participants']['civilite'] == 'F') ? 'checked' : ''; ?>> Femme
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="civilite" id="civiliteH" value="H" <?php echo (isset($_SESSION['filtres_participants']['civilite']) && $_SESSION['filtres_participants']['civilite'] == 'H') ? 'checked' : ''; ?>> Homme
+                    </label>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="nom" class="col-md-1 control-label">Nom</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="nom">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="type" class="col-md-1 control-label">Type</label>
-            <div class="col-md-3">
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="type" value="jeune" <?php echo (!empty($_POST['type']) && $_POST['type'] == 'jeune') ? 'checked' : ''; ?>> Jeune
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="type" value="adulte" <?php echo (!empty($_POST['type']) && $_POST['type'] == 'adulte') ? 'checked' : ''; ?>> Adulte
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="ancien" class="col-md-1 control-label">Ancien</label>
-            <div class="col-md-3">
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="ancien" value="oui" <?php echo (!empty($_POST['ancien']) && $_POST['ancien'] == 'oui') ? 'checked' : ''; ?>> Oui
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="ancien" value="non" <?php echo (!empty($_POST['ancien']) && $_POST['ancien'] == 'non') ? 'checked' : ''; ?>> Non
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="prepa" class="col-md-1 control-label">Prépa</label>
-            <div class="col-md-3">
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="prepa" value="oui" <?php echo (!empty($_POST['prepa']) && $_POST['prepa'] == 'oui') ? 'checked' : ''; ?>> Oui
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="prepa" value="non" <?php echo (!empty($_POST['prepa']) && $_POST['prepa'] == 'non') ? 'checked' : ''; ?>> Non
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="civilite" class="col-md-1 control-label">Civilité</label>
-            <div class="col-md-3">
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="civilite" value="H" <?php echo (!empty($_POST['civilite']) && $_POST['civilite'] == 'H') ? 'checked' : ''; ?>> Homme
-                </label>
-                <label class="checkbox-inline">
-                    <input type="checkbox" name="civilite" value="F" <?php echo (!empty($_POST['civilite']) && $_POST['civilite'] == 'F') ? 'checked' : ''; ?>> Femme
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-default">Filtrer</button>
-            </div>
-        </div>
-    </form>
 
-    <h3>Tri</h3>
-
-    <form class="form-horizontal" action="" method="POST">
-        <div class="form-group">
-            <label for="tri1" class="col-md-1 control-label">Tri 1</label>
-            <div class="col-md-3">
-                <select class="form-control" name="tri1">
+        <div class="form-group row">
+            <!-- FILTRE TRANSPORT ALLER -->
+            <label class="col-form-label col-sm-2" for="aller_transport">Transport aller</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="aller_transport" id="aller_transport">
                     <option value=""></option>
-                    <option value="type" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'type') ? 'selected' : ''; ?>>Type</option>
-                    <option value="ancien" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'ancien') ? 'selected' : ''; ?>>Ancien</option>
-                    <option value="prepa" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'prepa') ? 'selected' : ''; ?>>Prépa</option>
-                    <option value="civilite" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'civilite') ? 'selected' : ''; ?>>Civilité</option>
-                    <option value="nom" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'nom') ? 'selected' : ''; ?>>Nom</option>
-                    <option value="prenom" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'prenom') ? 'selected' : ''; ?>>Prénom</option>
-                    <option value="ville" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'ville') ? 'selected' : ''; ?>>Ville</option>
-                    <option value="date_naissance" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'date_naissance') ? 'selected' : ''; ?>>Âge</option>
-                    <option value="taille" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'taille') ? 'selected' : ''; ?>>Taille</option>
-                    <option value="poids" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'poids') ? 'selected' : ''; ?>>Poids</option>
-                    <option value="pg_num" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'pg_num') ? 'selected' : ''; ?>>Numéro PG</option>
-                    <option value="service" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'service') ? 'selected' : ''; ?>>Service</option>
-                    <option value="chambre_num" <?php echo (!empty($_POST['tri1']) && $_POST['tri1'] == 'chambre_num') ? 'selected' : ''; ?>>Chambre</option>
+                    <option value="sur_place" <?php echo (isset($_SESSION['filtres_participants']['aller_transport']) && $_SESSION['filtres_participants']['aller_transport'] == 'sur_place') ? 'selected' : ''; ?>>Je serai déjà sur place</option>
+                    <option value="voiture" <?php echo (isset($_SESSION['filtres_participants']['aller_transport']) && $_SESSION['filtres_participants']['aller_transport'] == 'voiture') ? 'selected' : ''; ?>>Voiture personnelle</option>
+                    <option value="train" <?php echo (isset($_SESSION['filtres_participants']['aller_transport']) && $_SESSION['filtres_participants']['aller_transport'] == 'train') ? 'selected' : ''; ?>>Train</option>
+                    <option value="bus" <?php echo (isset($_SESSION['filtres_participants']['aller_transport']) && $_SESSION['filtres_participants']['aller_transport'] == 'bus') ? 'selected' : ''; ?>>Bus organisé par Fondacio</option>
                 </select>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="tri2" class="col-md-1 control-label">Tri 2</label>
-            <div class="col-md-3">
-                <select class="form-control" name="tri2">
+            <!-- FILTRE TRANSPORT RETOUR -->
+            <label class="col-form-label col-sm-2" for="retour_transport">Transport retour</label>
+            <div class="col-sm-3">
+                <select class="form-control" name="retour_transport" id="retour_transport">
                     <option value=""></option>
-                    <option value="type" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'type') ? 'selected' : ''; ?>>Type</option>
-                    <option value="ancien" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'ancien') ? 'selected' : ''; ?>>Ancien</option>
-                    <option value="prepa" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'prepa') ? 'selected' : ''; ?>>Prépa</option>
-                    <option value="civilite" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'civilite') ? 'selected' : ''; ?>>Civilité</option>
-                    <option value="nom" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'nom') ? 'selected' : ''; ?>>Nom</option>
-                    <option value="prenom" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'prenom') ? 'selected' : ''; ?>>Prénom</option>
-                    <option value="ville" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'ville') ? 'selected' : ''; ?>>Ville</option>
-                    <option value="date_naissance" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'date_naissance') ? 'selected' : ''; ?>>Âge</option>
-                    <option value="taille" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'taille') ? 'selected' : ''; ?>>Taille</option>
-                    <option value="poids" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'poids') ? 'selected' : ''; ?>>Poids</option>
-                    <option value="pg_num" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'pg_num') ? 'selected' : ''; ?>>Numéro PG</option>
-                    <option value="service" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'service') ? 'selected' : ''; ?>>Service</option>
-                    <option value="chambre_num" <?php echo (!empty($_POST['tri2']) && $_POST['tri2'] == 'chambre_num') ? 'selected' : ''; ?>>Chambre</option>
+                    <option value="sur_place" <?php echo (isset($_SESSION['filtres_participants']['retour_transport']) && $_SESSION['filtres_participants']['retour_transport'] == 'sur_place') ? 'selected' : ''; ?>>Je serai déjà sur place</option>
+                    <option value="voiture" <?php echo (isset($_SESSION['filtres_participants']['retour_transport']) && $_SESSION['filtres_participants']['retour_transport'] == 'voiture') ? 'selected' : ''; ?>>Voiture personnelle</option>
+                    <option value="train" <?php echo (isset($_SESSION['filtres_participants']['retour_transport']) && $_SESSION['filtres_participants']['retour_transport'] == 'train') ? 'selected' : ''; ?>>Train</option>
+                    <option value="bus" <?php echo (isset($_SESSION['filtres_participants']['retour_transport']) && $_SESSION['filtres_participants']['retour_transport'] == 'bus') ? 'selected' : ''; ?>>Bus organisé par Fondacio</option>
                 </select>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-default">Trier</button>
+
+        <div class="form-group row">
+            <!-- FILTRE PREPA -->
+            <label class="col-form-label col-sm-1" for="prepa">Prépa ?</label>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="prepa" id="prepaO" value="1" <?php echo (isset($_SESSION['filtres_participants']['prepa']) && $_SESSION['filtres_participants']['prepa'] == 1) ? 'checked' : ''; ?>> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="prepa" id="prepaN" value="0" <?php echo (isset($_SESSION['filtres_participants']['prepa']) && $_SESSION['filtres_participants']['prepa'] == 0) ? 'checked' : ''; ?>> Non
+                    </label>
+                </div>
+            </div>
+            <!-- FILTRE ANCIEN -->
+            <label class="col-form-label col-sm-1" for="ancien">Ancien ?</label>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="ancien" id="ancienO" value="1" <?php echo (isset($_SESSION['filtres_participants']['ancien']) && $_SESSION['filtres_participants']['ancien'] == 1) ? 'checked' : ''; ?>> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="ancien" id="ancienN" value="0" <?php echo (isset($_SESSION['filtres_participants']['ancien']) && $_SESSION['filtres_participants']['ancien'] == 0) ? 'checked' : ''; ?>> Non
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-1">
+                <button type="submit" class="btn btn-primary">Filtrer</button>
+            </div>
+            <div class="col-sm-6">
+                <button type="button" class="btn btn-secondary" onclick="location.href = 'participants.php?reset_filtres';">Reset filtres</button>
             </div>
         </div>
     </form>
@@ -622,38 +636,42 @@ else {
     <h3>Données</h3>
 
     Nombre de résultats: <?php echo sizeof($donnees); ?>
-    <table class="table table-hover">
-        <tr>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Type</th>
-            <th>Portable</th>
-            <th>Âge</th>
-            <th>Civilité</th>
-            <th>Ancien</th>
-            <th>Prépa</th>
-            <th>Service</th>
-            <th>PG</th>
-            <th>Chambre</th>
-        </tr>
-        <?php
-            foreach ($donnees as $id_participant => $data) {
-                $age = age($data['date_naissance']);
-                echo '<tr>
-                        <td><a href="participants.php?action=edit&id_participant='.$id_participant.'">'.$data['nom'].'</a></td>
-                        <td>'.$data['prenom'].'</td>
-                        <td>'.ucfirst($data['type']).'</td>
-                        <td>'.$data['tel_portable'].'</td>
-                        <td>'.$age.'</td>
-                        <td>'.$data['civilite'].'</td>
-                        <td>'.ucfirst($data['ancien']).'</td>
-                        <td>'.ucfirst($data['prepa']).'</td>
-                        <td>'.ucfirst($data['service']).'</td>
-                        <td>'.$data['pg_num'].'</td>
-                        <td>'.$data['chambre_num'].'</td>
-                      </tr>';
-            }
-        ?>
+    <table class="table table-sm table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Type</th>
+                <th>Portable</th>
+                <th>Âge</th>
+                <th>Civilité</th>
+                <th>Ancien</th>
+                <th>Prépa</th>
+                <th>Service</th>
+                <th>PG</th>
+                <th>Chambre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                foreach ($donnees as $id_participant => $data) {
+                    $age = age($data['date_naissance']);
+                    echo '<tr>
+                            <td><a href="participants.php?action=edit&id_participant='.$id_participant.'">'.$data['nom'].'</a></td>
+                            <td>'.$data['prenom'].'</td>
+                            <td>'.ucfirst($data['type']).'</td>
+                            <td>'.$data['tel_portable'].'</td>
+                            <td>'.$age.'</td>
+                            <td>'.$data['civilite'].'</td>
+                            <td>'.ucfirst($data['ancien']).'</td>
+                            <td>'.ucfirst($data['prepa']).'</td>
+                            <td>'.ucfirst($data['service']).'</td>
+                            <td>'.$data['pg_num'].'</td>
+                            <td>'.$data['chambre_num'].'</td>
+                          </tr>';
+                }
+            ?>
+        </tbody>
     </table>
 
 <?php

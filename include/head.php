@@ -25,7 +25,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
-                <!-- <li class="nav-item"><a class="nav-link" href="participants.php">Participants</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="participants.php">Participants</a></li>
                 <!-- <li class="nav-item"><a class="nav-link" href="remplissage.php">Remplissage</a></li> -->
                 <!-- <li class="nav-item"><a class="nav-link" href="exports/exports.php">Exports</a></li> -->
                 <!-- <li class="nav-item"><a class="nav-link" href="transports.php">Transports</a></li>

@@ -1229,7 +1229,7 @@ function alertes_transports($raison) {
 
     switch ($raison) {
         case 'arrivees':
-            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, aller_heure FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND aller_transport = "train" AND aller_date = "'.$today->format('Y-m-d').'"
+            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, aller_heure FROM jeunes WHERE aller_transport = "train" AND aller_date = "'.$today->format('Y-m-d').'"
                     UNION
                     SELECT "Adulte" AS type, nom, prenom, tel_portable, aller_heure FROM adultes WHERE aller_transport = "train" AND aller_date = "'.$today->format('Y-m-d').'"
                     ORDER BY type, aller_heure, nom';
@@ -1288,49 +1288,48 @@ function get_anniversaires() {
 
 }
 
-/// OLD ///
-
-function get_participants($filtres) {
+function get_participants($filtres = array()) {
 
     global $bdd;
 
-    $data = array();
-    $req = 'SELECT id_participant, nom, prenom, type, tel_portable, date_naissance, civilite, ancien, prepa, service, pg_num, chambre_num FROM participants';
+    $req_filtres . '';
     if (!empty($filtres)) {
-        $req .= ' WHERE';
-        end($filtres);
-        $last = key($filtres);
-        foreach ($filtres as $key => $value) {
-            if ($key != 'tri1' && $key != 'tri2') {
-                if ($key == 'nom') {
-                    $req .= ' (nom LIKE "%'.$value.'%" OR prenom LIKE "%'.$value.'%")';
+        foreach ($filtres as $champ => $value) {
+            if ($champ != 'type') {
+                if ($champ == 'nom') {
+                    $req_filtres .= ' AND '.$champ.' LIKE "%'.$value.'%"';
                 }
                 else {
-                    $req .= ' '.$key.' = "'.$value.'"';
-                }
-                if ($key != $last) {
-                    $req .= ' AND';
+                    $req_filtres .= ' AND '.$champ.' = "'.$value.'"';
                 }
             }
         }
     }
-    if (!empty($filtres['tri1'])) {
-        $req .= ' ORDER BY '.$filtres['tri1'];
-        if (!empty($filtres['tri2'])) {
-            $req .= ', '.$filtres['tri2'];
-        }
+
+    if (!empty($filtres['type'])) {
+        $req = 'SELECT id_'.strtolower($filtres['type']).' AS id, nom, prenom, "'.$filtres['type'].'" AS type, tel_portable, date_naissance, civilite, ancien, prepa, service, pg_num, chambre_num FROM '.strtolower($filtres['type']).'s WHERE camp = '.$_SESSION['camp'].$req_filtres;
     }
     else {
-        $req .= ' ORDER BY nom';
+        $req = '
+        SELECT id_jeune AS id, nom, prenom, "Jeune" AS type, tel_portable, date_naissance, civilite, ancien, prepa, service, pg_num, chambre_num FROM jeunes
+            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
+        UNION
+        SELECT id_adulte AS id, nom, prenom, "Adulte" AS type, tel_portable, date_naissance, civilite, 1 AS ancien, 1 AS prepa, service, pg_num, chambre_num FROM adultes
+            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
+        ORDER BY type, nom, prenom
+        ';
     }
+
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
-        $data[$d['id_participant']] = $d;
+        $data[] = $d;
     }
     $res->closeCursor();
 
     return $data;
 }
+
+/// OLD ///
 
 function get_participant($id) {
 
