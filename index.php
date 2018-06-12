@@ -11,6 +11,7 @@ if (empty($_SESSION['camp'])) {
 if (!empty($_POST['camp'])) {
     $_SESSION['camp'] = $_POST['camp'];
 }
+
 ?>
 
 <h2 style="color: red"><b>Si problème, contacter Pierre: pleplat75@gmail.com / 06 12 19 22 92</b></h2><br>

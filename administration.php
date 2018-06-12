@@ -1108,6 +1108,7 @@ else {
             </thead>
             <tbody>';
 
+        $inscrits_totaux = 0;
         foreach ($data as $camp => $inscrits) {
             echo '
                 <tr>
@@ -1123,7 +1124,9 @@ else {
                     <td>'.get_totaux_transport($camp, 'retour', 'voiture').'</td>
                 </tr>
             ';
+            $inscrits_totaux += $inscrits;
         }
+        echo '<tr><td>Totaux</td><td>'.$inscrits_totaux.'</td></tr>';
 
         echo '
             </tbody>
@@ -1259,11 +1262,25 @@ else {
                     <td>'.number_format($data['montant_declare_deux_car'], 2, ',', ' ').'€</td>
                 </tr>
                 <tr>
+                    <td class="table-dark"><b>Montant déclaré moyen</b></td>
+                    <td>'.number_format($data['montant_declare_global']/$inscrits_totaux, 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_declare_sans_car']/$inscrits_totaux, 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_declare_un_car']/$inscrits_totaux, 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_declare_deux_car']/$inscrits_totaux, 2, ',', ' ').'€</td>
+                </tr>
+                <tr>
                     <td class="table-dark"><b>Montant reçu</b></td>
                     <td>'.number_format($data['montant_recu_global'], 2, ',', ' ').'€</td>
                     <td>'.number_format($data['montant_recu_sans_car'], 2, ',', ' ').'€</td>
                     <td>'.number_format($data['montant_recu_un_car'], 2, ',', ' ').'€</td>
                     <td>'.number_format($data['montant_recu_deux_car'], 2, ',', ' ').'€</td>
+                </tr>
+                <tr>
+                    <td class="table-dark"><b>Montant reçu moyen</b></td>
+                    <td>'.number_format($data['montant_recu_global']/$data['nb_rgt_recu'], 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_recu_sans_car']/$data['nb_rgt_recu'], 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_recu_un_car']/$data['nb_rgt_recu'], 2, ',', ' ').'€</td>
+                    <td>'.number_format($data['montant_recu_deux_car']/$data['nb_rgt_recu'], 2, ',', ' ').'€</td>
                 </tr>
                 <tr>
                     <td class="table-dark"><b>Montant bourse</b></td>
@@ -1313,8 +1330,8 @@ else {
         $_SESSION['filtres_admin_jeunes']['da_a_relancer'] = $_POST['da_a_relancer'];
     }
 
-    if (isset($_POST['rgt_recu'])) {
-        $_SESSION['filtres_admin_jeunes']['rgt_recu'] = $_POST['rgt_recu'];
+    if (isset($_POST['rgt_montant'])) {
+        $_SESSION['filtres_admin_jeunes']['rgt_montant'] = $_POST['rgt_montant'];
     }
 
     if (isset($_POST['prepa'])) {
@@ -1440,16 +1457,16 @@ else {
                 </div>
             </div>
             <!-- FILTRE RGT RECU -->
-            <label class="col-form-label col-sm-2" for="rgt_recu">Rgt reçu ?</label>
+            <label class="col-form-label col-sm-2" for="rgt_montant">Rgt reçu ?</label>
             <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="rgt_recu" id="rgt_recuO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['rgt_recu']) && $_SESSION['filtres_admin_jeunes']['rgt_recu'] == 1) ? 'checked' : ''; ?>> Oui
+                        <input class="form-check-input" type="radio" name="rgt_montant" id="rgt_montantO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['rgt_montant']) && $_SESSION['filtres_admin_jeunes']['rgt_montant'] == 1) ? 'checked' : ''; ?>> Oui
                     </label>
                 </div>
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="rgt_recu" id="rgt_recuN" value="0" <?php echo (isset($_SESSION['filtres_admin_jeunes']['rgt_recu']) && $_SESSION['filtres_admin_jeunes']['rgt_recu'] == 0) ? 'checked' : ''; ?>> Non
+                        <input class="form-check-input" type="radio" name="rgt_montant" id="rgt_montantN" value="0" <?php echo (isset($_SESSION['filtres_admin_jeunes']['rgt_montant']) && $_SESSION['filtres_admin_jeunes']['rgt_montant'] == 0) ? 'checked' : ''; ?>> Non
                     </label>
                 </div>
             </div>
