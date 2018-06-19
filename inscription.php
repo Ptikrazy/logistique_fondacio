@@ -258,7 +258,7 @@ else {
 
         Il y a trois façons d'arriver au Mourtis:<br><br>
 
-        – En bus : des bus sont organisés pour chacun des camps : en fonction de la région attribuée à la semaine, ils desserviront plusieurs grandes villes en France (Lille, Paris, Versailles, Brive, Toulouse, Lyon, Marseille, Montpellier, Valence, Nantes, Angers, Poitiers, Bordeaux, …). Il faut compter 150 € l’aller-retour, soit 75€ par trajet. Le nombre de places est limité.<br><br>
+        – En bus : des bus sont organisés pour chacun des camps : en fonction de la région attribuée à la semaine, ils desserviront plusieurs grandes villes en France (Lille, Paris, Versailles, Brive, Toulouse, Lyon, Marseille, Montpellier, Valence, Nantes, Angers, Poitiers, Bordeaux, …). Il faut compter 150 € l’aller-retour, soit 75€ par trajet. Le nombre de places est limité (si le choix n'apparait pas, c'est que le bus est plein).<br><br>
 
         – En train : la gare la plus proche est Montréjeau-Gourdan-Polignan. Un service de navette Fondacio sera mis en place entre la gare et le lieu du camp à l’aller et au retour : il faut compter 40€ pour l’aller-retour, soit 20€ par trajet. A l’aller, navettes à 11h15 ou 14h30 (si impossible à 11h30). Au retour, arrivée des navettes à la gare à 11h maximum (une ou plusieurs navettes en fonction des horaires de départ des différents trains). En fonction du remplissage des navettes, il est possible qu’il y ait de l’attente en gare de Montréjeau-Gourdan-Pollignan. Si vous rencontrez un problème avec les horaires de train ou souhaitez avoir plus d’informations sur la navette, merci de nous contacter par mail.<br><br>
 
@@ -271,7 +271,7 @@ else {
                     <option value="" selected></option>
                     <option value="voiture">Voiture personnelle</option>
                     <option value="train">Train</option>
-                    <option value="bus">Bus organisé par Fondacio</option>
+                    <option value="bus" id="transport_aller_bus">Bus organisé par Fondacio</option>
                 </select>
             </div>
         </div>
@@ -496,6 +496,17 @@ else {
                 $('#cout_revient').text(cout_transport+cout_prepa+420);
                 $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                 $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
+            });
+
+            // Gestion bus plein
+
+            $('#camp').change(function() {
+                if (this.value == "2") {
+                    $('#transport_aller_bus').hide();
+                }
+                else {
+                    $('#transport_aller_bus').show();
+                }
             });
 
             // Gestion des transports
