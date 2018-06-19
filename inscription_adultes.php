@@ -304,7 +304,7 @@ else {
                     <option value="sur_place">Je serai déjà sur place</option>
                     <option value="voiture">Voiture personnelle</option>
                     <option value="train">Train</option>
-                    <option value="bus">Bus organisé par Fondacio</option>
+                    <option value="bus" id="transport_aller_bus">Bus organisé par Fondacio</option>
                 </select>
             </div>
         </div>
@@ -932,6 +932,17 @@ else {
     <script type="text/javascript">
 
         $(function() {
+
+            // Gestion bus plein
+
+            $('#camp').change(function() {
+                if (this.value == "2") {
+                    $('#transport_aller_bus').hide();
+                }
+                else {
+                    $('#transport_aller_bus').show();
+                }
+            });
 
             // Gestion des transports
 
