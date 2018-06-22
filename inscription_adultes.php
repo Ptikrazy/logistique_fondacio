@@ -382,8 +382,6 @@ else {
             <b>20€</b> pour une navette Montréjeau-Le Mourtis (aller simple)<br>
             <b>40€</b> pour une navette Montréjeau-Le Mourtis (aller-retour)<br><br>
 
-            Pour le camp 2 uniquement: nous proposons une fourchette <b>entre 50€ et 100€</b> pour chaque enfant qui correspond aux frais de restauration et des activités qu’ils vivront pendant la semaine.<br><br>
-
             A partir de ces repères, chacun est invité à participer de façon tout à fait libre, selon ses moyens et ce qui lui semble juste.<br>
             Dans le cas où vous ne pourriez pas participer, cela ne remet pas en cause votre présence sur le camp, nous vous invitons à en discuter avec le responsable vous ayant appelé.<br><br>
 

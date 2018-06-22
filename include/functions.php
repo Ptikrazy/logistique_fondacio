@@ -1341,6 +1341,42 @@ function get_participants($filtres = array()) {
     return $data;
 }
 
+function get_transports($filtres = array()) {
+
+    global $bdd;
+
+    $req_filtres . '';
+    if (!empty($filtres)) {
+        foreach ($filtres as $champ => $value) {
+            if ($champ == 'prepa') {
+                $req_filtres .= ' AND prepa = "'.$value.'"';
+            }
+            if ($champ == 'aller_retour' && !empty($filtres['moyen_transport'])) {
+                $req_filtres .= ' AND '.$value.'_transport = "'.$filtres['moyen_transport'].'"';
+            }
+            if ($champ == 'ville' && !empty($value)) {
+                $req_filtres .= ' AND '.$filtres['aller_retour'].'_ville = "'.$value.'"';
+            }
+        }
+    }
+
+    $req = '
+    SELECT id_jeune AS id, nom, prenom, "Jeune" AS type, tel_portable, '.$filtres['aller_retour'].'_transport AS transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM jeunes
+            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
+        UNION
+    SELECT id_adulte AS id, nom, prenom, "Adulte" AS type, tel_portable, '.$filtres['aller_retour'].'_transport AS transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM adultes
+            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
+    ORDER BY type, transport, ville, nom';
+
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+}
+
 /// OLD ///
 
 function get_participant($id) {
@@ -1351,31 +1387,6 @@ function get_participant($id) {
     $req = 'SELECT * FROM participants WHERE id_participant = '.$id;
     $res = $bdd->query($req);
     $data = $res->fetch();
-    $res->closeCursor();
-
-    return $data;
-}
-
-function get_transports($camp, $aller_retour, $prepa, $moyen_transport, $ville) {
-
-    global $bdd;
-
-    $data = array();
-    $req = 'SELECT id_participant, nom, prenom, type, tel_portable, mere_portable, pere_portable, '.$aller_retour.'_transport AS transport, '.$aller_retour.'_heure AS heure, '.$aller_retour.'_ville AS ville, '.$aller_retour.'_date AS date FROM participants WHERE camp = '.$camp;
-    if ($aller_retour == 'aller') {
-        $req .= ' AND prepa = "'.$prepa.'"';
-    }
-    if (!empty($moyen_transport)) {
-        $req .= ' AND '.$aller_retour.'_transport = "'.$moyen_transport.'"';
-    }
-    if (!empty($ville)) {
-        $req .= ' AND '.$aller_retour.'_ville = "'.$ville.'"';
-    }
-    $req .= ' ORDER BY date, heure, transport, ville, type, nom';
-    $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[$d['transport']][] = $d;
-    }
     $res->closeCursor();
 
     return $data;

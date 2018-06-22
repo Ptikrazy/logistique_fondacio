@@ -1,9 +1,9 @@
 <?php
 
-require_once 'include/init.php';
+require_once '../include/init.php';
 
 $title = 'Exports';
-require_once 'include/head.php';
+require_once '../include/head.php';
 
 ?>
 
