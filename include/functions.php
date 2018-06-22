@@ -1361,12 +1361,12 @@ function get_transports($filtres = array()) {
     }
 
     $req = '
-    SELECT id_jeune AS id, nom, prenom, "Jeune" AS type, tel_portable, '.$filtres['aller_retour'].'_transport AS transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM jeunes
+    SELECT id_jeune AS id, nom, prenom, "Jeune" AS type, tel_portable, '.$filtres['aller_retour'].'_transport AS moyen_transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM jeunes
             WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
         UNION
-    SELECT id_adulte AS id, nom, prenom, "Adulte" AS type, tel_portable, '.$filtres['aller_retour'].'_transport AS transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM adultes
+    SELECT id_adulte AS id, nom, prenom, "Adulte" AS type, tel_portable, '.$filtres['aller_retour'].'_transport AS moyen_transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM adultes
             WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
-    ORDER BY type, transport, ville, nom';
+    ORDER BY type, moyen_transport, ville, nom';
 
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {

@@ -322,7 +322,7 @@ else {
         </div>
 
         <div class="form-group row" id="retour_train">
-            <label class="col-form-label col-sm-12">Le camp termine dans la nuit du samedi au dimanche à 2h du matin. Nous proposons une navette jusqu'à la gare pour le train de 11h25 le dimanche matin.</label>
+            <label class="col-form-label col-sm-12">Le camp termine dans la nuit du samedi au dimanche à 2h du matin. Nous proposons des navettes jusqu'à la gare de Montréjeau le dimanche matin, pour prendre un train à partir de 9h00 jusqu’en fin de matinée.</label>
         </div>
 
         <div class="form-group row" id="retour_bus">

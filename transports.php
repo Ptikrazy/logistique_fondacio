@@ -125,12 +125,22 @@ Nombre de résultats: <?php echo sizeof($donnees); ?>
     <tbody>
         <?php
             foreach ($donnees as $participant) {
+
+                switch ($participant['moyen_transport']) {
+                    case 'sur_place':
+                        $participant['moyen_transport'] = 'Sur place';
+                        break;
+                    default:
+                        $participant['moyen_transport'] = ucfirst($participant['moyen_transport']);
+                        break;
+                }
+
                 echo '<tr>
                         <td><a href="participants.php?action=edit&id='.$participant['id'].'">'.$participant['nom'].'</a></td>
                         <td>'.$participant['prenom'].'</td>
                         <td>'.$participant['type'].'</td>
                         <td>'.$participant['tel_portable'].'</td>
-                        <td>'.$participant['transport'].'</td>
+                        <td>'.$participant['moyen_transport'].'</td>
                         <td>'.$participant['ville'].'</td>
                         <td>'.convert_date($participant['date'], '-', '/').'</td>
                         <td>'.$participant['heure'].'</td>
