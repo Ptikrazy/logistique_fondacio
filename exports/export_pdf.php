@@ -12,7 +12,16 @@ if ($_GET['contexte'] == 'transports') {
     $pdf->SetPrintHeader(false);
     $pdf->SetPrintFooter(false);
 
-    if ($transport == 'bus') {
+    if ($_SESSION['filtres_transports']['moyen_transport'] == 'bus') {
+        $participants = array();
+        foreach ($donnees as $participant) {
+                $participants[$participant['ville']][] = $participant;
+        }
+        $prepa = '';
+        if (!empty($_SESSION['filtres_transports']['prepa'])) {
+            $prepa = 'prépa';
+        }
+
         foreach ($participants as $ville => $data) {
 
             $pdf->AddPage();
@@ -21,7 +30,7 @@ if ($_GET['contexte'] == 'transports') {
 
             $pdf->SetFont('helvetica', 'B', 25, '', true);
             $pdf->SetTextColor(255,0,0);
-            $pdf->writeHTMLCell(0, 0, $x, $y, 'Bus pour '.$ville);
+            $pdf->writeHTMLCell(0, 0, $x, $y, 'Bus '.$_SESSION['filtres_transports']['aller_retour'].' '.$prepa.' '.$ville);
 
             $pdf->SetFont('helvetica', '', 10, '', true);
             $pdf->SetTextColor(0,0,0);
@@ -38,14 +47,7 @@ if ($_GET['contexte'] == 'transports') {
                     $i = 0;
                 }
 
-                $portable_parents = '';
-                if (!empty($participant['mere_portable'])) {
-                     $portable_parents = $participant['mere_portable'];
-                }
-                elseif (!empty($participant['pere_portable'])) {
-                     $portable_parents = $participant['pere_portable'];
-                }
-                $pdf->writeHTMLCell(80, 0, $x, $y, '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' ('.$participant['tel_portable'].'/'.$portable_parents.')');
+                $pdf->writeHTMLCell(80, 0, $x, $y, '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' ('.$participant['tel_portable'].'/'.$participant['ref_portable'].')');
                 $y += 8;
                 ++$i;
                 ++$j;
@@ -56,15 +58,20 @@ if ($_GET['contexte'] == 'transports') {
         }
     }
 
-    if ($transport == 'train' || $transport == 'voiture') {
+    if ($_SESSION['filtres_transports']['moyen_transport'] == 'train' || $_SESSION['filtres_transports']['moyen_transport'] == 'voiture') {
 
         $pdf->AddPage();
         $x = 50;
         $y = 5;
 
+        $prepa = '';
+        if (!empty($_SESSION['filtres_transports']['prepa'])) {
+            $prepa = 'prépa';
+        }
+
         $pdf->SetFont('helvetica', 'B', 25, '', true);
         $pdf->SetTextColor(255,0,0);
-        $pdf->writeHTMLCell(0, 0, $x, $y, ucfirst($transport));
+        $pdf->writeHTMLCell(0, 0, $x, $y, ucfirst($_SESSION['filtres_transports']['moyen_transport']).' '.$_SESSION['filtres_transports']['aller_retour'].' '.$prepa);
 
         $pdf->SetFont('helvetica', '', 10, '', true);
         $pdf->SetTextColor(0,0,0);
@@ -81,18 +88,11 @@ if ($_GET['contexte'] == 'transports') {
                 $i = 0;
             }
 
-            $portable_parents = '';
-            if (!empty($participant['mere_portable'])) {
-                 $portable_parents = $participant['mere_portable'];
-            }
-            elseif (!empty($participant['pere_portable'])) {
-                 $portable_parents = $participant['pere_portable'];
-            }
             if ($transport == 'train') {
-                $html = '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' '.$participant['heure'].' ('.$participant['tel_portable'].'/'.$portable_parents.')';
+                $html = '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' '.$participant['heure'].' ('.$participant['tel_portable'].'/'.$participant['ref_portable'].')';
             }
             else {
-                $html = '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' ('.$participant['tel_portable'].'/'.$portable_parents.')';
+                $html = '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' ('.$participant['tel_portable'].'/'.$participant['ref_portable'].')';
             }
             $pdf->writeHTMLCell(80, 0, $x, $y, $html);
             $y += 8;
@@ -104,7 +104,7 @@ if ($_GET['contexte'] == 'transports') {
 
     }
 
-    $pdf->Output('Transports Bus.pdf', 'I');
+    $pdf->Output('Transports '.$_SESSION['filtres_transports']['moyen_transport'].'.pdf', 'D');
 
 }
 
