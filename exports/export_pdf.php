@@ -1,70 +1,19 @@
 <?php
 
-require_once 'include/init.php';
-require_once 'include/tcpdf/tcpdf.php';
+require_once '../include/init.php';
+require_once '../include/tcpdf/tcpdf.php';
 
 if ($_GET['contexte'] == 'transports') {
 
     $donnees = $_SESSION['donnees_transport'];
-    if (!empty($donnees['bus'])) {
-        foreach ($donnees['bus'] as $participant) {
-            $donnees_bus[$participant['ville']][] = $participant;
-        }
-    }
-    unset($donnees['bus']);
-    $donnees['bus'] = $donnees_bus;
 
     $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
-    $pdf->SetTitle('Transports Bus');
+    $pdf->SetTitle('Transports '.$_SESSION['filtres_transports']['moyen_transport']);
     $pdf->SetPrintHeader(false);
     $pdf->SetPrintFooter(false);
 
-    foreach ($donnees as $transport => $participants) {
-        if ($transport == 'bus') {
-            foreach ($participants as $ville => $data) {
-
-                $pdf->AddPage();
-                $x = 50;
-                $y = 5;
-
-                $pdf->SetFont('helvetica', 'B', 25, '', true);
-                $pdf->SetTextColor(255,0,0);
-                $pdf->writeHTMLCell(0, 0, $x, $y, 'Bus pour '.$ville);
-
-                $pdf->SetFont('helvetica', '', 10, '', true);
-                $pdf->SetTextColor(0,0,0);
-                $x = 5;
-                $y = 20;
-                $i = 0;
-                $j = 0;
-
-                foreach ($data as $id_participant => $participant) {
-
-                    if ($i == 30) {
-                        $x += 100;
-                        $y = 20;
-                        $i = 0;
-                    }
-
-                    $portable_parents = '';
-                    if (!empty($participant['mere_portable'])) {
-                         $portable_parents = $participant['mere_portable'];
-                    }
-                    elseif (!empty($participant['pere_portable'])) {
-                         $portable_parents = $participant['pere_portable'];
-                    }
-                    $pdf->writeHTMLCell(80, 0, $x, $y, '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' ('.$participant['tel_portable'].'/'.$portable_parents.')');
-                    $y += 8;
-                    ++$i;
-                    ++$j;
-
-                }
-                $pdf->writeHTMLCell(0, 0, $x, $y+5, '<b>TOTAL: '.$j);
-
-            }
-        }
-
-        if ($transport == 'train' || $transport == 'voiture') {
+    if ($transport == 'bus') {
+        foreach ($participants as $ville => $data) {
 
             $pdf->AddPage();
             $x = 50;
@@ -72,7 +21,7 @@ if ($_GET['contexte'] == 'transports') {
 
             $pdf->SetFont('helvetica', 'B', 25, '', true);
             $pdf->SetTextColor(255,0,0);
-            $pdf->writeHTMLCell(0, 0, $x, $y, ucfirst($transport));
+            $pdf->writeHTMLCell(0, 0, $x, $y, 'Bus pour '.$ville);
 
             $pdf->SetFont('helvetica', '', 10, '', true);
             $pdf->SetTextColor(0,0,0);
@@ -81,7 +30,7 @@ if ($_GET['contexte'] == 'transports') {
             $i = 0;
             $j = 0;
 
-            foreach ($participants as $participant) {
+            foreach ($data as $id_participant => $participant) {
 
                 if ($i == 30) {
                     $x += 100;
@@ -96,13 +45,7 @@ if ($_GET['contexte'] == 'transports') {
                 elseif (!empty($participant['pere_portable'])) {
                      $portable_parents = $participant['pere_portable'];
                 }
-                if ($transport == 'train') {
-                    $html = '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' '.$participant['heure'].' ('.$participant['tel_portable'].'/'.$portable_parents.')';
-                }
-                else {
-                    $html = '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' ('.$participant['tel_portable'].'/'.$portable_parents.')';
-                }
-                $pdf->writeHTMLCell(80, 0, $x, $y, $html);
+                $pdf->writeHTMLCell(80, 0, $x, $y, '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' ('.$participant['tel_portable'].'/'.$portable_parents.')');
                 $y += 8;
                 ++$i;
                 ++$j;
@@ -111,10 +54,57 @@ if ($_GET['contexte'] == 'transports') {
             $pdf->writeHTMLCell(0, 0, $x, $y+5, '<b>TOTAL: '.$j);
 
         }
+    }
+
+    if ($transport == 'train' || $transport == 'voiture') {
+
+        $pdf->AddPage();
+        $x = 50;
+        $y = 5;
+
+        $pdf->SetFont('helvetica', 'B', 25, '', true);
+        $pdf->SetTextColor(255,0,0);
+        $pdf->writeHTMLCell(0, 0, $x, $y, ucfirst($transport));
+
+        $pdf->SetFont('helvetica', '', 10, '', true);
+        $pdf->SetTextColor(0,0,0);
+        $x = 5;
+        $y = 20;
+        $i = 0;
+        $j = 0;
+
+        foreach ($donnees as $participant) {
+
+            if ($i == 30) {
+                $x += 100;
+                $y = 20;
+                $i = 0;
+            }
+
+            $portable_parents = '';
+            if (!empty($participant['mere_portable'])) {
+                 $portable_parents = $participant['mere_portable'];
+            }
+            elseif (!empty($participant['pere_portable'])) {
+                 $portable_parents = $participant['pere_portable'];
+            }
+            if ($transport == 'train') {
+                $html = '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' '.$participant['heure'].' ('.$participant['tel_portable'].'/'.$portable_parents.')';
+            }
+            else {
+                $html = '<b>'.$participant['nom'].'</b> '.$participant['prenom'].' ('.$participant['tel_portable'].'/'.$portable_parents.')';
+            }
+            $pdf->writeHTMLCell(80, 0, $x, $y, $html);
+            $y += 8;
+            ++$i;
+            ++$j;
+
+        }
+        $pdf->writeHTMLCell(0, 0, $x, $y+5, '<b>TOTAL: '.$j);
 
     }
 
-    $pdf->Output('Transports Bus.pdf', 'D');
+    $pdf->Output('Transports Bus.pdf', 'I');
 
 }
 
@@ -471,7 +461,7 @@ if ($_GET['contexte'] == 'activites') {
     $pdf->SetPrintFooter(false);
 
     foreach ($donnees as $activite => $participants) {
-        
+
         if ($activite != '') {
             $pdf->AddPage();
             $x = 20;

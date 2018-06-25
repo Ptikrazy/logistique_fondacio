@@ -31,6 +31,7 @@ if (!empty($_POST['ville'])) {
 }
 
 $donnees = get_transports($_SESSION['filtres_transports']);
+$_SESSION['donnees_transport'] = $donnees;
 
 ?>
 
