@@ -1323,10 +1323,10 @@ function get_participants($filtres = array()) {
     }
     else {
         $req = '
-        SELECT id_jeune AS id, nom, prenom, "Jeune" AS type, tel_portable, date_naissance, civilite, ancien, prepa, service, pg_num, chambre_num FROM jeunes
+        SELECT id_jeune AS id, nom, prenom, "jeune" AS type, tel_portable, date_naissance, civilite, ancien, prepa, service, pg_num, chambre_num FROM jeunes
             WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
         UNION
-        SELECT id_adulte AS id, nom, prenom, "Adulte" AS type, tel_portable, date_naissance, civilite, 1 AS ancien, 1 AS prepa, service, pg_num, chambre_num FROM adultes
+        SELECT id_adulte AS id, nom, prenom, "adulte" AS type, tel_portable, date_naissance, civilite, 1 AS ancien, 1 AS prepa, service, pg_num, chambre_num FROM adultes
             WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
         ORDER BY type, nom, prenom
         ';
@@ -1377,20 +1377,31 @@ function get_transports($filtres = array()) {
     return $data;
 }
 
-/// OLD ///
-
-function get_participant($id) {
+function delete_participant ($id, $type) {
 
     global $bdd;
 
-    $data = array();
-    $req = 'SELECT * FROM participants WHERE id_participant = '.$id;
+    $req = 'DELETE FROM '.$type.' WHERE id_'.$type.' = '.$id;
+    $res = $bdd->query($req);
+    $res->closeCursor();
+    header('Location: participants.php');
+
+}
+
+function get_participant($id, $type) {
+
+    global $bdd;
+
+    $req = 'SELECT * FROM '.$type.'s WHERE id_'.$type.' = '.$id;
+    print_rh($req);
     $res = $bdd->query($req);
     $data = $res->fetch();
     $res->closeCursor();
 
     return $data;
 }
+
+/// OLD ///
 
 function get_activites() {
 
@@ -1456,17 +1467,6 @@ function update_participant ($action, $donnees, $id) {
         $id = $bdd->lastInsertId();
     }
     header('Location: participants.php?action=edit&id_participant='.$id);
-
-}
-
-function delete_participant ($id) {
-
-    global $bdd;
-
-    $req = 'DELETE FROM participants WHERE id_participant = '.$id;
-    $res = $bdd->query($req);
-    $res->closeCursor();
-    header('Location: participants.php');
 
 }
 

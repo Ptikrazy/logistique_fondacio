@@ -78,7 +78,7 @@ $_SESSION['donnees_transport'] = $donnees;
     </div>
     <div class="form-group row">
         <!-- FILTRE MOYEN TRANSPORT -->
-        <label for="moyen_transport" class="col-md-2 control-label">Moyen de transport</label>
+        <label for="moyen_transport" class="col-md-2 col-form-label">Moyen de transport</label>
         <div class="col-md-2">
             <select class="form-control" name="moyen_transport">
                 <option value="bus" <?php echo (!empty($_SESSION['filtres_transports']['moyen_transport']) && $_SESSION['filtres_transports']['moyen_transport'] == "bus") ? 'selected' : ''; ?>>Bus</option>
@@ -88,7 +88,7 @@ $_SESSION['donnees_transport'] = $donnees;
             </select>
         </div>
         <!-- FILTRE VILLE -->
-        <label for="ville" class="col-md-2 control-label">Ville</label>
+        <label for="ville" class="col-md-2 col-form-label">Ville</label>
         <div class="col-md-2">
             <select class="form-control" name="ville">
                 <option value="" id="aller_bus_villes" selected></option>

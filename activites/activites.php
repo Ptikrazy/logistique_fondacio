@@ -57,7 +57,7 @@ if (!empty($_GET['action'])) {
 
     <form class="form-horizontal" action="" method="POST">
         <div class="form-group">
-            <label for="code" class="col-md-3 control-label">Code couleur</label>
+            <label for="code" class="col-md-3 col-form-label">Code couleur</label>
             <div class="col-md-3">
                 <select class="form-control" name="code">
                     <option value="0"></option>
@@ -69,13 +69,13 @@ if (!empty($_GET['action'])) {
             </div>
         </div>
         <div class="form-group">
-            <label for="nom" class="col-md-3 control-label">Nom</label>
+            <label for="nom" class="col-md-3 col-form-label">Nom</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="nom" value="<?php echo $donnees['nom']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="type" class="col-md-3 control-label">Type</label>
+            <label for="type" class="col-md-3 col-form-label">Type</label>
             <div class="col-md-3">
                 <select class="form-control" name="type">
                     <option value="creative" <?php echo (!empty($donnees['type']) && $donnees['type'] == 'creative') ? 'selected' : ''; ?>>Créative</option>
@@ -84,37 +84,37 @@ if (!empty($_GET['action'])) {
             </div>
         </div>
         <div class="form-group">
-            <label for="horaires" class="col-md-3 control-label">Horaires (format: 14h-17h)</label>
+            <label for="horaires" class="col-md-3 col-form-label">Horaires (format: 14h-17h)</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="horaires" value="<?php echo $donnees['horaires']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="horaires_mercredi" class="col-md-3 control-label">Horaires mercredi (si différentes)</label>
+            <label for="horaires_mercredi" class="col-md-3 col-form-label">Horaires mercredi (si différentes)</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="horaires_mercredi" value="<?php echo $donnees['horaires_mercredi']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="nb_adultes" class="col-md-3 control-label">Nombre d'adultes</label>
+            <label for="nb_adultes" class="col-md-3 col-form-label">Nombre d'adultes</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="nb_adultes" value="<?php echo $donnees['nb_adultes']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="nb_jeunes" class="col-md-3 control-label">Nombre de jeunes</label>
+            <label for="nb_jeunes" class="col-md-3 col-form-label">Nombre de jeunes</label>
             <div class="col-md-3">
                 <input type="text" class="form-control" name="nb_jeunes" value="<?php echo $donnees['nb_jeunes']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="infos_presta" class="col-md-3 control-label">Informations prestataire</label>
+            <label for="infos_presta" class="col-md-3 col-form-label">Informations prestataire</label>
             <div class="col-md-3">
                 <textarea class="form-control" name="infos_presta" rows="8"><?php echo $donnees['infos_presta']; ?></textarea>
             </div>
         </div>
         <div class="form-group">
-            <label for="dispos[]" class="col-md-3 control-label">Disponibilités</label>
+            <label for="dispos[]" class="col-md-3 col-form-label">Disponibilités</label>
             <div class="col-md-5">
                 <label class="checkbox-inline">
                     <input type="checkbox" name="dispos[]" value="mardi" <?php echo ($donnees['mardi_dispo']) ? 'checked' : ''; ?>> Mardi
@@ -131,49 +131,49 @@ if (!empty($_GET['action'])) {
             </div>
         </div>
         <div class="form-group">
-            <label for="mardi_resp1" class="col-md-3 control-label">Mardi Resp 1</label>
+            <label for="mardi_resp1" class="col-md-3 col-form-label">Mardi Resp 1</label>
             <div class="col-md-3">
                 <input type="text" class="form-control col-md-6" name="mardi_resp1" id="mardi_resp1" value="<?php echo $donnees['mardi_resp1']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="mardi_resp2" class="col-md-3 control-label">Mardi Resp 2</label>
+            <label for="mardi_resp2" class="col-md-3 col-form-label">Mardi Resp 2</label>
             <div class="col-md-3">
                 <input type="text" class="form-control col-md-6" name="mardi_resp2" id="mardi_resp2" value="<?php echo $donnees['mardi_resp2']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="mercredi_resp1" class="col-md-3 control-label">Mercredi Resp 1</label>
+            <label for="mercredi_resp1" class="col-md-3 col-form-label">Mercredi Resp 1</label>
             <div class="col-md-3">
                 <input type="text" class="form-control col-md-6" name="mercredi_resp1" id="mercredi_resp1" value="<?php echo $donnees['mercredi_resp1']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="mercredi_resp2" class="col-md-3 control-label">Mercredi Resp 2</label>
+            <label for="mercredi_resp2" class="col-md-3 col-form-label">Mercredi Resp 2</label>
             <div class="col-md-3">
                 <input type="text" class="form-control col-md-6" name="mercredi_resp2" id="mercredi_resp2" value="<?php echo $donnees['mercredi_resp2']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="jeudi_resp1" class="col-md-3 control-label">Jeudi Resp 1</label>
+            <label for="jeudi_resp1" class="col-md-3 col-form-label">Jeudi Resp 1</label>
             <div class="col-md-3">
                 <input type="text" class="form-control col-md-6" name="jeudi_resp1" id="jeudi_resp1" value="<?php echo $donnees['jeudi_resp1']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="jeudi_resp2" class="col-md-3 control-label">Jeudi Resp 2</label>
+            <label for="jeudi_resp2" class="col-md-3 col-form-label">Jeudi Resp 2</label>
             <div class="col-md-3">
                 <input type="text" class="form-control col-md-6" name="jeudi_resp2" id="jeudi_resp2" value="<?php echo $donnees['jeudi_resp2']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="vendredi_resp1" class="col-md-3 control-label">Vendredi Resp 1</label>
+            <label for="vendredi_resp1" class="col-md-3 col-form-label">Vendredi Resp 1</label>
             <div class="col-md-3">
                 <input type="text" class="form-control col-md-6" name="vendredi_resp1" id="vendredi_resp1" value="<?php echo $donnees['vendredi_resp1']; ?>">
             </div>
         </div>
         <div class="form-group">
-            <label for="vendredi_resp2" class="col-md-3 control-label">Vendredi Resp 2</label>
+            <label for="vendredi_resp2" class="col-md-3 col-form-label">Vendredi Resp 2</label>
             <div class="col-md-3">
                 <input type="text" class="form-control col-md-6" name="vendredi_resp2" id="vendredi_resp2" value="<?php echo $donnees['vendredi_resp2']; ?>">
             </div>

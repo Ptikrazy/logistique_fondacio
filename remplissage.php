@@ -115,13 +115,13 @@ if (!empty($_GET['remplissage'])) {
 
         <form class="form-horizontal" action="" method="POST">
             <div class="form-group">
-                    <label for="parrain" class="col-md-1 control-label">Parrain</label>
+                    <label for="parrain" class="col-md-1 col-form-label">Parrain</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="parrain" id="parrain">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="filleul" class="col-md-1 control-label">Filleul</label>
+                    <label for="filleul" class="col-md-1 col-form-label">Filleul</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="filleul" id="filleul">
                     </div>
@@ -155,37 +155,37 @@ if (!empty($_GET['remplissage'])) {
 
         <form class="form-horizontal" action="" method="POST">
             <div class="form-group">
-                    <label for="pg_num" class="col-md-1 control-label">N° PG</label>
+                    <label for="pg_num" class="col-md-1 col-form-label">N° PG</label>
                     <div class="col-md-1">
                         <input type="text" class="form-control" name="pg_num" id="pg_num">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="pg_resp" class="col-md-1 control-label">Responsable</label>
+                    <label for="pg_resp" class="col-md-1 col-form-label">Responsable</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="pg_resp" id="pg_resp">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jeune_1" class="col-md-1 control-label">Jeune 1</label>
+                    <label for="jeune_1" class="col-md-1 col-form-label">Jeune 1</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_1" id="jeune_1">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jeune_2" class="col-md-1 control-label">Jeune 2</label>
+                    <label for="jeune_2" class="col-md-1 col-form-label">Jeune 2</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_2" id="jeune_2">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jeune_3" class="col-md-1 control-label">Jeune 3</label>
+                    <label for="jeune_3" class="col-md-1 col-form-label">Jeune 3</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_3" id="jeune_3">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jeune_4" class="col-md-1 control-label">Jeune 4</label>
+                    <label for="jeune_4" class="col-md-1 col-form-label">Jeune 4</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_4" id="jeune_4">
                     </div>
@@ -231,43 +231,43 @@ if (!empty($_GET['remplissage'])) {
 
         <form class="form-horizontal" action="" method="POST">
             <div class="form-group">
-                    <label for="chambre_num" class="col-md-1 control-label">N° Chambre</label>
+                    <label for="chambre_num" class="col-md-1 col-form-label">N° Chambre</label>
                     <div class="col-md-1">
                         <input type="text" class="form-control" name="chambre_num" id="chambre_num">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="chambre_resp" class="col-md-1 control-label">Responsable</label>
+                    <label for="chambre_resp" class="col-md-1 col-form-label">Responsable</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="chambre_resp" id="chambre_resp">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jeune_1" class="col-md-1 control-label">Jeune 1</label>
+                    <label for="jeune_1" class="col-md-1 col-form-label">Jeune 1</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_1" id="jeune_1">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jeune_2" class="col-md-1 control-label">Jeune 2</label>
+                    <label for="jeune_2" class="col-md-1 col-form-label">Jeune 2</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_2" id="jeune_2">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jeune_3" class="col-md-1 control-label">Jeune 3</label>
+                    <label for="jeune_3" class="col-md-1 col-form-label">Jeune 3</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_3" id="jeune_3">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jeune_4" class="col-md-1 control-label">Jeune 4</label>
+                    <label for="jeune_4" class="col-md-1 col-form-label">Jeune 4</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_4" id="jeune_4">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="jeune_5" class="col-md-1 control-label">Jeune 5</label>
+                    <label for="jeune_5" class="col-md-1 col-form-label">Jeune 5</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_5" id="jeune_5">
                     </div>

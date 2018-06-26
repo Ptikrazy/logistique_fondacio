@@ -91,7 +91,7 @@ if (in_array($day, array('mardi', 'mercredi', 'jeudi', 'vendredi'))) {
 
 <form class="form-horizontal" action="" method="POST">
     <div class="form-group">
-        <label for="jeune" class="col-md-1 control-label">Jeune</label>
+        <label for="jeune" class="col-md-1 col-form-label">Jeune</label>
         <div class="col-md-5">
             <input type="text" class="form-control" name="jeune" id="jeune" value="<?php echo $_POST['jeune'] ?>">
         </div>
@@ -222,41 +222,41 @@ if (!empty($_POST['jeune'])) {
 </div>
 
 <div class="form-group">
-    <label for="mardi_sport" class="col-md-1 control-label">Mardi</label>
+    <label for="mardi_sport" class="col-md-1 col-form-label">Mardi</label>
     <div class="col-md-3">
         <?php echo $mardi_sport; ?>
     </div>
-    <label for="mardi_crea" class="col-md-1 col-md-offset-2 control-label">Mardi</label>
+    <label for="mardi_crea" class="col-md-1 col-md-offset-2 col-form-label">Mardi</label>
     <div class="col-md-3">
         <?php echo $mardi_crea; ?>
     </div>
 </div>
 <div class="form-group">
-    <label for="mercredi_sport" class="col-md-1 control-label">Mercredi</label>
+    <label for="mercredi_sport" class="col-md-1 col-form-label">Mercredi</label>
     <div class="col-md-3">
         <?php echo $mercredi_sport; ?>
     </div>
-    <label for="mercredi_crea" class="col-md-1 col-md-offset-2 control-label">Mercredi</label>
+    <label for="mercredi_crea" class="col-md-1 col-md-offset-2 col-form-label">Mercredi</label>
     <div class="col-md-3">
         <?php echo $mercredi_crea; ?>
     </div>
 </div>
 <div class="form-group">
-    <label for="jeudi_sport" class="col-md-1 control-label">Jeudi</label>
+    <label for="jeudi_sport" class="col-md-1 col-form-label">Jeudi</label>
     <div class="col-md-3">
         <?php echo $jeudi_sport; ?>
     </div>
-    <label for="jeudi_crea" class="col-md-1 col-md-offset-2 control-label">Jeudi</label>
+    <label for="jeudi_crea" class="col-md-1 col-md-offset-2 col-form-label">Jeudi</label>
     <div class="col-md-3">
         <?php echo $jeudi_crea; ?>
     </div>
 </div>
 <div class="form-group">
-    <label for="vendredi_sport" class="col-md-1 control-label">Vendredi</label>
+    <label for="vendredi_sport" class="col-md-1 col-form-label">Vendredi</label>
     <div class="col-md-3">
         <?php echo $vendredi_sport; ?>
     </div>
-    <label for="vendredi_crea" class="col-md-1 col-md-offset-2 control-label">Vendredi</label>
+    <label for="vendredi_crea" class="col-md-1 col-md-offset-2 col-form-label">Vendredi</label>
     <div class="col-md-3">
         <?php echo $vendredi_crea; ?>
     </div>

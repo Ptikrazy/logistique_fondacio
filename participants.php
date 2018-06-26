@@ -11,64 +11,19 @@ if (!empty($_GET['action'])) {
             break;
 
         case 'edit':
-            $donnees = get_participant($_GET['id_participant']);
-            $donnees['activite_mardi_creative'] = get_historique($_GET['id_participant'], 'mardi', 'creative');
+            $donnees = get_participant($_GET['id'], $_GET['type']);
+            /*$donnees['activite_mardi_creative'] = get_historique($_GET['id_participant'], 'mardi', 'creative');
             $donnees['activite_mardi_sportive'] = get_historique($_GET['id_participant'], 'mardi', 'sportive');
             $donnees['activite_mercredi_creative'] = get_historique($_GET['id_participant'], 'mercredi', 'creative');
             $donnees['activite_mercredi_sportive'] = get_historique($_GET['id_participant'], 'mercredi', 'sportive');
             $donnees['activite_jeudi_creative'] = get_historique($_GET['id_participant'], 'jeudi', 'creative');
             $donnees['activite_jeudi_sportive'] = get_historique($_GET['id_participant'], 'jeudi', 'sportive');
             $donnees['activite_vendredi_creative'] = get_historique($_GET['id_participant'], 'vendredi', 'creative');
-            $donnees['activite_vendredi_sportive'] = get_historique($_GET['id_participant'], 'vendredi', 'sportive');
+            $donnees['activite_vendredi_sportive'] = get_historique($_GET['id_participant'], 'vendredi', 'sportive');*/
             $titre = 'Fiche de '.$donnees['prenom'].' '.$donnees['nom'];
             break;
 
         case 'add':
-            $donnees = array('id_participant'    => '',
-                              'date_saisie'      => '',
-                              'type'             => '',
-                              'camp'             => 0,
-                              'ancien'           => '',
-                              'prepa'            => '',
-                              'service'          => '',
-                              'diplomes'         => '',
-                              'civilite'         => '',
-                              'nom'              => '',
-                              'prenom'           => '',
-                              'adresse'          => '',
-                              'cp'               => '',
-                              'ville'            => '',
-                              'pays'             => '',
-                              'tel_portable'     => '',
-                              'mail'             => '',
-                              'date_naissance'   => '',
-                              'etudes'           => '',
-                              'taille'           => 0,
-                              'poids'            => 0,
-                              'tel_fixe'         => '',
-                              'parents_nom'      => '',
-                              'parents_prenom'   => '',
-                              'pere_portable'    => '',
-                              'mere_portable'    => '',
-                              'parents_mail'     => '',
-                              'parents_adresse'  => '',
-                              'aller_transport'  => '',
-                              'aller_date'       => '',
-                              'aller_heure'      => '',
-                              'aller_ville'      => '',
-                              'retour_transport' => '',
-                              'retour_date'      => '',
-                              'retour_heure'     => '',
-                              'retour_ville'     => '',
-                              'chambre_num'      => '',
-                              'chambre_resp'     => '',
-                              'pg_num'           => 0,
-                              'pg_resp'          => '',
-                              'inscrit_mardi'    => '',
-                              'inscrit_mercredi' => '',
-                              'inscrit_jeudi'    => '',
-                              'inscrit_vendredi' => '',
-                              'manquant'         => '');
             $titre = 'Ajout d\'un participant';
             break;
 
@@ -81,362 +36,444 @@ if (!empty($_GET['action'])) {
     require_once 'include/head.php';
 
 ?>
-    <h3><?php echo $titre; ?></h3>
-    <a class="btn btn-default" href="participants.php" role="button">Retour</a>
-    <a class="btn btn-default" href="participants.php?action=del&id_participant=<?php echo $_GET['id_participant']; ?>" role="button">Suprimer</a>
-    <br><br>
+    <h2><?php echo $titre; ?></h2>
+    <a class="btn btn-secondary" href="participants.php" role="button">Retour</a>
+    <a class="btn btn-danger" href="participants.php?action=del&id=<?php echo $_GET['id']; ?>&type=<?php echo $_GET['type']; ?>" role="button">Supprimer</a><br><br>
 
-    <form class="form-horizontal" action="" method="POST">
-        <div class="form-group">
-            <label for="date_inscription" class="col-md-2 control-label">Date d'inscription</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="date_inscription" value="<?php echo $donnees['date_saisie']; ?>" disabled>
+    <?php
+        if ($_GET['type'] == 'adulte') {
+    ?>
+
+        <form action="" method="POST">
+            <div class="form-group row">
+                <label for="date_inscription" class="col-md-2 col-form-label">Date d'inscription</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="date_inscription" value="<?php echo $donnees['date_saisie']; ?>" disabled>
+                </div>
+                <label for="camp" class="col-md-1 col-form-label">Camp</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" name="camp" value="<?php echo $donnees['camp']; ?>" <?php echo ($_GET['action'] == 'edit') ? 'disabled' : ''; ?>>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="camp" class="col-md-2 control-label">Camp</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="camp" value="<?php echo $donnees['camp']; ?>" <?php echo ($_GET['action'] == 'edit') ? 'disabled' : ''; ?>>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="prepa">Prépa</label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="prepa" id="prepa1" value="1" <?php echo ($donnees['prepa'] == 1) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="prepa" id="prepa0" value="0" <?php echo ($donnees['prepa'] == 0) ? 'checked' : ''; ?>> Non
+                        </label>
+                    </div>
+                </div>
+                <label for="service" class="col-md-1 col-form-label">Service</label>
+                <div class="col-md-3">
+                    <select class="form-control" name="service">
+                        <option value="" selected></option>
+                        <option value="Direction" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Direction') ? 'selected' : ''; ?>>Direction</option>
+                        <option value="Logistique" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Logistique') ? 'selected' : ''; ?>>Logistique</option>
+                        <option value="Temps Fun" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Temps Fun') ? 'selected' : ''; ?>>Temps Fun</option>
+                        <option value="Soirées" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Soirées') ? 'selected' : ''; ?>>Soirées</option>
+                        <option value="Trame" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Trame') ? 'selected' : ''; ?>>Trame</option>
+                        <option value="Resteau" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Resteau') ? 'selected' : ''; ?>>Resteau</option>
+                        <option value="RAAR" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'RAAR') ? 'selected' : ''; ?>>RAAR</option>
+                        <option value="Chant et Musique" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Chant et Musique') ? 'selected' : ''; ?>>Chant et Musique</option>
+                        <option value="Déco" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Déco') ? 'selected' : ''; ?>>Déco</option>
+                        <option value="Compagnonage" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Compagnonage') ? 'selected' : ''; ?>>Compagnonage</option>
+                        <option value="Sono/Vidéo" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Sono/Vidéo') ? 'selected' : ''; ?>>Sono/Vidéo</option>
+                        <option value="Activités" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Activités') ? 'selected' : ''; ?>>Activités</option>
+                        <option value="Santé" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Santé') ? 'selected' : ''; ?>>Santé</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="type" class="col-md-2 control-label">Type</label>
-            <div class="col-md-3">
-                <label class="radio-inline">
-                    <input type="radio" name="type" value="jeune" <?php echo (!empty($donnees['type']) && $donnees['type'] == 'jeune') ? 'checked' : ''; ?>> Jeune
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="type" value="adulte" <?php echo (!empty($donnees['type']) && $donnees['type'] == 'adulte') ? 'checked' : ''; ?>> Adulte
-                </label>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="civilite">Civilité</label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="civilite" id="civiliteF" value="F" <?php echo ($donnees['civilite'] == 'F') ? 'checked' : ''; ?>> Mme
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="civilite" id="civiliteH" value="H" <?php echo ($donnees['civilite'] == 'H') ? 'checked' : ''; ?>> M.
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="ancien" class="col-md-2 control-label">Ancien</label>
-            <div class="col-md-3">
-                <label class="radio-inline">
-                    <input type="radio" name="ancien" value="oui" <?php echo (!empty($donnees['ancien']) && $donnees['ancien'] == 'oui') ? 'checked' : ''; ?>> Oui
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="ancien" value="non" <?php echo (!empty($donnees['ancien']) && $donnees['ancien'] == 'non') ? 'checked' : ''; ?>> Non
-                </label>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="nom">Nom</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="nom" id="nom" value="<?php echo $donnees['nom']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="nom_usage">Nom d'usage</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="nom_usage" id="nom_usage" value="<?php echo $donnees['nom_usage']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="prenom">Prénom</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="prenom" id="prenom" value="<?php echo $donnees['prenom']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="prepa" class="col-md-2 control-label">Prépa</label>
-            <div class="col-md-3">
-                <label class="radio-inline">
-                    <input type="radio" name="prepa" value="oui" <?php echo (!empty($donnees['prepa']) && $donnees['prepa'] == 'oui') ? 'checked' : ''; ?>> Oui
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="prepa" value="non" <?php echo (!empty($donnees['prepa']) && $donnees['prepa'] == 'non') ? 'checked' : ''; ?>> Non
-                </label>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="adresse">Adresse</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="adresse" id="adresse" value="<?php echo $donnees['adresse']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="cp">Code postal</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" name="cp" id="cp" value="<?php echo $donnees['cp']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="service" class="col-md-2 control-label">Service</label>
-            <div class="col-md-3">
-                <select class="form-control" name="service">
-                    <option value="" selected></option>
-                    <option value="Logistique" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Logistique') ? 'selected' : ''; ?>>Logistique</option>
-                    <option value="Temps Fun" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Temps Fun') ? 'selected' : ''; ?>>Temps Fun</option>
-                    <option value="Soirées" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Soirées') ? 'selected' : ''; ?>>Soirées</option>
-                    <option value="Trame" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Trame') ? 'selected' : ''; ?>>Trame</option>
-                    <option value="Resteau" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Resteau') ? 'selected' : ''; ?>>Resteau</option>
-                    <option value="RAAR" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'RAAR') ? 'selected' : ''; ?>>RAAR</option>
-                    <option value="Chant et Musique" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Chant et Musique') ? 'selected' : ''; ?>>Chant et Musique</option>
-                    <option value="Déco" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Déco') ? 'selected' : ''; ?>>Déco</option>
-                    <option value="Compagnonage" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Compagnonage') ? 'selected' : ''; ?>>Compagnonage</option>
-                    <option value="Sono/Vidéo" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Sono/Vidéo') ? 'selected' : ''; ?>>Sono/Vidéo</option>
-                    <option value="Activités" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Activités') ? 'selected' : ''; ?>>Activités</option>
-                    <option value="Santé" <?php echo (!empty($donnees['service']) && $donnees['service'] == 'Santé') ? 'selected' : ''; ?>>Santé</option>
-                </select>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="ville">Ville</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="ville" id="ville" value="<?php echo $donnees['ville']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="pays">Pays</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="pays" id="pays" value="<?php echo $donnees['pays']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="diplomes" class="col-md-2 control-label">Diplômes</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="diplomes" value="<?php echo $donnees['diplomes']; ?>">
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="tel_portable">Téléphone portable</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="tel_portable" id="tel_portable" value="<?php echo $donnees['tel_portable']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="tel_fixe" id="tel_fixe" value="<?php echo $donnees['tel_fixe']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="civilite" class="col-md-2 control-label">Civilité</label>
-            <div class="col-md-3">
-                <label class="radio-inline">
-                    <input type="radio" name="civilite" value="H" <?php echo (!empty($donnees['civilite']) && $donnees['civilite'] == 'H') ? 'checked' : ''; ?>> Homme
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="civilite" value="F" <?php echo (!empty($donnees['civilite']) && $donnees['civilite'] == 'F') ? 'checked' : ''; ?>> Femme
-                </label>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="mail">Adresse mail</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="mail" id="mail" value="<?php echo $donnees['mail']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="profession">Profession</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="profession" id="profession" value="<?php echo $donnees['profession']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="nom" class="col-md-2 control-label">Nom</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="nom" value="<?php echo $donnees['nom']; ?>">
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="lieu_naissance">Lieu de naissance</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="lieu_naissance" id="lieu_naissance" value="<?php echo $donnees['lieu_naissance']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="date_naissance">Date de naissance</label>
+                <div class="col-sm-3">
+                    <input type="date" class="form-control" name="date_naissance" id="date_naissance" value="<?php echo $donnees['date_naissance']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="prenom" class="col-md-2 control-label">Prénom</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="prenom" value="<?php echo $donnees['prenom']; ?>">
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="allergies">Allergies ou intolérances</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="allergies" id="allergies" value="<?php echo $donnees['allergies']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="appele_par">J'ai été appelé par</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="appele_par" id="appele_par" value="<?php echo $donnees['appele_par']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="adresse" class="col-md-2 control-label">Adresse</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="adresse" value="<?php echo $donnees['adresse']; ?>">
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="permis">Ai-je le permis B?</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="permis" id="permisO" value="1" <?php echo ($donnees['permis'] == 1) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="permis" id="permisN" value="0" <?php echo ($donnees['permis'] == 0) ? 'checked' : ''; ?>> Non
+                        </label>
+                    </div>
+                </div>
+                <label class="col-form-label col-sm-6" for="ok_conduire">J'ai au moins 23 ans, je possède le permis de conduire depuis plus de 3 ans et je me sens capable de conduire en montagne un des véhicules de Fondacio, notamment pour transporter des jeunes</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="ok_conduire" id="ok_conduireO" value="1" <?php echo ($donnees['ok_conduire'] == 1) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="ok_conduire" id="ok_conduireN" value="0" <?php echo ($donnees['ok_conduire'] == 0) ? 'checked' : ''; ?>> Non
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="cp" class="col-md-2 control-label">Code postal</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="cp" value="<?php echo $donnees['cp']; ?>">
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-4" for="permis">Je possède un ou plusieurs diplôme(s)</label>
+                <div class="col-sm-8">
+                    <div class="form-check form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="diplome_bafd" value="1" id="diplome_bafd" <?php echo ($donnees['diplome_bafd'] == 1) ? 'checked' : ''; ?>>Titulaire du BAFD
+                        </label>
+                    </div>
+                    <div class="form-check form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="diplome_bafa" value="1" id="diplome_bafa" <?php echo ($donnees['diplome_bafa'] == 1) ? 'checked' : ''; ?>>Titulaire du BAFA
+                        </label>
+                    </div>
+                    <div class="form-check form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="diplome_secouriste" value="1" id="diplome_secouriste" <?php echo ($donnees['diplome_secouriste'] == 1) ? 'checked' : ''; ?>>PSC1 ou PSCE1 ou secouriste
+                        </label>
+                    </div>
+                    <div class="form-check form-check">
+                        <label class="form-check-label col-sm-8">
+                            <input class="form-check-input" type="checkbox" value="1">Si vous détenez ce diplôme, vous avez un diplôme de premiers secours : infirmier(ère), médecin, chirurgien(ne)-dentiste, pharmacien(ne), détenteur (trice) de l’AFPS, du BN ou le CSST. Si oui précisez lequel ou lesquels : <input type="text" class="form-control" name="diplome_ps" id="diplome_ps" value="<?php $donnees['diplome_ps'] ?>">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-check-label col-sm-8">
+                            <input class="form-check-input" type="checkbox" value="1" id="diplome_autre">Autre(s) diplôme(s) : <input type="text" class="form-control" name="diplome_autre" id="diplome_autre" value="<?php $donnees['diplome_autre'] ?>">
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="ville" class="col-md-2 control-label">Ville</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="ville" value="<?php echo $donnees['ville']; ?>">
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="stagiaire">Je suis</label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="stagiaire" id="stagiaireBAFA" value="BAFA" <?php echo ($donnees['stagiaire'] == "BAFA") ? 'checked' : ''; ?>> Stagiaire BAFA
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="stagiaire" id="stagiaireBAFD" value="BAFD" <?php echo ($donnees['stagiaire'] == "BAFD") ? 'checked' : ''; ?>> Stagiaire BAFD
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="pays" class="col-md-2 control-label">Pays</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="pays" value="<?php echo $donnees['pays']; ?>">
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="urgence_nom">Nom urgence</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="urgence_nom" id="urgence_nom" value="<?php echo $donnees['urgence_nom']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="urgence_prenom">Prénom urgence</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="urgence_prenom" id="urgence_prenom" value="<?php echo $donnees['urgence_prenom']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="tel_portable" class="col-md-2 control-label">Portable</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="tel_portable" value="<?php echo $donnees['tel_portable']; ?>">
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="urgence_portable">Téléphone urgence</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="urgence_portable" id="urgence_portable" value="<?php echo $donnees['urgence_portable']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="urgence_lien">Lien urgence</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="urgence_lien" id="urgence_lien" value="<?php echo $donnees['urgence_lien']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="mail" class="col-md-2 control-label">Mail</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="mail" value="<?php echo $donnees['mail']; ?>">
+
+            <h4>Transport</h4><br>
+
+            <h5>Aller</h5><br>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span></label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="aller_transport" id="aller_transport" required>
+                        <option value="sur_place" <?php echo ($donnees['aller_transport'] == 'sur_place') ? 'selected': ''; ?>>Je serai sur place</option>
+                        <option value="voiture" <?php echo ($donnees['aller_transport'] == 'voiture') ? 'selected': ''; ?>>Voiture personnelle</option>
+                        <option value="train" <?php echo ($donnees['aller_transport'] == 'train') ? 'selected': ''; ?>>Train</option>
+                        <option value="bus" <?php echo ($donnees['aller_transport'] == 'bus') ? 'selected': ''; ?>>Bus organisé par Fondacio</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="date_naissance" class="col-md-2 control-label">Date de naissance (aaaa-mm-jj)</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="date_naissance" value="<?php echo $donnees['date_naissance']; ?>">
+
+            <div class="form-group row" id="aller_train">
+                <label class="col-form-label col-sm-2" for="aller_train">Heure d'arrivée (train)</label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="aller_train" id="aller_train11h25" value="11h25" <?php echo ($donnees['aller_transport'] == 'train' && $donnees['aller_heure'] == '11h25') ? 'checked': ''; ?>> 11h25 (recommandé)
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="aller_train" id="aller_train14h25" value="14h25" <?php echo ($donnees['aller_transport'] == 'train' && $donnees['aller_heure'] == '14h25') ? 'checked': ''; ?>> 14h25 (si impossible à 11h25)
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="etudes" class="col-md-2 control-label">Etudes</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="etudes" value="<?php echo $donnees['etudes']; ?>">
+
+            <div class="form-group row" id="aller_ville">
+                <label class="col-form-label col-sm-2" for="aller_ville">Ville de départ (bus)</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="aller_ville" id="aller_bus_clear">
+                        <option value="" id="aller_bus_villes"></option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="taille" class="col-md-2 control-label">Taille</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="taille" value="<?php echo $donnees['taille']; ?>">
+
+            <h5>Retour</h5><br>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="retour_transport">Je repartirai du Mourtis en <span style="color: red">*</span></label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="retour_transport" id="retour_transport" required>
+                        <option value="voiture" <?php echo ($donnees['retour_transport'] == 'voiture') ? 'selected': ''; ?>>Voiture personnelle</option>
+                        <option value="train" <?php echo ($donnees['retour_transport'] == 'train') ? 'selected': ''; ?>>Train</option>
+                        <option value="bus" <?php echo ($donnees['retour_transport'] == 'bus') ? 'selected': ''; ?>>Bus organisé par Fondacio</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="poids" class="col-md-2 control-label">Poids</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="poids" value="<?php echo $donnees['poids']; ?>">
+
+            <div class="form-group row" id="retour_train">
+                <label class="col-form-label col-sm-2" for="retour_train">Heure de départ (train)</label>
+                <div class="col-sm-3">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="retour_train" id="retour_train11h25" value="11h25" <?php echo ($donnees['retour_transport'] == 'train' && $donnees['retour_heure'] == '11h25') ? 'checked': ''; ?>> 11h25 (recommandé)
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="retour_train" id="retour_train14h25" value="14h25" <?php echo ($donnees['retour_transport'] == 'train' && $donnees['retour_heure'] == '14h25') ? 'checked': ''; ?>> 14h25 (si impossible à 11h25)
+                        </label>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="tel_fixe" class="col-md-2 control-label">Téléphone fixe</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="tel_fixe" value="<?php echo $donnees['tel_fixe']; ?>">
+
+            <div class="form-group row" id="retour_ville">
+                <label class="col-form-label col-sm-2" for="retour_ville">Ville d'arrivée (bus)</label>
+                <div class="col-sm-3">
+                    <select class="form-control" name="retour_ville" id="retour_bus_clear">
+                        <option value="" id="retour_bus_villes" selected></option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="parents_nom" class="col-md-2 control-label">Nom parents</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="parents_nom" value="<?php echo $donnees['parents_nom']; ?>">
+
+            <div class="form-group">
+                <label for="chambre_num" class="col-md-2 col-form-label">Numéro chambre</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="chambre_num" value="<?php echo $donnees['chambre_num']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="parents_prenom" class="col-md-2 control-label">Prénom parents</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="parents_prenom" value="<?php echo $donnees['parents_prenom']; ?>">
+            <div class="form-group">
+                <label for="chambre_resp" class="col-md-2 col-form-label">Responsable chambre</label>
+                <div class="col-md-3">
+                    <label class="radio-inline">
+                        <input type="radio" name="chambre_resp" value="oui" <?php echo (!empty($donnees['chambre_resp']) && $donnees['chambre_resp'] == 'oui') ? 'checked' : ''; ?>> Oui
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="chambre_resp" value="non" <?php echo (!empty($donnees['chambre_resp']) && $donnees['chambre_resp'] == 'non') ? 'checked' : ''; ?>> Non
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="pere_portable" class="col-md-2 control-label">Portable père</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="pere_portable" value="<?php echo $donnees['pere_portable']; ?>">
+            <div class="form-group">
+                <label for="pg_num" class="col-md-2 col-form-label">Numéro PG</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="pg_num" value="<?php echo $donnees['pg_num']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="mere_portable" class="col-md-2 control-label">Portable mère</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="mere_portable" value="<?php echo $donnees['mere_portable']; ?>">
+            <div class="form-group">
+                <label for="pg_resp" class="col-md-2 col-form-label">Responsable PG</label>
+                <div class="col-md-3">
+                    <label class="radio-inline">
+                        <input type="radio" name="pg_resp" value="oui" <?php echo (!empty($donnees['pg_resp']) && $donnees['pg_resp'] == 'oui') ? 'checked' : ''; ?>> Oui
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="pg_resp" value="non" <?php echo (!empty($donnees['pg_resp']) && $donnees['pg_resp'] == 'non') ? 'checked' : ''; ?>> Non
+                    </label>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="parents_mail" class="col-md-2 control-label">Mail parents</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="parents_mail" value="<?php echo $donnees['parents_mail']; ?>">
+            <div class="form-group">
+                <label for="activite_mardi_creative" class="col-md-2 col-form-label">Acti créative mardi</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="activite_mardi_creative" id="activite_mardi_creative" value="<?php echo $donnees['activite_mardi_creative']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="parents_adresse" class="col-md-2 control-label">Adresse parents</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="parents_adresse" value="<?php echo $donnees['parents_adresse']; ?>">
+            <div class="form-group">
+                <label for="activite_mardi_sportive" class="col-md-2 col-form-label">Acti sportive mardi</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="activite_mardi_sportive" id="activite_mardi_sportive" value="<?php echo $donnees['activite_mardi_sportive']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="aller_transport" class="col-md-2 control-label">Transport aller</label>
-            <div class="col-md-3">
-                <select class="form-control" name="aller_transport">
-                    <option value="bus" <?php echo (!empty($donnees['aller_transport']) && $donnees['aller_transport'] == 'bus') ? 'selected' : ''; ?>>Bus organisé par Fondacio</option>
-                    <option value="train" <?php echo (!empty($donnees['aller_transport']) && $donnees['aller_transport'] == 'train') ? 'selected' : ''; ?>>Train</option>
-                    <option value="voiture" <?php echo (!empty($donnees['aller_transport']) && $donnees['aller_transport'] == 'voiture') ? 'selected' : ''; ?>>Voiture personnelle</option>
-                </select>
+            <div class="form-group">
+                <label for="activite_mercredi_creative" class="col-md-2 col-form-label">Acti créative mercredi</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="activite_mercredi_creative" id="activite_mercredi_creative" value="<?php echo $donnees['activite_mercredi_creative']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="aller_date" class="col-md-2 control-label">Date aller (aaaa-mm-jj)</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="aller_date" value="<?php echo $donnees['aller_date']; ?>">
+            <div class="form-group">
+                <label for="activite_mercredi_sportive" class="col-md-2 col-form-label">Acti sportive mercredi</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="activite_mercredi_sportive" id="activite_mercredi_sportive" value="<?php echo $donnees['activite_mercredi_sportive']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="aller_heure" class="col-md-2 control-label">Heure aller</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="aller_heure" value="<?php echo $donnees['aller_heure']; ?>">
+            <div class="form-group">
+                <label for="activite_jeudi_creative" class="col-md-2 col-form-label">Acti créative jeudi</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="activite_jeudi_creative" id="activite_jeudi_creative" value="<?php echo $donnees['activite_jeudi_creative']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="aller_ville" class="col-md-2 control-label">Ville aller</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="aller_ville" value="<?php echo $donnees['aller_ville']; ?>">
+            <div class="form-group">
+                <label for="activite_jeudi_sportive" class="col-md-2 col-form-label">Acti sportive jeudi</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="activite_jeudi_sportive" id="activite_jeudi_sportive" value="<?php echo $donnees['activite_jeudi_sportive']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="retour_transport" class="col-md-2 control-label">Transport retour</label>
-            <div class="col-md-3">
-                <select class="form-control" name="retour_transport">
-                    <option value="bus" <?php echo (!empty($donnees['retour_transport']) && $donnees['retour_transport'] == 'bus') ? 'selected' : ''; ?>>Bus organisé par Fondacio</option>
-                    <option value="train" <?php echo (!empty($donnees['retour_transport']) && $donnees['retour_transport'] == 'train') ? 'selected' : ''; ?>>Train</option>
-                    <option value="voiture" <?php echo (!empty($donnees['retour_transport']) && $donnees['retour_transport'] == 'voiture') ? 'selected' : ''; ?>>Voiture personnelle</option>
-                </select>
+            <div class="form-group">
+                <label for="activite_vendredi_creative" class="col-md-2 col-form-label">Acti creative vendredi</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="activite_vendredi_creative" id="activite_vendredi_creative" value="<?php echo $donnees['activite_vendredi_creative']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="retour_date" class="col-md-2 control-label">Date retour (aaaa-mm-jj)</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="retour_date" value="<?php echo $donnees['retour_date']; ?>">
+            <div class="form-group">
+                <label for="activite_vendredi_sportive" class="col-md-2 col-form-label">Acti sportive vendredi</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="activite_vendredi_sportive" id="activite_vendredi_sportive" value="<?php echo $donnees['activite_vendredi_sportive']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="retour_heure" class="col-md-2 control-label">Heure retour</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="retour_heure" value="<?php echo $donnees['retour_heure']; ?>">
+            <div class="form-group">
+                <label for="manquant" class="col-md-2 col-form-label">Manquant</label>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="manquant" value="<?php echo $donnees['manquant']; ?>">
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="retour_ville" class="col-md-2 control-label">Ville retour</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="retour_ville" value="<?php echo $donnees['retour_ville']; ?>">
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default">Sauvegarder</button>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="chambre_num" class="col-md-2 control-label">Numéro chambre</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="chambre_num" value="<?php echo $donnees['chambre_num']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="chambre_resp" class="col-md-2 control-label">Responsable chambre</label>
-            <div class="col-md-3">
-                <label class="radio-inline">
-                    <input type="radio" name="chambre_resp" value="oui" <?php echo (!empty($donnees['chambre_resp']) && $donnees['chambre_resp'] == 'oui') ? 'checked' : ''; ?>> Oui
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="chambre_resp" value="non" <?php echo (!empty($donnees['chambre_resp']) && $donnees['chambre_resp'] == 'non') ? 'checked' : ''; ?>> Non
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="pg_num" class="col-md-2 control-label">Numéro PG</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="pg_num" value="<?php echo $donnees['pg_num']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="pg_resp" class="col-md-2 control-label">Responsable PG</label>
-            <div class="col-md-3">
-                <label class="radio-inline">
-                    <input type="radio" name="pg_resp" value="oui" <?php echo (!empty($donnees['pg_resp']) && $donnees['pg_resp'] == 'oui') ? 'checked' : ''; ?>> Oui
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="pg_resp" value="non" <?php echo (!empty($donnees['pg_resp']) && $donnees['pg_resp'] == 'non') ? 'checked' : ''; ?>> Non
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="activite_mardi_creative" class="col-md-2 control-label">Acti créative mardi</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="activite_mardi_creative" id="activite_mardi_creative" value="<?php echo $donnees['activite_mardi_creative']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="activite_mardi_sportive" class="col-md-2 control-label">Acti sportive mardi</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="activite_mardi_sportive" id="activite_mardi_sportive" value="<?php echo $donnees['activite_mardi_sportive']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="activite_mercredi_creative" class="col-md-2 control-label">Acti créative mercredi</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="activite_mercredi_creative" id="activite_mercredi_creative" value="<?php echo $donnees['activite_mercredi_creative']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="activite_mercredi_sportive" class="col-md-2 control-label">Acti sportive mercredi</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="activite_mercredi_sportive" id="activite_mercredi_sportive" value="<?php echo $donnees['activite_mercredi_sportive']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="activite_jeudi_creative" class="col-md-2 control-label">Acti créative jeudi</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="activite_jeudi_creative" id="activite_jeudi_creative" value="<?php echo $donnees['activite_jeudi_creative']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="activite_jeudi_sportive" class="col-md-2 control-label">Acti sportive jeudi</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="activite_jeudi_sportive" id="activite_jeudi_sportive" value="<?php echo $donnees['activite_jeudi_sportive']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="activite_vendredi_creative" class="col-md-2 control-label">Acti creative vendredi</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="activite_vendredi_creative" id="activite_vendredi_creative" value="<?php echo $donnees['activite_vendredi_creative']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="activite_vendredi_sportive" class="col-md-2 control-label">Acti sportive vendredi</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="activite_vendredi_sportive" id="activite_vendredi_sportive" value="<?php echo $donnees['activite_vendredi_sportive']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="manquant" class="col-md-2 control-label">Manquant</label>
-            <div class="col-md-3">
-                <input type="text" class="form-control" name="manquant" value="<?php echo $donnees['manquant']; ?>">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-default">Sauvegarder</button>
-            </div>
-        </div>
-    </form>
+        </form>
+
+    <?php
+        }
+
+        else {
+
+        }
+    ?>
 
     <script>
     $(function() {
-        $( "#activite_mardi_creative" ).autocomplete({
+
+        // Gestion des activités
+
+        /*$( "#activite_mardi_creative" ).autocomplete({
             source: 'search.php?contexte=modif_activite&type=creative',
             autoFocus: true
         });
@@ -467,6 +504,92 @@ if (!empty($_GET['action'])) {
         $( "#activite_vendredi_sportive" ).autocomplete({
             source: 'search.php?contexte=modif_activite&type=sportive',
             autoFocus: true
+        });*/
+
+        // Gestion des transports
+
+        if ($('#aller_transport').val() == 'bus') {
+            $.ajax({
+                type: 'POST',
+                url: '/ajax/villes_bus.php',
+                data: {
+                    'camp': $('#camp').find(":selected").val(),
+                    'aller_retour': 'aller',
+                    'select_ville': <?php echo (!empty($data['aller_ville'])) ? '\''.$data['aller_ville'].'\'' : '\'\''; ?>
+                },
+                success: function(data){
+                    $("#aller_bus_villes").after(data);
+                }
+            });
+            $('#aller_train').hide();
+        };
+
+        if ($('#aller_transport').val() == 'train') {
+            $('#aller_train').show();
+            $('#aller_ville').hide();
+        }
+
+        $('#aller_transport').change(function() {
+            if (this.value == "train" || this.value == "voiture" || this.value == "sur_place") {
+                $('#aller_bus_clear option').remove();
+                $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
+            }
+            if (this.value == "bus") {
+                $.ajax({
+                    type: 'POST',
+                    url: '/ajax/villes_bus.php',
+                    data: {
+                        'camp': <?php echo $donnees['camp'] ?>,
+                        'aller_retour': 'aller',
+                        'select_ville': <?php echo (!empty($data['aller_ville'])) ? '\''.$data['aller_ville'].'\'' : '\'\''; ?>
+                    },
+                    success: function(data){
+                        $("#aller_bus_villes").after(data);
+                    }
+                });
+            }
+        });
+
+        if ($('#retour_transport').val() == 'bus') {
+            $.ajax({
+                type: 'POST',
+                url: '/ajax/villes_bus.php',
+                data: {
+                    'camp': $('#camp').find(":selected").val(),
+                    'aller_retour': 'retour',
+                    'select_ville': <?php echo (!empty($data['retour_ville'])) ? '\''.$data['retour_ville'].'\'' : '\'\''; ?>
+                },
+                success: function(data){
+                    $("#retour_bus_villes").after(data);
+                }
+            });
+            $('#retour_train').hide();
+        }
+
+        if ($('#retour_transport').val() == 'train') {
+            $('#retour_train').show();
+            $('#retour_ville').hide();
+        }
+
+        $('#retour_transport').change(function() {
+            if (this.value == "train" || this.value == "voiture") {
+                $('#retour_bus_clear option').remove();
+                $('#retour_bus_clear').append('<option value="" id="retour_bus_villes" selected></option>');
+            }
+            if (this.value == "bus") {
+                $.ajax({
+                    type: 'POST',
+                    url: '/ajax/villes_bus.php',
+                    data: {
+                        'camp': <?php echo $donnees['camp'] ?>,
+                        'aller_retour': 'retour',
+                        'select_ville': <?php echo (!empty($data['retour_ville'])) ? '\''.$data['retour_ville'].'\'' : '\'\''; ?>
+                    },
+                    success: function(data){
+                        $("#retour_bus_villes").after(data);
+                    }
+                });
+            }
         });
     });
     </script>
@@ -654,10 +777,10 @@ else {
         </thead>
         <tbody>
             <?php
-                foreach ($donnees as $id_participant => $data) {
+                foreach ($donnees as $data) {
                     $age = age($data['date_naissance']);
                     echo '<tr>
-                            <td><a href="participants.php?action=edit&id_participant='.$id_participant.'">'.$data['nom'].'</a></td>
+                            <td><a href="participants.php?action=edit&id='.$data['id'].'&type='.$data['type'].'">'.$data['nom'].'</a></td>
                             <td>'.$data['prenom'].'</td>
                             <td>'.ucfirst($data['type']).'</td>
                             <td>'.$data['tel_portable'].'</td>
