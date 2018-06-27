@@ -449,22 +449,13 @@ function send_mail_confirmation_jeune($data, $infos_camp) {
 
 Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir Sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.convert_date($infos_camp['date_debut'], '-', '/').' au '.convert_date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
 
-Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>';
+Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
-    if ($infos_camp['numero'] == 3) {
-        $str .= 'Christine Boulbès<br>
-        Fondacio camp RSV n°3<br>
-        Le Sénèque, Bât. B1<br>
-        2 avenue Georges Brassens<br>
-        13100 AIX-EN-PROVENCE<br><br>';
-    }
-    else {
-        $str .= 'Fondacio camp RSV n°'.$infos_camp['numero'].'<br>
-        2 rue de l\'Esvière<br>
-        49100 ANGERS<br><br>';
-    }
+Fondacio – Camps Réussir Sa Vie<br>
+Les Pierres Blanches<br>
+31440 Boutx le Mourtis<br><br>
 
-    $str .= 'Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
+Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
 Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>';
 
     if (isset($data['prepa']) && $data['prepa']) {
