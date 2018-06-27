@@ -23,13 +23,10 @@ if (!empty($_GET['action'])) {
             $titre = 'Fiche de '.$donnees['prenom'].' '.$donnees['nom'];
             break;
 
-        case 'add':
-            $titre = 'Ajout d\'un participant';
-            break;
-
     }
-    if (!empty($_POST) && ($_GET['action'] == 'add' || $_GET['action'] == 'edit')) {
-        update_participant($_GET['action'], $_POST, $_GET['id_participant']);
+    if (!empty($_POST)) {
+        print_rh($_POST);
+        update_participant($_GET['id'], $_GET['type'], $_POST);
     }
 
     $title = 'Participants';
@@ -53,6 +50,26 @@ if (!empty($_GET['action'])) {
                 <label for="camp" class="col-md-1 col-form-label">Camp</label>
                 <div class="col-md-1">
                     <input type="text" class="form-control" name="camp" value="<?php echo $donnees['camp']; ?>" <?php echo ($_GET['action'] == 'edit') ? 'disabled' : ''; ?>>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-2">Pièces du dossier recues</div>
+                <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="da_cb" id="da_cb" value="1" <?php echo ($donnees['da_cb']) ? 'checked': ''; ?>> Convention de bénévolat
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="da_di" id="da_di" value="1" <?php echo ($donnees['da_di']) ? 'checked': ''; ?>> DI
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="da_cm" id="da_cm" value="1" <?php echo ($donnees['da_cm']) ? 'checked': ''; ?>> Certificat médial
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="da_d" id="da_d" value="1" <?php echo ($donnees['da_d']) ? 'checked': ''; ?>> Diplôme
+                        </label>
+                    </div>
                 </div>
             </div>
 
@@ -363,99 +380,66 @@ if (!empty($_GET['action'])) {
                         <option value="" id="retour_bus_villes" selected></option>
                     </select>
                 </div>
-            </div>
+            </div><br>
 
-            <div class="form-group">
-                <label for="chambre_num" class="col-md-2 col-form-label">Numéro chambre</label>
-                <div class="col-md-3">
+            <div class="form-group  row">
+                <label for="chambre_num" class="col-md-2 col-form-label">Chambre</label>
+                <div class="col-md-2">
                     <input type="text" class="form-control" name="chambre_num" value="<?php echo $donnees['chambre_num']; ?>">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="chambre_resp" class="col-md-2 col-form-label">Responsable chambre</label>
-                <div class="col-md-3">
-                    <label class="radio-inline">
-                        <input type="radio" name="chambre_resp" value="oui" <?php echo (!empty($donnees['chambre_resp']) && $donnees['chambre_resp'] == 'oui') ? 'checked' : ''; ?>> Oui
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="chambre_resp" value="non" <?php echo (!empty($donnees['chambre_resp']) && $donnees['chambre_resp'] == 'non') ? 'checked' : ''; ?>> Non
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="pg_num" class="col-md-2 col-form-label">Numéro PG</label>
-                <div class="col-md-3">
+                <label for="pg_num" class="col-md-2 col-form-label">Petit groupe</label>
+                <div class="col-md-2">
                     <input type="text" class="form-control" name="pg_num" value="<?php echo $donnees['pg_num']; ?>">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="pg_resp" class="col-md-2 col-form-label">Responsable PG</label>
-                <div class="col-md-3">
-                    <label class="radio-inline">
-                        <input type="radio" name="pg_resp" value="oui" <?php echo (!empty($donnees['pg_resp']) && $donnees['pg_resp'] == 'oui') ? 'checked' : ''; ?>> Oui
-                    </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="pg_resp" value="non" <?php echo (!empty($donnees['pg_resp']) && $donnees['pg_resp'] == 'non') ? 'checked' : ''; ?>> Non
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
+
+            <div class="form-group row">
                 <label for="activite_mardi_creative" class="col-md-2 col-form-label">Acti créative mardi</label>
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="activite_mardi_creative" id="activite_mardi_creative" value="<?php echo $donnees['activite_mardi_creative']; ?>">
                 </div>
-            </div>
-            <div class="form-group">
                 <label for="activite_mardi_sportive" class="col-md-2 col-form-label">Acti sportive mardi</label>
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="activite_mardi_sportive" id="activite_mardi_sportive" value="<?php echo $donnees['activite_mardi_sportive']; ?>">
                 </div>
             </div>
-            <div class="form-group">
+
+            <div class="form-group row">
                 <label for="activite_mercredi_creative" class="col-md-2 col-form-label">Acti créative mercredi</label>
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="activite_mercredi_creative" id="activite_mercredi_creative" value="<?php echo $donnees['activite_mercredi_creative']; ?>">
                 </div>
-            </div>
-            <div class="form-group">
                 <label for="activite_mercredi_sportive" class="col-md-2 col-form-label">Acti sportive mercredi</label>
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="activite_mercredi_sportive" id="activite_mercredi_sportive" value="<?php echo $donnees['activite_mercredi_sportive']; ?>">
                 </div>
             </div>
-            <div class="form-group">
+
+            <div class="form-group row">
                 <label for="activite_jeudi_creative" class="col-md-2 col-form-label">Acti créative jeudi</label>
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="activite_jeudi_creative" id="activite_jeudi_creative" value="<?php echo $donnees['activite_jeudi_creative']; ?>">
                 </div>
-            </div>
-            <div class="form-group">
                 <label for="activite_jeudi_sportive" class="col-md-2 col-form-label">Acti sportive jeudi</label>
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="activite_jeudi_sportive" id="activite_jeudi_sportive" value="<?php echo $donnees['activite_jeudi_sportive']; ?>">
                 </div>
             </div>
-            <div class="form-group">
+
+            <div class="form-group row">
                 <label for="activite_vendredi_creative" class="col-md-2 col-form-label">Acti creative vendredi</label>
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="activite_vendredi_creative" id="activite_vendredi_creative" value="<?php echo $donnees['activite_vendredi_creative']; ?>">
                 </div>
-            </div>
-            <div class="form-group">
                 <label for="activite_vendredi_sportive" class="col-md-2 col-form-label">Acti sportive vendredi</label>
                 <div class="col-md-3">
                     <input type="text" class="form-control" name="activite_vendredi_sportive" id="activite_vendredi_sportive" value="<?php echo $donnees['activite_vendredi_sportive']; ?>">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="manquant" class="col-md-2 col-form-label">Manquant</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="manquant" value="<?php echo $donnees['manquant']; ?>">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Sauvegarder</button>
+
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
                 </div>
             </div>
         </form>
@@ -643,9 +627,6 @@ else {
 
     <h2>Liste des participants</h2>
     <div class="form-group row">
-        <div class="col-sm-1">
-            <button type="button" class="btn btn-primary" onclick="location.href = 'participants.php?action=add';">Ajouter</button>
-        </div>
         <div class="col-sm-6">
             <button type="button" class="btn btn-secondary" onclick="location.href = 'export_csv.php?contexte=participants';">Exporter</button>
         </div>
@@ -780,7 +761,7 @@ else {
                 foreach ($donnees as $data) {
                     $age = age($data['date_naissance']);
                     echo '<tr>
-                            <td><a href="participants.php?action=edit&id='.$data['id'].'&type='.$data['type'].'">'.$data['nom'].'</a></td>
+                            <td><a href="participants.php?action=edit&id='.$data['id'].'&type='.$data['type'].'">'.strtoupper($data['nom']).'</a></td>
                             <td>'.$data['prenom'].'</td>
                             <td>'.ucfirst($data['type']).'</td>
                             <td>'.$data['tel_portable'].'</td>

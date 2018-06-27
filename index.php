@@ -5,9 +5,6 @@ require_once 'include/init.php';
 $title = 'Accueil';
 require_once 'include/head.php';
 
-if (empty($_SESSION['camp'])) {
-    $_SESSION['camp'] = 1;
-}
 if (!empty($_POST['camp'])) {
     $_SESSION['camp'] = $_POST['camp'];
 }

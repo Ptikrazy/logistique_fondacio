@@ -1300,6 +1300,41 @@ function get_anniversaires() {
 
 }
 
+function get_transports($filtres = array()) {
+
+    global $bdd;
+    $req_filtres . '';
+    if (!empty($filtres)) {
+        foreach ($filtres as $champ => $value) {
+            if ($champ == 'prepa') {
+                $req_filtres .= ' AND prepa = "'.$value.'"';
+            }
+            if ($champ == 'aller_retour' && !empty($filtres['moyen_transport'])) {
+                $req_filtres .= ' AND '.$value.'_transport = "'.$filtres['moyen_transport'].'"';
+            }
+            if ($champ == 'ville' && !empty($value)) {
+                $req_filtres .= ' AND '.$filtres['aller_retour'].'_ville = "'.$value.'"';
+            }
+        }
+    }
+
+    $req = '
+    SELECT id_jeune AS id, nom, prenom, "Jeune" AS type, tel_portable, mere_portable AS ref_portable, '.$filtres['aller_retour'].'_transport AS moyen_transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM jeunes
+            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
+        UNION
+    SELECT id_adulte AS id, nom, prenom, "Adulte" AS type, tel_portable, urgence_portable AS ref_portable, '.$filtres['aller_retour'].'_transport AS moyen_transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM adultes
+            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
+    ORDER BY type, moyen_transport, ville, nom';
+
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+}
+
 function get_participants($filtres = array()) {
 
     global $bdd;
@@ -1341,40 +1376,51 @@ function get_participants($filtres = array()) {
     return $data;
 }
 
-function get_transports($filtres = array()) {
+function get_participant($id, $type) {
 
     global $bdd;
 
-    $req_filtres . '';
-    if (!empty($filtres)) {
-        foreach ($filtres as $champ => $value) {
-            if ($champ == 'prepa') {
-                $req_filtres .= ' AND prepa = "'.$value.'"';
-            }
-            if ($champ == 'aller_retour' && !empty($filtres['moyen_transport'])) {
-                $req_filtres .= ' AND '.$value.'_transport = "'.$filtres['moyen_transport'].'"';
-            }
-            if ($champ == 'ville' && !empty($value)) {
-                $req_filtres .= ' AND '.$filtres['aller_retour'].'_ville = "'.$value.'"';
-            }
-        }
-    }
-
-    $req = '
-    SELECT id_jeune AS id, nom, prenom, "Jeune" AS type, tel_portable, mere_portable AS ref_portable, '.$filtres['aller_retour'].'_transport AS moyen_transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM jeunes
-            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
-        UNION
-    SELECT id_adulte AS id, nom, prenom, "Adulte" AS type, tel_portable, urgence_portable AS ref_portable, '.$filtres['aller_retour'].'_transport AS moyen_transport, '.$filtres['aller_retour'].'_ville AS ville, '.$filtres['aller_retour'].'_date AS date, '.$filtres['aller_retour'].'_heure AS heure FROM adultes
-            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
-    ORDER BY type, moyen_transport, ville, nom';
-
+    $req = 'SELECT * FROM '.$type.'s WHERE id_'.$type.' = '.$id;
     $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[] = $d;
-    }
+    $data = $res->fetch();
     $res->closeCursor();
 
     return $data;
+}
+
+function update_participant ($id, $type, $donnees) {
+
+    global $bdd;
+
+    $req  = 'UPDATE jeunes SET ';
+    end($data);
+    $last = key($data);
+    reset($data);
+    foreach ($data as $champ => $value) {
+        if ($champ == 'aller_bus') {
+            $req .= 'aller_ville = "'.$value.'"';
+        }
+        if ($champ == 'aller_train') {
+            $req .= 'aller_heure = "'.$value.'"';
+        }
+        else {
+            if ($value == 'NULL') {
+                $req .= $champ.' = NULL';
+            }
+            else {
+                $req .= $champ.' = "'.$value.'"';
+            }
+        }
+
+        if ($champ != $last) {
+            $req .= ', ';
+        }
+    }
+    $req .= ' WHERE id_jeune = '.$id;
+    $res = $bdd->query($req);
+    $res->closeCursor();
+    header('Location: participants.php?action=edit&id_participant='.$id);
+
 }
 
 function delete_participant ($id, $type) {
@@ -1386,19 +1432,6 @@ function delete_participant ($id, $type) {
     $res->closeCursor();
     header('Location: participants.php');
 
-}
-
-function get_participant($id, $type) {
-
-    global $bdd;
-
-    $req = 'SELECT * FROM '.$type.'s WHERE id_'.$type.' = '.$id;
-    print_rh($req);
-    $res = $bdd->query($req);
-    $data = $res->fetch();
-    $res->closeCursor();
-
-    return $data;
 }
 
 /// OLD ///
@@ -1429,45 +1462,6 @@ function get_activite($id) {
     $res->closeCursor();
 
     return $data;
-}
-
-function update_participant ($action, $donnees, $id) {
-
-    global $bdd;
-
-    $req = 'participants SET ';
-    end($donnees);
-    $last = key($donnees);
-    foreach ($donnees as $key => $value) {
-        if (!in_array($key, array('activite_mardi_creative', 'activite_mardi_sportive', 'activite_mercredi_creative', 'activite_mercredi_sportive', 'activite_jeudi_creative', 'activite_jeudi_sportive', 'activite_vendredi_creative', 'activite_vendredi_sportive'))) {
-            $req .= $key.' = "'.$value.'"';
-            if ($key != $last) {
-                $req .= ', ';
-            }
-        }
-        else {
-            if ($action != 'add') {
-                $jour = explode('_', $key);
-                $req2 = 'UPDATE inscriptions SET activite = "'.$value.'" WHERE id_jeune = '.$id.' AND jour = "'.$jour[1].'" AND type = "'.$jour[2].'"';
-                $res2 = $bdd->query($req2);
-                $res2->closeCursor();
-            }
-        }
-    }
-    if ($action == 'add') {
-        $req = 'INSERT INTO '.$req;
-    }
-    else {
-        $req = 'UPDATE '.$req.' WHERE id_participant = '.$id;
-    }
-    $res = $bdd->query($req);
-    $res->closeCursor();
-
-    if ($action == 'add') {
-        $id = $bdd->lastInsertId();
-    }
-    header('Location: participants.php?action=edit&id_participant='.$id);
-
 }
 
 function update_activite ($action, $donnees, $id) {

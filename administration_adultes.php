@@ -169,12 +169,7 @@ else {
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="da_d" id="da_d" value="1" <?php echo ($data['da_d']) ? 'checked': ''; ?>> Diplôme
-                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <?php
-                            if ($data['ancien']) {
-                                echo '<label class="form-check-label">(Voir '.date('Y', strtotime('-1 year')).' pour BN + photo)</label>';
-                            }
-                        ?>
+                        </label>
                     </div>
                 </div>
             </div>
