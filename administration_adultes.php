@@ -1561,7 +1561,7 @@ else {
                 if (!empty($data['desistement'])) {
                     $color = '#DC0B0B';
                 }
-                else if (!$data['da_complet'] || empty($data['rgt_recu']) || ($data['paiement_declare'] > $data['rgt_montant'])) {
+                else if ($data['paiement_declare'] != 0 && (!$data['da_complet'] || empty($data['rgt_recu']) || ($data['paiement_declare'] > $data['rgt_montant']))) {
                     $color = '#EFEF07';
                 }
 
