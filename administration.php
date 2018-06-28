@@ -938,12 +938,12 @@ else {
                 }
 
                 if ($data['retour_transport'] == 'voiture') {
-                    echo "('#retour_voiture').show();";
+                    echo "$('#retour_voiture').show();";
                 }
                 if ($data['retour_transport'] == 'train') {
                     echo "$('#retour_train').show();";
                 }
-                else {
+                if ($data['retour_transport'] == 'bus') {
                     echo "$('#retour_ville').show();";
                 }
 
