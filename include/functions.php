@@ -1379,11 +1379,11 @@ function get_participant($id, $type) {
     return $data;
 }
 
-function update_participant ($id, $type, $donnees) {
+function update_participant ($id, $type, $data) {
 
     global $bdd;
 
-    $req  = 'UPDATE jeunes SET ';
+    $req  = 'UPDATE '.$type.'s SET ';
     end($data);
     $last = key($data);
     reset($data);
@@ -1407,10 +1407,11 @@ function update_participant ($id, $type, $donnees) {
             $req .= ', ';
         }
     }
-    $req .= ' WHERE id_jeune = '.$id;
+    $req .= ' WHERE id_'.$type.' = '.$id;
     $res = $bdd->query($req);
     $res->closeCursor();
-    header('Location: participants.php?action=edit&id_participant='.$id);
+    $_SESSION['edit_ok'] = 1;
+    redirect('participants.php?action=edit&id='.$id.'&type='.$type);
 
 }
 
@@ -1418,10 +1419,10 @@ function delete_participant ($id, $type) {
 
     global $bdd;
 
-    $req = 'DELETE FROM '.$type.' WHERE id_'.$type.' = '.$id;
+    $req = 'DELETE FROM '.$type.'s WHERE id_'.$type.' = '.$id;
     $res = $bdd->query($req);
     $res->closeCursor();
-    header('Location: participants.php');
+    redirect('participants.php');
 
 }
 

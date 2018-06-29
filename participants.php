@@ -5,12 +5,20 @@ require_once 'include/init.php';
 ////////// AJOUT / EDITION / SUPPRESSION D'UN PARTICIPANT //////////
 
 if (!empty($_GET['action'])) {
+
+    $title = 'Participants';
+    require_once 'include/head.php';
+
     switch ($_GET['action']) {
         case 'del':
-            delete_participant($_GET['id_participant']);
+            delete_participant($_GET['id'], $_GET['type']);
             break;
 
         case 'edit':
+            if (isset($_SESSION['edit_ok'])) {
+                echo '<script>swal("Fiche mise à jour avec succès !","","success")</script>';
+                unset($_SESSION['edit_ok']);
+            }
             $donnees = get_participant($_GET['id'], $_GET['type']);
             /*$donnees['activite_mardi_creative'] = get_historique($_GET['id_participant'], 'mardi', 'creative');
             $donnees['activite_mardi_sportive'] = get_historique($_GET['id_participant'], 'mardi', 'sportive');
@@ -25,12 +33,8 @@ if (!empty($_GET['action'])) {
 
     }
     if (!empty($_POST)) {
-        print_rh($_POST);
         update_participant($_GET['id'], $_GET['type'], $_POST);
     }
-
-    $title = 'Participants';
-    require_once 'include/head.php';
 
 ?>
     <h2><?php echo $titre; ?></h2>
