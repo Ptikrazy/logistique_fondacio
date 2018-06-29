@@ -626,13 +626,15 @@ else {
     }
 
     $donnees = get_participants($_SESSION['filtres_participants']);
+    $_SESSION['participants_donnees'] = $donnees;
+    $_SESSION['participants_legende'] = array('ID', 'Nom', 'Prénom', 'Type', 'Portable', 'Âge', 'Civilité', 'Ancien', 'Prépa', 'Service', 'PG', 'Chambre');
 
 ?>
 
     <h2>Liste des participants</h2>
     <div class="form-group row">
         <div class="col-sm-6">
-            <button type="button" class="btn btn-secondary" onclick="location.href = 'export_csv.php?contexte=participants';">Exporter</button>
+            <button type="button" class="btn btn-secondary" onclick="location.href = 'exports/export_csv.php?contexte=participants';">Exporter</button>
         </div>
     </div>
 

@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-require_once 'include/functions.php';
+require_once '../include/functions.php';
 
 header('Content-Type: application/excel');
 header('Content-Disposition: attachment; filename="export_participants.csv"');
@@ -14,7 +14,7 @@ $donnees = $_SESSION[$_GET['contexte'].'_donnees'];
 
 fputcsv($f, $legende, ';');
 
-foreach ($donnees as $value) {
+foreach ($donnees as $champ => $value) {
     $value['date_naissance'] = age($value['date_naissance']);
     fputcsv($f, $value, ';');
 }
