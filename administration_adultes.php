@@ -1557,12 +1557,22 @@ else {
             foreach ($inscrits as $id_adulte => $data) {
 
                 $color = '#39CA1A';
+                $solde = $data['rgt_montant'] - $data['paiement_declare'];
 
                 if (!empty($data['desistement'])) {
                     $color = '#DC0B0B';
                 }
-                else if ($data['paiement_declare'] != 0 && (!$data['da_complet'] || empty($data['rgt_recu']) || ($data['paiement_declare'] > $data['rgt_montant']))) {
-                    $color = '#EFEF07';
+                else if ($data['paiement_declare'] != 0) {
+                    if ($data['da_complet']) {
+                        if ($solde < 0) {
+                            $color = '#FFA31A';
+                        }
+                    }
+                    else {
+                        if (empty($data['rgt_recu']) || ($data['paiement_declare'] > $data['rgt_montant'])) {
+                            $color = '#EFEF07';
+                        }
+                    }
                 }
 
                 $da_complet = 'Non';
