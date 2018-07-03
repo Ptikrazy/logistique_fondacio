@@ -1,14 +1,14 @@
 <?php
 
-require_once 'include/init.php';
+require_once '../include/init.php';
 
 $data = array();
 
 if ($_GET['contexte'] == 'remplissage') {
-    $req = 'SELECT id_participant, nom, prenom FROM participants WHERE camp = '.$_SESSION['camp'].' AND (prenom LIKE "%'.$_GET['term'].'%" OR nom LIKE "%'.$_GET['term'].'%")';
+    $req = 'SELECT id_'.$_GET['type'].', nom, prenom FROM '.$_GET['type'].'s WHERE camp = '.$_SESSION['camp'].' AND (prenom LIKE "%'.$_GET['term'].'%" OR nom LIKE "%'.$_GET['term'].'%")';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
-        $data[] = $d['nom'].' '.$d['prenom'].' - '.$d['id_participant'];
+        $data[] = $d['nom'].' '.$d['prenom'].' - '.$d['id_'.$_GET['type']];
     }
 }
 

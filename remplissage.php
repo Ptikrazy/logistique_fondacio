@@ -89,8 +89,8 @@ if (!empty($_POST)) {
 
 <h2>Remplissage</h2>
 
-<form class="form-horizontal" action="" method="GET">
-    <div class="form-group">
+<form action="" method="GET">
+    <div class="form-group row">
         <div class="col-md-3">
             <select class="form-control" name="remplissage">
                 <option value='pg' <?php echo (!empty($_GET['remplissage']) && $_GET['remplissage'] == 'pg') ? 'selected' : ''; ?>>Petits groupes</option>
@@ -99,9 +99,9 @@ if (!empty($_POST)) {
             </select>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group row">
         <div class="col-sm-10">
-            <button type="submit" class="btn btn-default">Remplir</button>
+            <button type="submit" class="btn btn-primary">Remplir</button>
         </div>
     </div>
 </form>
@@ -113,7 +113,7 @@ if (!empty($_GET['remplissage'])) {
 
 ?>
 
-        <form class="form-horizontal" action="" method="POST">
+        <form action="" method="POST">
             <div class="form-group">
                     <label for="parrain" class="col-md-1 col-form-label">Parrain</label>
                     <div class="col-md-5">
@@ -153,46 +153,46 @@ if (!empty($_GET['remplissage'])) {
 
 ?>
 
-        <form class="form-horizontal" action="" method="POST">
-            <div class="form-group">
-                    <label for="pg_num" class="col-md-1 col-form-label">N° PG</label>
-                    <div class="col-md-1">
-                        <input type="text" class="form-control" name="pg_num" id="pg_num">
-                    </div>
+        <form action="" method="POST">
+            <div class="form-group row">
+                <label for="pg_num" class="col-md-1 col-form-label">N° PG</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" name="pg_num" id="pg_num" required>
                 </div>
-                <div class="form-group">
-                    <label for="pg_resp" class="col-md-1 col-form-label">Responsable</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="pg_resp" id="pg_resp">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="pg_resp" class="col-md-1 col-form-label">Responsable</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="pg_resp" id="pg_resp">
                 </div>
-                <div class="form-group">
-                    <label for="jeune_1" class="col-md-1 col-form-label">Jeune 1</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="jeune_1" id="jeune_1">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="jeune_1" class="col-md-1 col-form-label">Jeune 1</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_1" id="jeune_1">
                 </div>
-                <div class="form-group">
-                    <label for="jeune_2" class="col-md-1 col-form-label">Jeune 2</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="jeune_2" id="jeune_2">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="jeune_2" class="col-md-1 col-form-label">Jeune 2</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_2" id="jeune_2">
                 </div>
-                <div class="form-group">
-                    <label for="jeune_3" class="col-md-1 col-form-label">Jeune 3</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="jeune_3" id="jeune_3">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="jeune_3" class="col-md-1 col-form-label">Jeune 3</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_3" id="jeune_3">
                 </div>
-                <div class="form-group">
-                    <label for="jeune_4" class="col-md-1 col-form-label">Jeune 4</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="jeune_4" id="jeune_4">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="jeune_4" class="col-md-1 col-form-label">Jeune 4</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_4" id="jeune_4">
                 </div>
-            <div class="form-group">
+            </div>
+            <div class="form-group row">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-default">Sauvegarder</button>
+                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
                 </div>
             </div>
         </form>
@@ -200,23 +200,23 @@ if (!empty($_GET['remplissage'])) {
         <script>
         $(function() {
             $( "#pg_resp" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=jeune',
                 autoFocus: true
             });
             $( "#jeune_1" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=jeune',
                 autoFocus: true
             });
             $( "#jeune_2" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=jeune',
                 autoFocus: true
             });
             $( "#jeune_3" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=jeune',
                 autoFocus: true
             });
             $( "#jeune_4" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=jeune',
                 autoFocus: true
             });
         });
@@ -229,80 +229,99 @@ if (!empty($_GET['remplissage'])) {
 
 ?>
 
-        <form class="form-horizontal" action="" method="POST">
-            <div class="form-group">
-                    <label for="chambre_num" class="col-md-1 col-form-label">N° Chambre</label>
-                    <div class="col-md-1">
-                        <input type="text" class="form-control" name="chambre_num" id="chambre_num">
+        <form action="" method="POST">
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="type">Type</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="type" value="adulte"> Adulte
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="type" value="jeune"> Jeune
+                        </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="chambre_resp" class="col-md-1 col-form-label">Responsable</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="chambre_resp" id="chambre_resp">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="chambre_num" class="col-md-2 col-form-label">N° Chambre</label>
+                <div class="col-md-1">
+                    <input type="text" class="form-control" name="chambre_num" id="chambre_num">
                 </div>
-                <div class="form-group">
-                    <label for="jeune_1" class="col-md-1 col-form-label">Jeune 1</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="jeune_1" id="jeune_1">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="chambre_resp" class="col-md-2 col-form-label">Responsable</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="chambre_resp" id="chambre_resp">
                 </div>
-                <div class="form-group">
-                    <label for="jeune_2" class="col-md-1 col-form-label">Jeune 2</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="jeune_2" id="jeune_2">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="jeune_1" class="col-md-2 col-form-label">Jeune 1</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_1" id="jeune_1">
                 </div>
-                <div class="form-group">
-                    <label for="jeune_3" class="col-md-1 col-form-label">Jeune 3</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="jeune_3" id="jeune_3">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="jeune_2" class="col-md-2 col-form-label">Jeune 2</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_2" id="jeune_2">
                 </div>
-                <div class="form-group">
-                    <label for="jeune_4" class="col-md-1 col-form-label">Jeune 4</label>
-                    <div class="col-md-5">
-                        <input type="text" class="form-control" name="jeune_4" id="jeune_4">
-                    </div>
+            </div>
+            <div class="form-group row">
+                <label for="jeune_3" class="col-md-2 col-form-label">Jeune 3</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_3" id="jeune_3">
                 </div>
-                <div class="form-group">
-                    <label for="jeune_5" class="col-md-1 col-form-label">Jeune 5</label>
-                    <div class="col-md-5">
+            </div>
+            <div class="form-group row">
+                <label for="jeune_4" class="col-md-2 col-form-label">Jeune 4</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_4" id="jeune_4">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="jeune_5" class="col-md-2 col-form-label">Jeune 5</label>
+                <div class="col-md-5">
                         <input type="text" class="form-control" name="jeune_5" id="jeune_5">
-                    </div>
                 </div>
-            <div class="form-group">
+            </div>
+            <div class="form-group row">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-default">Sauvegarder</button>
+                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
                 </div>
             </div>
         </form>
 
         <script>
+        var type;
         $(function() {
+            $('input[name=type]').change(function() {
+                type = $(this).val();
+            });
             $( "#chambre_resp" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_1" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_2" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_3" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_4" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_5" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=' + type,
                 autoFocus: true
             });
         });

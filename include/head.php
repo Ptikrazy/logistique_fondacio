@@ -8,9 +8,11 @@
 
         <link href="/include/css/bootstrap-4.0.0.min.css" rel="stylesheet">
         <link href="/include/css/swal2.min.css" rel="stylesheet">
+        <link href="/include/css/jquery-ui-1.12.1.min.css" rel="stylesheet">
         <link href="/include/css/main.css" rel="stylesheet">
 
         <script src="/include/js/jquery-3.2.1.min.js"></script>
+        <script src="/include/js/jquery-ui-1.12.1.min.js"></script>
         <script src="/include/js/popper-1.12.3.min.js"></script>
         <script src="/include/js/bootstrap-4.0.0.min.js"></script>
         <script src="/include/js/swal2.min.js"></script>
@@ -26,7 +28,7 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="participants.php">Participants</a></li>
-                <!-- <li class="nav-item"><a class="nav-link" href="remplissage.php">Remplissage</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="remplissage.php">Remplissage</a></li>
                 <!-- <li class="nav-item"><a class="nav-link" href="exports/exports.php">Exports</a></li> -->
                 <li class="nav-item"><a class="nav-link" href="transports.php">Transports</a></li>
                 <!-- <li class="nav-item"><a class="nav-link" href="activites/activites.php">Activités</a></li>

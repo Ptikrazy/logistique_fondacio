@@ -835,13 +835,6 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="parents_mail">Courriel des parents <span style="color: red">*</span></label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" name="parents_mail" id="parents_mail" value="<?php echo $data['parents_mail']; ?>" required>
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="observations">Observations <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
                 <div class="col-sm-10">
                     <textarea class="form-control" name="observations" id="observations" rows="3"><?php echo $data['observations']; ?></textarea>

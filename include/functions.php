@@ -1426,6 +1426,24 @@ function delete_participant ($id, $type) {
 
 }
 
+function save_pg($num, $jeunes) {
+
+    global $bdd;
+
+    $i = 1;
+    foreach ($jeunes as $jeune) {
+        $req = 'UPDATE jeunes SET pg_num = '.$num.' WHERE id_jeune = '.$jeune;
+        if ($i == 1) {
+            $req2 = 'UPDATE jeunes SET pg_resp = 1 WHERE id_jeune = '.$jeune;
+        }
+        $bdd->query($req);
+        ++$i;
+    }
+    $bdd->query($req2);
+
+    return 0;
+}
+
 /// OLD ///
 
 function get_activites() {
@@ -1592,24 +1610,6 @@ function save_parrainage($parrain, $filleul) {
 
     return 0;
 
-}
-
-function save_pg($num, $jeunes) {
-
-    global $bdd;
-
-    $i = 1;
-    foreach ($jeunes as $jeune) {
-        $req = 'UPDATE participants SET pg_num = '.$num.' WHERE id_participant = '.$jeune;
-        if ($i == 1) {
-            $req2 = 'UPDATE participants SET pg_resp = "oui" WHERE id_participant = '.$jeune;
-        }
-        $bdd->query($req);
-        ++$i;
-    }
-    $bdd->query($req2);
-
-    return 0;
 }
 
 function save_chambre($num, $jeunes) {
