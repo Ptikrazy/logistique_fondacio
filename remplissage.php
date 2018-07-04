@@ -80,7 +80,7 @@ if (!empty($_POST)) {
         else {
             $jeunes[] = '';
         }
-        save_chambre($_POST['chambre_num'], $jeunes);
+        save_chambre($_POST['chambre_num'], $jeunes, $_POST['type']);
     }
 
 }
@@ -114,21 +114,21 @@ if (!empty($_GET['remplissage'])) {
 ?>
 
         <form action="" method="POST">
-            <div class="form-group">
+            <div class="form-group row">
                     <label for="parrain" class="col-md-1 col-form-label">Parrain</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="parrain" id="parrain">
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label for="filleul" class="col-md-1 col-form-label">Filleul</label>
                     <div class="col-md-5">
                         <input type="text" class="form-control" name="filleul" id="filleul">
                     </div>
                 </div>
-            <div class="form-group">
+            <div class="form-group row">
                 <div class="col-sm-10">
-                    <button type="submit" class="btn btn-default">Sauvegarder</button>
+                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
                 </div>
             </div>
         </form>
@@ -136,11 +136,11 @@ if (!empty($_GET['remplissage'])) {
         <script>
         $(function() {
             $( "#parrain" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=jeune',
                 autoFocus: true
             });
             $( "#filleul" ).autocomplete({
-                source: 'search.php?contexte=remplissage',
+                source: 'ajax/search.php?contexte=remplissage&type=jeune',
                 autoFocus: true
             });
         });
@@ -235,16 +235,24 @@ if (!empty($_GET['remplissage'])) {
                 <div class="col-sm-2">
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="type" value="adulte"> Adulte
+                            <input class="form-check-input" type="radio" name="type" value="adulte" <?php echo ($_POST['type'] == 'adulte') ? 'checked' : ''; ?>> Adulte
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="type" value="jeune"> Jeune
+                            <input class="form-check-input" type="radio" name="type" value="jeune" <?php echo ($_POST['type'] == 'jeune') ? 'checked' : ''; ?>> Jeune
                         </label>
                     </div>
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit" class="btn btn-primary">Sauvegarder</button>
+                </div>
+            </div>
+        </form>
+        <?php if (isset($_POST['type'])) { ?>
+        <form action="" method="POST">
             <div class="form-group row">
                 <label for="chambre_num" class="col-md-2 col-form-label">N° Chambre</label>
                 <div class="col-md-1">
@@ -287,19 +295,24 @@ if (!empty($_GET['remplissage'])) {
                         <input type="text" class="form-control" name="jeune_5" id="jeune_5">
                 </div>
             </div>
+            <div class="form-group row hidden">
+                <label for="jeune_5" class="col-md-2 col-form-label">Type</label>
+                <div class="col-md-5">
+                        <input type="text" class="form-control" name="type" id="type" value="<?php echo $_POST['type']; ?>">
+                </div>
+            </div>
             <div class="form-group row">
                 <div class="col-sm-10">
                     <button type="submit" class="btn btn-primary">Sauvegarder</button>
                 </div>
             </div>
         </form>
+        <?php } ?>
 
         <script>
-        var type;
         $(function() {
-            $('input[name=type]').change(function() {
-                type = $(this).val();
-            });
+            $(".hidden").hide();
+            var type = '<?php echo $_POST['type'] ?>';
             $( "#chambre_resp" ).autocomplete({
                 source: 'ajax/search.php?contexte=remplissage&type=' + type,
                 autoFocus: true

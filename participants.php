@@ -765,16 +765,23 @@ else {
         <tbody>
             <?php
                 foreach ($donnees as $data) {
-                    $age = age($data['date_naissance']);
+                    $ancien = 'Non';
+                    if ($data['ancien']) {
+                        $ancien = 'Oui';
+                    }
+                    $prepa = 'Non';
+                    if ($data['prepa']) {
+                        $prepa = 'Oui';
+                    }
                     echo '<tr>
                             <td><a href="participants.php?action=edit&id='.$data['id'].'&type='.$data['type'].'">'.strtoupper($data['nom']).'</a></td>
                             <td>'.$data['prenom'].'</td>
                             <td>'.ucfirst($data['type']).'</td>
                             <td>'.$data['tel_portable'].'</td>
-                            <td>'.$age.'</td>
+                            <td>'.age($data['date_naissance']).'</td>
                             <td>'.$data['civilite'].'</td>
-                            <td>'.ucfirst($data['ancien']).'</td>
-                            <td>'.ucfirst($data['prepa']).'</td>
+                            <td>'.$ancien.'</td>
+                            <td>'.$prepa.'</td>
                             <td>'.ucfirst($data['service']).'</td>
                             <td>'.$data['pg_num'].'</td>
                             <td>'.$data['chambre_num'].'</td>

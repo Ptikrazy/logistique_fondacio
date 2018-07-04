@@ -1444,6 +1444,35 @@ function save_pg($num, $jeunes) {
     return 0;
 }
 
+function save_parrainage($parrain, $filleul) {
+
+    global $bdd;
+
+    $req = 'INSERT INTO parrainages VALUES ("'.$parrain.'", "'.$filleul.'", '.$_SESSION['camp'].')';
+    $bdd->query($req);
+
+    return 0;
+
+}
+
+function save_chambre($num, $jeunes, $type) {
+
+    global $bdd;
+
+    $i = 1;
+    foreach ($jeunes as $jeune) {
+        $req = 'UPDATE '.$type.'s SET chambre_num = "'.$num.'" WHERE id_'.$type.' = '.$jeune;
+        if ($i == 1) {
+            $req2 = 'UPDATE '.$type.'s SET chambre_resp = 1 WHERE id_'.$type.' = '.$jeune;
+        }
+        $bdd->query($req);
+        ++$i;
+    }
+    $bdd->query($req2);
+
+    return 0;
+}
+
 /// OLD ///
 
 function get_activites() {
@@ -1599,35 +1628,6 @@ function get_accueil($type) {
 
     return $data;
 
-}
-
-function save_parrainage($parrain, $filleul) {
-
-    global $bdd;
-
-    $req = 'INSERT INTO parrainages VALUES ("'.$parrain.'", "'.$filleul.'", '.$_SESSION['camp'].')';
-    $bdd->query($req);
-
-    return 0;
-
-}
-
-function save_chambre($num, $jeunes) {
-
-    global $bdd;
-
-    $i = 1;
-    foreach ($jeunes as $jeune) {
-        $req = 'UPDATE participants SET chambre_num = "'.$num.'" WHERE id_participant = '.$jeune;
-        if ($i == 1) {
-            $req2 = 'UPDATE participants SET chambre_resp = "oui" WHERE id_participant = '.$jeune;
-        }
-        $bdd->query($req);
-        ++$i;
-    }
-    $bdd->query($req2);
-
-    return 0;
 }
 
 function get_historique($jeune, $jour, $type) {
