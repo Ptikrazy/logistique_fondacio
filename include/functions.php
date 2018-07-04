@@ -1473,6 +1473,60 @@ function save_chambre($num, $jeunes, $type) {
     return 0;
 }
 
+function get_accueil($type) {
+
+    global $bdd;
+
+    $data = array();
+    $manquant = array('da_fsl', 'da_ap', 'da_di', 'da_bn', 'da_photo', 'da_vaccins');
+    if ($type == 'adulte') {
+        $manquant = array('da_cb', 'da_cm', 'da_di', 'da_d');
+    }
+    $req = 'SELECT id_'.$type.' AS id, nom, prenom, chambre_num, pg_num, retour_transport, retour_date, retour_heure, retour_ville, '.implode(', ', $manquant).' FROM '.$type.'s WHERE camp = '.$_SESSION['camp'].' ORDER BY nom';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['id']]['manquant'] = '';
+        foreach ($d as $key => $value) {
+            if (in_array($key, $manquant) && $value == 0) {
+                $data[$d['id']]['manquant'] .= $key.',';
+            }
+            if (!in_array($key, $manquant)) {
+                $data[$d['id']][$key] = $value;
+            }
+        }
+        $data[$d['id']]['manquant'] = substr($data[$d['id']]['manquant'], 0, -1);
+        $diff = array_diff(explode(', ', $data[$d['id']]['manquant']), $manquant);
+        if (!empty($diff[0])) {
+            $data[$d['id']]['manquant'] = 'tout';
+        }
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_badges() {
+
+    global $bdd;
+
+    $data = array();
+    $req = '
+    SELECT nom, prenom, pg_num, chambre_num, service, "adulte" AS type FROM adultes
+    UNION
+    SELECT nom, prenom, pg_num, chambre_num, service, "jeune" AS type FROM jeunes
+    WHERE camp = '.$_SESSION['camp'].'
+    ORDER BY type, nom';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
 /// OLD ///
 
 function get_activites() {
@@ -1586,43 +1640,10 @@ function get_chambres() {
     global $bdd;
 
     $data = array();
-    $req = 'SELECT nom, prenom, chambre_num FROM participants WHERE camp = '.$_SESSION['camp'].' ORDER BY chambre_num, nom, prenom';
+    $req = 'SELECT nom, prenom, chambre_num FROM adultes UNION SELECT nom, prenom, chambre_num FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY chambre_num, nom, prenom';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['chambre_num']][] = $d['nom'].' '.$d['prenom'];
-    }
-    $res->closeCursor();
-
-    return $data;
-
-}
-
-
-function get_badges() {
-
-    global $bdd;
-
-    $data = array();
-    $req = 'SELECT nom, prenom, type, pg_num, chambre_num, service FROM participants WHERE camp = '.$_SESSION['camp'].' ORDER BY type, nom';
-    $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[] = $d;
-    }
-    $res->closeCursor();
-
-    return $data;
-
-}
-
-function get_accueil($type) {
-
-    global $bdd;
-
-    $data = array();
-    $req = 'SELECT nom, prenom, chambre_num, pg_num, retour_transport, retour_date, retour_heure, retour_ville, manquant FROM participants WHERE camp = '.$_SESSION['camp'].' AND type = "'.$type.'" ORDER BY nom';
-    $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[] = $d;
     }
     $res->closeCursor();
 

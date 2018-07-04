@@ -108,8 +108,6 @@ if ($_GET['contexte'] == 'transports') {
 
 }
 
-/// OLD
-
 if ($_GET['contexte'] == 'accueil') {
 
     $donnees = get_accueil($_GET['type']);
@@ -152,9 +150,120 @@ if ($_GET['contexte'] == 'accueil') {
         ++$i;
     }
 
-    $pdf->Output('Accueil.pdf', 'D');
+    $pdf->Output('Accueil '.$_GET['type'].'.pdf', 'D');
 
 }
+
+if ($_GET['contexte'] == 'badges') {
+
+    $donnees = get_badges();
+
+    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
+    $pdf->SetTitle('Badges');
+    $pdf->SetFont('helvetica', '', 12, '', true);
+    $pdf->setCellPadding(5, 5, 5, 0);
+    $pdf->SetPrintHeader(false);
+    $pdf->SetPrintFooter(false);
+
+    $pdf->AddPage();
+    $x = 5;
+    $y = 2;
+    $i = 0;
+    $j = 0;
+
+    foreach ($donnees as $participant) {
+
+        if ($participant['nom'] != 'CHAUFFEUR') {
+            $z = 0;
+            while ($z < 6) {
+                // Gestion des nouvelles pages
+                if ($j == 16) {
+                    $pdf->AddPage();
+                    $x = 5;
+                    $y = 2;
+                    $i = 0;
+                    $j = 0;
+                }
+
+                // Gestion des nouvelles lignes
+                if ($i == 2) {
+                    $i = 0;
+                    $x = 5;
+                    $y += 36;
+                }
+
+
+                $html = '<b>'.$participant['nom'].' '.$participant['prenom'].'</b><br>';
+                if ($participant['type'] == 'jeune') {
+                    $html .= 'Chambre: <b>'.$participant['chambre_num'].'</b><br>PG: <b>'.$participant['pg_num'].'</b>';
+                }
+                else {
+                    $html .= 'Service: <b>'.$participant['service'].'</b>';
+                }
+                $pdf->writeHTMLCell('99,1', 0, $x, $y, $html);
+
+                $x += '101,6';
+                ++$i;
+                ++$j;
+                ++$z;
+            }
+        }
+    }
+
+    $pdf->Output('Badges.pdf', 'D');
+
+}
+
+if ($_GET['contexte'] == 'chambres') {
+
+    $donnees = get_chambres();
+
+    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
+    $pdf->SetTitle('Chambres');
+    $pdf->SetFont('helvetica', '', 12, '', true);
+    $pdf->SetPrintHeader(false);
+    $pdf->SetPrintFooter(false);
+
+    $pdf->AddPage();
+    $x = 5;
+    $y = 5;
+    $i = 0;
+    $j = 0;
+
+    foreach ($donnees as $chambre_num => $membres) {
+
+        if ($j == 8) {
+            $pdf->AddPage();
+            $x = 5;
+            $y = 5;
+            $i = 0;
+            $j = 0;
+        }
+
+        // Gestion des nouvelles colonnes
+        if ($i == 2) {
+            $i = 0;
+            $x = 5;
+            $y += 50;
+        }
+
+        $html = '<div style="color: red; font-weight: bold; font-size: 16;">Chambre '.$chambre_num.'</div>';
+        foreach ($membres as $membre) {
+            $html .= '<br>'.$membre;
+        }
+
+        $pdf->writeHTMLCell(120, 50, $x, $y, $html);
+
+        $x += 90;
+        ++$i;
+        ++$j;
+    }
+
+    $pdf->Output('Chambres.pdf', 'D');
+
+}
+
+/// OLD
 
 if ($_GET['contexte'] == 'trombi') {
 
@@ -200,62 +309,6 @@ if ($_GET['contexte'] == 'trombi') {
     }
 
     $pdf->Output('Trombinoscope.pdf', 'D');
-
-}
-
-if ($_GET['contexte'] == 'badges') {
-
-    $donnees = get_badges();
-
-    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
-    $pdf->SetTitle('Badges');
-    $pdf->SetFont('helvetica', '', 12, '', true);
-    $pdf->setCellPadding(5, 5, 5, 0);
-    $pdf->SetPrintHeader(false);
-    $pdf->SetPrintFooter(false);
-
-    $pdf->AddPage();
-    $x = 5;
-    $y = 2;
-    $i = 0;
-    $j = 0;
-
-    foreach ($donnees as $participant) {
-
-        if ($participant['nom'] != 'CHAUFFEUR') {
-            // Gestion des nouvelles pages
-            if ($j == 16) {
-                $pdf->AddPage();
-                $x = 5;
-                $y = 2;
-                $i = 0;
-                $j = 0;
-            }
-
-            // Gestion des nouvelles lignes
-            if ($i == 2) {
-                $i = 0;
-                $x = 5;
-                $y += 36;
-            }
-
-
-            $html = '<b>'.$participant['nom'].' '.$participant['prenom'].'</b><br>';
-            if ($participant['type'] == 'jeune') {
-                $html .= 'Chambre: <b>'.$participant['chambre_num'].'</b><br>PG: <b>'.$participant['pg_num'].'</b>';
-            }
-            else {
-                $html .= 'Service: <b>'.$participant['service'].'</b>';
-            }
-            $pdf->writeHTMLCell('99,1', 0, $x, $y, $html);
-
-            $x += '101,6';
-            ++$i;
-            ++$j;
-        }
-    }
-
-    $pdf->Output('Badges.pdf', 'D');
 
 }
 
@@ -329,7 +382,7 @@ if ($_GET['contexte'] == 'pg') {
         $html = '<div style="color: red; font-weight: bold; font-size: 16;">PG N°'.$pg_num.'</div>';
         foreach ($membres as $membre) {
             $membre = explode(' - ', $membre);
-            if ($membre[1] == 'oui') {
+            if ($membre[1] == 1) {
                 $html .= '<br><b>R1: '.$membre[0].'</b>';
             }
             else {
@@ -345,55 +398,6 @@ if ($_GET['contexte'] == 'pg') {
     }
 
     $pdf->Output('Petits Groupes.pdf', 'D');
-
-}
-
-if ($_GET['contexte'] == 'chambres') {
-
-    $donnees = get_chambres();
-
-    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
-    $pdf->SetTitle('Chambres');
-    $pdf->SetFont('helvetica', '', 12, '', true);
-    $pdf->SetPrintHeader(false);
-    $pdf->SetPrintFooter(false);
-
-    $pdf->AddPage();
-    $x = 5;
-    $y = 5;
-    $i = 0;
-    $j = 0;
-
-    foreach ($donnees as $chambre_num => $membres) {
-
-        if ($j == 8) {
-            $pdf->AddPage();
-            $x = 5;
-            $y = 5;
-            $i = 0;
-            $j = 0;
-        }
-
-        // Gestion des nouvelles colonnes
-        if ($i == 2) {
-            $i = 0;
-            $x = 5;
-            $y += 50;
-        }
-
-        $html = '<div style="color: red; font-weight: bold; font-size: 16;">Chambre '.$chambre_num.'</div>';
-        foreach ($membres as $membre) {
-            $html .= '<br>'.$membre;
-        }
-
-        $pdf->writeHTMLCell(120, 50, $x, $y, $html);
-
-        $x += 90;
-        ++$i;
-        ++$j;
-    }
-
-    $pdf->Output('Chambres.pdf', 'D');
 
 }
 

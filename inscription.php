@@ -40,6 +40,9 @@ else {
                     <?php
 
                     $camps = get_camps_inscriptions();
+                    if (isset($_SESSION['profil']['role']) && $_SESSION['profil']['role'] == 'admin') {
+                        $camps = get_camps();
+                    }
 
                     foreach ($camps as $camp) {
                         echo '<option value="'.$camp['numero'].'">Camp n°'.$camp['numero'].' ('.$camp['regions'].') du '.convert_date($camp['date_debut'], "-", "/").' au '.convert_date($camp['date_fin'], "-", "/").'</option>';
