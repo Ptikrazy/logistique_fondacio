@@ -16,8 +16,7 @@ if (!empty($_GET['action'])) {
                               'code'              => '',
                               'type'              => '',
                               'nom'               => '',
-                              'horaires_1'        => '',
-                              'horaires_2'        => '',
+                              'horaires'          => '',
                               'horaires_mercredi' => '',
                               'nb_jeunes'         => '',
                               'nb_adultes'        => '',
@@ -53,7 +52,7 @@ if (!empty($_GET['action'])) {
 
 ?>
     <h3><?php echo $titre; ?></h3>
-    <button type="button" class="btn btn-secondary" onclick="location.href = 'activites.php';">Ajouter</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href = 'activites.php';">Retour</button>
     <br><br>
 
     <form action="" method="POST">
@@ -62,13 +61,9 @@ if (!empty($_GET['action'])) {
             <div class="col-md-2">
                 <input type="text" class="form-control" name="nom" value="<?php echo $donnees['nom']; ?>">
             </div>
-            <label for="horaires_1" class="col-md-1 col-form-label">Horaires 1</label>
+            <label for="horaires" class="col-md-1 col-form-label">Horaires</label>
             <div class="col-md-2">
-                <input type="text" class="form-control" name="horaires_1" value="<?php echo $donnees['horaires_1']; ?>">
-            </div>
-            <label for="horaires_2" class="col-md-1 col-form-label">Horaires 2</label>
-            <div class="col-md-2">
-                <input type="text" class="form-control" name="horaires_2" value="<?php echo $donnees['horaires_2']; ?>">
+                <input type="text" class="form-control" name="horaires" value="<?php echo $donnees['horaires']; ?>">
             </div>
             <label for="horaires_mercredi" class="col-md-1 col-form-label">Horaires M</label>
             <div class="col-md-2">
@@ -296,7 +291,7 @@ else {
                         <td style="background-color: '.$color.'"></td>
                         <td><a href="activites.php?action=edit&id_activite='.$id_activite.'">'.$data['nom'].'</a></td>
                         <td>'.ucfirst($data['type']).'</td>
-                        <td>'.$data['horaires_1'].' / '.$data['horaires_2'].' (M: '.$data['horaires_mercredi'].')</td>
+                        <td>'.$data['horaires'].' (Mercredi: '.$data['horaires_mercredi'].')</td>
                         <td>'.$data['nb_adultes'].'</td>
                         <td>'.$data['nb_jeunes'].'</td>
                         <td>'.$dispos.'</td>

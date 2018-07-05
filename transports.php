@@ -137,7 +137,7 @@ Nombre de résultats: <?php echo sizeof($donnees); ?>
                 }
 
                 echo '<tr>
-                        <td><a href="participants.php?action=edit&id='.$participant['id'].'">'.$participant['nom'].'</a></td>
+                        <td><a href="participants.php?action=edit&id='.$participant['id'].'&type='.strtolower($participant['type']).'">'.$participant['nom'].'</a></td>
                         <td>'.$participant['prenom'].'</td>
                         <td>'.$participant['type'].'</td>
                         <td>'.$participant['tel_portable'].'</td>

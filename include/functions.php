@@ -1649,6 +1649,15 @@ function get_activite($id) {
     return $data;
 }
 
+function clean_dispo($id) {
+
+    global $bdd;
+    $req = 'UPDATE activites SET mardi_dispo = 0, mercredi_dispo = 0, jeudi_dispo = 0, vendredi_dispo = 0 WHERE id_activite = '.$id;
+    $bdd->query($req);
+
+    return 0;
+
+}
 
 /// OLD ///
 
@@ -1682,21 +1691,11 @@ function inscrire($camp, $id, $nom, $activites, $jour) {
 
 }
 
-function clean_dispo($id) {
-
-    global $bdd;
-    $req = 'UPDATE activites SET mardi_dispo = 0, mercredi_dispo = 0, jeudi_dispo = 0, vendredi_dispo = 0 WHERE id_activite = '.$id;
-    $bdd->query($req);
-
-    return 0;
-
-}
-
 function get_non_inscrits($jour) {
 
     global $bdd;
 
-    $req = 'SELECT nom, prenom, service FROM participants WHERE camp = '.$_SESSION['camp'].' AND type = "jeune" AND inscrit_'.$jour.' = 0 ORDER BY service';
+    $req = 'SELECT nom, prenom, service FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND type = "jeune" AND inscrit_'.$jour.' = 0 ORDER BY service';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[] = $d;
