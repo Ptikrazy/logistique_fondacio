@@ -1527,7 +1527,69 @@ function get_badges() {
 
 }
 
-/// OLD ///
+function get_parrainages() {
+
+    global $bdd;
+
+    $data = array();
+    $req = 'SELECT parrain, filleul FROM parrainages WHERE camp = '.$_SESSION['camp'].' ORDER BY parrain, filleul';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[] = array($d['parrain'], $d['filleul']);
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_pg() {
+
+    global $bdd;
+
+    $data = array();
+    $req = 'SELECT nom, prenom, pg_num, pg_resp FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY pg_num, pg_resp, nom, prenom';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['pg_num']][] = $d['nom'].' '.$d['prenom'].' - '.$d['pg_resp'];
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_trombi() {
+
+    global $bdd;
+
+    $data = array();
+    $req = 'SELECT nom, prenom, "adulte" AS type FROM adultes UNION SELECT nom, prenom, "jeune" AS type FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY type, nom';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function get_chambres() {
+
+    global $bdd;
+
+    $data = array();
+    $req = 'SELECT nom, prenom, chambre_num FROM adultes UNION SELECT nom, prenom, chambre_num FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY chambre_num, nom, prenom';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['chambre_num']][] = $d['nom'].' '.$d['prenom'];
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
 
 function get_activites() {
 
@@ -1539,19 +1601,6 @@ function get_activites() {
     while ($d = $res->fetch()) {
         $data[$d['id_activite']] = $d;
     }
-    $res->closeCursor();
-
-    return $data;
-}
-
-function get_activite($id) {
-
-    global $bdd;
-
-    $data = array();
-    $req = 'SELECT * FROM activites WHERE id_activite = '.$id;
-    $res = $bdd->query($req);
-    $data = $res->fetch();
     $res->closeCursor();
 
     return $data;
@@ -1587,69 +1636,21 @@ function update_activite ($action, $donnees, $id) {
 
 }
 
-function get_trombi() {
+function get_activite($id) {
 
     global $bdd;
 
     $data = array();
-    $req = 'SELECT nom, prenom FROM participants WHERE camp = '.$_SESSION['camp'].' ORDER BY type, nom';
+    $req = 'SELECT * FROM activites WHERE id_activite = '.$id;
     $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[] = $d;
-    }
+    $data = $res->fetch();
     $res->closeCursor();
 
     return $data;
-
 }
 
-function get_parrainages() {
 
-    global $bdd;
-
-    $data = array();
-    $req = 'SELECT parrain, filleul FROM parrainages WHERE camp = '.$_SESSION['camp'].' ORDER BY parrain, filleul';
-    $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[] = array($d['parrain'], $d['filleul']);
-    }
-    $res->closeCursor();
-
-    return $data;
-
-}
-
-function get_pg() {
-
-    global $bdd;
-
-    $data = array();
-    $req = 'SELECT nom, prenom, pg_num, pg_resp FROM participants WHERE camp = '.$_SESSION['camp'].' AND type = "jeune" ORDER BY pg_num, pg_resp, nom, prenom';
-    $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[$d['pg_num']][] = $d['nom'].' '.$d['prenom'].' - '.$d['pg_resp'];
-    }
-    $res->closeCursor();
-
-    return $data;
-
-}
-
-function get_chambres() {
-
-    global $bdd;
-
-    $data = array();
-    $req = 'SELECT nom, prenom, chambre_num FROM adultes UNION SELECT nom, prenom, chambre_num FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY chambre_num, nom, prenom';
-    $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[$d['chambre_num']][] = $d['nom'].' '.$d['prenom'];
-    }
-    $res->closeCursor();
-
-    return $data;
-
-}
+/// OLD ///
 
 function get_historique($jeune, $jour, $type) {
 

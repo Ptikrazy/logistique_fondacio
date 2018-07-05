@@ -45,6 +45,20 @@ if (!empty($_POST)) {
         else {
             $jeunes[] = '';
         }
+        if (!empty($_POST['jeune_5'])) {
+            $jeune_5 = explode(' - ', $_POST['jeune_5']);
+            $jeunes[] = $jeune_5[1];
+        }
+        else {
+            $jeunes[] = '';
+        }
+        if (!empty($_POST['jeune_6'])) {
+            $jeune_6 = explode(' - ', $_POST['jeune_6']);
+            $jeunes[] = $jeune_6[1];
+        }
+        else {
+            $jeunes[] = '';
+        }
         save_pg($_POST['pg_num'], $jeunes);
     }
 
@@ -191,6 +205,18 @@ if (!empty($_GET['remplissage'])) {
                 </div>
             </div>
             <div class="form-group row">
+                <label for="jeune_5" class="col-md-1 col-form-label">Jeune 5</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_5" id="jeune_4">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="jeune_6" class="col-md-1 col-form-label">Jeune 6</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" name="jeune_6" id="jeune_4">
+                </div>
+            </div>
+            <div class="form-group row">
                 <div class="col-sm-10">
                     <button type="submit" class="btn btn-primary">Sauvegarder</button>
                 </div>
@@ -216,6 +242,14 @@ if (!empty($_GET['remplissage'])) {
                 autoFocus: true
             });
             $( "#jeune_4" ).autocomplete({
+                source: 'ajax/search.php?contexte=remplissage&type=jeune',
+                autoFocus: true
+            });
+            $( "#jeune_5" ).autocomplete({
+                source: 'ajax/search.php?contexte=remplissage&type=jeune',
+                autoFocus: true
+            });
+            $( "#jeune_6" ).autocomplete({
                 source: 'ajax/search.php?contexte=remplissage&type=jeune',
                 autoFocus: true
             });

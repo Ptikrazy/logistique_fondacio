@@ -123,7 +123,7 @@ if ($_GET['contexte'] == 'accueil') {
     $y = 5;
     $i = 0;
 
-    $html = '<table border="1"><tr><th></th><th height="30" style="text-align: center; color: red"><b>Nom</b></th><th height="30" style="text-align: center; color: red"><b>Prénom</b></th><th height="30" style="text-align: center; color: red"><b>Chambre</b></th><th height="30" style="text-align: center; color: red"><b>PG</b></th><th height="30" style="text-align: center; color: red"><b>Retour</b></th><th height="30" style="text-align: center; color: red"><b>Ville</b></th><th height="30" style="text-align: center; color: red"><b>Date</b></th><th height="30" style="text-align: center; color: red"><b>Heure</b></th><th height="30" style="text-align: center; color: red"><b>Docs</b></th><th height="30" style="text-align: center; color: red"><b>Obs</b></th></tr></table>';
+    $html = '<table border="1"><tr><th></th><th height="30" style="text-align: center; color: red"><b>Nom</b></th><th height="30" style="text-align: center; color: red"><b>Prénom</b></th><th height="30" style="text-align: center; color: red"><b>Retour</b></th><th height="30" style="text-align: center; color: red"><b>Ville</b></th><th height="30" style="text-align: center; color: red"><b>Date</b></th><th height="30" style="text-align: center; color: red"><b>Heure</b></th><th height="30" style="text-align: center; color: red"><b>Docs</b></th><th height="30" style="text-align: center; color: red"><b>Obs</b></th></tr></table>';
 
     $pdf->writeHTMLCell(0, 0, $x, $y, $html);
     $y += 15;
@@ -137,12 +137,12 @@ if ($_GET['contexte'] == 'accueil') {
             $y = 5;
             $i = 0;
             $j = 0;
-            $html = '<table border="1"><tr><th></th><th height="30" style="text-align: center; color: red"><b>Nom</b></th><th height="30" style="text-align: center; color: red"><b>Prénom</b></th><th height="30" style="text-align: center; color: red"><b>Chambre</b></th><th height="30" style="text-align: center; color: red"><b>PG</b></th><th height="30" style="text-align: center; color: red"><b>Retour</b></th><th height="30" style="text-align: center; color: red"><b>Ville</b></th><th height="30" style="text-align: center; color: red"><b>Date</b></th><th height="30" style="text-align: center; color: red"><b>Heure</b></th><th height="30" style="text-align: center; color: red"><b>Docs</b></th><th height="30" style="text-align: center; color: red"><b>Obs</b></th></tr></table>';
+            $html = '<table border="1"><tr><th></th><th height="30" style="text-align: center; color: red"><b>Nom</b></th><th height="30" style="text-align: center; color: red"><b>Prénom</b></th><th height="30" style="text-align: center; color: red"><b>Retour</b></th><th height="30" style="text-align: center; color: red"><b>Ville</b></th><th height="30" style="text-align: center; color: red"><b>Date</b></th><th height="30" style="text-align: center; color: red"><b>Heure</b></th><th height="30" style="text-align: center; color: red"><b>Docs</b></th><th height="30" style="text-align: center; color: red"><b>Obs</b></th></tr></table>';
             $pdf->writeHTMLCell(0, 0, $x, $y, $html);
             $y += 15;
         }
 
-        $html = '<table border="1"><tr><td></td><td height="30" style="text-align: center;"><b>'.$participant['nom'].'</b></td><td height="30" style="text-align: center;">'.$participant['prenom'].'</td><td height="30" style="text-align: center;">'.$participant['chambre_num'].'</td><td height="30" style="text-align: center;">'.$participant['pg_num'].'</td><td height="30" style="text-align: center;">'.$participant['retour_transport'].'</td><td height="30" style="text-align: center;">'.$participant['retour_ville'].'</td><td height="30" style="text-align: center;">'.convert_date($participant['retour_date']).'</td><td height="30" style="text-align: center;">'.$participant['retour_heure'].'</td><td height="30" style="text-align: center;">'.$participant['manquant'].'</td><td></td></tr></table>';
+        $html = '<table border="1"><tr><td></td><td height="30" style="text-align: center;"><b>'.$participant['nom'].'</b></td><td height="30" style="text-align: center;">'.$participant['prenom'].'</td><td height="30" style="text-align: center;">'.$participant['retour_transport'].'</td><td height="30" style="text-align: center;">'.$participant['retour_ville'].'</td><td height="30" style="text-align: center;">'.convert_date($participant['retour_date']).'</td><td height="30" style="text-align: center;">'.$participant['retour_heure'].'</td><td height="30" style="text-align: center;">'.$participant['manquant'].'</td><td></td></tr></table>';
 
         $pdf->writeHTMLCell(0, 0, $x, $y, $html);
 
@@ -175,7 +175,7 @@ if ($_GET['contexte'] == 'badges') {
 
         if ($participant['nom'] != 'CHAUFFEUR') {
             $z = 0;
-            while ($z < 6) {
+            while ($z < 4) {
                 // Gestion des nouvelles pages
                 if ($j == 16) {
                     $pdf->AddPage();
@@ -263,14 +263,12 @@ if ($_GET['contexte'] == 'chambres') {
 
 }
 
-/// OLD
+if ($_GET['contexte'] == 'parrainages') {
 
-if ($_GET['contexte'] == 'trombi') {
+    $donnees = get_parrainages();
 
-    $donnees = get_trombi();
-
-    $pdf = new TCPDF('L', 'mm', 'A3', true, 'UTF-8');
-    $pdf->SetTitle('Trombinoscope');
+    $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
+    $pdf->SetTitle('Parrainages');
     $pdf->SetFont('helvetica', '', 12, '', true);
     $pdf->SetPrintHeader(false);
     $pdf->SetPrintFooter(false);
@@ -283,51 +281,13 @@ if ($_GET['contexte'] == 'trombi') {
 
     foreach ($donnees as $participant) {
 
-        if ($participant['nom'] != 'CHAUFFEUR') {
-            // Gestion des nouvelles pages
-            if ($j == 35) {
-                $pdf->AddPage();
-                $x = 5;
-                $y = 5;
-                $i = 0;
-                $j = 0;
-            }
-
-            // Gestion des nouvelles lignes
-            if ($i == 7) {
-                $i = 0;
-                $x = 5;
-                $y += 55;
-            }
-
-            $pdf->writeHTMLCell(50, 40, $x, $y, '<table border="1"><tr><td width="130" height="110"></td></tr></table>'.$participant['nom'].' '.$participant['prenom']);
-
-            $x += 60;
-            ++$i;
-            ++$j;
+        if ($j == 39) {
+            $pdf->AddPage();
+            $x = 5;
+            $y = 5;
+            $i = 0;
+            $j = 0;
         }
-    }
-
-    $pdf->Output('Trombinoscope.pdf', 'D');
-
-}
-
-if ($_GET['contexte'] == 'parrainages') {
-
-    $donnees = get_parrainages();
-
-    $pdf = new TCPDF('L', 'mm', 'A3', true, 'UTF-8');
-    $pdf->SetTitle('Parrainages');
-    $pdf->SetFont('helvetica', '', 12, '', true);
-    $pdf->SetPrintHeader(false);
-    $pdf->SetPrintFooter(false);
-
-    $pdf->AddPage();
-    $x = 5;
-    $y = 5;
-    $i = 0;
-
-    foreach ($donnees as $participant) {
 
         // Gestion des nouvelles colonnes
         if ($i == 13) {
@@ -340,9 +300,10 @@ if ($_GET['contexte'] == 'parrainages') {
 
         $y += 20;
         ++$i;
+        ++$j;
     }
 
-    $pdf->Output('Parrainages.pdf', 'D');
+    $pdf->Output('Parrainages.pdf', 'I');
 
 }
 
@@ -401,59 +362,54 @@ if ($_GET['contexte'] == 'pg') {
 
 }
 
-if ($_GET['contexte'] == 'transports_train') {
+if ($_GET['contexte'] == 'trombi') {
 
-    $donnees = get_retour_train();
+    $donnees = get_trombi();
 
     $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
-    $pdf->SetTitle('Transports Train');
+    $pdf->SetTitle('Trombinoscope');
+    $pdf->SetFont('helvetica', '', 12, '', true);
     $pdf->SetPrintHeader(false);
     $pdf->SetPrintFooter(false);
 
     $pdf->AddPage();
-    $x = 50;
+    $x = 5;
     $y = 5;
-
-    $pdf->SetFont('helvetica', 'B', 25, '', true);
-    $pdf->SetTextColor(255,0,0);
-    $pdf->writeHTMLCell(0, 0, $x, $y, 'Retours en train');
-
-    $pdf->SetFont('helvetica', '', 10, '', true);
-    $pdf->SetTextColor(0,0,0);
-    $x = 20;
-    $y += 15;
     $i = 0;
     $j = 0;
 
-    foreach ($donnees as $date => $heures) {
+    foreach ($donnees as $participant) {
 
-        $pdf->writeHTMLCell(0, 0, $x, $y, '<b>'.convert_date($date).'</b>');
-        $y += 10;
-        foreach ($heures as $heure => $participants) {
-            $pdf->writeHTMLCell(0, 0, $x, $y, '<b>'.$heure.'</b>');
-            $y += 5;
-            foreach ($participants as $participant) {
-                if ($i == 10) {
-                    $x += 100;
-                    $y = 20;
-                    $i = 0;
-                }
-                $pdf->writeHTMLCell(0, 0, $x, $y, $participant);
-                $y += 5;
-                ++$i;
-                ++$j;
+        if ($participant['nom'] != 'CHAUFFEUR') {
+            // Gestion des nouvelles pages
+            if ($j == 15) {
+                $pdf->AddPage();
+                $x = 5;
+                $y = 5;
+                $i = 0;
+                $j = 0;
             }
-            $y += 5;
-        }
-        $y += 5;
 
+            // Gestion des nouvelles lignes
+            if ($i == 3) {
+                $i = 0;
+                $x = 5;
+                $y += 55;
+            }
+
+            $pdf->writeHTMLCell(50, 40, $x, $y, '<table border="1"><tr><td width="130" height="110"></td></tr></table>'.$participant['nom'].' '.$participant['prenom']);
+
+            $x += 60;
+            ++$i;
+            ++$j;
+        }
     }
 
-    $pdf->writeHTMLCell(0, 0, $x, $y, '<b>TOTAL: '.$j);
-
-    $pdf->Output('Transports Train.pdf', 'D');
+    $pdf->Output('Trombinoscope.pdf', 'I');
 
 }
+
+/// OLD
 
 if ($_GET['contexte'] == 'activites') {
 

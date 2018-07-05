@@ -13,7 +13,7 @@ if ($_GET['contexte'] == 'remplissage') {
 }
 
 if ($_GET['contexte'] == 'resp_activites') {
-    $req = 'SELECT id_participant, nom, prenom FROM participants WHERE type = "adulte" AND camp = '.$_SESSION['camp'].' AND (prenom LIKE "%'.$_GET['term'].'%" OR nom LIKE "%'.$_GET['term'].'%")';
+    $req = 'SELECT id_adulte, nom, prenom FROM adultes WHERE camp = '.$_SESSION['camp'].' AND (prenom LIKE "%'.$_GET['term'].'%" OR nom LIKE "%'.$_GET['term'].'%")';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[] = $d['nom'].' '.$d['prenom'];

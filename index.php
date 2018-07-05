@@ -168,7 +168,7 @@ foreach ($anniversaires as $anniv) {
 
 ?>
 
-<h3><b>Statistiques</b></h3><br>
+<h3><b>Statistiques du camp <?php echo $_SESSION['camp']; ?></b></h3><br>
 
 <?php
 
