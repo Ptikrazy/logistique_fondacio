@@ -20,14 +20,6 @@ if (!empty($_GET['action'])) {
                 unset($_SESSION['edit_ok']);
             }
             $donnees = get_participant($_GET['id'], $_GET['type']);
-            /*$donnees['activite_mardi_creative'] = get_historique($_GET['id_participant'], 'mardi', 'creative');
-            $donnees['activite_mardi_sportive'] = get_historique($_GET['id_participant'], 'mardi', 'sportive');
-            $donnees['activite_mercredi_creative'] = get_historique($_GET['id_participant'], 'mercredi', 'creative');
-            $donnees['activite_mercredi_sportive'] = get_historique($_GET['id_participant'], 'mercredi', 'sportive');
-            $donnees['activite_jeudi_creative'] = get_historique($_GET['id_participant'], 'jeudi', 'creative');
-            $donnees['activite_jeudi_sportive'] = get_historique($_GET['id_participant'], 'jeudi', 'sportive');
-            $donnees['activite_vendredi_creative'] = get_historique($_GET['id_participant'], 'vendredi', 'creative');
-            $donnees['activite_vendredi_sportive'] = get_historique($_GET['id_participant'], 'vendredi', 'sportive');*/
             $titre = 'Fiche de '.$donnees['prenom'].' '.$donnees['nom'];
             break;
 
@@ -398,50 +390,6 @@ if (!empty($_GET['action'])) {
             </div>
 
             <div class="form-group row">
-                <label for="activite_mardi_creative" class="col-md-2 col-form-label">Acti créative mardi</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="activite_mardi_creative" id="activite_mardi_creative" value="<?php echo $donnees['activite_mardi_creative']; ?>">
-                </div>
-                <label for="activite_mardi_sportive" class="col-md-2 col-form-label">Acti sportive mardi</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="activite_mardi_sportive" id="activite_mardi_sportive" value="<?php echo $donnees['activite_mardi_sportive']; ?>">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="activite_mercredi_creative" class="col-md-2 col-form-label">Acti créative mercredi</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="activite_mercredi_creative" id="activite_mercredi_creative" value="<?php echo $donnees['activite_mercredi_creative']; ?>">
-                </div>
-                <label for="activite_mercredi_sportive" class="col-md-2 col-form-label">Acti sportive mercredi</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="activite_mercredi_sportive" id="activite_mercredi_sportive" value="<?php echo $donnees['activite_mercredi_sportive']; ?>">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="activite_jeudi_creative" class="col-md-2 col-form-label">Acti créative jeudi</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="activite_jeudi_creative" id="activite_jeudi_creative" value="<?php echo $donnees['activite_jeudi_creative']; ?>">
-                </div>
-                <label for="activite_jeudi_sportive" class="col-md-2 col-form-label">Acti sportive jeudi</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="activite_jeudi_sportive" id="activite_jeudi_sportive" value="<?php echo $donnees['activite_jeudi_sportive']; ?>">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="activite_vendredi_creative" class="col-md-2 col-form-label">Acti creative vendredi</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="activite_vendredi_creative" id="activite_vendredi_creative" value="<?php echo $donnees['activite_vendredi_creative']; ?>">
-                </div>
-                <label for="activite_vendredi_sportive" class="col-md-2 col-form-label">Acti sportive vendredi</label>
-                <div class="col-md-3">
-                    <input type="text" class="form-control" name="activite_vendredi_sportive" id="activite_vendredi_sportive" value="<?php echo $donnees['activite_vendredi_sportive']; ?>">
-                </div>
-            </div>
-
-            <div class="form-group row">
                 <div class="col-sm-10">
                     <button type="submit" class="btn btn-primary">Sauvegarder</button>
                 </div>
@@ -458,41 +406,6 @@ if (!empty($_GET['action'])) {
 
     <script>
     $(function() {
-
-        // Gestion des activités
-
-        /*$( "#activite_mardi_creative" ).autocomplete({
-            source: 'search.php?contexte=modif_activite&type=creative',
-            autoFocus: true
-        });
-        $( "#activite_mardi_sportive" ).autocomplete({
-            source: 'search.php?contexte=modif_activite&type=sportive',
-            autoFocus: true
-        });
-        $( "#activite_mercredi_creative" ).autocomplete({
-            source: 'search.php?contexte=modif_activite&type=creative',
-            autoFocus: true
-        });
-        $( "#activite_mercredi_sportive" ).autocomplete({
-            source: 'search.php?contexte=modif_activite&type=sportive',
-            autoFocus: true
-        });
-        $( "#activite_jeudi_creative" ).autocomplete({
-            source: 'search.php?contexte=modif_activite&type=creative',
-            autoFocus: true
-        });
-        $( "#activite_jeudi_sportive" ).autocomplete({
-            source: 'search.php?contexte=modif_activite&type=sportive',
-            autoFocus: true
-        });
-        $( "#activite_vendredi_creative" ).autocomplete({
-            source: 'search.php?contexte=modif_activite&type=creative',
-            autoFocus: true
-        });
-        $( "#activite_vendredi_sportive" ).autocomplete({
-            source: 'search.php?contexte=modif_activite&type=sportive',
-            autoFocus: true
-        });*/
 
         // Gestion des transports
 
