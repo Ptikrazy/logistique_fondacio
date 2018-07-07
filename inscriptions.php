@@ -210,12 +210,36 @@ if (isset($_POST['inscription'])) {
 
         <script>
         $(function() {
-            $( "#<?php echo $_SESSION['jour_inscription']; ?>_sport" ).autocomplete({
-                source: 'ajax/search.php?contexte=inscriptions_activite&type=sportive&day=<?php echo $_SESSION['jour_inscription']; ?>',
+            $( "#mardi_sport" ).autocomplete({
+                source: 'ajax/search.php?contexte=inscriptions_activite&type=sportive&day=mardi',
                 autoFocus: true
             });
-            $( "#<?php echo $_SESSION['jour_inscription']; ?>_crea" ).autocomplete({
-                source: 'ajax/search.php?contexte=inscriptions_activite&type=creative&day=<?php echo $_SESSION['jour_inscription']; ?>',
+            $( "#mardi_crea" ).autocomplete({
+                source: 'ajax/search.php?contexte=inscriptions_activite&type=creative&day=mardi',
+                autoFocus: true
+            });
+            $( "#mercredi_sport" ).autocomplete({
+                source: 'ajax/search.php?contexte=inscriptions_activite&type=sportive&day=mercredi',
+                autoFocus: true
+            });
+            $( "#mercredi_crea" ).autocomplete({
+                source: 'ajax/search.php?contexte=inscriptions_activite&type=creative&day=mercredi',
+                autoFocus: true
+            });
+            $( "#jeudi_sport" ).autocomplete({
+                source: 'ajax/search.php?contexte=inscriptions_activite&type=sportive&day=jeudi',
+                autoFocus: true
+            });
+            $( "#jeudi_crea" ).autocomplete({
+                source: 'ajax/search.php?contexte=inscriptions_activite&type=creative&day=jeudi',
+                autoFocus: true
+            });
+            $( "#vendredi_sport" ).autocomplete({
+                source: 'ajax/search.php?contexte=inscriptions_activite&type=sportive&day=vendredi',
+                autoFocus: true
+            });
+            $( "#vendredi_crea" ).autocomplete({
+                source: 'ajax/search.php?contexte=inscriptions_activite&type=creative&day=vendredi',
                 autoFocus: true
             });
         });

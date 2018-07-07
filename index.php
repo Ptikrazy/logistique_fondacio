@@ -173,9 +173,12 @@ foreach ($anniversaires as $anniv) {
 <?php
 
 echo '- Nombre total de participants: '.(get_totaux_jeunes($_SESSION['camp'], '1') + get_totaux_adultes($_SESSION['camp'], '1')).'<br>';
+echo '- Nombre d\'adultes: '.get_totaux_adultes($_SESSION['camp'], '1').'<br>';
 echo '- Nombre de jeunes: '.get_totaux_jeunes($_SESSION['camp'], '1').'<br>';
 echo '- Nombre de jeunes prépa: '.get_totaux_jeunes($_SESSION['camp'], 'prepa = 1').'<br>';
+echo '- Nombre de jeunes camp: '.get_totaux_jeunes($_SESSION['camp'], 'prepa = 0').'<br>';
 echo '- Nombre de jeunes nouveaux: '.get_totaux_jeunes($_SESSION['camp'], 'ancien = 0').'<br>';
+echo '- Nombre de jeunes ancien: '.get_totaux_jeunes($_SESSION['camp'], 'ancien = 1').'<br>';
 echo '- Nombre de jeunes filles: '.get_totaux_jeunes($_SESSION['camp'], 'civilite = "F"').'<br>';
 echo '- Nombre de jeunes garçons: '.get_totaux_jeunes($_SESSION['camp'], 'civilite = "H"').'<br>';
 echo '- Nombre d\'adultes: '.get_totaux_adultes($_SESSION['camp'], '1');
