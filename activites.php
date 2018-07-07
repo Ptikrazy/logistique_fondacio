@@ -172,35 +172,35 @@ if (!empty($_GET['action'])) {
     <script>
     $(function() {
         $( "#mardi_resp1" ).autocomplete({
-            source: 'ajax/search.php?contexte=resp_activites',
+            source: 'ajax/search.php?contexte=remplissage&type=adulte',
             autoFocus: true
         });
         $( "#mardi_resp2" ).autocomplete({
-            source: 'ajax/search.php?contexte=resp_activites',
+            source: 'ajax/search.php?contexte=remplissage&type=adulte',
             autoFocus: true
         });
         $( "#mercredi_resp1" ).autocomplete({
-            source: 'ajax/search.php?contexte=resp_activites',
+            source: 'ajax/search.php?contexte=remplissage&type=adulte',
             autoFocus: true
         });
         $( "#mercredi_resp2" ).autocomplete({
-            source: 'ajax/search.php?contexte=resp_activites',
+            source: 'ajax/search.php?contexte=remplissage&type=adulte',
             autoFocus: true
         });
         $( "#jeudi_resp1" ).autocomplete({
-            source: 'ajax/search.php?contexte=resp_activites',
+            source: 'ajax/search.php?contexte=remplissage&type=adulte',
             autoFocus: true
         });
         $( "#jeudi_resp2" ).autocomplete({
-            source: 'ajax/search.php?contexte=resp_activites',
+            source: 'ajax/search.php?contexte=remplissage&type=adulte',
             autoFocus: true
         });
         $( "#vendredi_resp1" ).autocomplete({
-            source: 'ajax/search.php?contexte=resp_activites',
+            source: 'ajax/search.php?contexte=remplissage&type=adulte',
             autoFocus: true
         });
         $( "#vendredi_resp2" ).autocomplete({
-            source: 'ajax/search.php?contexte=resp_activites',
+            source: 'ajax/search.php?contexte=remplissage&type=adulte',
             autoFocus: true
         });
     });

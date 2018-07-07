@@ -1659,8 +1659,6 @@ function clean_dispo($id) {
 
 }
 
-/// OLD ///
-
 function get_historique($jeune, $jour, $type) {
 
     global $bdd;
@@ -1675,27 +1673,36 @@ function get_historique($jeune, $jour, $type) {
 
 }
 
-function inscrire($camp, $id, $nom, $activites, $jour) {
+function inscrire($id, $nom, $activites) {
 
     global $bdd;
 
-    foreach ($activites as $type => $activite) {
-        $req = 'INSERT INTO inscriptions SET camp = '.$camp.', id_jeune = '.$id.', nom_jeune = "'.$nom.'", activite = "'.$activite.'", jour = "'.$jour.'", type = "'.$type.'"';
+    foreach ($activites as $key => $value) {
+        $acti = explode('_', $key);
+        $req = 'SELECT id_inscription FROM inscriptions WHERE camp = '.$_SESSION['camp'].' AND id_jeune = '.$id.' AND jour = "'.$acti[0].'" AND type = "'.$acti[1].'"';
+        $res = $bdd->query($req);
+        $data = $res->fetchColumn();
+        if (!empty($data)) {
+            $req = 'UPDATE inscriptions SET activite = "'.$value.'" WHERE id_inscription = '.$data;
+        }
+        else {
+            $req = 'INSERT INTO inscriptions SET camp = '.$_SESSION['camp'].', id_jeune = '.$id.', nom_jeune = "'.$nom.'", activite = "'.$value.'", jour = "'.$acti[0].'", type = "'.$acti[1].'"';
+        }
         $bdd->query($req);
     }
 
-    $req = 'UPDATE participants SET inscrit_'.$jour.' = 1 WHERE id_participant = '.$id;
+    $req = 'UPDATE jeunes SET inscrit_'.$_SESSION['jour_inscription'].' = 1 WHERE id_jeune = '.$id;
     $bdd->query($req);
 
     return 0;
 
 }
 
-function get_non_inscrits($jour) {
+function get_non_inscrits() {
 
     global $bdd;
 
-    $req = 'SELECT nom, prenom, service FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND type = "jeune" AND inscrit_'.$jour.' = 0 ORDER BY service';
+    $req = 'SELECT nom, prenom, service FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND inscrit_'.$_SESSION['jour_inscription'].' = 0 ORDER BY service, nom';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[] = $d;
@@ -1706,16 +1713,14 @@ function get_non_inscrits($jour) {
 
 }
 
-function get_inscrits_doublon($jour) {
+function get_donnees_mails($activite) {
 
     global $bdd;
 
-    $req = 'SELECT nom_jeune, COUNT(*) AS compte FROM inscriptions WHERE camp = '.$_SESSION['camp'].' AND jour = "'.$jour.'" GROUP BY nom_jeune';
+    $req = 'SELECT i.nom_jeune, j.taille, j.poids FROM inscriptions i, jeunes j WHERE i.id_jeune = j.id_jeune AND i.camp = '.$_SESSION['camp'].' AND activite = "'.$activite.'" AND jour = "'.$_SESSION['jour_inscription'].'"';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
-        if($d['compte'] > 2) {
-            $data[] = $d;
-        }
+        $data[] = $d;
     }
     $res->closeCursor();
 
@@ -1727,32 +1732,7 @@ function get_inscriptions() {
 
     global $bdd;
 
-    $day = date('w')+1;
-    switch ($day) {
-        case 0:
-            $day = 'dimanche';
-            break;
-        case 1:
-            $day = 'lundi';
-            break;
-        case 2:
-            $day = 'mardi';
-            break;
-        case 3:
-            $day = 'mercredi';
-            break;
-        case 4:
-            $day = 'jeudi';
-            break;
-        case 5:
-            $day = 'vendredi';
-            break;
-        case 6:
-            $day = 'samedi';
-            break;
-    }
-
-    $req = 'SELECT i.activite, p.type, i.nom_jeune FROM inscriptions i, participants p WHERE i.id_jeune = p.id_participant AND p.camp = '.$_SESSION['camp'].' AND i.jour = "'.$day.'"';
+    $req = 'SELECT activite, "Jeune" AS type, nom_jeune FROM inscriptions WHERE camp = '.$_SESSION['camp'].' AND jour = "'.$_SESSION['jour_inscription'].'"';
 
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
@@ -1762,60 +1742,20 @@ function get_inscriptions() {
 
     foreach ($data as $acti => $donnees_osef) {
 
-        $req = 'SELECT '.$day.'_resp1, '.$day.'_resp2 FROM activites WHERE nom = "'.$acti.'"';
+        $req = 'SELECT '.$_SESSION['jour_inscription'].'_resp1, '.$_SESSION['jour_inscription'].'_resp2 FROM activites WHERE nom = "'.$acti.'"';
         $res = $bdd->query($req);
         while ($d = $res->fetch()) {
-            if (!empty($d[$day.'_resp2'])) {
-                $resps = $d[$day.'_resp1'].' / '.$d[$day.'_resp2'];
+            if (!empty($d[$_SESSION['jour_inscription'].'_resp2'])) {
+                $resps = $d[$_SESSION['jour_inscription'].'_resp1'].' / '.$d[$_SESSION['jour_inscription'].'_resp2'];
             }
             else {
-                $resps = $d[$day.'_resp1'];
+                $resps = $d[$_SESSION['jour_inscription'].'_resp1'];
             }
             $data[$acti]['adulte'][] = $resps;
         }
     $res->closeCursor();
 
     }
-
-    return $data;
-
-}
-
-function get_donnees_mails($activite) {
-
-    global $bdd;
-
-    $day = date('w')+1;
-    switch ($day) {
-        case 0:
-            $day = 'dimanche';
-            break;
-        case 1:
-            $day = 'lundi';
-            break;
-        case 2:
-            $day = 'mardi';
-            break;
-        case 3:
-            $day = 'mercredi';
-            break;
-        case 4:
-            $day = 'jeudi';
-            break;
-        case 5:
-            $day = 'vendredi';
-            break;
-        case 6:
-            $day = 'samedi';
-            break;
-    }
-
-    $req = 'SELECT i.nom_jeune, p.taille, p.poids FROM inscriptions i, participants p WHERE i.id_jeune = p.id_participant AND i.camp = '.$_SESSION['camp'].' AND activite = "'.$activite.'" AND jour = "'.$day.'"';
-    $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[] = $d;
-    }
-    $res->closeCursor();
 
     return $data;
 

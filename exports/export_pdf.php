@@ -409,8 +409,6 @@ if ($_GET['contexte'] == 'trombi') {
 
 }
 
-/// OLD
-
 if ($_GET['contexte'] == 'activites') {
 
     $donnees = get_inscriptions();
@@ -465,7 +463,7 @@ if ($_GET['contexte'] == 'activites') {
 
     }
 
-    $pdf->Output('Inscriptions.pdf', 'D');
+    $pdf->Output('Inscriptions '.$_SESSION['jour_inscription'].'.pdf', 'D');
 
 }
 
