@@ -348,27 +348,27 @@ if (!empty($_GET['remplissage'])) {
             $(".hidden").hide();
             var type = '<?php echo $_POST['type'] ?>';
             $( "#chambre_resp" ).autocomplete({
-                source: 'ajax/search.php?contexte=remplissage&type=' + type,
+                source: 'ajax/search.php?contexte=chambres&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_1" ).autocomplete({
-                source: 'ajax/search.php?contexte=remplissage&type=' + type,
+                source: 'ajax/search.php?contexte=chambres&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_2" ).autocomplete({
-                source: 'ajax/search.php?contexte=remplissage&type=' + type,
+                source: 'ajax/search.php?contexte=chambres&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_3" ).autocomplete({
-                source: 'ajax/search.php?contexte=remplissage&type=' + type,
+                source: 'ajax/search.php?contexte=chambres&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_4" ).autocomplete({
-                source: 'ajax/search.php?contexte=remplissage&type=' + type,
+                source: 'ajax/search.php?contexte=chambres&type=' + type,
                 autoFocus: true
             });
             $( "#jeune_5" ).autocomplete({
-                source: 'ajax/search.php?contexte=remplissage&type=' + type,
+                source: 'ajax/search.php?contexte=chambres&type=' + type,
                 autoFocus: true
             });
         });
