@@ -94,7 +94,8 @@ if (!empty($_POST)) {
         else {
             $jeunes[] = '';
         }
-        save_chambre($_POST['chambre_num'], $jeunes, $_POST['type']);
+        $chambre = $_POST['batiment'].' '.$_POST['chambre_num'];
+        save_chambre($chambre, $jeunes, $_POST['type']);
     }
 
 }
@@ -287,6 +288,16 @@ if (!empty($_GET['remplissage'])) {
         </form>
         <?php if (isset($_POST['type'])) { ?>
         <form action="" method="POST">
+            <div class="form-group row">
+                <label for="batiment" class="col-md-2 col-form-label">Bâtiment</label>
+                <div class="col-md-3">
+                    <select class="form-control" name="batiment">
+                        <option value="PB">Pierres Blanches</option>
+                        <option value="TUC">Tuc</option>
+                        <option value="OURSONS">Oursons</option>
+                    </select>
+                </div>
+            </div>
             <div class="form-group row">
                 <label for="chambre_num" class="col-md-2 col-form-label">N° Chambre</label>
                 <div class="col-md-1">

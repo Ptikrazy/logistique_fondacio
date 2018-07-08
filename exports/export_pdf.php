@@ -175,9 +175,9 @@ if ($_GET['contexte'] == 'badges') {
 
         if ($participant['nom'] != 'CHAUFFEUR') {
             $z = 0;
-            while ($z < 4) {
+            while ($z < 6) {
                 // Gestion des nouvelles pages
-                if ($j == 16) {
+                if ($j == 14) {
                     $pdf->AddPage();
                     $x = 5;
                     $y = 2;
@@ -189,7 +189,7 @@ if ($_GET['contexte'] == 'badges') {
                 if ($i == 2) {
                     $i = 0;
                     $x = 5;
-                    $y += 36;
+                    $y += 42;
                 }
 
 
@@ -303,7 +303,7 @@ if ($_GET['contexte'] == 'parrainages') {
         ++$j;
     }
 
-    $pdf->Output('Parrainages.pdf', 'I');
+    $pdf->Output('Parrainages.pdf', 'D');
 
 }
 
@@ -405,7 +405,7 @@ if ($_GET['contexte'] == 'trombi') {
         }
     }
 
-    $pdf->Output('Trombinoscope.pdf', 'I');
+    $pdf->Output('Trombinoscope.pdf', 'D');
 
 }
 

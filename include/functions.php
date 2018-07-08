@@ -1512,10 +1512,9 @@ function get_badges() {
 
     $data = array();
     $req = '
-    SELECT nom, prenom, pg_num, chambre_num, service, "adulte" AS type FROM adultes
+    SELECT nom, prenom, pg_num, chambre_num, service, "adulte" AS type FROM adultes WHERE camp = '.$_SESSION['camp'].'
     UNION
-    SELECT nom, prenom, pg_num, chambre_num, service, "jeune" AS type FROM jeunes
-    WHERE camp = '.$_SESSION['camp'].'
+    SELECT nom, prenom, pg_num, chambre_num, service, "jeune" AS type FROM jeunes WHERE camp = '.$_SESSION['camp'].'
     ORDER BY type, nom';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
@@ -1564,7 +1563,7 @@ function get_trombi() {
     global $bdd;
 
     $data = array();
-    $req = 'SELECT nom, prenom, "adulte" AS type FROM adultes UNION SELECT nom, prenom, "jeune" AS type FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY type, nom';
+    $req = 'SELECT nom, prenom, "adulte" AS type FROM adultes WHERE camp = '.$_SESSION['camp'].' UNION SELECT nom, prenom, "jeune" AS type FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY type, nom';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[] = $d;
@@ -1580,7 +1579,7 @@ function get_chambres() {
     global $bdd;
 
     $data = array();
-    $req = 'SELECT nom, prenom, chambre_num FROM adultes UNION SELECT nom, prenom, chambre_num FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY chambre_num, nom, prenom';
+    $req = 'SELECT nom, prenom, chambre_num FROM adultes WHERE camp = '.$_SESSION['camp'].' UNION SELECT nom, prenom, chambre_num FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY chambre_num, nom, prenom';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['chambre_num']][] = $d['nom'].' '.$d['prenom'];
