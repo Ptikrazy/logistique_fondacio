@@ -1330,12 +1330,12 @@ function get_participants($filtres = array()) {
 
     global $bdd;
 
-    $req_filtres . '';
+    $req_filtres = ' AND desistement IS NULL';
     if (!empty($filtres)) {
         foreach ($filtres as $champ => $value) {
             if ($champ != 'type') {
                 if ($champ == 'nom') {
-                    $req_filtres .= ' AND '.$champ.' LIKE "%'.$value.'%"';
+                    $req_filtres .= ' AND (prenom LIKE "%'.$value.'%" OR nom LIKE "%'.$value.'%")';
                 }
                 else {
                     $req_filtres .= ' AND '.$champ.' = "'.$value.'"';
@@ -1350,10 +1350,10 @@ function get_participants($filtres = array()) {
     else {
         $req = '
         SELECT id_jeune AS id, nom, prenom, "jeune" AS type, tel_portable, date_naissance, civilite, ancien, prepa, service, pg_num, chambre_num FROM jeunes
-            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
+            WHERE camp = '.$_SESSION['camp'].$req_filtres.'
         UNION
         SELECT id_adulte AS id, nom, prenom, "adulte" AS type, tel_portable, date_naissance, civilite, 1 AS ancien, 1 AS prepa, service, pg_num, chambre_num FROM adultes
-            WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL'.$req_filtres.'
+            WHERE camp = '.$_SESSION['camp'].$req_filtres.'
         ORDER BY type, nom, prenom
         ';
     }
