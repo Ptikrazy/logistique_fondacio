@@ -1232,33 +1232,33 @@ function alertes_transports($raison) {
 
     switch ($raison) {
         case 'arrivees':
-            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, aller_heure FROM jeunes WHERE aller_transport = "train" AND aller_date = "'.$today->format('Y-m-d').'"
+            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, aller_heure FROM jeunes WHERE desistement IS NULL AND aller_transport = "train" AND aller_date = "'.$today->format('Y-m-d').'"
                     UNION
                     SELECT "Adulte" AS type, nom, prenom, tel_portable, aller_heure FROM adultes WHERE aller_transport = "train" AND aller_date = "'.$today->format('Y-m-d').'"
                     ORDER BY type, aller_heure, nom';
             break;
         case 'arrivees_demain':
-            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, aller_heure FROM jeunes WHERE aller_transport = "train" AND aller_date = "'.$tomorrow->format('Y-m-d').'"
+            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, aller_heure FROM jeunes WHERE desistement IS NULL AND aller_transport = "train" AND aller_date = "'.$tomorrow->format('Y-m-d').'"
                     UNION
-                    SELECT "Adulte" AS type, nom, prenom, tel_portable, aller_heure FROM adultes WHERE aller_transport = "train" AND aller_date = "'.$tomorrow->format('Y-m-d').'"
+                    SELECT "Adulte" AS type, nom, prenom, tel_portable, aller_heure FROM adultes WHERE desistement IS NULL AND aller_transport = "train" AND aller_date = "'.$tomorrow->format('Y-m-d').'"
                     ORDER BY type, aller_heure, nom';
             break;
         case 'departs':
-            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, retour_heure FROM jeunes WHERE retour_transport = "train" AND retour_date = "'.$today->format('Y-m-d').'"
+            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, retour_heure FROM jeunes WHERE desistement IS NULL AND retour_transport = "train" AND retour_date = "'.$today->format('Y-m-d').'"
                     UNION
-                    SELECT "Adulte" AS type, nom, prenom, tel_portable, retour_heure FROM adultes WHERE retour_transport = "train" AND retour_date = "'.$today->format('Y-m-d').'"
+                    SELECT "Adulte" AS type, nom, prenom, tel_portable, retour_heure FROM adultes WHERE desistement IS NULL AND retour_transport = "train" AND retour_date = "'.$today->format('Y-m-d').'"
                     ORDER BY type, retour_heure, nom';
             break;
         case 'departs_demain':
-            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, retour_heure FROM jeunes WHERE retour_transport = "train" AND retour_date = "'.$tomorrow->format('Y-m-d').'"
+            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable, retour_heure FROM jeunes WHERE desistement IS NULL AND retour_transport = "train" AND retour_date = "'.$tomorrow->format('Y-m-d').'"
                     UNION
-                    SELECT "Adulte" AS type, nom, prenom, tel_portable, retour_heure FROM adultes WHERE retour_transport = "train" AND retour_date = "'.$tomorrow->format('Y-m-d').'"
+                    SELECT "Adulte" AS type, nom, prenom, tel_portable, retour_heure FROM adultes WHERE desistement IS NULL AND retour_transport = "train" AND retour_date = "'.$tomorrow->format('Y-m-d').'"
                     ORDER BY type, retour_heure, nom';
             break;
         case 'bus_ville':
-            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND retour_transport = "bus" AND retour_ville = ""
+            $req = 'SELECT "Jeune" AS type, nom, prenom, tel_portable FROM jeunes WHERE desistement IS NULL AND camp = '.$_SESSION['camp'].' AND retour_transport = "bus" AND retour_ville = ""
                     UNION
-                    SELECT "Adulte" AS type, nom, prenom, tel_portable FROM adultes WHERE camp = '.$_SESSION['camp'].' AND retour_transport = "bus" AND retour_ville = ""
+                    SELECT "Adulte" AS type, nom, prenom, tel_portable FROM adultes WHERE desistement IS NULL AND camp = '.$_SESSION['camp'].' AND retour_transport = "bus" AND retour_ville = ""
                     ORDER BY type, nom';
             break;
     }
@@ -1547,7 +1547,7 @@ function get_pg() {
     global $bdd;
 
     $data = array();
-    $req = 'SELECT nom, prenom, pg_num, pg_resp FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY pg_num, pg_resp, nom, prenom';
+    $req = 'SELECT nom, prenom, pg_num, pg_resp FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND pg_num != "" ORDER BY pg_num, pg_resp, nom, prenom';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['pg_num']][] = $d['nom'].' '.$d['prenom'].' - '.$d['pg_resp'];
@@ -1579,7 +1579,7 @@ function get_chambres() {
     global $bdd;
 
     $data = array();
-    $req = 'SELECT nom, prenom, chambre_num FROM adultes WHERE camp = '.$_SESSION['camp'].' UNION SELECT nom, prenom, chambre_num FROM jeunes WHERE camp = '.$_SESSION['camp'].' ORDER BY chambre_num, nom, prenom';
+    $req = 'SELECT nom, prenom, chambre_num FROM adultes WHERE camp = '.$_SESSION['camp'].' AND chambre_num != "" UNION SELECT nom, prenom, chambre_num FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND chambre_num != "" ORDER BY chambre_num, nom, prenom';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['chambre_num']][] = $d['nom'].' '.$d['prenom'];
