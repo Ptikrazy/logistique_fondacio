@@ -62,7 +62,7 @@ if (!empty($_POST)) {
         save_pg($_POST['pg_num'], $jeunes);
     }
 
-    if (!empty($_POST['chambre_num']) && !empty($_POST['chambre_resp'])) {
+    if (!empty($_POST['chambre_num'])) {
         $jeunes = array();
         $chambre_resp = explode(' - ', $_POST['chambre_resp']);
         $jeunes[] = $chambre_resp[1];
