@@ -1741,14 +1741,16 @@ function get_inscriptions() {
 
     foreach ($data as $acti => $donnees_osef) {
 
-        $req = 'SELECT '.$_SESSION['jour_inscription'].'_resp1, '.$_SESSION['jour_inscription'].'_resp2 FROM activites WHERE nom = "'.$acti.'"';
+        $req = 'SELECT '.$_SESSION['jour_inscription'].'_resp1 AS resp1, '.$_SESSION['jour_inscription'].'_resp2 AS resp2 FROM activites WHERE nom = "'.$acti.'"';
         $res = $bdd->query($req);
         while ($d = $res->fetch()) {
-            if (!empty($d[$_SESSION['jour_inscription'].'_resp2'])) {
-                $resps = $d[$_SESSION['jour_inscription'].'_resp1'].' / '.$d[$_SESSION['jour_inscription'].'_resp2'];
+            $resp1 = explode('-', $d['resp1']);
+            if (!empty($d['resp2'])) {
+                $resp2 = explode('-', $d['resp2']);
+                $resps = $resp1[0].' / '.$resp2[0];
             }
             else {
-                $resps = $d[$_SESSION['jour_inscription'].'_resp1'];
+                $resps = $resp1[0];
             }
             $data[$acti]['adulte'][] = $resps;
         }
