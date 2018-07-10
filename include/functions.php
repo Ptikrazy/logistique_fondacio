@@ -1701,7 +1701,7 @@ function get_non_inscrits() {
 
     global $bdd;
 
-    $req = 'SELECT nom, prenom, service FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND inscrit_'.$_SESSION['jour_inscription'].' = 0 ORDER BY service, nom';
+    $req = 'SELECT nom, prenom, service FROM jeunes WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL AND inscrit_'.$_SESSION['jour_inscription'].' = 0 ORDER BY service, nom';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[] = $d;
@@ -1716,7 +1716,7 @@ function get_donnees_mails($activite) {
 
     global $bdd;
 
-    $req = 'SELECT i.nom_jeune, j.taille, j.poids FROM inscriptions i, jeunes j WHERE i.id_jeune = j.id_jeune AND i.camp = '.$_SESSION['camp'].' AND activite = "'.$activite.'" AND jour = "'.$_SESSION['jour_inscription'].'"';
+    $req = 'SELECT i.nom_jeune, j.taille, j.poids FROM inscriptions i, jeunes j WHERE i.id_jeune = j.id_jeune AND i.camp = '.$_SESSION['camp'].' AND activite LIKE "%'.$activite.'%" AND jour = "'.$_SESSION['jour_inscription'].'"';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[] = $d;

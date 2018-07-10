@@ -5,7 +5,7 @@ require_once '../include/init.php';
 $data = array();
 
 if ($_GET['contexte'] == 'remplissage') {
-    $req = 'SELECT id_'.$_GET['type'].', nom, prenom FROM '.$_GET['type'].'s WHERE camp = '.$_SESSION['camp'].' AND (prenom LIKE "%'.$_GET['term'].'%" OR nom LIKE "%'.$_GET['term'].'%")';
+    $req = 'SELECT id_'.$_GET['type'].', nom, prenom FROM '.$_GET['type'].'s WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL AND (prenom LIKE "%'.$_GET['term'].'%" OR nom LIKE "%'.$_GET['term'].'%")';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[] = $d['nom'].' '.$d['prenom'].' - '.$d['id_'.$_GET['type']];
@@ -13,7 +13,7 @@ if ($_GET['contexte'] == 'remplissage') {
 }
 
 if ($_GET['contexte'] == 'chambres') {
-    $req = 'SELECT id_'.$_GET['type'].', nom, prenom FROM '.$_GET['type'].'s WHERE camp = '.$_SESSION['camp'].' AND chambre_num = "" AND (prenom LIKE "%'.$_GET['term'].'%" OR nom LIKE "%'.$_GET['term'].'%")';
+    $req = 'SELECT id_'.$_GET['type'].', nom, prenom FROM '.$_GET['type'].'s WHERE camp = '.$_SESSION['camp'].' AND desistement IS NULL AND chambre_num = "" AND (prenom LIKE "%'.$_GET['term'].'%" OR nom LIKE "%'.$_GET['term'].'%")';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[] = $d['nom'].' '.$d['prenom'].' - '.$d['id_'.$_GET['type']];
