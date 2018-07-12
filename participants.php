@@ -346,6 +346,7 @@ if (!empty($_GET['action'])) {
                 <label class="col-form-label col-sm-2" for="retour_transport">Je repartirai du Mourtis en</label>
                 <div class="col-sm-3">
                     <select class="form-control" name="retour_transport" id="retour_transport" required>
+                        <option value="sur_place" <?php echo ($donnees['retour_transport'] == 'sur_place') ? 'selected': ''; ?>>Je serai sur place</option>
                         <option value="voiture" <?php echo ($donnees['retour_transport'] == 'voiture') ? 'selected': ''; ?>>Voiture personnelle</option>
                         <option value="train" <?php echo ($donnees['retour_transport'] == 'train') ? 'selected': ''; ?>>Train</option>
                         <option value="bus" <?php echo ($donnees['retour_transport'] == 'bus') ? 'selected': ''; ?>>Bus organisé par Fondacio</option>
