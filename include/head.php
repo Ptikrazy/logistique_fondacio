@@ -6,16 +6,16 @@
 
         <title><?php echo $title; ?></title>
 
-        <link href="/include/css/bootstrap-4.0.0.min.css" rel="stylesheet">
-        <link href="/include/css/swal2.min.css" rel="stylesheet">
-        <link href="/include/css/jquery-ui-1.12.1.min.css" rel="stylesheet">
-        <link href="/include/css/main.css" rel="stylesheet">
+        <link href="include/css/bootstrap-4.0.0.min.css" rel="stylesheet">
+        <link href="include/css/swal2.min.css" rel="stylesheet">
+        <link href="include/css/jquery-ui-1.12.1.min.css" rel="stylesheet">
+        <link href="include/css/main.css" rel="stylesheet">
 
-        <script src="/include/js/jquery-3.2.1.min.js"></script>
-        <script src="/include/js/jquery-ui-1.12.1.min.js"></script>
-        <script src="/include/js/popper-1.12.3.min.js"></script>
-        <script src="/include/js/bootstrap-4.0.0.min.js"></script>
-        <script src="/include/js/swal2.min.js"></script>
+        <script src="include/js/jquery-3.2.1.min.js"></script>
+        <script src="include/js/jquery-ui-1.12.1.min.js"></script>
+        <script src="include/js/popper-1.12.3.min.js"></script>
+        <script src="include/js/bootstrap-4.0.0.min.js"></script>
+        <script src="include/js/swal2.min.js"></script>
     </head>
 
     <body>
@@ -23,7 +23,7 @@
     <?php if (!in_array($_SERVER['SCRIPT_NAME'], array('/inscription.php', '/inscription_adultes.php'))) { ?>
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="/"><img src="/include/logo.png" width="150" height="30" alt=""></a>
+        <a class="navbar-brand" href="/"><img src="include/logo.png" width="150" height="30" alt=""></a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
