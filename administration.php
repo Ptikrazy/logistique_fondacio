@@ -39,7 +39,7 @@ if (empty($_SESSION['profil']['id'])) {
     else {
 
         if (!check_password($_POST['login'], $_POST['password'])) {
-            redirect('/administration.php');
+            redirect('administration.php');
         }
 
         else {
@@ -49,7 +49,7 @@ if (empty($_SESSION['profil']['id'])) {
             }
             $_SESSION['profil']['id'] = $login['id_utilisateur'];
             $_SESSION['profil']['role'] = $login['role'];
-            redirect('/administration.php');
+            redirect('administration.php');
         }
 
     }
@@ -269,9 +269,16 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="da_commentaire">Commentaires</label>
+                <label class="col-form-label col-sm-2" for="da_commentaire_log">Commentaires logistique</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="da_commentaire" id="da_commentaire" value="<?php echo $data['da_commentaire']; ?>">
+                    <input type="text" class="form-control" name="da_commentaire_log" id="da_commentaire_log" value="<?php echo $data['da_commentaire_log']; ?>">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="da_commentaire_peda">Commentaires pédagogique</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="da_commentaire_peda" id="da_commentaire_peda" value="<?php echo $data['da_commentaire_peda']; ?>">
                 </div>
             </div>
 
@@ -319,7 +326,7 @@ else {
             </div><br>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="observations">Observations <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
+                <label class="col-form-label col-sm-2" for="observations">Observations des parents <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
                 <div class="col-sm-10">
                     <textarea class="form-control" name="observations" id="observations" rows="3"><?php echo $data['observations']; ?></textarea>
                 </div>
@@ -375,7 +382,7 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="rgt_commentaire">Commentaires</label>
+                <label class="col-form-label col-sm-2" for="rgt_commentaire">Commentaires financier</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="rgt_commentaire" id="rgt_commentaire" value="<?php echo $data['rgt_commentaire']; ?>">
                 </div>
@@ -835,7 +842,7 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="observations">Observations <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
+                <label class="col-form-label col-sm-2" for="observations">Observations des parents <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
                 <div class="col-sm-10">
                     <textarea class="form-control" name="observations" id="observations" rows="3"><?php echo $data['observations']; ?></textarea>
                 </div>
@@ -1299,6 +1306,10 @@ else {
         $_SESSION['filtres_admin_jeunes']['nom'] = $_POST['nom'];
     }
 
+    if (!empty($_POST['prenom'])) {
+        $_SESSION['filtres_admin_jeunes']['prenom'] = $_POST['prenom'];
+    }
+
     if (!empty($_POST['cp'])) {
         $_SESSION['filtres_admin_jeunes']['cp'] = $_POST['cp'];
     }
@@ -1367,9 +1378,14 @@ else {
 
         <div class="form-group row">
             <!-- FILTRE NOM -->
-            <label class="col-form-label col-sm-2" for="nom">Nom du jeune</label>
+            <label class="col-form-label col-sm-1" for="nom">Nom</label>
             <div class="col-sm-2">
                 <input type="text" class="form-control" name="nom" id="nom" value="<?php echo $_SESSION['filtres_admin_jeunes']['nom']; ?>">
+            </div>
+            <!-- FILTRE PRENOM -->
+            <label class="col-form-label col-sm-1" for="prenom">Prénom</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="prenom" id="prenom" value="<?php echo $_SESSION['filtres_admin_jeunes']['prenom']; ?>">
             </div>
             <!-- FILTRE CAMP -->
             <label class="col-form-label col-sm-1" for="camp">Camp</label>

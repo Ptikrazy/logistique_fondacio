@@ -137,9 +137,21 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="jeune_tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, laisser vide"></label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" placeholder="Si pas de portable, laisser vide">
+            <label class="col-form-label col-sm-2" for="jeune_tel_portable_radio" id="jeune_tel_portable_libelle">Téléphone portable du jeune</label>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="jeune_tel_portable_radio" id="jeune_tel_portable1" value="1"> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="jeune_tel_portable_radio" id="jeune_tel_portable0" value="0"> Non
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3" id="jeune_tel_portable_id">
+                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable">
             </div>
             <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
             <div class="col-sm-3">
@@ -259,11 +271,11 @@ else {
 
         Il y a trois façons d'arriver au Mourtis:<br><br>
 
-        – En bus : des bus sont organisés pour chacun des camps : en fonction de la région attribuée à la semaine, ils desserviront plusieurs grandes villes en France (Lille, Paris, Versailles, Brive, Toulouse, Lyon, Marseille, Montpellier, Valence, Nantes, Angers, Poitiers, Bordeaux, …). Il faut compter 150 € l’aller-retour, soit 75€ par trajet. Le nombre de places est limité (si le choix n'apparait pas, c'est que le bus est plein).<br><br>
+        – <b>En bus</b> : des bus sont organisés pour chacun des camps : en fonction de la région attribuée à la semaine, ils desserviront plusieurs grandes villes en France (Lille, Paris, Versailles, Brive, Toulouse, Lyon, Marseille, Montpellier, Valence, Nantes, Angers, Poitiers, Bordeaux, …). Il faut compter 150 € l’aller-retour, soit 75€ par trajet. Le nombre de places est limité (si le choix n'apparait pas, c'est que le bus est plein).<br><br>
 
-        – En train : la gare la plus proche est Montréjeau-Gourdan-Polignan. Un service de navette Fondacio sera mis en place entre la gare et le lieu du camp à l’aller et au retour : il faut compter 40€ pour l’aller-retour, soit 20€ par trajet. A l’aller, navettes à 11h15 ou 14h30 (si impossible à 11h30). Au retour, arrivée des navettes à la gare à 11h maximum (une ou plusieurs navettes en fonction des horaires de départ des différents trains). En fonction du remplissage des navettes, il est possible qu’il y ait de l’attente en gare de Montréjeau-Gourdan-Pollignan. Si vous rencontrez un problème avec les horaires de train ou souhaitez avoir plus d’informations sur la navette, merci de nous contacter par mail.<br><br>
+        – <b>En train</b> : la gare la plus proche est Montréjeau-Gourdan-Polignan. Un service de navette Fondacio sera mis en place entre la gare et le lieu du camp à l’aller et au retour : il faut compter 40€ pour l’aller-retour, soit 20€ par trajet. A l’aller, navettes à 11h15 ou 14h30 (si impossible à 11h30). Au retour, arrivée des navettes à la gare à 11h maximum (une ou plusieurs navettes en fonction des horaires de départ des différents trains). En fonction du remplissage des navettes, il est possible qu’il y ait de l’attente en gare de Montréjeau-Gourdan-Pollignan. Si vous rencontrez un problème avec les horaires de train ou souhaitez avoir plus d’informations sur la navette, merci de nous contacter par mail.<br><br>
 
-        – En voiture : directement sur le lieu du camp à partir de 12h30 le lundi avec un pique-nique (de même pour la prépa le samedi précédent). L’accueil pour le départ le dimanche est assuré jusqu’à 11h.<br><br>
+        – <b>En voiture</b> : directement sur le lieu du camp à partir de 12h30 le lundi avec un pique-nique (de même pour la prépa le samedi précédent). L’accueil pour le départ le dimanche est assuré jusqu’à 11h.<br><br>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-3" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span></label>
@@ -653,6 +665,22 @@ else {
                 }
                 else {
                     $('#aller_train_navette').text('14h30');
+                }
+            });
+
+            // Affichage portable
+
+            $('#jeune_tel_portable').hide();
+            $('input[name="jeune_tel_portable_radio"]').change(function() {
+                if (this.value == 1) {
+                    $('#jeune_tel_portable').show();
+                    $("#jeune_tel_portable").prop('required',true);
+                    $("#jeune_tel_portable_libelle").html('Téléphone portable du jeune <span style="color: red">*</span>');
+                }
+                else {
+                    $('#jeune_tel_portable').hide();
+                    $("#jeune_tel_portable").prop('required',false);
+                    $("#jeune_tel_portable_libelle").html('Téléphone portable du jeune');
                 }
             });
 

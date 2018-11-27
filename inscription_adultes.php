@@ -149,18 +149,9 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="allergies">Informations sanitaires (allergies, intolérances, traitements...)</label>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="allergies" id="allergiesO" value="1"> Oui
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="allergies" id="allergiesN" value="0" required> Non
-                    </label>
-                </div>
+            <label class="col-form-label col-sm-2" for="allergies">Informations sanitaires (allergies, intolérances, traitements...)</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" name="allergies" id="allergies" rows="3"></textarea>
             </div>
         </div>
 

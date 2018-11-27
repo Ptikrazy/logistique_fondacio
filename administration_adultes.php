@@ -175,9 +175,16 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="da_commentaire">Commentaire</label>
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" name="da_commentaire" id="da_commentaire" value="<?php echo $data['da_commentaire']; ?>">
+                <label class="col-form-label col-sm-2" for="da_commentaire_log">Commentaires logistique</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="da_commentaire_log" id="da_commentaire_log" value="<?php echo $data['da_commentaire_log']; ?>">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="da_commentaire_peda">Commentaires pédagogique</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="da_commentaire_peda" id="da_commentaire_peda" value="<?php echo $data['da_commentaire_peda']; ?>">
                 </div>
             </div>
 
@@ -213,7 +220,7 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="rgt_commentaire">Commentaires</label>
+                <label class="col-form-label col-sm-2" for="rgt_commentaire">Commentaires financier</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="rgt_commentaire" id="rgt_commentaire" value="<?php echo $data['rgt_commentaire']; ?>">
                 </div>
