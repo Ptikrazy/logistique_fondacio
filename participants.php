@@ -532,7 +532,7 @@ if (!empty($_GET['action'])) {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="tel_portable">Téléphone portable du jeune <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
+                <label class="col-form-label col-sm-2" for="tel_portable">Téléphone portable du jeune <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="tel_portable" id="tel_portable" value="<?php echo $donnees['tel_portable']; ?>">
                 </div>
@@ -543,7 +543,7 @@ if (!empty($_GET['action'])) {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="mail">Courriel personnel du jeune <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
+                <label class="col-form-label col-sm-2" for="mail">Courriel personnel du jeune <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="mail" id="mail" value="<?php echo $donnees['mail']; ?>">
                 </div>

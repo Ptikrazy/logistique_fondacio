@@ -303,7 +303,7 @@ else {
             </div>
 
             <div class="form-group row" id="prepa">
-                <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
+                <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
                 <div class="col-sm-3">
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
@@ -319,7 +319,7 @@ else {
             </div><br>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="observations">Observations <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
+                <label class="col-form-label col-sm-2" for="observations">Observations <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
                 <div class="col-sm-10">
                     <textarea class="form-control" name="observations" id="observations" rows="3"><?php echo $data['observations']; ?></textarea>
                 </div>
@@ -590,7 +590,7 @@ else {
             <h5>Aller</h5><br>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Pour rejoindre le lieu de camp, 3 possibilités: <ul><li>Arriver en voiture</li><li>Venir en train jusqu'à la gare de Montréjeau-Gourdan Polignan, où une navette Fondacio attendra les jeunes pour les conduire sur le lieu de camp</li><li>Prendre le bus organisé par Fondacio</li></ul>"></label>
+                <label class="col-form-label col-sm-2" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Pour rejoindre le lieu de camp, 3 possibilités: <ul><li>Arriver en voiture</li><li>Venir en train jusqu'à la gare de Montréjeau-Gourdan Polignan, où une navette Fondacio attendra les jeunes pour les conduire sur le lieu de camp</li><li>Prendre le bus organisé par Fondacio</li></ul>"></label>
                 <div class="col-sm-3">
                     <select class="form-control" name="aller_transport" id="aller_transport" required>
                         <option value="voiture" <?php echo ($data['aller_transport'] == 'voiture') ? 'selected': ''; ?>>Voiture personnelle</option>
@@ -732,7 +732,7 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
+                <label class="col-form-label col-sm-2" for="tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="tel_portable" id="tel_portable" value="<?php echo $data['tel_portable']; ?>">
                 </div>
@@ -743,7 +743,7 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="mail">Courriel personnel du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
+                <label class="col-form-label col-sm-2" for="mail">Courriel personnel du jeune <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="mail" id="mail" value="<?php echo $data['mail']; ?>" required>
                 </div>
@@ -793,11 +793,11 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="taille">Taille (en cm)<span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
+                <label class="col-form-label col-sm-2" for="taille">Taille (en cm)<span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
                 <div class="col-sm-2">
                     <input type="number" class="form-control" name="taille" id="taille" value="<?php echo $data['taille']; ?>" required>
                 </div>
-                <label class="col-form-label col-sm-2" for="poids">Poids (en kg) <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
+                <label class="col-form-label col-sm-2" for="poids">Poids (en kg) <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
                 <div class="col-sm-2">
                     <input type="number" class="form-control" name="poids" id="poids" value="<?php echo $data['poids']; ?>" required>
                 </div>
@@ -835,7 +835,7 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="observations">Observations <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
+                <label class="col-form-label col-sm-2" for="observations">Observations <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
                 <div class="col-sm-10">
                     <textarea class="form-control" name="observations" id="observations" rows="3"><?php echo $data['observations']; ?></textarea>
                 </div>
@@ -844,7 +844,7 @@ else {
             <h4>Paiement</h4>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-4" for="paiement_declare">Je choisis de payer le montant suivant <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Notez bien ce montant, il vous sera redemandé au moment du paiement.."></label>
+                <label class="col-form-label col-sm-4" for="paiement_declare">Je choisis de payer le montant suivant <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Notez bien ce montant, il vous sera redemandé au moment du paiement.."></label>
                 <div class="col-sm-3">
                     <input type="number" class="form-control" name="paiement_declare" id="paiement_declare" value="<?php echo $data['paiement_declare']; ?>" required>
                 </div>

@@ -36,7 +36,7 @@ else {
 
 ?>
 
-    <center><h2>Inscription aux camps RSV</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires<br>Les <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" > indiquent qu'une aide est disponible</center>
+    <center><h2>Inscription aux camps RSV</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires<br>Les <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" > indiquent qu'une aide est disponible</center>
 
     <form action="" method="POST">
 
@@ -83,9 +83,9 @@ else {
             <div class="col-sm-2">
                 <input type="text" class="form-control" name="nom" id="nom" required>
             </div>
-            <label class="col-form-label col-sm-2" for="nom_usage">Nom d'usage</label>
+            <label class="col-form-label col-sm-2" for="nom_usage">Nom d'usage <span style="color: red">*</span></label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" name="nom_usage" id="nom_usage">
+                <input type="text" class="form-control" name="nom_usage" id="nom_usage" required>
             </div>
             <label class="col-form-label col-sm-2" for="prenom">Prénom <span style="color: red">*</span></label>
             <div class="col-sm-2">
@@ -149,9 +149,18 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="allergies">Allergies ou intolérances</label>
-            <div class="col-sm-10">
-                <textarea class="form-control" name="allergies" id="allergies" rows="3"></textarea>
+            <label class="col-form-label col-sm-4" for="allergies">Informations sanitaires (allergies, intolérances, traitements...)</label>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="allergies" id="allergiesO" value="1"> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="allergies" id="allergiesN" value="0" required> Non
+                    </label>
+                </div>
             </div>
         </div>
 
@@ -199,17 +208,33 @@ else {
                 </div>
                 <div class="form-check form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="diplome_secouriste" value="1" id="diplome_secouriste">PSC1 ou PSCE1 ou secouriste
+                        <input class="form-check-input" type="checkbox" name="diplome_psc1" value="1" id="diplome_psc1">PSC1 (Si vous détenez ce diplôme, vous avez un diplôme de premiers secours : infirmier(ère), médecin, chirurgien(ne)-dentiste, pharmacien(ne), détenteur (trice) de l’AFPS, du BN ou le CSST. Si oui précisez lequel ou lesquels : <input type="text" class="form-control" name="diplome_psc1_autre" id="diplome_psc1_autre">
                     </label>
                 </div>
                 <div class="form-check form-check">
-                    <label class="form-check-label col-sm-8">
-                        <input class="form-check-input" type="checkbox" value="1">Si vous détenez ce diplôme, vous avez un diplôme de premiers secours : infirmier(ère), médecin, chirurgien(ne)-dentiste, pharmacien(ne), détenteur (trice) de l’AFPS, du BN ou le CSST. Si oui précisez lequel ou lesquels : <input type="text" class="form-control" name="diplome_ps" id="diplome_ps">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="diplome_psce1_secouriste" value="1" id="diplome_psce1_secouriste">Titulaire du PSCE1 / Diplôme de secouriste
                     </label>
                 </div>
                 <div class="form-group">
                     <label class="form-check-label col-sm-8">
-                        <input class="form-check-input" type="checkbox" value="1" id="diplome_autre">Autre(s) diplôme(s) : <input type="text" class="form-control" name="diplome_autre" id="diplome_autre">
+                        <input class="form-check-input" type="checkbox" value="1" id="diplome_autre">Autre(s) diplôme(s) (lié à l'animation ou l'encadrement de mineur) : <input type="text" class="form-control" name="diplome_autre" id="diplome_autre">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-4" for="diplome_physique">Je détiens une copie physique du ou des diplôme(s) que j'ai indiqué avoir ci-dessus</label>
+            <div class="col-sm-4">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="diplome_physique" id="diplome_physique1" value="1"> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="diplome_physique" id="diplome_physique2" value="0"> Non
                     </label>
                 </div>
             </div>
@@ -217,7 +242,7 @@ else {
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="stagiaire">Je suis</label>
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="stagiaire" id="stagiaireBAFA" value="BAFA"> Stagiaire BAFA
@@ -235,36 +260,6 @@ else {
             <label class="col-form-label col-sm-2" for="appele_par">J'ai été appelé par <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <input type="text" class="form-control" name="appele_par" id="appele_par" required>
-            </div>
-        </div>
-
-        <h5>WE de formation</h5>
-
-        <div class="form-group row">
-            <label class="col-form-label col-sm-12">
-                Un week-end de formation aura lieu du vendredi 25 au dimanche 27 mai 2018, à l’Ermitage à Versailles.<br>
-                Nous avons à cœur que chaque adulte venant sur un camp puisse avoir les outils nécessaires à l’encadrement de mineurs, et aussi, que ce week-end soit l’opportunité de rencontrer une majorité des personnes avec lesquelles vous serez dans cette aventure !<br>
-                Nous souhaitons que toutes les personnes soient présentes qu’elles aient déjà été dans des équipes d’encadrement ou non (salariés, bénévoles, services civiques, …)
-            </label>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="we_formation">Je serai présent au WE de formation <span style="color: red">*</span></label>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="we_formation" id="we_formationO" value="1"> Oui
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="we_formation" id="we_formationN" value="0" required> Non
-                    </label>
-                </div>
-            </div>
-            <label class="col-form-label col-sm-2" for="we_formation_refus">Si non, pourquoi ?</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control" name="we_formation_refus" id="we_formation_refus">
             </div>
         </div>
 
@@ -297,7 +292,7 @@ else {
         <h5>Aller</h5><br>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-3" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Pour rejoindre le lieu de camp, 3 possibilités: <ul><li>Arriver en voiture</li><li>Venir en train jusqu'à la gare de Montréjeau-Gourdan Polignan, où une navette Fondacio attendra les jeunes pour les conduire sur le lieu de camp</li><li>Prendre le bus organisé par Fondacio</li></ul>"></label>
+            <label class="col-form-label col-sm-3" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Pour rejoindre le lieu de camp, 3 possibilités: <ul><li>Arriver en voiture</li><li>Venir en train jusqu'à la gare de Montréjeau-Gourdan Polignan, où une navette Fondacio attendra les jeunes pour les conduire sur le lieu de camp</li><li>Prendre le bus organisé par Fondacio</li></ul>"></label>
             <div class="col-sm-3">
                 <select class="form-control" name="aller_transport" id="aller_transport" required>
                     <option value="" selected></option>
@@ -314,18 +309,9 @@ else {
         </div>
 
         <div class="form-group row" id="aller_train">
-            <label class="col-form-label col-sm-3" for="aller_train">Heure d'arrivée <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" data-html="true" title="Si impossible d'arriver à ces horaires, voir avec le responsable de camp</li></ul>"></label>
+            <label class="col-form-label col-sm-3" for="aller_train_value">Heure d'arrivée du train <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="aller_train" id="aller_train11h25" value="11h25"> 11h25 (recommandé)
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="aller_train" id="aller_train14h25" value="14h25"> 14h25 (si impossible à 11h25)
-                    </label>
-                </div>
+                <input type="time" class="form-control" name="aller_train_value" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
             </div>
         </div>
 
@@ -358,15 +344,9 @@ else {
         </div>
 
         <div class="form-group row" id="retour_train">
-            <label class="col-form-label col-sm-12">Le camp termine dans la nuit du samedi au dimanche à 2h du matin. Nous proposons une navette jusqu'à la gare pour le train de 11h25 le dimanche matin.</label>
-        </div>
-
-        <div class="form-group row" id="retour_bus">
-            <label class="col-form-label col-sm-3" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="retour_train_value">Heure de départ du train <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <select class="form-control" name="retour_bus" id="retour_bus_clear">
-                    <option value="" id="retour_bus_villes" selected></option>
-                </select>
+                <input type="time" class="form-control" name="retour_train_value" id="retour_train_value"> (Nous organisons deux départs de navette Fondacio le dimanche matin, il est donc possible de prendre un billet à compter de 7h du matin)
             </div>
         </div>
 
@@ -389,7 +369,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="paiement_declare">Je choisis de payer le montant suivant <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Notez bien ce montant, il vous sera redemandé au moment du paiement."></label>
+            <label class="col-form-label col-sm-4" for="paiement_declare">Je choisis de payer le montant suivant <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Notez bien ce montant, il vous sera redemandé au moment du paiement."></label>
             <div class="col-sm-3">
                 <input type="number" class="form-control" name="paiement_declare" id="paiement_declare" required>
             </div>
@@ -920,6 +900,36 @@ else {
             </div>
         </div>
 
+        <h5>WE de formation</h5>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-12">
+                Un week-end de formation aura lieu du vendredi 25 au dimanche 27 mai 2018, à l’Ermitage à Versailles.<br>
+                Nous avons à cœur que chaque adulte venant sur un camp puisse avoir les outils nécessaires à l’encadrement de mineurs, et aussi, que ce week-end soit l’opportunité de rencontrer une majorité des personnes avec lesquelles vous serez dans cette aventure !<br>
+                Nous souhaitons que toutes les personnes soient présentes qu’elles aient déjà été dans des équipes d’encadrement ou non (salariés, bénévoles, services civiques, …)
+            </label>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-3" for="we_formation">Je serai présent au WE de formation <span style="color: red">*</span></label>
+            <div class="col-sm-2">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="we_formation" id="we_formationO" value="1"> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="we_formation" id="we_formationN" value="0" required> Non
+                    </label>
+                </div>
+            </div>
+            <label class="col-form-label col-sm-2" for="we_formation_refus">Si non, pourquoi ?</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="we_formation_refus" id="we_formation_refus">
+            </div>
+        </div>
+
         <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Valider l'inscription</button>
@@ -1026,6 +1036,15 @@ else {
                     $('#retour_voiture').hide();
                     $('#retour_train').hide();
                     $('#retour_bus').hide();
+                }
+            });
+
+            $('#aller_train_value').change(function() {
+                if (this.value <= "11:30") {
+                    $('#aller_train_navette').text('11h30');
+                }
+                else {
+                    $('#aller_train_navette').text('14h30');
                 }
             });
 

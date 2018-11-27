@@ -26,7 +26,7 @@ else {
 
 ?>
 
-    <center><h2>Inscription aux camps RSV</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires<br>Les <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" > indiquent qu'une aide est disponible</center>
+    <center><h2>Inscription aux camps RSV</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires<br>Les <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" > indiquent qu'une aide est disponible</center>
 
     <form action="" method="POST">
 
@@ -70,7 +70,7 @@ else {
         </div>
 
         <div class="form-group row" id="prepa">
-            <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 60 euros."></label>
+            <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 60 euros."></label>
             <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
@@ -137,7 +137,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="jeune_tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, laisser vide"></label>
+            <label class="col-form-label col-sm-2" for="jeune_tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, laisser vide"></label>
             <div class="col-sm-3">
                 <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable" placeholder="Si pas de portable, laisser vide">
             </div>
@@ -148,7 +148,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="jeune_mail">Courriel personnel du jeune <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
+            <label class="col-form-label col-sm-2" for="jeune_mail">Courriel personnel du jeune <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
             <div class="col-sm-3">
                 <input type="text" class="form-control" name="jeune_mail" id="jeune_mail" required>
             </div>
@@ -198,11 +198,11 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="taille">Taille (en cm)<span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
+            <label class="col-form-label col-sm-2" for="taille">Taille (en cm)<span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
             <div class="col-sm-2">
                 <input type="number" class="form-control" name="taille" id="taille" required>
             </div>
-            <label class="col-form-label col-sm-2" for="poids">Poids (en kg) <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
+            <label class="col-form-label col-sm-2" for="poids">Poids (en kg) <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
             <div class="col-sm-2">
                 <input type="number" class="form-control" name="poids" id="poids" required>
             </div>
@@ -247,7 +247,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="observations">Observations <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
+            <label class="col-form-label col-sm-2" for="observations">Observations <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
             <div class="col-sm-10">
                 <textarea class="form-control" name="observations" id="observations" rows="3"></textarea>
             </div>
@@ -266,7 +266,7 @@ else {
         – En voiture : directement sur le lieu du camp à partir de 12h30 le lundi avec un pique-nique (de même pour la prépa le samedi précédent). L’accueil pour le départ le dimanche est assuré jusqu’à 11h.<br><br>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="aller_transport" id="aller_transport" required>
                     <option value="" selected></option>
@@ -282,18 +282,9 @@ else {
         </div>
 
         <div class="form-group row" id="aller_train">
-            <label class="col-form-label col-sm-2" for="aller_train">Heure d'arrivée <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="aller_train_value">Heure d'arrivée du train <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="aller_train" id="aller_train11h25" value="11h25"> 11h25 (recommandé)
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="aller_train" id="aller_train14h25" value="14h25"> 14h25 (si impossible à 11h25)
-                    </label>
-                </div>
+                <input type="time" class="form-control" name="aller_train_value" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
             </div>
         </div>
 
@@ -309,7 +300,7 @@ else {
         <h5>Retour</h5><br>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="retour_transport">Je repartirai du Mourtis en <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="retour_transport">Je repartirai du Mourtis en <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <select class="form-control" name="retour_transport" id="retour_transport" required>
                     <option value="" selected></option>
@@ -325,7 +316,10 @@ else {
         </div>
 
         <div class="form-group row" id="retour_train">
-            <label class="col-form-label col-sm-12">Le camp termine dans la nuit du samedi au dimanche à 2h du matin. Nous proposons des navettes jusqu'à la gare de Montréjeau le dimanche matin, pour prendre un train à partir de 9h00 jusqu’en fin de matinée.</label>
+            <label class="col-form-label col-sm-3" for="retour_train_value">Heure de départ du train <span style="color: red">*</span></label>
+            <div class="col-sm-3">
+                <input type="time" class="form-control" name="retour_train_value" id="retour_train_value"> (Nous organisons deux départs de navette Fondacio le dimanche matin, il est donc possible de prendre un billet à compter de 7h du matin)
+            </div>
         </div>
 
         <div class="form-group row" id="retour_bus">
@@ -353,7 +347,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-4" for="paiement_declare">Je choisis de payer le montant suivant <span style="color: red">*</span> <img src="/include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Notez bien ce montant, il vous sera redemandé au moment du paiement.."></label>
+            <label class="col-form-label col-sm-4" for="paiement_declare">Je choisis de payer le montant suivant <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Notez bien ce montant, il vous sera redemandé au moment du paiement.."></label>
             <div class="col-sm-3">
                 <input type="number" class="form-control" name="paiement_declare" id="paiement_declare" required>
             </div>
@@ -650,6 +644,15 @@ else {
                     $('#cout_revient').text(cout_transport+cout_prepa+420);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
+                }
+            });
+
+            $('#aller_train_value').change(function() {
+                if (this.value <= "11:30") {
+                    $('#aller_train_navette').text('11h30');
+                }
+                else {
+                    $('#aller_train_navette').text('14h30');
                 }
             });
 
