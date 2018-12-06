@@ -36,7 +36,7 @@ else {
 
 ?>
 
-    <center><h2>Inscription aux camps RSV</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires<br>Les <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" > indiquent qu'une aide est disponible</center>
+    <center><h2>Inscription aux camps Réussir Sa Vie (adulte)</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires<br>Les <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" > indiquent qu'une aide est disponible</center>
 
     <form action="" method="POST">
 
@@ -83,9 +83,9 @@ else {
             <div class="col-sm-2">
                 <input type="text" class="form-control" name="nom" id="nom" required>
             </div>
-            <label class="col-form-label col-sm-2" for="nom_usage">Nom d'usage <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-2" for="nom_jf">Nom de jeune fille</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" name="nom_usage" id="nom_usage" required>
+                <input type="text" class="form-control" name="nom_jf" id="nom_jf">
             </div>
             <label class="col-form-label col-sm-2" for="prenom">Prénom <span style="color: red">*</span></label>
             <div class="col-sm-2">
@@ -139,11 +139,15 @@ else {
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="lieu_naissance">Lieu de naissance <span style="color: red">*</span></label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input type="text" class="form-control" name="lieu_naissance" id="lieu_naissance" required>
             </div>
+            <label class="col-form-label col-sm-2" for="cp_naissance">CP de naissance <span style="color: red">*</span></label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="cp_naissance" id="cp_naissance" required>
+            </div>
             <label class="col-form-label col-sm-2" for="profession">Profession</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input type="text" class="form-control" name="profession" id="profession">
             </div>
         </div>
@@ -254,7 +258,7 @@ else {
             </div>
         </div>
 
-        <h4>Coordonnées à contacter en cas d'urgence</h4><br>
+        <h4>Personne à contacter en cas d'urgence</h4><br>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="urgence_nom">Nom <span style="color: red">*</span></label>
@@ -895,7 +899,7 @@ else {
 
         <div class="form-group row">
             <label class="col-form-label col-sm-12">
-                Un week-end de formation aura lieu du vendredi 25 au dimanche 27 mai 2018, à l’Ermitage à Versailles.<br>
+                Un week-end de formation aura lieu du vendredi 21 au dimanche 23 juin 2019, à l’Ermitage à Versailles.<br>
                 Nous avons à cœur que chaque adulte venant sur un camp puisse avoir les outils nécessaires à l’encadrement de mineurs, et aussi, que ce week-end soit l’opportunité de rencontrer une majorité des personnes avec lesquelles vous serez dans cette aventure !<br>
                 Nous souhaitons que toutes les personnes soient présentes qu’elles aient déjà été dans des équipes d’encadrement ou non (salariés, bénévoles, services civiques, …)
             </label>

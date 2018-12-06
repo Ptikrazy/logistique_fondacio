@@ -26,7 +26,7 @@ else {
 
 ?>
 
-    <center><h2>Inscription aux camps RSV</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires<br>Les <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" > indiquent qu'une aide est disponible</center>
+    <center><h2>Inscription aux camps Réussir Sa Vie</h2>Les champs suivis d'un <span style="color: red">*</span> sont obligatoires<br>Les <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" > indiquent qu'une aide est disponible</center>
 
     <form action="" method="POST">
 
@@ -259,8 +259,8 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="observations">Observations <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler. Si vous souhaitez donner des informations concernant les traversées médicales et/ou psychologiques ou émotionnelles de votre enfant, afin de pouvoir l'accompagner de manière ajustée au travers de notre pédagogie et de la vie de groupe, vous pouvez le faire ici ou en envoyant un mail à jeunes.camp@fondacio.fr. Seuls le service inscriptions, les responsables et directeurs de camp et l'assistant sanitaire auront accès à ces informations."></label>
-            <div class="col-sm-10">
+            <label class="col-form-label col-sm-5" for="observations">Observations / Informations que nous devrions connaître <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler pour que nous puissions accueillir votre enfant au mieux. Vous pouvez nous y donner des informations médicales, nous faire part d’éventuelles difficultés psychologiques, relationnelles ou émotionnelles. Il n’y a pas de risque que nous refusions l’inscription de votre enfant, cela nous aidera simplement à l’accompagner d’une manière plus ajustée et à prendre soin de lui pour que chacun vive le camp au mieux. Merci d’avance de votre confiance ! Vous pouvez également envoyer un mail à jeunes.camps@fondacio.fr Seuls le service inscriptions, les responsables et directeurs ainsi que l’assistant sanitaire auront accès à ces informations."></label>
+            <div class="col-sm-7">
                 <textarea class="form-control" name="observations" id="observations" rows="3"></textarea>
             </div>
         </div><br>
@@ -446,7 +446,7 @@ else {
 
         <div class="form-check form-check-inline">
             <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" id="conditions_inscription" value="" required><span style="color: red">*</span> Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente pré-inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.
+                <input class="form-check-input" type="checkbox" id="conditions_inscription" value="" required><span style="color: red">*</span> Je m’engage à envoyer le dossier d’inscription COMPLET avec le règlement dans un délai de 15 jours à compter de la présente inscription sur internet. Fondacio se réserve le droit d’annuler l’inscription du jeune si ce délai n’est pas respecté.
             </label>
         </div>
 
