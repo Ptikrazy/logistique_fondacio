@@ -1057,9 +1057,9 @@ else {
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Région(s)</th>
+                <th scope="col">Date prépa</th>
                 <th scope="col">Date début</th>
                 <th scope="col">Date fin</th>
-                <th scope="col">Date prépa</th>
             </tr>
         </thead>
         <tbody>';
@@ -1069,9 +1069,9 @@ else {
             <tr>
                 <td>'.$camp['numero'].'</td>
                 <td>'.$camp['regions'].'</td>
+                <td>'.convert_date($camp['date_prepa'], '-', '/').'</td>
                 <td>'.convert_date($camp['date_debut'], '-', '/').'</td>
                 <td>'.convert_date($camp['date_fin'], '-', '/').'</td>
-                <td>'.convert_date($camp['date_prepa'], '-', '/').'</td>
             </tr>
         ';
     }

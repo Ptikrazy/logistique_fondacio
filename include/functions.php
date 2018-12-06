@@ -74,11 +74,15 @@ function get_infos_login($login) {
 
 }
 
-function get_camps() {
+function get_camps($ouvert = 0) {
 
     global $bdd;
 
-    $req = 'SELECT * FROM camps ORDER BY numero';
+    $req  = 'SELECT * FROM camps ';
+    if (!empty($ouvert)) {
+        $req .= 'WHERE ouvert = '.$ouvert;
+    }
+    $req .= ' ORDER BY numero';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['id_camp']] = $d;
@@ -102,18 +106,53 @@ function get_camp($camp) {
 
 }
 
-function get_camps_inscriptions() {
+function add_camp($data) {
 
     global $bdd;
 
-    $req = 'SELECT * FROM camps WHERE numero != 1 AND numero != 3 ORDER BY numero';
-    $res = $bdd->query($req);
-    while ($d = $res->fetch()) {
-        $data[$d['id_camp']] = $d;
-    }
-    $res->closeCursor();
+    $req = 'INSERT INTO camps SET
+            numero            = '.$data[0].',
+            date_prepa        = "'.$data[1].'",
+            date_debut        = "'.$data[2].'",
+            date_fin          = "'.$data[3].'",
+            regions           = "'.$data[4].'",
+            villes_bus_aller  = "'.$data[5].'",
+            villes_bus_retour = "'.$data[6].'"';
 
-    return $data;
+    $res = $bdd->query($req);
+    $res->closeCursor();
+    redirect('administration_camps.php');
+
+}
+
+function toggle_camp($camp) {
+
+    global $bdd;
+
+    $req = 'SELECT ouvert FROM camps WHERE id_camp = '.$camp;
+    $res = $bdd->query($req);
+    $data = $res->fetchColumn();
+    $res->closeCursor();
+    $ouvert = 1;
+    if ($data) {
+        $ouvert = 0;
+    }
+    $req = 'UPDATE camps SET ouvert = '.$ouvert.' WHERE id_camp = '.$camp;
+    $res = $bdd->query($req);
+    $data = $res->fetch();
+    $res->closeCursor();
+    redirect('administration_camps.php');
+
+}
+
+function delete_camp($id) {
+
+    global $bdd;
+
+    $req = 'DELETE FROM camps WHERE id_camp = '.$id;
+    $res = $bdd->query($req);
+    $res->closeCursor();
+    redirect('administration_camps.php');
 
 }
 
