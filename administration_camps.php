@@ -5,7 +5,7 @@ require_once 'include/init.php';
 $title = 'Administration';
 require_once 'include/head.php';
 
-if (empty($_SESSION['profil']['id'])) {
+if (empty($_SESSION['profil']['id']) || $_SESSION['profil']['role'] != 'admin') {
 
     if (empty($_POST['login'])) {
 
