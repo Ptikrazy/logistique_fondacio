@@ -2,7 +2,7 @@
 
 require_once 'include/init.php';
 
-$title = 'Administration camps';
+$title = 'Administration utilisateurs';
 require_once 'include/head.php';
 
 if (empty($_SESSION['profil']['id']) || $_SESSION['profil']['role'] != 'admin') {
@@ -60,52 +60,47 @@ if (empty($_SESSION['profil']['id']) || $_SESSION['profil']['role'] != 'admin') 
 else {
 
     if (!empty($_GET['delete'])) {
-        delete_camp($_GET['delete']);
-    }
-
-    if (!empty($_GET['toggle'])) {
-        toggle_camp($_GET['toggle']);
+        delete_utilisateur($_GET['delete']);
     }
 
     if (!empty($_POST['numero'])) {
         add_camp(array($_POST['numero'], $_POST['date_prepa'], $_POST['date_debut'], $_POST['date_fin'], $_POST['regions'], $_POST['villes_bus_aller'], $_POST['villes_bus_retour']));
     }
 
-    echo '<h2>Gestion des camps</h2>';
+    echo '<h2>Gestion des utilisateurs</h2>';
 
-    $liste_camps = get_camps();
+    $liste_utilisateurs = get_utilisateurs();
 
     echo '
     <table class="table table-sm table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Région(s)</th>
-                <th scope="col">Date prépa</th>
-                <th scope="col">Date début</th>
-                <th scope="col">Date fin</th>
-                <th scope="col">Villes aller</th>
-                <th scope="col">Villes retour</th>
+                <th scope="col">Role</th>
+                <th scope="col">Login</th>
+                <th scope="col">Camp</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>';
 
-    foreach ($liste_camps as $camp) {
-        $color = '#FFFFFF';
-        if (!$camp['ouvert']) {
-            $color = "#F25F5F";
+    foreach ($liste_utilisateurs as $user) {
+        switch ($user['role']) {
+            case 'admin':
+                $role = 'Administrateur';
+                break;
+            case 'charge_insc':
+                $role = 'Chargé d\'inscription';
+                break;
+            case 'resp_camp':
+                $role = 'Responsable de camp';
+                break;
         }
         echo '
-            <tr bgcolor="'.$color.'">
-                <td>'.$camp['numero'].'</td>
-                <td>'.$camp['regions'].'</td>
-                <td>'.convert_date($camp['date_prepa'], '-', '/').'</td>
-                <td>'.convert_date($camp['date_debut'], '-', '/').'</td>
-                <td>'.convert_date($camp['date_fin'], '-', '/').'</td>
-                <td>'.$camp['villes_bus_aller'].'</td>
-                <td>'.$camp['villes_bus_retour'].'</td>
-                <td><a href="administration_camps.php?delete='.$camp['id_camp'].'"><img src="include/icons/delete.svg" alt="delete" class="icon" data-toggle="tooltip" data-placement="top" title="Supprimer"></a>&nbsp;<a href="administration_camps.php?toggle='.$camp['id_camp'].'"><img src="include/icons/transfer.svg" alt="toggle" class="icon" data-toggle="tooltip" data-placement="top" title="Ouvrir/Fermer"></a></td>
+            <tr>
+                <td>'.$role.'</td>
+                <td>'.$user['login'].'</td>
+                <td>'.$user['camp'].'</td>
+                <td><a href="administration_utilisateurs.php?delete='.$user['id_utilisateur'].'"><img src="include/icons/delete.svg" alt="delete" class="icon" data-toggle="tooltip" data-placement="top" title="Supprimer"></a>&nbsp;<a href="administration_utilisateurs.php?toggle='.$user['id_utilisateur'].'"><img src="include/icons/action-redo.svg" alt="toggle" class="icon" data-toggle="tooltip" data-placement="top" title="Ouvrir/Fermer"></a></td>
             </tr>
         ';
     }
@@ -115,35 +110,13 @@ else {
     </table><br>';
 ?>
 
-    <h3>Ajouter un camp</h3><br>
+    <h3>Ajouter un utilisateur</h3><br>
 
     <form action="" method="POST">
         <div class="form-group row">
             <label class="col-sm-2 col-form-label" for="numero">Numéro</label>
             <div class="col-sm-1 form-check">
                 <input type="text" class="form-control" name="numero" id="numero" value=" " required>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="date_prepa">Début de la prépa</label>
-            <div class="col-sm-3 form-check">
-                <input type="date" class="form-control" name="date_prepa" id="date_prepa" required>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="date_debut">Date de début</label>
-            <div class="col-sm-3 form-check form-check-inline">
-                <input type="date" class="form-control" name="date_debut" id="date_debut" required>
-            </div>
-            <label class="col-sm-2 col-form-label" for="date_fin">Date de fin</label>
-            <div class="col-sm-3 form-check form-check-inline">
-                <input type="date" class="form-control" name="date_fin" id="date_fin" required>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="regions">Région(s)</label>
-            <div class="col-sm-3 form-check">
-                <input type="text" class="form-control" name="regions" id="regions" required>
             </div>
         </div>
         <div class="form-group row">

@@ -36,6 +36,7 @@
                 <li class="nav-item"><a class="nav-link" href="administration.php">Administration</a></li>
                 <li class="nav-item"><a class="nav-link" href="administration_adultes.php">Administration Adultes</a></li>
                 <li class="nav-item"><a class="nav-link" href="administration_camps.php">Gestion des camps</a></li>
+                <li class="nav-item"><a class="nav-link" href="administration_utilisateurs.php">Gestion des utilisateurs</a></li>
                 <li class="nav-item"><a class="nav-link" href="aide.php">Aide</a></li>
             </ul>
         </div>

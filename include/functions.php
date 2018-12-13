@@ -1801,4 +1801,31 @@ function get_inscriptions() {
 
 }
 
+function get_utilisateurs() {
+
+    global $bdd;
+
+    $req  = 'SELECT id_utilisateur, role, login, camp FROM utilisateurs';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['id_utilisateur']] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function delete_utilisateur($id) {
+
+    global $bdd;
+
+    $req = 'DELETE FROM utilisateurs WHERE id_utilisateur = '.$id;
+    $res = $bdd->query($req);
+    $res->closeCursor();
+    redirect('administration_utilisateurs.php');
+
+}
+
+
 ?>
