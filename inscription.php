@@ -255,8 +255,9 @@ else {
             </div>
         </div>
 
+        Observations / Informations que nous devrions connaître (Indiquez ici ce que vous souhaitez nous signaler pour que nous puissions accueillir votre enfant au mieux. Vous pouvez nous y donner des informations médicales, nous faire part d’éventuelles difficultés psychologiques, relationnelles ou émotionnelles. Il n’y a pas de risque que nous refusions l’inscription de votre enfant, cela nous aidera simplement à l’accompagner d’une manière plus ajustée et à prendre soin de lui pour que chacun vive le camp au mieux. Merci d’avance de votre confiance ! Vous pouvez également envoyer un mail à jeunes.camps@fondacio.fr Seuls le service inscriptions, les responsables et directeurs ainsi que l’assistant sanitaire auront accès à ces informations.)<br><br>
+
         <div class="form-group row">
-            <label class="col-form-label col-sm-5" for="observations">Observations / Informations que nous devrions connaître <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Indiquez ici ce que vous souhaitez nous signaler pour que nous puissions accueillir votre enfant au mieux. Vous pouvez nous y donner des informations médicales, nous faire part d’éventuelles difficultés psychologiques, relationnelles ou émotionnelles. Il n’y a pas de risque que nous refusions l’inscription de votre enfant, cela nous aidera simplement à l’accompagner d’une manière plus ajustée et à prendre soin de lui pour que chacun vive le camp au mieux. Merci d’avance de votre confiance ! Vous pouvez également envoyer un mail à jeunes.camps@fondacio.fr Seuls le service inscriptions, les responsables et directeurs ainsi que l’assistant sanitaire auront accès à ces informations."></label>
             <div class="col-sm-7">
                 <textarea class="form-control" name="observations" id="observations" rows="3"></textarea>
             </div>
@@ -270,9 +271,9 @@ else {
 
         – <b>En bus</b> : des bus sont organisés pour chacun des camps : en fonction de la région attribuée à la semaine, ils desserviront plusieurs grandes villes en France (Lille, Paris, Versailles, Brive, Toulouse, Lyon, Marseille, Montpellier, Valence, Nantes, Angers, Poitiers, Bordeaux, …). Il faut compter 150 € l’aller-retour, soit 75€ par trajet. Le nombre de places est limité (si le choix n'apparait pas, c'est que le bus est plein).<br><br>
 
-        – <b>En train</b> : la gare la plus proche est Montréjeau-Gourdan-Polignan. Un service de navette Fondacio sera mis en place entre la gare et le lieu du camp à l’aller et au retour : il faut compter 40€ pour l’aller-retour, soit 20€ par trajet. A l’aller, navettes à 11h15 ou 14h30 (si impossible à 11h30). Au retour, arrivée des navettes à la gare à 11h maximum (une ou plusieurs navettes en fonction des horaires de départ des différents trains). En fonction du remplissage des navettes, il est possible qu’il y ait de l’attente en gare de Montréjeau-Gourdan-Pollignan. Si vous rencontrez un problème avec les horaires de train ou souhaitez avoir plus d’informations sur la navette, merci de nous contacter par mail.<br><br>
+        – <b>En train</b> : la gare la plus proche est Montréjeau-Gourdan-Polignan. Un service de navette Fondacio sera mis en place entre la gare et le lieu du camp à l’aller et au retour : il faut compter 40€ pour l’aller-retour, soit 20€ par trajet. A l’aller, navettes à 11h30 ou 14h30 (si impossible à 11h30). Au retour, arrivée des navettes à la gare à 11h maximum (une ou plusieurs navettes en fonction des horaires de départ des différents trains). En fonction du remplissage des navettes, il est possible qu’il y ait de l’attente en gare de Montréjeau-Gourdan-Pollignan. Si vous rencontrez un problème avec les horaires de train ou souhaitez avoir plus d’informations sur la navette, merci de nous contacter par mail.<br><br>
 
-        – <b>En voiture</b> : directement sur le lieu du camp à partir de 12h30 le lundi avec un pique-nique (de même pour la prépa le samedi précédent). L’accueil pour le départ le dimanche est assuré jusqu’à 11h.<br><br>
+        – <b>En voiture</b> : directement sur le lieu du camp entre 12h30 et 13h le lundi avec un pique-nique (de même pour la prépa le samedi précédent). L’accueil pour le départ le dimanche est assuré jusqu’à 11h.<br><br>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-3" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span></label>
@@ -287,7 +288,7 @@ else {
         </div>
 
         <div class="form-group row" id="aller_voiture">
-            <label class="col-form-label col-sm-12">Le camp démarre à 14h, un accueil sera assuré à partir de 13h pour les jeunes arrivant en voiture personnelle.</label>
+
         </div>
 
         <div class="form-group row" id="aller_train">
