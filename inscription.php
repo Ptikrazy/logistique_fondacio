@@ -292,7 +292,7 @@ else {
         </div>
 
         <div class="form-group row" id="aller_train">
-            <label class="col-form-label col-sm-3" for="aller_train_value">Heure d'arrivée du train <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="aller_train_value">Heure d'arrivée du train <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Si je n'ai pas encore mon horaire de train, je m'engage à l'envoyer dès que je l'ai à jeunes@fondacio.fr"></label>
             <div class="col-sm-3">
                 <input type="time" class="form-control" name="aller_train_value" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
             </div>
@@ -326,7 +326,7 @@ else {
         </div>
 
         <div class="form-group row" id="retour_train">
-            <label class="col-form-label col-sm-3" for="retour_train_value">Heure de départ du train <span style="color: red">*</span></label>
+            <label class="col-form-label col-sm-3" for="retour_train_value">Heure de départ du train <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Si je n'ai pas encore mon horaire de train, je m'engage à l'envoyer dès que je l'ai à jeunes@fondacio.fr"></label>
             <div class="col-sm-3">
                 <input type="time" class="form-control" name="retour_train_value" id="retour_train_value"> (Nous organisons deux départs de navette Fondacio le dimanche matin, il est donc possible de prendre un billet à compter de 7h du matin)
             </div>
