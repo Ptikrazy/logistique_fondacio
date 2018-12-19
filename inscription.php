@@ -253,6 +253,10 @@ else {
             <div class="col-sm-3">
                 <input type="text" class="form-control" name="parents_mail" id="parents_mail" required>
             </div>
+            <label class="col-form-label col-sm-2" for="parents_mail2">Courriel secondaire</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="parents_mail2" id="parents_mail2" required>
+            </div>
         </div>
 
         Observations / Informations que nous devrions connaître (Indiquez ici ce que vous souhaitez nous signaler pour que nous puissions accueillir votre enfant au mieux. Vous pouvez nous y donner des informations médicales, nous faire part d’éventuelles difficultés psychologiques, relationnelles ou émotionnelles. Il n’y a pas de risque que nous refusions l’inscription de votre enfant, cela nous aidera simplement à l’accompagner d’une manière plus ajustée et à prendre soin de lui pour que chacun vive le camp au mieux. Merci d’avance de votre confiance ! Vous pouvez également envoyer un mail à jeunes.camps@fondacio.fr Seuls le service inscriptions, les responsables et directeurs ainsi que l’assistant sanitaire auront accès à ces informations.)<br><br>
@@ -285,10 +289,6 @@ else {
                     <option value="bus" id="transport_aller_bus">Bus organisé par Fondacio</option>
                 </select>
             </div>
-        </div>
-
-        <div class="form-group row" id="aller_voiture">
-
         </div>
 
         <div class="form-group row" id="aller_train">
@@ -516,7 +516,6 @@ else {
 
             // Gestion des transports
 
-            $('#aller_voiture').hide();
             $('#aller_train').hide();
             $('#aller_bus').hide();
             $('#retour_voiture').hide();
@@ -527,7 +526,6 @@ else {
                 if (this.value == "voiture") {
                     $('#aller_bus_clear option').remove();
                     $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
-                    $('#aller_voiture').show();
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
                     cout_transport_aller = 0;
@@ -541,7 +539,6 @@ else {
                 if (this.value == "train") {
                     $('#aller_bus_clear option').remove();
                     $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
-                    $('#aller_voiture').hide();
                     $('#aller_train').show();
                     $('#aller_bus').hide();
                     cout_transport_aller = 20;
@@ -553,7 +550,6 @@ else {
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
                 if (this.value == "bus") {
-                    $('#aller_voiture').hide();
                     $('#aller_train').hide();
                     $('#aller_bus').show();
                     cout_transport_aller = 75;
@@ -577,7 +573,6 @@ else {
                     });
                 }
                 if (this.value == "") {
-                    $('#aller_voiture').hide();
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
                     cout_transport_aller = 0;

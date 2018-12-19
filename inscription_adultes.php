@@ -299,10 +299,6 @@ else {
             </div>
         </div>
 
-        <div class="form-group row" id="aller_voiture">
-            <label class="col-form-label col-sm-12">Le camp démarre à 14h, un accueil sera assuré à partir de 13h pour les jeunes arrivant en voiture personnelle.</label>
-        </div>
-
         <div class="form-group row" id="aller_train">
             <label class="col-form-label col-sm-3" for="aller_train_value">Heure d'arrivée du train <span style="color: red">*</span></label>
             <div class="col-sm-3">
@@ -947,7 +943,6 @@ else {
 
             // Gestion des transports
 
-            $('#aller_voiture').hide();
             $('#aller_train').hide();
             $('#aller_bus').hide();
             $('#retour_voiture').hide();
@@ -958,19 +953,16 @@ else {
                 if (this.value == "voiture") {
                     $('#aller_bus_clear option').remove();
                     $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
-                    $('#aller_voiture').show();
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
                 }
                 if (this.value == "train") {
                     $('#aller_bus_clear option').remove();
                     $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
-                    $('#aller_voiture').hide();
                     $('#aller_train').show();
                     $('#aller_bus').hide();
                 }
                 if (this.value == "bus") {
-                    $('#aller_voiture').hide();
                     $('#aller_train').hide();
                     $('#aller_bus').show();
 
@@ -987,7 +979,6 @@ else {
                     });
                 }
                 if (this.value == "") {
-                    $('#aller_voiture').hide();
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
                 }
