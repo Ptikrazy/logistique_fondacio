@@ -156,7 +156,7 @@ Nombre de résultats: <?php echo sizeof($donnees); ?>
     $(function() {
         $.ajax({
             type: 'POST',
-            url: '/ajax/villes_bus.php',
+            url: 'ajax/villes_bus.php',
             data: {
                 'camp': <?php echo $_SESSION['camp'] ?>,
                 'aller_retour': 'aller'

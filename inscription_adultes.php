@@ -968,7 +968,7 @@ else {
 
                     $.ajax({
                         type: 'POST',
-                        url: '/ajax/villes_bus.php',
+                        url: 'ajax/villes_bus.php',
                         data: {
                             'camp': $('#camp').find(":selected").val(),
                             'aller_retour': 'aller'
@@ -1006,7 +1006,7 @@ else {
 
                     $.ajax({
                         type: 'POST',
-                        url: '/ajax/villes_bus.php',
+                        url: 'ajax/villes_bus.php',
                         data: {
                             'camp': $('#camp').find(":selected").val(),
                             'aller_retour': 'retour'

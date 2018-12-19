@@ -737,7 +737,7 @@ if (!empty($_GET['action'])) {
         if ($('#aller_transport').val() == 'bus') {
             $.ajax({
                 type: 'POST',
-                url: '/ajax/villes_bus.php',
+                url: 'ajax/villes_bus.php',
                 data: {
                     'camp': $('#camp').find(":selected").val(),
                     'aller_retour': 'aller',
@@ -763,7 +763,7 @@ if (!empty($_GET['action'])) {
             if (this.value == "bus") {
                 $.ajax({
                     type: 'POST',
-                    url: '/ajax/villes_bus.php',
+                    url: 'ajax/villes_bus.php',
                     data: {
                         'camp': <?php echo $donnees['camp'] ?>,
                         'aller_retour': 'aller',
@@ -779,7 +779,7 @@ if (!empty($_GET['action'])) {
         if ($('#retour_transport').val() == 'bus') {
             $.ajax({
                 type: 'POST',
-                url: '/ajax/villes_bus.php',
+                url: 'ajax/villes_bus.php',
                 data: {
                     'camp': $('#camp').find(":selected").val(),
                     'aller_retour': 'retour',
@@ -805,7 +805,7 @@ if (!empty($_GET['action'])) {
             if (this.value == "bus") {
                 $.ajax({
                     type: 'POST',
-                    url: '/ajax/villes_bus.php',
+                    url: 'ajax/villes_bus.php',
                     data: {
                         'camp': <?php echo $donnees['camp'] ?>,
                         'aller_retour': 'retour',

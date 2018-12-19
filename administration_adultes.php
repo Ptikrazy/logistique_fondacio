@@ -39,7 +39,7 @@ if (empty($_SESSION['profil']['id'])) {
     else {
 
         if (!check_password($_POST['login'], $_POST['password'])) {
-            redirect('/administration_adultes.php');
+            redirect('administration_adultes.php');
         }
 
         else {
@@ -447,18 +447,9 @@ else {
             </div>
 
             <div class="form-group row" id="aller_train">
-                <label class="col-form-label col-sm-2" for="aller_train">Heure d'arrivée (train)</label>
+                <label class="col-form-label col-sm-2" for="aller_train_value">Heure d'arrivée du train <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="aller_train" id="aller_train11h25" value="11h25" <?php echo ($data['aller_transport'] == 'train' && $data['aller_heure'] == '11h25') ? 'checked': ''; ?>> 11h25 (recommandé)
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="aller_train" id="aller_train14h25" value="14h25" <?php echo ($data['aller_transport'] == 'train' && $data['aller_heure'] == '14h25') ? 'checked': ''; ?>> 14h25 (si impossible à 11h25)
-                        </label>
-                    </div>
+                    <input type="time" class="form-control" name="aller_train_value" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
                 </div>
             </div>
 
@@ -485,18 +476,9 @@ else {
             </div>
 
             <div class="form-group row" id="retour_train">
-                <label class="col-form-label col-sm-2" for="retour_train">Heure de départ (train)</label>
+                <label class="col-form-label col-sm-2" for="retour_train_value">Heure de départ du train <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="retour_train" id="retour_train11h25" value="11h25" <?php echo ($data['retour_transport'] == 'train' && $data['retour_heure'] == '11h25') ? 'checked': ''; ?>> 11h25 (recommandé)
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="retour_train" id="retour_train14h25" value="14h25" <?php echo ($data['retour_transport'] == 'train' && $data['retour_heure'] == '14h25') ? 'checked': ''; ?>> 14h25 (si impossible à 11h25)
-                        </label>
-                    </div>
+                    <input type="time" class="form-control" name="retour_train_value" id="retour_train_value">
                 </div>
             </div>
 
@@ -1264,7 +1246,7 @@ else {
                 if ($('#aller_transport').val() == 'bus') {
                     $.ajax({
                         type: 'POST',
-                        url: '/ajax/villes_bus.php',
+                        url: 'ajax/villes_bus.php',
                         data: {
                             'camp': $('#camp').find(":selected").val(),
                             'aller_retour': 'aller',
@@ -1294,7 +1276,7 @@ else {
                     if (this.value == "bus") {
                         $.ajax({
                             type: 'POST',
-                            url: '/ajax/villes_bus.php',
+                            url: 'ajax/villes_bus.php',
                             data: {
                                 'camp': $('#camp').find(":selected").val(),
                                 'aller_retour': 'aller',
@@ -1310,7 +1292,7 @@ else {
                 if ($('#retour_transport').val() == 'bus') {
                     $.ajax({
                         type: 'POST',
-                        url: '/ajax/villes_bus.php',
+                        url: 'ajax/villes_bus.php',
                         data: {
                             'camp': $('#camp').find(":selected").val(),
                             'aller_retour': 'retour',
@@ -1340,7 +1322,7 @@ else {
                     if (this.value == "bus") {
                         $.ajax({
                             type: 'POST',
-                            url: '/ajax/villes_bus.php',
+                            url: 'ajax/villes_bus.php',
                             data: {
                                 'camp': $('#camp').find(":selected").val(),
                                 'aller_retour': 'retour',
