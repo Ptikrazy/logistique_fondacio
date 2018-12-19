@@ -116,6 +116,28 @@ else {
         </div>
 
         <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="adresse_vie">Adresse d'habitation</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="adresse_vie" id="adresse_vie" placeholder="Si différente de l'adresse ci-dessus">
+            </div>
+            <label class="col-form-label col-sm-2" for="cp_vie">Code postal d'habitation</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="cp_vie" id="cp_vie" placeholder="Si différente du code postal ci-dessus">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="ville_vie">Ville d'habitation</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="ville_vie" id="ville_vie" placeholder="Si différente de la ville ci-dessus">
+            </div>
+            <label class="col-form-label col-sm-2" for="pays_vie">Pays d'habitation</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="pays_vie" id="pays_vie" placeholder="Si différente du pays ci-dessus">
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label class="col-form-label col-sm-2" for="tel_portable">Téléphone portable <span style="color: red">*</span></label>
             <div class="col-sm-3">
                 <input type="text" class="form-control" name="tel_portable" id="tel_portable" required>
