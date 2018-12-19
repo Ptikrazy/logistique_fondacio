@@ -435,6 +435,13 @@ else {
             <h5>Aller</h5><br>
 
             <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="aller_date">Date d'arrivée <span style="color: red">*</span></label>
+                <div class="col-sm-3">
+                    <input type="date" class="form-control" name="aller_date" id="aller_date" value="<?php echo $data['aller_date']; ?>" required>
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="aller_transport">J'arriverai au Mourtis en <span style="color: red">*</span></label>
                 <div class="col-sm-3">
                     <select class="form-control" name="aller_transport" id="aller_transport" required>
@@ -463,6 +470,13 @@ else {
             </div>
 
             <h5>Retour</h5><br>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="retour_date">Date de retour <span style="color: red">*</span></label>
+                <div class="col-sm-3">
+                    <input type="date" class="form-control" name="retour_date" id="retour_date" value="<?php echo $data['retour_date']; ?>" required>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="retour_transport">Je repartirai du Mourtis en <span style="color: red">*</span></label>
