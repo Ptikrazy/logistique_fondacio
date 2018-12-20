@@ -7,18 +7,25 @@ require_once 'include/head.php';
 
 if (!empty($_POST)) {
 
-    enregistrer_inscription_jeune($_POST);
+    if ($_POST['date_naissance'] > "2005-12-31") {
+        echo 'Le camp est réservé aux jeunes qui auront au moins 14 ans lors du début du camp, votre inscription n\'a donc pas été enregistrée. Pour toute question, contactez-nous par mail: jeunes.camps@fondacio.fr';
+    }
 
-    echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée. Un mail de confirmation va vous être envoyé. Attention, il est possible qu\'il arrive dans votre dossier "Spam" ou "Courrier indésirable", pensez à vérifier ce dernier.<br><br>
+    else {
 
-Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
+        enregistrer_inscription_jeune($_POST);
 
-Fondacio camp RSV<br>
-2 rue de l\'Esvière<br>
-49100 ANGERS<br><br>
+        echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée. Un mail de confirmation va vous être envoyé. Attention, il est possible qu\'il arrive dans votre dossier "Spam" ou "Courrier indésirable", pensez à vérifier ce dernier.<br><br>
 
-Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
-Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.';
+    Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
+
+    Fondacio camp RSV<br>
+    2 rue de l\'Esvière<br>
+    49100 ANGERS<br><br>
+
+    Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
+    Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.';
+    }
 
 }
 
@@ -163,7 +170,7 @@ else {
             </div>
             <label class="col-form-label col-sm-2" for="date_naissance">Date de naissance <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="date" class="form-control" name="date_naissance" id="date_naissance" required>
+                <input type="date" class="form-control" name="date_naissance" id="date_naissance" required><span style="font-size: 12px; color: red" id="date_naissance_alerte"></span>
             </div>
         </div>
 
@@ -255,7 +262,7 @@ else {
             </div>
             <label class="col-form-label col-sm-2" for="parents_mail2">Courriel secondaire</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="parents_mail2" id="parents_mail2" required>
+                <input type="text" class="form-control" name="parents_mail2" id="parents_mail2">
             </div>
         </div>
 
@@ -292,7 +299,7 @@ else {
         </div>
 
         <div class="form-group row" id="aller_train">
-            <label class="col-form-label col-sm-3" for="aller_train_value">Heure d'arrivée du train <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Si je n'ai pas encore mon horaire de train, je m'engage à l'envoyer dès que je l'ai à jeunes@fondacio.fr"></label>
+            <label class="col-form-label col-sm-3" for="aller_train_value">Heure d'arrivée du train <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Si je n'ai pas encore mon horaire de train, je m'engage à l'envoyer dès que je l'ai à jeunes.camps@fondacio.fr"></label>
             <div class="col-sm-3">
                 <input type="time" class="form-control" name="aller_train_value" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
             </div>
@@ -344,7 +351,7 @@ else {
         <h4>Paiement</h4>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-12">Le coût de revient d’un camp (hébergement, restauration, activités, administratif, encadrement) est de <b>1 100 euros</b>. Fondacio France finance 62% du coût du camp par des dons (parrainage, bénévolat, mécénat). Les 38% restants, soit <b>420 euros</b>, correspondent au prix demandé aux familles. Selon vos possibilités, nous proposons une participation entre <b style="color: red">270 et 1 100 euros.</b><br><br>
+            <label class="col-form-label col-sm-12">Le coût de revient d’un camp (hébergement, restauration, activités, administratif, encadrement) est de <b>1 100 euros</b>. Fondacio France finance 61% du coût du camp par des dons (parrainage, bénévolat, mécénat). Les 39% restants, soit <b>430 euros</b>, correspondent au prix demandé aux familles. Selon vos possibilités, nous proposons une participation entre <b style="color: red">270 et 1 100 euros.</b><br><br>
 
             A ce coût s'ajoute le prix du transport:<br>
             - Le service de navette que nous proposons de la gare de Montréjeau au Mourtis ajoute <b style="color: green">20€ par voyage</b> au coût du camp (donc 40€ si vous arrivez et repartez en train)<br>
@@ -352,7 +359,7 @@ else {
 
             Si vous décidez de participer à la <b>prépa</b>, son coût de revient (<b style="color: blue">60€</b>) sera également ajouté.<br><br>
 
-            Le prix de revient total camp + transport est donc de <b>420 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> = <span id="cout_revient" style="color: red"></span> euros.</b><br>
+            Le prix de revient total camp + transport est donc de <b>430 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> = <span id="cout_revient" style="color: red"></span> euros.</b><br>
             La fourchette de participation proposée est donc de <b>(270 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_basse" style="color: red"></span> euros à (1 100 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_haute" style="color: red"></span> euros.</b></label>
         </div>
 
@@ -454,6 +461,13 @@ else {
             </label>
         </div><br><br>
 
+        <div class="form-check form-check-inline">
+            <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" id="conditions_inscription" value="" required><span style="color: red">*</span> Les données collectées via ce formulaire seront utilisées dans le cadre de l’organisation de ces événements, avant, pendant et après. Elles seront également utilisées par les associations de Fondacio en France afin vous présenter nos activités et nos projets, par voie email et postal. Nous vous proposons de recevoir des informations adaptées de la part de Fondacio en France afin de vous présenter nos autres activités et projets. Cochez si vous acceptez.<br>
+                Conformément à la Loi Informatique et Libertés du 06 janvier 1978 et au Règlement (UE) N)2016/679, vous bénéficiez d’un droit d’accès, de rectification, d’effacement, de limitation, de portabilité, d’opposition et d’édiction de directives anticipées, que vous pouvez faire valoir en nous écrivant par email à mesdonnees@fondacio.fr ou bien par courrier à l’adresse Fondacio France – DPD, 2 rue de l’Esvière, 49100 ANGERS
+            </label>
+        </div>
+
         <div class="form-group row">
             <div class="col-sm-10">
                 <button type="submit" class="btn btn-primary">Valider l'inscription</button>
@@ -498,7 +512,7 @@ else {
                 }
                 $('.cout_transport').text(cout_transport);
                 $('.cout_prepa').text(cout_prepa);
-                $('#cout_revient').text(cout_transport+cout_prepa+420);
+                $('#cout_revient').text(cout_transport+cout_prepa+430);
                 $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                 $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
             });
@@ -532,7 +546,7 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_revient').text(cout_transport+cout_prepa+430);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
@@ -545,7 +559,7 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_revient').text(cout_transport+cout_prepa+430);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
@@ -556,7 +570,7 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_revient').text(cout_transport+cout_prepa+430);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
 
@@ -579,7 +593,7 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_revient').text(cout_transport+cout_prepa+430);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
@@ -596,7 +610,7 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_revient').text(cout_transport+cout_prepa+430);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
@@ -610,7 +624,7 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_revient').text(cout_transport+cout_prepa+430);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
@@ -622,7 +636,7 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_revient').text(cout_transport+cout_prepa+430);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
 
@@ -646,7 +660,7 @@ else {
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
-                    $('#cout_revient').text(cout_transport+cout_prepa+420);
+                    $('#cout_revient').text(cout_transport+cout_prepa+430);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
                     $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
                 }
@@ -658,6 +672,19 @@ else {
                 }
                 else {
                     $('#aller_train_navette').text('14h30');
+                }
+            });
+
+            $('#date_naissance').change(function() {
+                console.log(this.value);
+                if (this.value < "2000-01-01") {
+                    $('#date_naissance_alerte').text('Ce camp est à destination des jeunes de 14 à 18 ans. Nous acceptons exceptionnellement des jeunes plus âgés s’ils ne sont pas scolarisés en études supérieures. Merci de nous contacter pour en parler: jeunes.camps@fondacio.fr. Par ailleurs, nous proposons un Forum 18/30 ans pour les jeunes étudiants ou professionnels.');
+                }
+                else if (this.value > "2005-12-31") {
+                    $('#date_naissance_alerte').text('Ce camp est réservé aux jeunes ayant au moins 14 ans au début du camp. Votre inscription ne sera donc pas prise en compte.');
+                }
+                else {
+                    $('#date_naissance_alerte').text('');
                 }
             });
 
@@ -681,7 +708,7 @@ else {
 
             $('.cout_transport').text(cout_transport);
             $('.cout_prepa').text(cout_prepa);
-            $('#cout_revient').text(cout_transport+cout_prepa+420);
+            $('#cout_revient').text(cout_transport+cout_prepa+430);
             $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
             $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
 

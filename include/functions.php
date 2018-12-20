@@ -490,9 +490,9 @@ Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp
 
 Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
-Fondacio – Camps Réussir Sa Vie<br>
-Les Pierres Blanches<br>
-31440 Boutx le Mourtis<br><br>
+Fondacio camp RSV '.$infos_camp['numero'].'<br>
+2 rue de l\'Esvière<br>
+49100 ANGERS<br><br>
 
 Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
 Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>';
