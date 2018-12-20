@@ -517,17 +517,6 @@ else {
                 $('#cout_fourchette_haute').text(cout_transport+cout_prepa+1100);
             });
 
-            // Gestion bus plein
-
-            $('#camp').change(function() {
-                if (this.value == "2") {
-                    $('#transport_aller_bus').hide();
-                }
-                else {
-                    $('#transport_aller_bus').show();
-                }
-            });
-
             // Gestion des transports
 
             $('#aller_train').hide();
@@ -677,7 +666,7 @@ else {
 
             $('#date_naissance').change(function() {
                 console.log(this.value);
-                if (this.value < "2000-01-01") {
+                if (this.value < "2001-01-01") {
                     $('#date_naissance_alerte').text('Ce camp est à destination des jeunes de 14 à 18 ans. Nous acceptons exceptionnellement des jeunes plus âgés s’ils ne sont pas scolarisés en études supérieures. Merci de nous contacter pour en parler: jeunes.camps@fondacio.fr. Par ailleurs, nous proposons un Forum 18/30 ans pour les jeunes étudiants ou professionnels.');
                 }
                 else if (this.value > "2005-12-31") {
