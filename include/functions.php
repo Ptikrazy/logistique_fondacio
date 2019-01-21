@@ -41,7 +41,7 @@ function convert_date($date, $from, $to) {
 function age($date) {
 
     $d1 = new DateTime($date);
-    $d2 = new DateTime('2018-07-07');
+    $d2 = new DateTime('2019-07-07');
     $diff = $d2->diff($d1);
 
     return $diff->y;
