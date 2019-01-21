@@ -463,7 +463,7 @@ else {
 
         <div class="form-check form-check-inline">
             <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" id="conditions_inscription" value="" required><span style="color: red">*</span> Les données collectées via ce formulaire seront utilisées dans le cadre de l’organisation de ces événements, avant, pendant et après. Elles seront également utilisées par les associations de Fondacio en France afin vous présenter nos activités et nos projets, par voie email et postal. Nous vous proposons de recevoir des informations adaptées de la part de Fondacio en France afin de vous présenter nos autres activités et projets. Cochez si vous acceptez.<br>
+                <input class="form-check-input" type="checkbox" id="conditions_inscription" value="">Les données collectées via ce formulaire seront utilisées dans le cadre de l’organisation de ces événements, avant, pendant et après. Elles seront également utilisées par les associations de Fondacio en France afin vous présenter nos activités et nos projets, par voie email et postal. Nous vous proposons de recevoir des informations adaptées de la part de Fondacio en France afin de vous présenter nos autres activités et projets. Cochez si vous acceptez.<br>
                 Conformément à la Loi Informatique et Libertés du 06 janvier 1978 et au Règlement (UE) N)2016/679, vous bénéficiez d’un droit d’accès, de rectification, d’effacement, de limitation, de portabilité, d’opposition et d’édiction de directives anticipées, que vous pouvez faire valoir en nous écrivant par email à mesdonnees@fondacio.fr ou bien par courrier à l’adresse Fondacio France – DPD, 2 rue de l’Esvière, 49100 ANGERS
             </label>
         </div>

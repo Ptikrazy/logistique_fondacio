@@ -495,15 +495,9 @@ Fondacio camp RSV '.$infos_camp['numero'].'<br>
 49100 ANGERS<br><br>
 
 Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
-Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>';
+Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>
 
-    if (isset($data['prepa']) && $data['prepa']) {
-
-        $str .= 'De plus, vous avez inscrit '.$data['jeune_prenom'].' à la prépa du camp. Merci de lui demander de remplir le formulaire de souhaits en <a href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/souhaits-prepa/">cliquant ici</a>.<br><br>';
-
-    }
-
-    $str .= 'Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer votre demande à <a href="mailto:jeunes.camps@fondacio.fr">l\'adresse suivante</a>.<br><br>
+Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer votre demande à <a href="mailto:jeunes.camps@fondacio.fr">l\'adresse suivante</a>.<br><br>
 
 Au plaisir d\'accueillir votre enfant cet été au Mourtis !<br>
 L\'équipe de la Mission Jeunes<br><br>
