@@ -1795,11 +1795,22 @@ function get_inscriptions() {
 
 }
 
+function add_utilisateur($data) {
+
+    global $bdd;
+
+    $req = 'INSERT INTO utilisateurs SET role = "'.$data[0].'", login = "'.$data[1].'", password = "'.password_hash($data[2], PASSWORD_DEFAULT).'", camp = '.$data[3];
+    $res = $bdd->query($req);
+    $res->closeCursor();
+    redirect('administration_utilisateurs.php');
+
+}
+
 function get_utilisateurs() {
 
     global $bdd;
 
-    $req  = 'SELECT id_utilisateur, role, login, camp FROM utilisateurs';
+    $req  = 'SELECT id_utilisateur, role, login, camp FROM utilisateurs WHERE role != "super_admin" ORDER BY role';
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['id_utilisateur']] = $d;
@@ -1820,6 +1831,5 @@ function delete_utilisateur($id) {
     redirect('administration_utilisateurs.php');
 
 }
-
 
 ?>

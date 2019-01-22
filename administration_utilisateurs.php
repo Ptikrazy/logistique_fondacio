@@ -63,8 +63,8 @@ else {
         delete_utilisateur($_GET['delete']);
     }
 
-    if (!empty($_POST['numero'])) {
-        add_camp(array($_POST['numero'], $_POST['date_prepa'], $_POST['date_debut'], $_POST['date_fin'], $_POST['regions'], $_POST['villes_bus_aller'], $_POST['villes_bus_retour']));
+    if (!empty($_POST['login'])) {
+        add_utilisateur(array($_POST['role'], $_POST['login'], $_POST['password'], $_POST['camp']));
     }
 
     echo '<h2>Gestion des utilisateurs</h2>';
@@ -100,7 +100,7 @@ else {
                 <td>'.$role.'</td>
                 <td>'.$user['login'].'</td>
                 <td>'.$user['camp'].'</td>
-                <td><a href="administration_utilisateurs.php?delete='.$user['id_utilisateur'].'"><img src="include/icons/delete.svg" alt="delete" class="icon" data-toggle="tooltip" data-placement="top" title="Supprimer"></a>&nbsp;<a href="administration_utilisateurs.php?toggle='.$user['id_utilisateur'].'"><img src="include/icons/action-redo.svg" alt="toggle" class="icon" data-toggle="tooltip" data-placement="top" title="Ouvrir/Fermer"></a></td>
+                <td><a href="administration_utilisateurs.php?delete='.$user['id_utilisateur'].'"><img src="include/icons/delete.svg" alt="delete" class="icon" data-toggle="tooltip" data-placement="top" title="Supprimer"></a>&nbsp;<a href="administration_utilisateurs.php?toggle='.$user['id_utilisateur'].'"></td>
             </tr>
         ';
     }
@@ -114,19 +114,27 @@ else {
 
     <form action="" method="POST">
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="numero">Numéro</label>
-            <div class="col-sm-1 form-check">
-                <input type="text" class="form-control" name="numero" id="numero" value=" " required>
+            <label class="col-sm-1 col-form-label" for="role">Role</label>
+            <div class="col-sm-3 form-check form-check-inline">
+                <select class="form-control" name="role" id="role" required>
+                    <option value="admin"> Administrateur</option>
+                    <option value="charge_insc">Chargé d'inscription</option>
+                    <option value="resp_camp">Responsable de camp</option>
+                </select>
+            </div>
+            <label class="col-sm-2 col-form-label" for="camp">Camp (0 pour admin)</label>
+            <div class="col-sm-1 form-check form-check-inline">
+                <input type="text" class="form-control" name="camp" id="camp" value=" " required>
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label" for="villes_bus_aller">Villes bus aller (Ville1;Ville2...)</label>
+            <label class="col-sm-1 col-form-label" for="login">Login</label>
             <div class="col-sm-3 form-check form-check-inline">
-                <input type="text" class="form-control" name="villes_bus_aller" id="villes_bus_aller" required>
+                <input type="text" class="form-control" name="login" id="login" required>
             </div>
-            <label class="col-sm-2 col-form-label" for="villes_bus_retour">Villes bus retour (Ville1;Ville2...)</label>
+            <label class="col-sm-2 col-form-label" for="password">Password</label>
             <div class="col-sm-3 form-check form-check-inline">
-                <input type="text" class="form-control" name="villes_bus_retour" id="villes_bus_retour" required>
+                <input type="password" class="form-control" name="password" id="password" required>
             </div>
         </div>
         <div class="form-group row">
