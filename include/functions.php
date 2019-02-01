@@ -270,7 +270,7 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
             }
         }
     }
-    if ($_SESSION['profil']['role'] != 'admin') {
+    if ($_SESSION['profil']['role'] != 'admin' && $_SESSION['profil']['role'] != 'super_admin') {
         if ($where) {
             $req .= ' AND camp = '.$camp.' ';
         }

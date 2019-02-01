@@ -454,9 +454,9 @@ else {
             </div>
 
             <div class="form-group row" id="aller_train">
-                <label class="col-form-label col-sm-2" for="aller_train_value">Heure d'arrivée du train <span style="color: red">*</span></label>
+                <label class="col-form-label col-sm-2" for="aller_train">Heure d'arrivée du train <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <input type="time" class="form-control" name="aller_train_value" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
+                    <input type="time" class="form-control" name="aller_train" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
                 </div>
             </div>
 
@@ -490,9 +490,9 @@ else {
             </div>
 
             <div class="form-group row" id="retour_train">
-                <label class="col-form-label col-sm-2" for="retour_train_value">Heure de départ du train <span style="color: red">*</span></label>
+                <label class="col-form-label col-sm-2" for="retour_train">Heure de départ du train <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <input type="time" class="form-control" name="retour_train_value" id="retour_train_value">
+                    <input type="time" class="form-control" name="retour_train" id="retour_train_value">
                 </div>
             </div>
 

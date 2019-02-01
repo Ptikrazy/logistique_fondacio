@@ -178,12 +178,14 @@ else {
                         $_POST['retour_ville'] = '';
                     }
                 }
+                unset($_POST['aller_train']);
+                unset($_POST['retour_train']);
 
                 $_POST['rgt_montant'] = $_POST['cb_montant'] + $_POST['cheque1_montant'] + $_POST['cheque2_montant'] + $_POST['cheque3_montant'] + $_POST['cheque4_montant'] + $_POST['cheque5_montant'] + $_POST['cheque6_montant'] + $_POST['cv_montant'] + $_POST['caf_rgt'] + $_POST['bourse'] + $_POST['autre'];
 
                 maj_administratif_jeune($_GET['id'], $_POST);
                 $_SESSION['edit_ok'] = 1;
-                redirect('/administration.php?action=edit&id='.$_GET['id']);
+                redirect('administration.php?action=edit&id='.$_GET['id']);
 
             }
 
@@ -608,9 +610,9 @@ else {
             </div>
 
             <div class="form-group row" id="aller_train">
-                <label class="col-form-label col-sm-2" for="aller_train_value">Heure d'arrivée du train <span style="color: red">*</span></label>
+                <label class="col-form-label col-sm-2" for="aller_train">Heure d'arrivée du train <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <input type="time" class="form-control" name="aller_train_value" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
+                    <input type="time" class="form-control" name="aller_train" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
                 </div>
             </div>
 
@@ -637,9 +639,9 @@ else {
             </div>
 
             <div class="form-group row" id="retour_train">
-                <label class="col-form-label col-sm-2" for="retour_train_value">Heure de départ du train <span style="color: red">*</span></label>
+                <label class="col-form-label col-sm-2" for="retour_train">Heure de départ du train <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <input type="time" class="form-control" name="retour_train_value" id="retour_train_value">
+                    <input type="time" class="form-control" name="retour_train" id="retour_train_value">
                 </div>
             </div>
 
