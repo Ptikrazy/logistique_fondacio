@@ -282,7 +282,12 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
         $req .= ' ORDER BY '.$tri;
     }
     else {
-        $req .= ' ORDER BY id_jeune';
+        if ($_SESSION['profil']['role'] == 'charge_insc') {
+            $req .= ' ORDER BY nom';
+        }
+        else {
+            $req .= ' ORDER BY id_jeune';
+        }
     }
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
