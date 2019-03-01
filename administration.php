@@ -240,6 +240,9 @@ else {
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="da_fsl" id="da_fsl" value="1" <?php echo ($data['da_fsl']) ? 'checked': ''; ?>> FSL
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="da_vaccins" id="da_vaccins" value="1" <?php echo ($data['da_vaccins']) ? 'checked': ''; ?>> Vaccins
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <?php
                             if (age($data['date_naissance']) < 18) {
                         ?>
@@ -253,14 +256,11 @@ else {
                             <input class="form-check-input" type="checkbox" name="da_di" id="da_di" value="1" <?php echo ($data['da_di']) ? 'checked': ''; ?>> DI
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="da_bn" id="da_bn" value="1" <?php echo ($data['da_bn']) ? 'checked': ''; ?>> BN
-                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" name="da_photo" id="da_photo" value="1" <?php echo ($data['da_photo']) ? 'checked': ''; ?>> Photo
                         </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="da_vaccins" id="da_vaccins" value="1" <?php echo ($data['da_vaccins']) ? 'checked': ''; ?>> Vaccins
-                        </label>
+                            <input class="form-check-input" type="checkbox" name="da_bn" id="da_bn" value="1" <?php echo ($data['da_bn']) ? 'checked': ''; ?>> BN
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <?php
                             if ($data['ancien']) {
                                 echo '<label class="form-check-label">(Voir '.date('Y', strtotime('-1 year')).' pour BN + photo)</label>';
