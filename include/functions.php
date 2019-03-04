@@ -221,7 +221,7 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
 
     $where = FALSE;
 
-    $req = 'SELECT id_jeune, nom, prenom, parents_mail, mere_portable, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes ';
+    $req = 'SELECT id_jeune, nom, prenom, date_naissance, camp, ancien, date_saisie, parents_mail, mere_portable, paiement_declare, da_a_relancer, da_complet, rgt_recu, rgt_montant, desistement FROM jeunes ';
     if (!empty($filtres)) {
         $req .= 'WHERE ';
         $where = TRUE;
