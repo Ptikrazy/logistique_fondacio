@@ -17,13 +17,22 @@ if (!empty($_POST)) {
 
         echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée. Un mail de confirmation va vous être envoyé. Attention, il est possible qu\'il arrive dans votre dossier "Spam" ou "Courrier indésirable", pensez à vérifier ce dernier.<br><br>
 
-    Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
+    Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>';
 
-    Fondacio camp RSV<br>
-    2 rue de l\'Esvière<br>
-    49100 ANGERS<br><br>
+    if ($infos_camp['numero'] == 1) {
+        $str .= 'Fondacio camp RSV n°1<br>
+            Chez Véronique PEDRON<br>
+            20 rue Monié<br>
+            31500 Toulouse<br><br>'
+    }
 
-    Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
+    else {
+        $str .= 'Fondacio camp RSV '.$infos_camp['numero'].'<br>
+        2 rue de l\'Esvière<br>
+        49100 ANGERS<br><br>'
+    }
+
+    $str .= 'Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
     Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.';
     }
 
