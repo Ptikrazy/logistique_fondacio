@@ -23,13 +23,13 @@ if (!empty($_POST)) {
         $str .= 'Fondacio camp RSV n°1<br>
             Chez Véronique PEDRON<br>
             20 rue Monié<br>
-            31500 Toulouse<br><br>'
+            31500 Toulouse<br><br>';
     }
 
     else {
         $str .= 'Fondacio camp RSV '.$infos_camp['numero'].'<br>
         2 rue de l\'Esvière<br>
-        49100 ANGERS<br><br>'
+        49100 ANGERS<br><br>';
     }
 
     $str .= 'Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
