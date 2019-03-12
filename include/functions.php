@@ -343,7 +343,7 @@ function get_inscrits_adultes($camp, $filtres = '', $tri = '') {
             }
         }
     }
-    if ($_SESSION['profil']['role'] != 'admin') {
+    if ($_SESSION['profil']['role'] != 'admin' && $_SESSION['profil']['role'] != 'super_admin') {
         if ($where) {
             $req .= ' AND camp = '.$camp.' ';
         }
@@ -642,12 +642,24 @@ function enregistrer_inscription_adulte($data) {
     $req .= 'camp = '.$infos_camp['numero'].', ';
     $req .= 'civilite = "'.$data['civilite'].'", ';
     $req .= 'nom = "'.strtoupper($data['nom']).'", ';
-    $req .= 'nom_usage = "'.strtoupper($data['nom_usage']).'", ';
+    $req .= 'nom_jf = "'.strtoupper($data['nom_jf']).'", ';
     $req .= 'prenom = "'.$data['prenom'].'", ';
     $req .= 'adresse = "'.$data['adresse'].'", ';
     $req .= 'cp = "'.$data['cp'].'", ';
     $req .= 'ville = "'.$data['ville'].'", ';
     $req .= 'pays = "'.$data['pays'].'", ';
+    if (isset($data['adresse_vie'])) {
+        $req .= 'adresse_vie = "'.$data['adresse_vie'].'", ';
+    }
+    if (isset($data['cp_vie'])) {
+        $req .= 'cp_vie = '.$data['cp_vie'].', ';
+    }
+    if (isset($data['ville_vie'])) {
+        $req .= 'ville_vie = "'.$data['ville_vie'].'", ';
+    }
+    if (isset($data['pays_vie'])) {
+        $req .= 'pays_vie = "'.$data['pays_vie'].'", ';
+    }
     $req .= 'tel_portable = "'.$data['tel_portable'].'", ';
     $req .= 'tel_fixe = "'.$data['tel_fixe'].'", ';
     $req .= 'mail = "'.$data['mail'].'", ';

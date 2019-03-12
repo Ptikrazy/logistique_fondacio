@@ -50,7 +50,7 @@ if (empty($_SESSION['profil']['id'])) {
             }
             $_SESSION['profil']['id'] = $login['id_utilisateur'];
             $_SESSION['profil']['role'] = $login['role'];
-            redirect('/administration_adultes.php');
+            redirect('administration_adultes.php');
         }
 
     }
@@ -102,11 +102,14 @@ else {
                     $_POST['da_reception'] = 'NULL';
                 }
 
+                unset($_POST['aller_train']);
+                unset($_POST['retour_train']);
+
                 $_POST['rgt_montant'] = $_POST['cb_montant'] + $_POST['cheque1_montant'] + $_POST['cheque2_montant'] + $_POST['cheque3_montant'] + $_POST['cheque4_montant'] + $_POST['cheque5_montant'] + $_POST['cheque6_montant'] + $_POST['cv_montant'] + $_POST['caf_rgt'] + $_POST['bourse'] + $_POST['autre'];
 
                 maj_administratif_adulte($_GET['id'], $_POST);
                 $_SESSION['edit_ok'] = 1;
-                redirect('/administration_adultes.php?action=edit&id='.$_GET['id']);
+                redirect('administration_adultes.php?action=edit&id='.$_GET['id']);
 
             }
 
@@ -528,9 +531,9 @@ else {
                 <div class="col-sm-2">
                     <input type="text" class="form-control" name="nom" id="nom" value="<?php echo $data['nom']; ?>" required>
                 </div>
-                <label class="col-form-label col-sm-2" for="nom_usage">Nom d'usage</label>
+                <label class="col-form-label col-sm-2" for="nom_jf">Nom d'usage</label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" name="nom_usage" id="nom_usage" value="<?php echo $data['nom_usage']; ?>">
+                    <input type="text" class="form-control" name="nom_jf" id="nom_jf" value="<?php echo $data['nom_jf']; ?>">
                 </div>
                 <label class="col-form-label col-sm-2" for="prenom">Prénom <span style="color: red">*</span></label>
                 <div class="col-sm-2">
@@ -634,35 +637,35 @@ else {
             </div>
 
             <div class="form-group row">
-                <label class="col-form-label col-sm-4" for="permis">Je possède un ou plusieurs diplôme(s)</label>
-                <div class="col-sm-8">
-                    <div class="form-check form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="diplome_bafd" value="1" id="diplome_bafd" <?php echo ($data['diplome_bafd'] == 1) ? 'checked' : ''; ?>>Titulaire du BAFD
-                        </label>
-                    </div>
-                    <div class="form-check form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="diplome_bafa" value="1" id="diplome_bafa" <?php echo ($data['diplome_bafa'] == 1) ? 'checked' : ''; ?>>Titulaire du BAFA
-                        </label>
-                    </div>
-                    <div class="form-check form-check">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="diplome_secouriste" value="1" id="diplome_secouriste" <?php echo ($data['diplome_secouriste'] == 1) ? 'checked' : ''; ?>>PSC1 ou PSCE1 ou secouriste
-                        </label>
-                    </div>
-                    <div class="form-check form-check">
-                        <label class="form-check-label col-sm-8">
-                            <input class="form-check-input" type="checkbox" value="1">Si vous détenez ce diplôme, vous avez un diplôme de premiers secours : infirmier(ère), médecin, chirurgien(ne)-dentiste, pharmacien(ne), détenteur (trice) de l’AFPS, du BN ou le CSST. Si oui précisez lequel ou lesquels : <input type="text" class="form-control" name="diplome_ps" id="diplome_ps" value="<?php $data['diplome_ps'] ?>">
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-check-label col-sm-8">
-                            <input class="form-check-input" type="checkbox" value="1" id="diplome_autre">Autre(s) diplôme(s) : <input type="text" class="form-control" name="diplome_autre" id="diplome_autre" value="<?php $data['diplome_autre'] ?>">
-                        </label>
-                    </div>
+            <label class="col-form-label col-sm-4" for="permis">Je possède un ou plusieurs diplôme(s)</label>
+            <div class="col-sm-8">
+                <div class="form-check form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="diplome_bafd" value="1" id="diplome_bafd" <?php echo ($data['diplome_bafd'] == 1) ? 'checked' : ''; ?>>Titulaire du BAFD
+                    </label>
+                </div>
+                <div class="form-check form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="diplome_bafa" value="1" id="diplome_bafa" <?php echo ($data['diplome_bafa'] == 1) ? 'checked' : ''; ?>>Titulaire du BAFA
+                    </label>
+                </div>
+                <div class="form-check form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="diplome_psc1" value="1" id="diplome_psc1" <?php echo ($data['diplome_psc1'] == 1) ? 'checked' : ''; ?>>PSC1 (Si vous détenez ce diplôme, vous avez un diplôme de premiers secours : infirmier(ère), médecin, chirurgien(ne)-dentiste, pharmacien(ne), détenteur (trice) de l’AFPS, du BN ou le CSST. Si oui précisez lequel ou lesquels : <input type="text" class="form-control" name="diplome_psc1_autre" id="diplome_psc1_autre">
+                    </label>
+                </div>
+                <div class="form-check form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="diplome_psce1_secouriste" value="1" id="diplome_psce1_secouriste" <?php echo ($data['diplome_psce1_secouriste'] == 1) ? 'checked' : ''; ?>>Titulaire du PSCE1 / Diplôme de secouriste
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="form-check-label col-sm-8">
+                        <input class="form-check-input" type="checkbox" value="1" id="diplome_autre" <?php echo ($data['diplome_psce1_secouriste']) ?>>Autre(s) diplôme(s) (lié à l'animation ou l'encadrement de mineur) : <input type="text" class="form-control" name="diplome_autre" id="diplome_autre">
+                    </label>
                 </div>
             </div>
+        </div>
 
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="stagiaire">Je suis</label>
