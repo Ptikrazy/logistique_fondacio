@@ -19,7 +19,7 @@ if (!empty($_POST)) {
 
     Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>';
 
-    if ($infos_camp['numero'] == 1) {
+    if ($_POST['camp'] == 1) {
         $str .= 'Fondacio camp RSV n°1<br>
             Chez Véronique PEDRON<br>
             20 rue Monié<br>
