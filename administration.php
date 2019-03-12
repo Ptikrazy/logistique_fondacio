@@ -86,7 +86,7 @@ else {
 
             $data = get_jeune($_GET['id']);
 
-            $data['rgt_montant'] = $data['cb_montant'] + $data['cheque1_montant'] + $data['cheque2_montant'] + $data['cheque3_montant'] + $data['cheque4_montant'] + $data['cheque5_montant'] + $data['cheque6_montant'] + $data['cv_montant'] + $data['caf_rgt'] + $data['bourse'] + $data['autre'];
+            $data['rgt_montant'] = $data['cb_montant'] + $data['cheque1_montant'] + $data['cheque2_montant'] + $data['cheque3_montant'] + $data['cheque4_montant'] + $data['cheque5_montant'] + $data['cheque6_montant'] + $data['cv_montant'] + $data['caf_rgt'] + $data['bourse'] + $data['autre'] - $data['rgt_rembourse'];
 
             if (!empty($_POST)) {
 
@@ -181,7 +181,7 @@ else {
                 unset($_POST['aller_train']);
                 unset($_POST['retour_train']);
 
-                $_POST['rgt_montant'] = $_POST['cb_montant'] + $_POST['cheque1_montant'] + $_POST['cheque2_montant'] + $_POST['cheque3_montant'] + $_POST['cheque4_montant'] + $_POST['cheque5_montant'] + $_POST['cheque6_montant'] + $_POST['cv_montant'] + $_POST['caf_rgt'] + $_POST['bourse'] + $_POST['autre'];
+                $_POST['rgt_montant'] = $_POST['cb_montant'] + $_POST['cheque1_montant'] + $_POST['cheque2_montant'] + $_POST['cheque3_montant'] + $_POST['cheque4_montant'] + $_POST['cheque5_montant'] + $_POST['cheque6_montant'] + $_POST['cv_montant'] + $_POST['caf_rgt'] + $_POST['bourse'] + $_POST['autre'] - $_POST['rgt_rembourse'];
 
                 maj_administratif_jeune($_GET['id'], $_POST);
                 $_SESSION['edit_ok'] = 1;
@@ -394,6 +394,10 @@ else {
                 <label class="col-form-label col-sm-2" for="cb_montant">Montant CB</label>
                 <div class="col-sm-3">
                     <input type="text" class="form-control" name="cb_montant" id="cb_montant" value="<?php echo $data['cb_montant']; ?>">
+                </div>
+                <label class="col-form-label col-sm-2" for="rgt_rembourse">Montant remboursé</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="rgt_rembourse" id="rgt_rembourse" value="<?php echo $data['rgt_rembourse']; ?>">
                 </div>
             </div>
 
