@@ -179,7 +179,7 @@ else {
             </div>
             <label class="col-form-label col-sm-2" for="date_naissance">Date de naissance <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="date" class="form-control" name="date_naissance" id="date_naissance" required><span style="font-size: 12px; color: red" id="date_naissance_alerte"></span>
+                <input type="date" class="form-control" name="date_naissance" id="date_naissance" required><span style="font-size: 12px; color: red" id="date_naissance_alerte"></span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Si vous utilisez Safari, merci de rempli la date au format AAAA/JJ/MM svp.">
             </div>
         </div>
 
