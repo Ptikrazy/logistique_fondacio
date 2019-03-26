@@ -102,6 +102,32 @@ else {
                     $_POST['da_reception'] = 'NULL';
                 }
 
+                if ($_POST['aller_transport'] != $data['aller_transport']) {
+                    if ($_POST['aller_transport'] == 'train') {
+                        $_POST['aller_heure'] = $_POST['aller_train'];
+                        $_POST['aller_ville'] = '';
+                    }
+                    else {
+                        $_POST['aller_heure'] = '13h';
+                        if ($_POST['aller_transport'] == 'voiture') {
+                            $_POST['aller_ville'] = '';
+                        }
+                    }
+                }
+                if ($_POST['retour_transport'] != $data['retour_transport']) {
+                    if ($_POST['retour_transport'] == 'bus') {
+                        $_POST['retour_heure'] = '2h';
+                    }
+                    else if ($_POST['retour_transport'] == 'train') {
+                        $_POST['retour_heure'] = $_POST['retour_train'];
+                        $_POST['retour_ville'] = '';
+                    }
+                    else {
+                        $_POST['retour_heure'] = '12h';
+                        $_POST['retour_ville'] = '';;
+                    }
+                }
+
                 unset($_POST['aller_train']);
                 unset($_POST['retour_train']);
 
@@ -459,7 +485,7 @@ else {
             <div class="form-group row" id="aller_train">
                 <label class="col-form-label col-sm-2" for="aller_train">Heure d'arrivée du train <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <input type="time" class="form-control" name="aller_train" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
+                    <input type="time" class="form-control" name="aller_train" id="aller_train_value" value="<?php echo $data['aller_heure']; ?>"> (La navette sera celle de <span id="aller_train_navette"></span>)
                 </div>
             </div>
 
@@ -495,7 +521,7 @@ else {
             <div class="form-group row" id="retour_train">
                 <label class="col-form-label col-sm-2" for="retour_train">Heure de départ du train <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <input type="time" class="form-control" name="retour_train" id="retour_train_value">
+                    <input type="time" class="form-control" name="retour_train" id="retour_train_value" value="<?php echo $data['retour_heure']; ?>">
                 </div>
             </div>
 
