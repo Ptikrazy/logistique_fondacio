@@ -23,8 +23,8 @@ Merci d\'envoyer dès que possible :<br><br>
 
 Fondacio camp RSV<br>
 Inscription adulte<br>
-23 rue de l\'Ermitage<br>
-78000 VERSAILLES<br><br>
+2 rue de l\'Esvière<br>
+49100 ANGERS<br><br>
 
 Si tu souhaites payer en ligne, clique <a target="_blank" href="http://bit.ly/1O6910a">ici</a><br><br>
 
@@ -367,7 +367,7 @@ else {
 
         <div class="form-group row">
             <label class="col-form-label col-sm-12">Afin de maintenir un prix le plus bas possible pour qu’un maximum de jeunes puissent participer aux camps, nous invitons les adultes présents sur les camps à participer librement à leurs frais d’hébergement et de nourriture.<br>
-            Pour information, le coût de revient du camp s'élève à <b>420€</b> par jeune (le camp + la prépa revient à <b>480€</b>). A titre indicatif, les frais de restauration et d'hébergement s'élèvent à <b>30€</b> par jour.<br><br>
+            Pour information, le coût de revient du camp s'élève à <b>430€</b> par jeune (le camp + la prépa revient à <b>490€</b>). A titre indicatif, les frais de restauration et d'hébergement s'élèvent à <b>30€</b> par jour.<br><br>
 
             A ce coût s'ajoute le prix du transport :<br>
             <b>75€</b> pour un trajet simple en bus<br>

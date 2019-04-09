@@ -833,8 +833,8 @@ Pour confirmer ton inscription, merci d\'envoyer le dossier administratif comple
 
 Fondacio camp RSV<br>
 Inscription adulte<br>
-23 rue de l’Ermitage<br>
-78000 VERSAILLES<br><br>
+2 rue de l\'Esvière<br>
+49100 ANGERS<br><br>
 
 Les éléments du dossier administratif sont téléchargeables sur la <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif-adultes/">page suivante</a>.<br>
 Si vous souhaitez payer en ligne, <a target="_blank" href="http://bit.ly/1O6910a">cliquez ici</a>.<br><br>
