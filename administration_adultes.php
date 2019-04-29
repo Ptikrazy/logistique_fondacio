@@ -114,6 +114,10 @@ else {
                         }
                     }
                 }
+                if ($_POST['aller_transport'] == 'train') {
+                    $_POST['aller_heure'] = $_POST['aller_train'];
+                    $_POST['aller_ville'] = '';
+                }
                 if ($_POST['retour_transport'] != $data['retour_transport']) {
                     if ($_POST['retour_transport'] == 'bus') {
                         $_POST['retour_heure'] = '2h';
@@ -126,6 +130,10 @@ else {
                         $_POST['retour_heure'] = '12h';
                         $_POST['retour_ville'] = '';;
                     }
+                }
+                if ($_POST['retour_transport'] == 'train') {
+                    $_POST['retour_heure'] = $_POST['retour_train'];
+                    $_POST['retour_ville'] = '';
                 }
 
                 unset($_POST['aller_train']);
