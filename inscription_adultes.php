@@ -225,17 +225,22 @@ else {
                 </div>
                 <div class="form-check form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="diplome_psc1" value="1" id="diplome_psc1">PSC1 (Si vous détenez ce diplôme, vous avez un diplôme de premiers secours : infirmier(ère), médecin, chirurgien(ne)-dentiste, pharmacien(ne), détenteur (trice) de l’AFPS, du BN ou le CSST. Si oui précisez lequel ou lesquels : <input type="text" class="form-control" name="diplome_psc1_autre" id="diplome_psc1_autre">
+                        <input class="form-check-input" type="checkbox" name="diplome_psc1" value="1" id="diplome_psc1">Secourisme (PSC1, infirmier(ère), médecin, chirurgien(ne)-dentiste, pharmacien(ne), détenteur (trice) de l’AFPS, du BN ou le CSST). Précisez : <input type="text" class="form-control" name="diplome_psc1_autre" id="diplome_psc1_autre">
                     </label>
                 </div>
                 <div class="form-check form-check">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="diplome_psce1_secouriste" value="1" id="diplome_psce1_secouriste">Titulaire du PSCE1 / Diplôme de secouriste
+                        <input class="form-check-input" type="checkbox" name="diplome_bafd_equi_blank" value="1" id="diplome_bafd_equi_blank">Concours ou diplômes équivalent au BAFD ou BAFA : professeur des écoles, CAPES, CPE, Educateur spécialisé, EJE, licences et master dans l’animation ou l’enseignement (équivalence à vérifier). Précisez : <input type="text" class="form-control" name="diplome_bafd_equi" id="diplome_bafd_equi">
+                    </label>
+                </div>
+                <div class="form-check form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="diplome_bafa_equi_blank" value="1" id="diplome_bafa_equi_blank">Diplôme équivalent au BAFA (DUT carrières sociales, licence sciences de l’éducation, licence STAPS, CAP petite enfance, moniteur éducateur…). Précisez : <input type="text" class="form-control" name="diplome_bafa_equi" id="diplome_bafa_equi">
                     </label>
                 </div>
                 <div class="form-group">
                     <label class="form-check-label col-sm-8">
-                        <input class="form-check-input" type="checkbox" value="1" id="diplome_autre">Autre(s) diplôme(s) (lié à l'animation ou l'encadrement de mineur) : <input type="text" class="form-control" name="diplome_autre" id="diplome_autre">
+                        <input class="form-check-input" type="checkbox" value="1" id="diplome_autre">Vous possédez un diplôme qui vous semble en lien avec l’animation ou l’encadrement de mineurs ? Notez ici l’intitulé précis et nous vérifierons s’il y a équivalence avec le BAFA : <input type="text" class="form-control" name="diplome_autre" id="diplome_autre">
                     </label>
                 </div>
             </div>
@@ -415,10 +420,10 @@ else {
         </div>
 
         <div class="form-group row">
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_arts_plastiques" id="act_arts_plastiques" value="1"> Arts plastiques
+                        <input class="form-check-input" type="checkbox" name="act_arts_plastiques" id="act_arts_plastiques" value="1"> Arts plastiques / Dessin / Illustration
                     </label>
                 </div>
             </div>
@@ -427,34 +432,10 @@ else {
                     Si possible, préciser <input type="text" class="form-control" name="act_arts_plastiques_p" id="act_arts_plastiques_p">
                 </label>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_bd" id="act_bd" value="1"> Bande dessinée
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_orient_pro" id="act_orient_pro" value="1"> Orientation professionelle
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_cinema" id="act_cinema" value="1"> Cinéma
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_exp_corp" id="act_exp_corp" value="1"> Expressions corporelles
+                        <input class="form-check-input" type="checkbox" name="act_exp_corp" id="act_exp_corp" value="1"> Danses / Expressions corporelles
                     </label>
                 </div>
             </div>
@@ -463,34 +444,12 @@ else {
                     Si possible, préciser <input type="text" class="form-control" name="act_exp_corp_p" id="act_exp_corp_p">
                 </label>
             </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_jeux_piste" id="act_jeux_piste" value="1"> Jeux de piste
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_meditation" id="act_meditation" value="1"> Méditation
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_arts_enigme" id="act_arts_enigme" value="1"> Énigmes
-                    </label>
-                </div>
-            </div>
         </div>
-
         <div class="form-group row">
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_musiques" id="act_musiques" value="1"> Musiques
+                        <input class="form-check-input" type="checkbox" name="act_musiques" id="act_musiques" value="1"> Musiques / Chants
                     </label>
                 </div>
             </div>
@@ -499,82 +458,7 @@ else {
                     Si possible, préciser <input type="text" class="form-control" name="act_musiques_p" id="act_musiques_p">
                 </label>
             </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_jeux_mem" id="act_jeux_mem" value="1"> Jeux de mémoire
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_ecritures" id="act_ecritures" value="1"> Écritures/récits
-                    </label>
-                </div>
-            </div>
             <div class="col-sm-3">
-                <label class="form-check-label">
-                    Si possible, préciser <input type="text" class="form-control" name="act_ecritures_p" id="act_ecritures_p">
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_danses" id="act_danses" value="1"> Danses
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <label class="form-check-label">
-                    Si possible, préciser <input type="text" class="form-control" name="act_danses_p" id="act_danses_p">
-                </label>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_sculpture" id="act_sculpture" value="1"> Sculpture, modelage
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_arts_rue" id="act_arts_rue" value="1"> Arts de la rue
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <label class="form-check-label">
-                    Si possible, préciser <input type="text" class="form-control" name="act_arts_rue_p" id="act_arts_rue_p">
-                </label>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_chants" id="act_chants" value="1"> Chants
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <label class="form-check-label">
-                    Si possible, préciser <input type="text" class="form-control" name="act_chants_p" id="act_chants_p">
-                </label>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_bijoux" id="act_bijoux" value="1"> Bijoux (bracelets, colliers etc...)
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="act_sports" id="act_sports" value="1"> Sports
@@ -587,28 +471,8 @@ else {
                 </label>
             </div>
         </div>
-
         <div class="form-group row">
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_imagination" id="act_imagination" value="1"> Imagination
-                    </label>
-                </div>
-            </div>
             <div class="col-sm-3">
-                <label class="form-check-label">
-                    Si possible, préciser le support <input type="text" class="form-control" name="act_imagination_p" id="act_imagination_p">
-                </label>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_relaxation" id="act_relaxation" value="1"> Relaxation
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="checkbox" name="act_theatres" id="act_theatres" value="1"> Théâtres
@@ -620,61 +484,109 @@ else {
                     Si possible, préciser <input type="text" class="form-control" name="act_theatres_p" id="act_theatres_p">
                 </label>
             </div>
-        </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_arts_rue" id="act_arts_rue" value="1"> Arts de la rue / Arts du cirque
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_arts_rue_p" id="act_arts_rue_p">
+                </label>
+            </div>
+        </div><br><br><br>
 
         <div class="form-group row">
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_arts_cirque" id="act_arts_cirque" value="1"> Arts du cirque
+                        <input class="form-check-input" type="checkbox" name="act_meditation" id="act_meditation" value="1"> Méditation / Relaxation
                     </label>
                 </div>
             </div>
             <div class="col-sm-3">
-                <label class="form-check-label">
-                    Si possible, préciser <input type="text" class="form-control" name="act_arts_cirque_p" id="act_arts_cirque_p">
-                </label>
-            </div>
-            <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_photo" id="act_photo" value="1"> Photographie
-                    </label>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_illustrations" id="act_illustrations" value="1"> Illustrations
+                        <input class="form-check-input" type="checkbox" name="act_logique" id="act_logique" value="1"> Jeux de logique / Énigmes / Jeux de mémoire / Stratégie
                     </label>
                 </div>
             </div>
             <div class="col-sm-3">
-                <label class="form-check-label">
-                    Si possible, préciser <input type="text" class="form-control" name="act_illustrations_p" id="act_illustrations_p">
-                </label>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_sculpture" id="act_sculpture" value="1"> Sculpture / Modelage
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_oser" id="act_oser" value="1"> Oser vivre
+                    </label>
+                </div>
             </div>
         </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_photo" id="act_photo" value="1"> Photos / Vidéo / Montage
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_photo" id="act_ecologie" value="1"> Ecologie / Zéro Déchets
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_ecritures" id="act_ecritures" value="1"> Écritures / Récits
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_bijoux" id="act_bijoux" value="1"> Bijoux (bracelets, colliers etc...)
+                    </label>
+                </div>
+            </div>
+        </div><br><br><br>
 
         <div class="form-group row">
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_logique" id="act_logique" value="1"> Logique
+                        <input class="form-check-input" type="checkbox" name="act_orient_pro" id="act_orient_pro" value="1"> Carrefour: orientation professionelle
                     </label>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_strategie" id="act_strategie" value="1"> Stratégie
+                        <input class="form-check-input" type="checkbox" name="act_addictions" id="act_addictions" value="1"> Carrefour: addictions
                     </label>
                 </div>
             </div>
             <div class="col-sm-3">
-                <label class="form-check-label">
-                    Autres <input type="text" class="form-control" name="act_autres" id="act_autres">
-                </label>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_sexualite" id="act_sexualite" value="1"> Carrefour: vie affective et sexualité
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_gestion" id="act_gestion" value="1"> Carrefour: gestion du temps
+                    </label>
+                </div>
             </div>
         </div>
 
@@ -906,6 +818,27 @@ else {
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co0" value="0" required> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_randonee">Randonée <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_randonee" id="act_randonee2" value="2"> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_randonee" id="act_randonee1" value="1"> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_randonee" id="act_randonee0" value="0" required> Il m'est impossible de le faire
                     </label>
                 </div>
             </div>
