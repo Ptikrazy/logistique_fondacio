@@ -26,6 +26,8 @@ Inscription adulte<br>
 2 rue de l\'Esvière<br>
 49100 ANGERS<br><br>
 
+Merci de vous inscrire au week-end de formation en cliquant <a href="https://forms.gle/tGxLqyAwL8HJoJ3Q9">ici</a>.<br><br>
+
 Si tu souhaites payer en ligne, clique <a target="_blank" href="http://bit.ly/1O6910a">ici</a><br><br>
 
 A bientôt au Mourtis !';
