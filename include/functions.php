@@ -652,7 +652,7 @@ function enregistrer_inscription_adulte($data) {
         $req .= 'adresse_vie = "'.$data['adresse_vie'].'", ';
     }
     if (isset($data['cp_vie'])) {
-        $req .= 'cp_vie = '.$data['cp_vie'].', ';
+        $req .= 'cp_vie = "'.$data['cp_vie'].'", ';
     }
     if (isset($data['ville_vie'])) {
         $req .= 'ville_vie = "'.$data['ville_vie'].'", ';
@@ -735,10 +735,6 @@ function enregistrer_inscription_adulte($data) {
     if (isset($data['act_jeux_piste'])) {
         $req .= 'act_jeux_piste = '.$data['act_jeux_piste'].', ';
     }
-    if (isset($data['act_illustrations'])) {
-        $req .= 'act_illustrations = '.$data['act_illustrations'].', ';
-    }
-    $req .= 'act_illustrations_p = "'.$data['act_illustrations_p'].'", ';
     if (isset($data['act_jeux_mem'])) {
         $req .= 'act_jeux_mem = '.$data['act_jeux_mem'].', ';
     }
@@ -746,14 +742,6 @@ function enregistrer_inscription_adulte($data) {
         $req .= 'act_musiques = '.$data['act_musiques'].', ';
     }
     $req .= 'act_musiques_p = "'.$data['act_musiques_p'].'", ';
-    if (isset($data['act_ecritures'])) {
-        $req .= 'act_ecritures = '.$data['act_ecritures'].', ';
-    }
-    $req .= 'act_ecritures_p = "'.$data['act_ecritures_p'].'", ';
-    if (isset($data['act_danses'])) {
-        $req .= 'act_danses = '.$data['act_danses'].', ';
-    }
-    $req .= 'act_danses_p = "'.$data['act_danses_p'].'", ';
     if (isset($data['act_arts_rue'])) {
         $req .= 'act_arts_rue = '.$data['act_arts_rue'].', ';
     }
@@ -764,10 +752,6 @@ function enregistrer_inscription_adulte($data) {
     if (isset($data['act_sculpture'])) {
         $req .= 'act_sculpture = '.$data['act_sculpture'].', ';
     }
-    if (isset($data['act_chants'])) {
-        $req .= 'act_chants = '.$data['act_chants'].', ';
-    }
-    $req .= 'act_chants_p = "'.$data['act_chants_p'].'", ';
     if (isset($data['act_relaxation'])) {
         $req .= 'act_relaxation = '.$data['act_relaxation'].', ';
     }
@@ -775,10 +759,6 @@ function enregistrer_inscription_adulte($data) {
         $req .= 'act_sports = '.$data['act_sports'].', ';
     }
     $req .= 'act_sports_p = "'.$data['act_sports_p'].'", ';
-    if (isset($data['act_imagination'])) {
-        $req .= 'act_imagination = '.$data['act_imagination'].', ';
-    }
-    $req .= 'act_imagination_p = "'.$data['act_imagination_p'].'", ';
     if (isset($data['act_logique'])) {
         $req .= 'act_logique = '.$data['act_logique'].', ';
     }
@@ -795,10 +775,6 @@ function enregistrer_inscription_adulte($data) {
     if (isset($data['act_photo'])) {
         $req .= 'act_photo = '.$data['act_photo'].', ';
     }
-    if (isset($data['act_arts_cirque'])) {
-        $req .= 'act_arts_cirque = '.$data['act_arts_cirque'].', ';
-    }
-    $req .= 'act_arts_cirque_p = "'.$data['act_arts_cirque_p'].'", ';
     if (isset($data['act_arts_enigme'])) {
         $req .= 'act_arts_enigme = '.$data['act_arts_enigme'].', ';
     }
@@ -954,20 +930,11 @@ PS : Tu trouveras ci-dessous les infos que tu viens de saisir.<br><br>';
     if ($data['act_jeux_piste']) {
         $str .= 'Jeux de piste<br>';
     }
-    if ($data['act_illustrations']) {
-        $str .= 'Illustrations ('.$data['act_illustrations_p'].')<br>';
-    }
     if ($data['act_jeux_mem']) {
         $str .= 'Jeux de mémoire<br>';
     }
     if ($data['act_musiques']) {
         $str .= 'Musiques ('.$data['act_musiques_p'].')<br>';
-    }
-    if ($data['act_ecritures']) {
-        $str .= 'Ecritures ('.$data['act_ecritures_p'].')<br>';
-    }
-    if ($data['act_danses']) {
-        $str .= 'Danses ('.$data['act_danses_p'].')<br>';
     }
     if ($data['act_arts_plastiques']) {
         $str .= 'Arts plastiques ('.$data['act_arts_plastiques_p'].')<br>';
@@ -981,17 +948,11 @@ PS : Tu trouveras ci-dessous les infos que tu viens de saisir.<br><br>';
     if ($data['act_sculpture']) {
         $str .= 'Suclpture<br>';
     }
-    if ($data['act_chants']) {
-        $str .= 'Chants ('.$data['act_chants_p'].')<br>';
-    }
     if ($data['act_relaxation']) {
         $str .= 'Relaxation<br>';
     }
     if ($data['act_sports']) {
         $str .= 'Sports ('.$data['act_sports_p'].')<br>';
-    }
-    if ($data['act_imagination']) {
-        $str .= 'Imagination ('.$data['act_imagination'].')<br>';
     }
     if ($data['act_logique']) {
         $str .= 'Logique<br>';
@@ -1007,9 +968,6 @@ PS : Tu trouveras ci-dessous les infos que tu viens de saisir.<br><br>';
     }
     if ($data['act_photo']) {
         $str .= 'Photo<br>';
-    }
-    if ($data['act_arts_cirque']) {
-        $str .= 'Arts du cirque ('.$data['act_arts_cirque_p'].')<br>';
     }
     if ($data['act_arts_enigme']) {
         $str .= 'Enigmes<br>';
