@@ -1352,8 +1352,8 @@ else {
         $_SESSION['filtres_admin_jeunes']['bourse'] = $_POST['bourse'];
     }
 
-    if (isset($_POST['caf'])) {
-        $_SESSION['filtres_admin_jeunes']['caf'] = $_POST['caf'];
+    if (isset($_POST['caf_rgt'])) {
+        $_SESSION['filtres_admin_jeunes']['caf_rgt'] = $_POST['caf_rgt'];
     }
 
     if (isset($_POST['attestation'])) {
@@ -1525,7 +1525,7 @@ else {
         </div>
 
         <?php
-        if ($_SESSION['profil']['role'] == 'admin') {
+        if ($_SESSION['profil']['role'] == 'admin' OR $_SESSION['profil']['role'] == 'super_admin') {
         ?>
 
             <div class="form-group row">
@@ -1544,16 +1544,16 @@ else {
                     </div>
                 </div>
                 <!-- FILTRE CAF -->
-                <label class="col-form-label col-sm-2" for="caf">CAF ?</label>
+                <label class="col-form-label col-sm-2" for="caf_rgt">CAF ?</label>
                 <div class="col-sm-2">
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="caf" id="cafO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['caf']) && $_SESSION['filtres_admin_jeunes']['caf'] == 1) ? 'checked' : ''; ?>> Oui
+                            <input class="form-check-input" type="radio" name="caf_rgt" id="cafO" value="1" <?php echo (isset($_SESSION['filtres_admin_jeunes']['caf_rgt']) && $_SESSION['filtres_admin_jeunes']['caf_rgt'] == 1) ? 'checked' : ''; ?>> Oui
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="caf" id="cafN" value="0" <?php echo (isset($_SESSION['filtres_admin_jeunes']['caf']) && $_SESSION['filtres_admin_jeunes']['caf'] == 0) ? 'checked' : ''; ?>> Non
+                            <input class="form-check-input" type="radio" name="caf_rgt" id="cafN" value="0" <?php echo (isset($_SESSION['filtres_admin_jeunes']['caf_rgt']) && $_SESSION['filtres_admin_jeunes']['caf_rgt'] == 0) ? 'checked' : ''; ?>> Non
                         </label>
                     </div>
                 </div>
