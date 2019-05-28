@@ -812,10 +812,10 @@ Inscription adulte<br>
 2 rue de l\'Esvière<br>
 49100 ANGERS<br><br>
 
-Merci de vous inscrire au week-end de formation en cliquant <a href="https://forms.gle/tGxLqyAwL8HJoJ3Q9">ici</a>.<br><br>
+Merci de t\'inscrire au week-end de formation en cliquant <a href="https://forms.gle/tGxLqyAwL8HJoJ3Q9">ici</a>.<br><br>
 
 Les éléments du dossier administratif sont téléchargeables sur la <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif-adultes/">page suivante</a>.<br>
-Si vous souhaitez payer en ligne, <a target="_blank" href="http://bit.ly/1O6910a">cliquez ici</a>.<br><br>
+Si tu souhaites payer en ligne, <a target="_blank" href="http://bit.ly/1O6910a">cliquez ici</a>.<br><br>
 
 Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer ta demande à : jeunes.camps@fondacio.fr<br><br>
 

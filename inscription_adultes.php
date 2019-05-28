@@ -359,6 +359,15 @@ else {
             </div>
         </div>
 
+        <div class="form-group row" id="retour_bus">
+            <label class="col-form-label col-sm-3" for="retour_bus">Ville d'arrivée <span style="color: red">*</span></label>
+            <div class="col-sm-3">
+                <select class="form-control" name="retour_bus" id="retour_bus_clear">
+                    <option value="" id="retour_bus_villes" selected></option>
+                </select>
+            </div>
+        </div>
+
         <div class="form-group row" id="retour_voiture">
             <label class="col-form-label col-sm-12">Le camp termine dans la nuit du samedi au dimanche à 2h du matin. Vous pouvez repartir en voiture jusqu'au dimanche à 11h du matin.</label>
         </div>
@@ -897,14 +906,14 @@ else {
 
             // Gestion bus plein
 
-            $('#camp').change(function() {
+            /*$('#camp').change(function() {
                 if (this.value == "2") {
                     $('#transport_aller_bus').hide();
                 }
                 else {
                     $('#transport_aller_bus').show();
                 }
-            });
+            });*/
 
             // Gestion des transports
 
