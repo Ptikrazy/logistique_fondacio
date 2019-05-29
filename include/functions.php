@@ -288,7 +288,7 @@ function get_inscrits_jeune($camp, $filtres = array(), $tri = '') {
         else {
             $req .= ' ORDER BY id_jeune';
         }
-    }print_rh($req);die();
+    }
     $res = $bdd->query($req);
     while ($d = $res->fetch()) {
         $data[$d['id_jeune']] = $d;
