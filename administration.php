@@ -1637,6 +1637,13 @@ else {
                     $color = '#EFEF07';
                 }
 
+                if ($data['aller_transport'] == 'train' && empty($data['aller_heure'])) {
+                    $color = '#EFEF07';
+                }
+                if ($data['retour_transport'] == 'train' && empty($data['retour_heure'])) {
+                    $color = '#EFEF07';
+                }
+
                 $da_complet = 'Non';
                 if ($data['da_complet']) {
                     $da_complet = 'Oui';
