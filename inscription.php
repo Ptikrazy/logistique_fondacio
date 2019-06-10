@@ -32,7 +32,9 @@ if (!empty($_POST)) {
         49100 ANGERS<br><br>';
     }
 
-    $str .= 'Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
+    $str .= 'Vous trouverez la feuille de route en suivant <a target="_blank" href="http://www.jeunes.fondacio.fr/wp-content/uploads/2019/05/Fiche-transports-C'.$_POST['camp'].'-RSV-2019.pdf">ce lien</a>.<br><br>
+
+    Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
     Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.';
     }
 
