@@ -784,502 +784,434 @@ else {
 
             <h6>Activités sur site</h6>
 
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_arts_plastiques" id="act_arts_plastiques" value="1" <?php echo ($data['act_arts_plastiques'] == 1) ? 'checked' : ''; ?>> Arts plastiques
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_arts_plastiques_p" id="act_arts_plastiques_p" value="<?php echo $data['act_arts_plastiques_p'] ?>">
-                    </label>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_bd" id="act_bd" value="1" <?php echo ($data['act_bd'] == 1) ? 'checked' : ''; ?>> Bande dessinée
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_orient_pro" id="act_orient_pro" value="1" <?php echo ($data['act_orient_pro'] == 1) ? 'checked' : ''; ?>> Orientation professionelle
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_cinema" id="act_cinema" value="1" <?php echo ($data['act_cinema'] == 1) ? 'checked' : ''; ?>> Cinéma
-                        </label>
-                    </div>
-                </div>
-            </div>
+        <div class="form-group row">
+            <label class="col-form-label col-sm-12">Veuillez nous indiquer, parmi la liste suivante, les activités ou hobbies dans lesquels vous vous reconnaissez. Dans la mesure du possible, précisez : (ex : sports : karaté ; escalade ; équitation)</label>
+        </div>
 
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_exp_corp" id="act_exp_corp" value="1" <?php echo ($data['act_exp_corp'] == 1) ? 'checked' : ''; ?>> Expressions corporelles
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_exp_corp_p" id="act_exp_corp_p" value="<?php echo $data['act_exp_corp_p'] ?>">
-                    </label>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_jeux_piste" id="act_jeux_piste" value="1" <?php echo ($data['act_jeux_piste'] == 1) ? 'checked' : ''; ?>> Jeux de piste
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_meditation" id="act_meditation" value="1" <?php echo ($data['act_meditation'] == 1) ? 'checked' : ''; ?>> Méditation
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_arts_enigme" id="act_arts_enigme" value="1" <?php echo ($data['act_arts_enigme'] == 1) ? 'checked' : ''; ?>> Énigmes
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_musiques" id="act_musiques" value="1" <?php echo ($data['act_musiques'] == 1) ? 'checked' : ''; ?>> Musiques
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_musiques_p" id="act_musiques_p" value="<?php echo $data['act_musiques_p'] ?>">
-                    </label>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_jeux_mem" id="act_jeux_mem" value="1" <?php echo ($data['act_jeux_mem'] == 1) ? 'checked' : ''; ?>> Jeux de mémoire
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_ecritures" id="act_ecritures" value="1" <?php echo ($data['act_ecritures'] == 1) ? 'checked' : ''; ?>> Écritures/récits
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_ecritures_p" id="act_ecritures_p" value="<?php echo $data['act_ecritures_p'] ?>">
+                        <input class="form-check-input" type="checkbox" name="act_arts_plastiques" id="act_arts_plastiques" value="1" <?php echo ($data['act_arts_plastiques'] == 1) ? 'checked' : ''; ?>> Arts plastiques / Dessin / Illustration
                     </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_danses" id="act_danses" value="1" <?php echo ($data['act_danses'] == 1) ? 'checked' : ''; ?>> Danses
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_arts_plastiques_p" id="act_arts_plastiques_p" value="<?php echo $data['act_arts_plastiques_p'] ?>">
+                </label>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_danses_p" id="act_danses_p" value="<?php echo $data['act_danses_p'] ?>">
-                    </label>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_sculpture" id="act_sculpture" value="1" <?php echo ($data['act_sculpture'] == 1) ? 'checked' : ''; ?>> Sculpture, modelage
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_arts_rue" id="act_arts_rue" value="1" <?php echo ($data['act_arts_rue'] == 1) ? 'checked' : ''; ?>> Arts de la rue
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_arts_rue_p" id="act_arts_rue_p" value="<?php echo $data['act_arts_rue_p'] ?>">
+                        <input class="form-check-input" type="checkbox" name="act_exp_corp" id="act_exp_corp" value="1" <?php echo ($data['act_exp_corp'] == 1) ? 'checked' : ''; ?>> Danses / Expressions corporelles
                     </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_chants" id="act_chants" value="1" <?php echo ($data['act_chants'] == 1) ? 'checked' : ''; ?>> Chants
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_exp_corp_p" id="act_exp_corp_p" value="<?php echo $data['act_exp_corp_p'] ?>">
+                </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_chants_p" id="act_chants_p" value="<?php echo $data['act_chants_p'] ?>">
-                    </label>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_bijoux" id="act_bijoux" value="1" <?php echo ($data['act_bijoux'] == 1) ? 'checked' : ''; ?>> Bijoux (bracelets, colliers etc...)
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_sports" id="act_sports" value="1" <?php echo ($data['act_sports'] == 1) ? 'checked' : ''; ?>> Sports
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_sports_p" id="act_sports_p" value="<?php echo $data['act_sports_p'] ?>">
+                        <input class="form-check-input" type="checkbox" name="act_musiques" id="act_musiques" value="1" <?php echo ($data['act_musiques'] == 1) ? 'checked' : ''; ?>> Musiques / Chants
                     </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_imagination" id="act_imagination" value="1" <?php echo ($data['act_imagination'] == 1) ? 'checked' : ''; ?>> Imagination
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_musiques_p" id="act_musiques_p" value="<?php echo $data['act_musiques_p'] ?>">
+                </label>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        Si possible, préciser le support <input type="text" class="form-control" name="act_imagination_p" id="act_imagination_p" value="<?php echo $data['act_imagination_p'] ?>">
-                    </label>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_relaxation" id="act_relaxation" value="1" <?php echo ($data['act_relaxation'] == 1) ? 'checked' : ''; ?>> Relaxation
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_theatres" id="act_theatres" value="1" <?php echo ($data['act_theatres'] == 1) ? 'checked' : ''; ?>> Théâtres
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_theatres_p" id="act_theatres_p" value="<?php echo $data['act_theatres_p'] ?>">
+                        <input class="form-check-input" type="checkbox" name="act_sports" id="act_sports" value="1" <?php echo ($data['act_sports'] == 1) ? 'checked' : ''; ?>> Sports
                     </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_arts_cirque" id="act_arts_cirque" value="1" <?php echo ($data['act_arts_cirque'] == 1) ? 'checked' : ''; ?>> Arts du cirque
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_sports_p" id="act_sports_p" value="<?php echo $data['act_sports_p'] ?>">
+                </label>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_arts_cirque_p" id="act_arts_cirque_p" value="<?php echo $data['act_arts_cirque_p'] ?>">
-                    </label>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_photo" id="act_photo" value="1" <?php echo ($data['act_photo'] == 1) ? 'checked' : ''; ?>> Photographie
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_illustrations" id="act_illustrations" value="1" <?php echo ($data['act_illustrations'] == 1) ? 'checked' : ''; ?>> Illustrations
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <label class="form-check-label">
-                        Si possible, préciser <input type="text" class="form-control" name="act_illustrations_p" id="act_illustrations_p" value="<?php echo $data['act_illustrations_p'] ?>">
+                        <input class="form-check-input" type="checkbox" name="act_theatres" id="act_theatres" value="1" <?php echo ($data['act_theatres'] == 1) ? 'checked' : ''; ?>> Théâtres
                     </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <div class="col-sm-2">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_logique" id="act_logique" value="1" <?php echo ($data['act_logique'] == 1) ? 'checked' : ''; ?>> Logique
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="act_strategie" id="act_strategie" value="1" <?php echo ($data['act_strategie'] == 1) ? 'checked' : ''; ?>> Stratégie
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-3">
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_theatres_p" id="act_theatres_p" value="<?php echo $data['act_theatres_p'] ?>">
+                </label>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        Autres <input type="text" class="form-control" name="act_autres" id="act_autres" value="<?php echo $data['act_autres'] ?>">
+                        <input class="form-check-input" type="checkbox" name="act_arts_rue" id="act_arts_rue" value="1" <?php echo ($data['act_arts_rue'] == 1) ? 'checked' : ''; ?>> Arts de la rue / Arts du cirque
                     </label>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <label class="form-check-label">
+                    Si possible, préciser <input type="text" class="form-control" name="act_arts_rue_p" id="act_arts_rue_p" value="<?php echo $data['act_arts_rue_p'] ?>">
+                </label>
+            </div>
+        </div><br><br><br>
 
-            <h6>Activités hors site (niveau débutant)</h6>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_rafting">Rafting <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_rafting" id="act_rafting2" value="2" <?php echo ($data['act_rafting'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_rafting" id="act_rafting1" value="1" <?php echo ($data['act_rafting'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_rafting" id="act_rafting0" value="0" <?php echo ($data['act_rafting'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_meditation" id="act_meditation" value="1" <?php echo ($data['act_meditation'] == 1) ? 'checked' : ''; ?>> Méditation / Relaxation
+                    </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_canyo">Canyoning <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_canyo" id="act_canyo" value="2" <?php echo ($data['act_canyo'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_canyo" id="act_canyo1" value="1" <?php echo ($data['act_canyo'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_canyo" id="act_canyo0" value="0" <?php echo ($data['act_canyo'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_logique" id="act_logique" value="1" <?php echo ($data['act_logique'] == 1) ? 'checked' : ''; ?>> Jeux de logique / Énigmes / Jeux de mémoire / Stratégie
+                    </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_descente">Descente VTT <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_descente" id="act_descente2" value="2" <?php echo ($data['act_descente'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_descente" id="act_descente1" value="1" <?php echo ($data['act_descente'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_descente" id="act_descente0" value="0" <?php echo ($data['act_descente'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_sculpture" id="act_sculpture" value="1" <?php echo ($data['act_sculpture'] == 1) ? 'checked' : ''; ?>> Sculpture / Modelage
+                    </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_mini_raid">Mini raid VTT <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_mini_raid" id="act_mini_raid2" value="2" <?php echo ($data['act_mini_raid'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_mini_raid" id="act_mini_raid1" value="1" <?php echo ($data['act_mini_raid'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_mini_raid" id="act_mini_raid0" value="0" <?php echo ($data['act_mini_raid'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_oser" id="act_oser" value="1" <?php echo ($data['act_oser'] == 1) ? 'checked' : ''; ?>> Oser vivre
+                    </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_via_fe">Via Ferrata <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_via_fe" id="act_via_fe2" value="2" <?php echo ($data['act_rafting'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_via_fe" id="act_via_fe1" value="1" <?php echo ($data['act_via_fe'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_via_fe" id="act_via_fe0" value="0" <?php echo ($data['act_via_fe'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_photo" id="act_photo" value="1" <?php echo ($data['act_photo'] == 1) ? 'checked' : ''; ?>> Photos / Vidéo / Montage
+                    </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_grimp">Grimp'arbre <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_grimp" id="act_grimp2" value="2" <?php echo ($data['act_grimp'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_grimp" id="act_grimp1" value="1" <?php echo ($data['act_grimp'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_grimp" id="act_grimp0" value="0" <?php echo ($data['act_grimp'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_ecologie" id="act_ecologie" value="1" <?php echo ($data['act_ecologie'] == 1) ? 'checked' : ''; ?>> Ecologie / Zéro Déchets
+                    </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_bike_park">Mourtis Bike Park <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_bike_park" id="act_bike_park2" value="2" <?php echo ($data['act_bike_park'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_bike_park" id="act_bike_park1" value="1" <?php echo ($data['act_bike_park'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_bike_park" id="act_bike_park0" value="0" <?php echo ($data['act_bike_park'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_ecritures" id="act_ecritures" value="1" <?php echo ($data['act_ecritures'] == 1) ? 'checked' : ''; ?>> Écritures / Récits
+                    </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_speed_chall">Mourtis Speed Challenge <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_speed_chall" id="act_speed_chall2" value="2" <?php echo ($data['act_rafting'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_speed_chall" id="act_speed_chall1" value="1" <?php echo ($data['act_speed_chall'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_speed_chall" id="act_speed_chall0" value="0" <?php echo ($data['act_speed_chall'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_bijoux" id="act_bijoux" value="1" <?php echo ($data['act_bijoux'] == 1) ? 'checked' : ''; ?>> Bijoux (bracelets, colliers etc...)
+                    </label>
                 </div>
             </div>
+        </div><br><br><br>
 
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_biathlon">Biathlon <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_biathlon" id="act_biathlon2" value="2" <?php echo ($data['act_biathlon'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_biathlon" id="act_biathlon1" value="1" <?php echo ($data['act_biathlon'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_biathlon" id="act_biathlon0" value="0" <?php echo ($data['act_biathlon'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_orient_pro" id="act_orient_pro" value="1" <?php echo ($data['act_orient_pro'] == 1) ? 'checked' : ''; ?>> Carrefour: orientation professionelle
+                    </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_piscine">Piscine <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_piscine" id="act_piscine2" value="2" <?php echo ($data['act_piscine'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_piscine" id="act_piscine1" value="1" <?php echo ($data['act_piscine'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_piscine" id="act_piscine0" value="0" <?php echo ($data['act_piscine'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_addictions" id="act_addictions" value="1" <?php echo ($data['act_addictions'] == 1) ? 'checked' : ''; ?>> Carrefour: addictions
+                    </label>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="act_sports_co">Animation sports co <span style="color: red">*</span></label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co2" value="2" <?php echo ($data['act_sports_co'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co1" value="1" <?php echo ($data['act_sports_co'] == 1) ? 'checked' : ''; ?>> Je peux le faire
-                        </label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co0" value="0" <?php echo ($data['act_sports_co'] == 0) ? 'checked' : ''; ?> required> Il m'est impossible de le faire
-                        </label>
-                    </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_sexualite" id="act_sexualite" value="1" <?php echo ($data['act_sexualite'] == 1) ? 'checked' : ''; ?>> Carrefour: vie affective et sexualité
+                    </label>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="act_gestion" id="act_gestion" value="1" <?php echo ($data['act_gestion'] == 1) ? 'checked' : ''; ?>> Carrefour: gestion du temps
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <h6>Activités hors site (niveau débutant)</h6>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_rafting">Rafting <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_rafting" id="act_rafting2" value="2" <?php echo ($data['act_rafting'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_rafting" id="act_rafting1" value="1" <?php echo ($data['act_rafting'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_rafting" id="act_rafting0" value="0" required <?php echo ($data['act_rafting'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_canyo">Canyoning <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_canyo" id="act_canyo" value="2" <?php echo ($data['act_canyo'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_canyo" id="act_canyo1" value="1" <?php echo ($data['act_canyo'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_canyo" id="act_canyo0" value="0" required <?php echo ($data['act_canyo'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_descente">Descente VTT <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_descente" id="act_descente2" value="2" <?php echo ($data['act_descente'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_descente" id="act_descente1" value="1" <?php echo ($data['act_descente'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_descente" id="act_descente0" value="0" required <?php echo ($data['act_descente'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_mini_raid">Mini raid VTT <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_mini_raid" id="act_mini_raid2" value="2" <?php echo ($data['act_mini_raid'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_mini_raid" id="act_mini_raid1" value="1" <?php echo ($data['act_mini_raid'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_mini_raid" id="act_mini_raid0" value="0" required <?php echo ($data['act_mini_raid'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_via_fe">Via Ferrata <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_via_fe" id="act_via_fe2" value="2" <?php echo ($data['act_mini_raid'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_via_fe" id="act_via_fe1" value="1" <?php echo ($data['act_mini_raid'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_via_fe" id="act_via_fe0" value="0" required <?php echo ($data['act_mini_raid'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_grimp">Grimp'arbre <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_grimp" id="act_grimp2" value="2" <?php echo ($data['act_grimp'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_grimp" id="act_grimp1" value="1" <?php echo ($data['act_grimp'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_grimp" id="act_grimp0" value="0" required <?php echo ($data['act_grimp'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_bike_park">Mourtis Bike Park <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_bike_park" id="act_bike_park2" value="2" <?php echo ($data['act_bike_park'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_bike_park" id="act_bike_park1" value="1" <?php echo ($data['act_bike_park'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_bike_park" id="act_bike_park0" value="0" required <?php echo ($data['act_bike_park'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_speed_chall">Mourtis Speed Challenge <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_speed_chall" id="act_speed_chall2" value="2" <?php echo ($data['act_speed_chall'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_speed_chall" id="act_speed_chall1" value="1" <?php echo ($data['act_speed_chall'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_speed_chall" id="act_speed_chall0" value="0" required <?php echo ($data['act_speed_chall'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_biathlon">Biathlon <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_biathlon" id="act_biathlon2" value="2" <?php echo ($data['act_biathlon'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_biathlon" id="act_biathlon1" value="1" <?php echo ($data['act_biathlon'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_biathlon" id="act_biathlon0" value="0" required <?php echo ($data['act_biathlon'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_piscine">Piscine <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_piscine" id="act_piscine2" value="2" <?php echo ($data['act_piscine'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_piscine" id="act_piscine1" value="1" <?php echo ($data['act_piscine'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_piscine" id="act_piscine0" value="0" required <?php echo ($data['act_piscine'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_sports_co">Animation sports co <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co2" value="2" <?php echo ($data['act_sports_co'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co1" value="1" <?php echo ($data['act_sports_co'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_sports_co" id="act_sports_co0" value="0" required <?php echo ($data['act_sports_co'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="act_randonnee">Randonée <span style="color: red">*</span></label>
+            <div class="col-sm-10">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_randonnee" id="act_randonnee2" value="2" <?php echo ($data['act_randonnee'] == 2) ? 'checked' : ''; ?>> Je souhaite le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_randonnee" id="act_randonnee1" value="1" <?php echo ($data['act_randonnee'] == 1) ? 'checked' : ''; ?>> Je peux le faire
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="act_randonnee" id="act_randonnee0" value="0" required <?php echo ($data['act_randonnee'] == 0) ? 'checked' : ''; ?>> Il m'est impossible de le faire
+                    </label>
+                </div>
+            </div>
+        </div>
 
             <div class="form-group row">
                 <div class="col-sm-10">

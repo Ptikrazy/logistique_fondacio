@@ -550,7 +550,7 @@ else {
             <div class="col-sm-3">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" name="act_photo" id="act_ecologie" value="1"> Ecologie / Zéro Déchets
+                        <input class="form-check-input" type="checkbox" name="act_ecologie" id="act_ecologie" value="1"> Ecologie / Zéro Déchets
                     </label>
                 </div>
             </div>
