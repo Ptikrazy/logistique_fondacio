@@ -493,22 +493,13 @@ function send_mail_confirmation_jeune($data, $infos_camp) {
 
 Votre demande d\'inscription pour votre enfant '.$data['jeune_prenom'].' au camp Réussir Sa Vie (camp n°'.$infos_camp['numero'].') qui aura lieu du '.convert_date($infos_camp['date_debut'], '-', '/').' au '.convert_date($infos_camp['date_fin'], '-', '/').' au Mourtis (31) a bien été enregistrée, et nous vous en remercions.
 
-Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>';
+Pour confirmer son inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
-if ($infos_camp['numero'] == 1) {
-$str .= 'Fondacio camp RSV n°1<br>
-    Chez Véronique PEDRON<br>
-    20 rue Monié<br>
-    31500 Toulouse<br><br>';
-}
+Fondacio camp RSV '.$infos_camp['numero'].'<br>
+Les Pierres Blanches – Station de Ski Le Mourtis<br>
+31440 BOUTX – LE MOURTIS<br><br>
 
-else {
-    $str .= 'Fondacio camp RSV '.$infos_camp['numero'].'<br>
-    2 rue de l\'Esvière<br>
-    49100 ANGERS<br><br>';
-}
-
-$str .= 'Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
+Les éléments du dossier administratif sont téléchargeables <a target="_blank" href="http://www.jeunes.fondacio.fr/camps-reussir-sa-vie/dossier-administratif/">en suivant ce lien</a>.<br>
 Si vous souhaitez payer en ligne, <a target="_blank" href="http://www.fondacio.fr/fondacio/spip.php?page=produit&ref=CAMPS_RSV_ADOS&id_article=524">cliquez ici</a>.<br><br>
 
 Pour toute question concernant le camp, merci de ne pas répondre à cette adresse, mais d\'envoyer votre demande à <a href="mailto:jeunes.camps@fondacio.fr">l\'adresse suivante</a>.<br><br>
@@ -807,10 +798,9 @@ Ta demande d\'inscription à l\'un des camps Réussir sa Vie qui aura lieu au Mo
 
 Pour confirmer ton inscription, merci d\'envoyer le dossier administratif complet, accompagné de ton règlement (chèque à l\'ordre de Fondacio France) à :<br><br>
 
-Fondacio camp RSV<br>
-Inscription adulte<br>
-2 rue de l\'Esvière<br>
-49100 ANGERS<br><br>
+Fondacio – Camps Réussir Sa Vie - Adulte<br>
+Les Pierres Blanches – Station de Ski Le Mourtis<br>
+31440 BOUTX – LE MOURTIS<br><br>
 
 Merci de t\'inscrire au week-end de formation en cliquant <a href="https://forms.gle/tGxLqyAwL8HJoJ3Q9">ici</a>.<br><br>
 
@@ -1442,6 +1432,17 @@ function delete_participant ($id, $type) {
     $res = $bdd->query($req);
     $res->closeCursor();
     redirect('participants.php');
+
+}
+
+function delete_activite ($id) {
+
+    global $bdd;
+
+    $req = 'DELETE FROM activites WHERE id_activite = '.$id;
+    $res = $bdd->query($req);
+    $res->closeCursor();
+    redirect('activites.php');
 
 }
 

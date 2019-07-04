@@ -6,6 +6,9 @@ require_once 'include/init.php';
 
 if (!empty($_GET['action'])) {
     switch ($_GET['action']) {
+        case 'del':
+            delete_activite($_GET['id']);
+            break;
         case 'edit':
             $donnees = get_activite($_GET['id_activite']);
             $titre = 'Fiche activité: '.$donnees['nom'];
@@ -166,6 +169,7 @@ if (!empty($_GET['action'])) {
             <div class="col-sm-offset-3 col-sm-10">
                 <button type="submit" class="btn btn-primary">Sauvegarder</button>
             </div>
+            <a class="btn btn-danger" href="activites.php?action=del&id=<?php echo $_GET['id_activite'];?>" role="button">Supprimer</a><br><br>
         </div>
     </form>
 
