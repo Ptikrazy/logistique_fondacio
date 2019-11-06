@@ -49,7 +49,12 @@ if (empty($_SESSION['profil']['id'])) {
             }
             $_SESSION['profil']['id'] = $login['id_utilisateur'];
             $_SESSION['profil']['role'] = $login['role'];
-            redirect('administration.php');
+            if ($_SESSION['profil']['role'] == 'charge_insc_adulte') {
+                redirect('administration_adultes.php');
+            }
+            else {
+                redirect('administration.php');
+            }
         }
 
     }

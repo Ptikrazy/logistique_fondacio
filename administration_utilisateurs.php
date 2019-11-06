@@ -39,18 +39,18 @@ if (empty($_SESSION['profil']['id']) || $_SESSION['profil']['role'] != 'admin') 
     else {
 
         if (!check_password($_POST['login'], $_POST['password'])) {
-            redirect('administration_camps.php');
+            redirect('administration_utilisateurs.php');
         }
 
         else {
             $login = get_infos_login($_POST['login']);
             if ($login['role'] != 'admin') {
                 $_SESSION['camp_admin'] = $login['camp'];
-                redirect('administration_camps.php');
+                redirect('administration_utilisateurs.php');
             }
             $_SESSION['profil']['id'] = $login['id_utilisateur'];
             $_SESSION['profil']['role'] = $login['role'];
-            redirect('administration_camps.php');
+            redirect('administration_utilisateurs.php');
         }
 
     }
@@ -91,6 +91,9 @@ else {
             case 'charge_insc':
                 $role = 'Chargé d\'inscription';
                 break;
+            case 'charge_insc_adulte':
+                $role = 'Chargé d\'inscription adulte';
+                break;
             case 'resp_camp':
                 $role = 'Responsable de camp';
                 break;
@@ -119,6 +122,7 @@ else {
                 <select class="form-control" name="role" id="role" required>
                     <option value="admin"> Administrateur</option>
                     <option value="charge_insc">Chargé d'inscription</option>
+                    <option value="charge_insc_adulte">Chargé d'inscription adulte</option>
                     <option value="resp_camp">Responsable de camp</option>
                 </select>
             </div>

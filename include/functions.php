@@ -482,6 +482,11 @@ function enregistrer_inscription_jeune($data) {
     $res = $bdd->query($req);
     $res->closeCursor();
 
+    // Check places bus
+    if (get_totaux_transport($infos_camp['numero'], 'aller', 'bus') > 47) {
+        send_mail_totaux_bus($infos_camp['numero']);
+    }
+
     // Envoi mail
     send_mail_confirmation_jeune($data, $infos_camp);
 
@@ -581,6 +586,20 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
     $headers .= 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
                 'Reply-To: fondacio.camp'.$infos_camp['numero'].'@gmail.com';
+
+    mail($to, $subject, $str, $headers);
+
+}
+
+function send_mail_totaux_bus($camp) {
+
+    $str      = 'Le bus aller du camp '.$camp.' a atteint 48 places libres restantes !';
+    $to       = 'pleplat75@gmail.com';
+    $subject  = 'ALERTE bus plein camp jeunes n°'.$camp;
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
+    $headers .= 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
+                'Reply-To: jeunes.camps@fondacio.fr';
 
     mail($to, $subject, $str, $headers);
 

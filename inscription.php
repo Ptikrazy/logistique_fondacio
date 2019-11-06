@@ -15,7 +15,7 @@ if (!empty($_POST)) {
 
         enregistrer_inscription_jeune($_POST);
 
-        echo '<br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée. Un mail de confirmation va vous être envoyé. Attention, il est possible qu\'il arrive dans votre dossier "Spam" ou "Courrier indésirable", pensez à vérifier ce dernier.<br><br>
+        echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>Votre demande d\'inscription au camp Réussir Sa Vie a bien été enregistrée. Un mail de confirmation va vous être envoyé. Attention, il est possible qu\'il arrive dans votre dossier "Spam" ou "Courrier indésirable", pensez à vérifier ce dernier.<br><br>
 
     Pour confirmer l’inscription, merci d\'envoyer le dossier administratif complet, accompagné de votre règlement (chèque à l\'ordre de Fondacio France) à :<br><br>';
 
@@ -95,6 +95,22 @@ else {
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="prepa" id="prepa0" value="0"> Non
+                    </label>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="form-group row" id="douze">
+            <label class="col-form-label col-sm-2" for="douze">J'ai déjà fais un camp 12-14 ans</label>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="douze" id="douze1" value="1"> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="douze" id="douze0" value="0"> Non
                     </label>
                 </div>
             </div>
@@ -232,6 +248,13 @@ else {
             <label class="col-form-label col-sm-2" for="poids">Poids (en kg) <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
             <div class="col-sm-2">
                 <input type="number" class="form-control" name="poids" id="poids" required>
+            </div>
+        </div><br>
+
+        <div class="form-group row">
+            <label class="col-form-label col-sm-2" for="allergies">Allergies et régimes spécifiques</label>
+            <div class="col-sm-6">
+                <textarea class="form-control" name="allergies" id="allergies" rows="2"></textarea>
             </div>
         </div><br>
 
@@ -491,6 +514,7 @@ else {
         $(function() {
 
             $('#prepa').hide();
+            $('#douze').hide();
 
             // Initialisation variable pour le coût
 
@@ -504,10 +528,12 @@ else {
             $('input[type=radio][name=ancien]').change(function() {
                 if (this.value == 1) {
                     $('#prepa').show();
+                    $('#douze').show();
                     $('#prepa').prop('required',true);
                 }
                 else {
                     $('#prepa').hide();
+                    $('#douze').hide();
                     $('#prepa').prop('required',false);
                 }
             });

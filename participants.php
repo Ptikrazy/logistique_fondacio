@@ -478,6 +478,22 @@ if (!empty($_GET['action'])) {
             </div>
 
             <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="douze">J'ai fais un camp 12-14 ans</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="douze" id="douze1" value="1" <?php echo ($donnees['douze']) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="douze" id="douze0" value="0" <?php echo ($donnees['douze']) ? '' : 'checked'; ?>> Non
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="civilite">Civilité</label>
                 <div class="col-sm-3">
                     <div class="form-check form-check-inline">
@@ -598,6 +614,13 @@ if (!empty($_GET['action'])) {
                 </div>
             </div><br>
 
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="allergies">Allergies et régimes spécifiques</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="allergies" id="allergies" rows="2"><?php echo $donnees['allergies']; ?></textarea>
+                </div>
+            </div><br>
+
             <h4>Coordonnées des parents (ou du responsable légal)</h4><br>
 
             <div class="form-group row">
@@ -711,6 +734,17 @@ if (!empty($_GET['action'])) {
                     <select class="form-control" name="retour_ville" id="retour_bus_clear">
                         <option value="" id="retour_bus_villes" selected></option>
                     </select>
+                </div>
+            </div>
+
+            <div class="form-group  row">
+                <label for="chambre_num" class="col-md-2 col-form-label">Chambre</label>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" name="chambre_num" value="<?php echo $donnees['chambre_num']; ?>">
+                </div>
+                <label for="pg_num" class="col-md-2 col-form-label">Petit groupe</label>
+                <div class="col-md-2">
+                    <input type="text" class="form-control" name="pg_num" value="<?php echo $donnees['pg_num']; ?>">
                 </div>
             </div>
 
