@@ -10,10 +10,6 @@ if (!empty($_GET['action'])) {
     require_once 'include/head.php';
 
     switch ($_GET['action']) {
-        case 'del':
-            delete_participant($_GET['id'], $_GET['type']);
-            break;
-
         case 'edit':
             if (isset($_SESSION['edit_ok'])) {
                 echo '<script>swal("Fiche mise à jour avec succès !","","success")</script>';
@@ -31,7 +27,6 @@ if (!empty($_GET['action'])) {
 ?>
     <h2><?php echo $titre; ?></h2>
     <a class="btn btn-secondary" href="participants.php" role="button">Retour</a>
-    <a class="btn btn-danger" href="participants.php?action=del&id=<?php echo $_GET['id']; ?>&type=<?php echo $_GET['type']; ?>" role="button">Supprimer</a><br><br>
 
     <?php
         if ($_GET['type'] == 'adulte') {
