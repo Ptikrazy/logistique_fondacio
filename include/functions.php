@@ -594,7 +594,7 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
 function send_mail_totaux_bus($camp) {
 
     $str      = 'Le bus aller du camp '.$camp.' a atteint 48 places libres restantes !';
-    $to       = 'pleplat75@gmail.com';
+    $to       = 'jeunes.camps@fondacio.fr';
     $subject  = 'ALERTE bus plein camp jeunes n°'.$camp;
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
