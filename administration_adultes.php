@@ -61,6 +61,10 @@ else {
 
     if (!empty($_GET['action'])) {
 
+        if ($_GET['action'] == 'del') {
+            delete_participant($_GET['id'], 'jeune', 'administration_adultes');
+        }
+
         if ($_GET['action'] == 'edit') {
 
             if (isset($_SESSION['edit_ok'])) {
@@ -150,7 +154,8 @@ else {
 ?>
 
             <h2>Fiche de <?php echo $data['prenom'].' '.$data['nom'].' '; ?></h2>
-            <a class="btn btn-secondary" href="administration_adultes.php" role="button">Retour</a><br><br>
+            <a class="btn btn-secondary" href="administration_adultes.php" role="button">Retour</a></a>&nbsp;&nbsp;
+            <a class="btn btn-danger" href="administration_adultes.php?action=del&id=<?php echo $_GET['id']; ?>" role="button">Supprimer</a><br><br>
 
             <h4>Administratif</h4><br>
 

@@ -410,6 +410,7 @@ function enregistrer_inscription_jeune($data) {
     else {
         $req .= 'prepa = 0, ';
     }
+    $req .= 'douze = '.$data['douze'].', ';
     $req .= 'civilite = "'.$data['civilite'].'", ';
     $req .= 'nom = "'.strtoupper($data['jeune_nom']).'", ';
     $req .= 'prenom = "'.$data['jeune_prenom'].'", ';
@@ -1443,14 +1444,14 @@ function update_participant ($id, $type, $data) {
 
 }
 
-function delete_participant ($id, $type) {
+function delete_participant ($id, $type, $script) {
 
     global $bdd;
 
     $req = 'DELETE FROM '.$type.'s WHERE id_'.$type.' = '.$id;
     $res = $bdd->query($req);
     $res->closeCursor();
-    redirect('participants.php');
+    redirect($script.'.php');
 
 }
 

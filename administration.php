@@ -83,7 +83,7 @@ else {
     if (!empty($_GET['action'])) {
 
         if ($_GET['action'] == 'del') {
-            delete_participant($_GET['id'], 'jeune');
+            delete_participant($_GET['id'], 'jeune', 'administration');
         }
 
         if ($_GET['action'] == 'edit') {
@@ -333,6 +333,22 @@ else {
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="douze">J'ai fais un camp 12-14 ans</label>
+                <div class="col-sm-2">
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="douze" id="douze1" value="1" <?php echo ($data['douze']) ? 'checked' : ''; ?>> Oui
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="douze" id="douze0" value="0" <?php echo ($data['douze']) ? '' : 'checked'; ?>> Non
+                        </label>
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group row" id="prepa">
                 <label class="col-form-label col-sm-2" for="prepa">Je m'inscris à la prépa <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La prépa aura lieu du samedi précédant le camp à 14h jusqu'au début du camp. Le coût de la prépa est de 55 euros."></label>
                 <div class="col-sm-3">
@@ -346,6 +362,13 @@ else {
                             <input class="form-check-input" type="radio" name="prepa" id="prepa0" value="0" <?php echo ($data['prepa']) ? '' : 'checked'; ?>> Non
                         </label>
                     </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-form-label col-sm-2" for="allergies">Allergies et régimes spécifiques</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" name="allergies" id="allergies" rows="2"><?php echo $data['allergies']; ?></textarea>
                 </div>
             </div><br>
 

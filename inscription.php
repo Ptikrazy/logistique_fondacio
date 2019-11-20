@@ -68,6 +68,22 @@ else {
             </div>
         </div>
 
+        <div class="form-group row" id="douze">
+            <label class="col-form-label col-sm-2" for="douze">J'ai déjà fais un camp 12-14 ans <span style="color: red">*</span></label>
+            <div class="col-sm-3">
+                <div class="form-check form-check-inline" required>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="douze" id="douze1" value="1"> Oui
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" name="douze" id="douze0" value="0"> Non
+                    </label>
+                </div>
+            </div>
+        </div><br>
+
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="ancien">J'ai déjà fait un camp "Réussir Sa Vie" <span style="color: red">*</span></label>
             <div class="col-sm-3">
@@ -95,22 +111,6 @@ else {
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
                         <input class="form-check-input" type="radio" name="prepa" id="prepa0" value="0"> Non
-                    </label>
-                </div>
-            </div>
-        </div><br>
-
-        <div class="form-group row" id="douze">
-            <label class="col-form-label col-sm-2" for="douze">J'ai déjà fais un camp 12-14 ans</label>
-            <div class="col-sm-3">
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="douze" id="douze1" value="1"> Oui
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label">
-                        <input class="form-check-input" type="radio" name="douze" id="douze0" value="0"> Non
                     </label>
                 </div>
             </div>
@@ -514,7 +514,6 @@ else {
         $(function() {
 
             $('#prepa').hide();
-            $('#douze').hide();
 
             // Initialisation variable pour le coût
 
@@ -528,12 +527,10 @@ else {
             $('input[type=radio][name=ancien]').change(function() {
                 if (this.value == 1) {
                     $('#prepa').show();
-                    $('#douze').show();
                     $('#prepa').prop('required',true);
                 }
                 else {
                     $('#prepa').hide();
-                    $('#douze').hide();
                     $('#prepa').prop('required',false);
                 }
             });
