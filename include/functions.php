@@ -432,9 +432,13 @@ function enregistrer_inscription_jeune($data) {
     }
     $req .= 'taille = '.$data['taille'].', ';
     $req .= 'poids = '.$data['poids'].', ';
+	$req .= 'allergies = "'.$data['allergies'].'", ';
     $req .= 'parents_nom = "'.$data['parents_nom'].'", ';
     $req .= 'parents_prenom = "'.$data['parents_prenom'].'", ';
     $req .= 'parents_adresse = "'.$data['parents_adresse'].'", ';
+	$req .= 'parents_cp = "'.$data['parents_cp'].'", ';
+	$req .= 'parents_ville = "'.$data['parents_ville'].'", ';
+	$req .= 'parents_pays = "'.$data['parents_pays'].'", ';
     $req .= 'mere_portable = "'.$data['mere_tel_portable'].'", ';
     $req .= 'pere_portable = "'.$data['pere_tel_portable'].'", ';
     $req .= 'parents_mail = "'.$data['parents_mail'].'", ';
@@ -537,6 +541,7 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
     }
     $str .= '<br>Taille: '.$data['taille'].' cm<br>
     Poids: '.$data['poids'].' kg<br>
+	Allergies: '.$data['allergies'].'<br>
     Nom des parents: '.$data['parents_nom'].'<br>
     Prénom des parents: '.$data['parents_prenom'].'<br>
     Tel portable de la mère: '.$data['mere_tel_portable'].'<br>
@@ -595,12 +600,12 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
 function send_mail_totaux_bus($camp) {
 
     $str      = 'Le bus aller du camp '.$camp.' a atteint 48 places libres restantes !';
-    $to       = 'jeunes.camps@fondacio.fr';
+    $to       = 'Fondacio Jeunes <jeunes.camps@fondacio.fr>';
     $subject  = 'ALERTE bus plein camp jeunes n°'.$camp;
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
     $headers .= 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
-                'Reply-To: jeunes.camps@fondacio.fr';
+                'Reply-To: Fondacio Jeunes <jeunes.camps@fondacio.fr>';
 
     mail($to, $subject, $str, $headers);
 

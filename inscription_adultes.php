@@ -197,7 +197,7 @@ else {
                     </label>
                 </div>
             </div>
-            <label class="col-form-label col-sm-6" for="ok_conduire">J'ai au moins 23 ans, je possède le permis de conduire depuis plus de 3 ans et je me sens capable de conduire en montagne un des véhicules de Fondacio, notamment pour transporter des jeunes</label>
+            <label class="col-form-label col-sm-6" for="ok_conduire">Je me sens capable de conduire en montagne un des véhicules de Fondacio, notamment pour transporter des jeunes</label>
             <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
