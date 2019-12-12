@@ -62,7 +62,7 @@ else {
     if (!empty($_GET['action'])) {
 
         if ($_GET['action'] == 'del') {
-            delete_participant($_GET['id'], 'jeune', 'administration_adultes');
+            delete_participant($_GET['id'], 'adulte', 'administration_adultes');
         }
 
         if ($_GET['action'] == 'edit') {
@@ -631,7 +631,7 @@ else {
                 </div>
                 <label class="col-form-label col-sm-2" for="date_naissance">Date de naissance <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <input type="date" class="form-control" name="date_naissance" id="date_naissance" value="<?php echo $data['date_naissance']; ?>" required>
+                    <input type="date" class="form-control" name="date_naissance" id="date_naissance" max="<?php echo date("Y-m-d") ?>" value="<?php echo $data['date_naissance']; ?>" required>
                 </div>
             </div>
 
@@ -660,7 +660,7 @@ else {
                         </label>
                     </div>
                 </div>
-                <label class="col-form-label col-sm-6" for="ok_conduire">J'ai au moins 23 ans, je possède le permis de conduire depuis plus de 3 ans et je me sens capable de conduire en montagne un des véhicules de Fondacio, notamment pour transporter des jeunes</label>
+                <label class="col-form-label col-sm-6" for="ok_conduire">Je me sens capable de conduire en montagne un des véhicules de Fondacio, notamment pour transporter des jeunes</label>
                 <div class="col-sm-2">
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">

@@ -7,7 +7,7 @@ require_once 'include/head.php';
 
 if (!empty($_POST)) {
 
-    if ($_POST['date_naissance'] > "2005-12-31") {
+    if ($_POST['date_naissance'] > "2006-12-31") {
         echo 'Le camp est réservé aux jeunes qui auront au moins 14 ans lors du début du camp, votre inscription n\'a donc pas été enregistrée. Pour toute question, contactez-nous par mail: jeunes.camps@fondacio.fr';
     }
 
@@ -168,7 +168,7 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="jeune_tel_portable_radio" id="jeune_tel_portable_libelle">Téléphone portable du jeune</label>
+            <label class="col-form-label col-sm-2" for="jeune_tel_portable_radio" id="jeune_tel_portable_libelle">Votre enfant a-t-il un téléphone portable ? </label>
             <div class="col-sm-2">
                 <div class="form-check form-check-inline">
                     <label class="form-check-label">
@@ -182,22 +182,22 @@ else {
                 </div>
             </div>
             <div class="col-sm-3" id="jeune_tel_portable_id">
-                <input type="text" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable">
+                <input type="tel" class="form-control" name="jeune_tel_portable" id="jeune_tel_portable">
             </div>
             <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="tel_fixe" id="tel_fixe">
+                <input type="tel" class="form-control" name="tel_fixe" id="tel_fixe">
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="jeune_mail">Courriel personnel du jeune <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="jeune_mail" id="jeune_mail" required>
+                <input type="email" class="form-control" name="jeune_mail" id="jeune_mail" required>
             </div>
             <label class="col-form-label col-sm-2" for="date_naissance">Date de naissance <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="date" class="form-control" name="date_naissance" id="date_naissance" required><span style="font-size: 12px; color: red" id="date_naissance_alerte"></span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Si vous utilisez Safari, merci de rempli la date au format AAAA/JJ/MM svp.">
+                <input type="date" class="form-control" name="date_naissance" id="date_naissance" max="<?php echo date("Y-m-d") ?>" required><span style="font-size: 12px; color: red" id="date_naissance_alerte"></span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Si vous utilisez Safari, merci de rempli la date au format AAAA/JJ/MM svp.">
             </div>
         </div>
 
@@ -243,11 +243,11 @@ else {
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="taille">Taille (en cm)<span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
             <div class="col-sm-2">
-                <input type="number" class="form-control" name="taille" id="taille" required>
+                <input type="number" pattern="[0-9]{3}" class="form-control" name="taille" id="taille" required>
             </div>
             <label class="col-form-label col-sm-2" for="poids">Poids (en kg) <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="La taille et le poids sont des informations qui nous sont indispensables pour l'inscription aux activités sportives (rafting, canyoning)"></label>
             <div class="col-sm-2">
-                <input type="number" class="form-control" name="poids" id="poids" required>
+                <input type="number" pattern="[0-9]{3}" class="form-control" name="poids" id="poids" required>
             </div>
         </div><br>
 
@@ -272,31 +272,45 @@ else {
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-2" for="parents_adresse">Adresse (seulement si différente de celle du jeune)</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="parents_adresse" id="parents_adresse">
+            <label class="col-form-label col-sm-2" for="parents_adresse">Adresse</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" name="parents_adresse" id="parents_adresse" placeholder="Si différente de l'adresse du jeune">
+            </div>
+			 <label class="col-form-label col-sm-2" for="parents_cp">Code postal</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="parents_cp" id="parents_cp" placeholder="Si différent du code postal du jeune">
+            </div>
+        </div>
+		<div class="form-group row">
+            <label class="col-form-label col-sm-2" for="parents_ville">Ville</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="parents_ville" id="parents_ville" placeholder="Si différente de la ville du jeune">
+            </div>
+            <label class="col-form-label col-sm-2" for="parents_pays">Pays</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control" name="parents_pays" id="parents_pays" placeholder="Si différent du pays du jeune">
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="mere_tel_portable">Téléphone portable de la mère <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="mere_tel_portable" id="mere_tel_portable" required>
+                <input type="tel" class="form-control" name="mere_tel_portable" id="mere_tel_portable" required>
             </div>
             <label class="col-form-label col-sm-2" for="pere_tel_portable">Téléphone portable du père</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="pere_tel_portable" id="pere_tel_portable">
+                <input type="tel" class="form-control" name="pere_tel_portable" id="pere_tel_portable">
             </div>
         </div>
 
         <div class="form-group row">
             <label class="col-form-label col-sm-2" for="parents_mail">Courriel des parents <span style="color: red">*</span></label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="parents_mail" id="parents_mail" required>
+                <input type="mail" class="form-control" name="parents_mail" id="parents_mail" required>
             </div>
             <label class="col-form-label col-sm-2" for="parents_mail2">Courriel secondaire</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="parents_mail2" id="parents_mail2">
+                <input type="mail" class="form-control" name="parents_mail2" id="parents_mail2">
             </div>
         </div>
 
@@ -335,7 +349,7 @@ else {
         <div class="form-group row" id="aller_train">
             <label class="col-form-label col-sm-3" for="aller_train_value">Heure d'arrivée du train <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Si je n'ai pas encore mon horaire de train, je m'engage à l'envoyer dès que je l'ai à jeunes.camps@fondacio.fr"></label>
             <div class="col-sm-3">
-                <input type="time" class="form-control" name="aller_train_value" id="aller_train_value"> (La navette sera celle de <span id="aller_train_navette"></span>)
+                <input type="time" class="form-control" name="aller_train_value" id="aller_train_value"> Fondacio organisera 2 navettes (une à 11h30 et une autre à 14h30 )<br>(Avec l'heure d'arrivée du train, la navette sera celle de <span id="aller_train_navette"></span>)
             </div>
         </div>
 
@@ -382,20 +396,41 @@ else {
             </div>
         </div>
 
-        <h4>Paiement</h4>
-
+        <h4>Paiement</h4><br>
+		<h5>Coût de revient</h5>
         <div class="form-group row">
             <label class="col-form-label col-sm-12">Le coût de revient d’un camp (hébergement, restauration, activités, administratif, encadrement) est de <b>1 100 euros</b>. Fondacio France finance 61% du coût du camp par des dons (parrainage, bénévolat, mécénat). Les 39% restants, soit <b>430 euros</b>, correspondent au prix demandé aux familles. Selon vos possibilités, nous proposons une participation entre <b style="color: red">270 et 1 100 euros.</b><br><br>
-
-            A ce coût s'ajoute le prix du transport:<br>
-            - Le service de navette que nous proposons de la gare de Montréjeau au Mourtis ajoute <b style="color: green">20€ par voyage</b> au coût du camp (donc 40€ si vous arrivez et repartez en train)<br>
-            - Le voyage en bus ajoute <b style="color: green">75€ par voyage</b> au coût du camp (donc 150€ si vous arrivez et repartez en bus)<br><br>
-
-            Si vous décidez de participer à la <b>prépa</b>, son coût de revient (<b style="color: blue">60€</b>) sera également ajouté.<br><br>
-
+			<div >
+			<h5>Coût de Transport</h5>
+			<span id="transport_prix_aller">
+			<h6>Aller:</h6>
+			Vous avez décidez de venir en <span class="transport_aller"></span>, le coût de ce trajet est de <b style="color: green"> <span class="cout_transport_aller"></span>€ </b>.<br><br>
+			</span>
+			<span id="transport_prix_retour">
+			<h6>Retour:</h6>
+			Vous avez décidez de repartir en <span class="transport_retour"></span>, le coût de ce trajet est de <b style="color: green"> <span class="cout_transport_retour"></span>€ </b>.<br><br>
+			</span>
+			<h6>Global:</h6>
+			Le coût de transport global (aller + retour) vous revient à <b style="color: green"> <span class="cout_transport"></span>€</b>.
+			</div> <br>
+			<span id="prepa_prix">
+			<h5>Coût Prépa</h5>
+            Vous décidez de participer à la <b>prépa</b>, son coût de revient est de <b style="color: blue">60€</b>.<br><br>
+			</span>
+			<h5>Coût du Camp</h5>
             Le prix de revient total camp + transport est donc de <b>430 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> = <span id="cout_revient" style="color: red"></span> euros.</b><br>
-            La fourchette de participation proposée est donc de <b>(270 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_basse" style="color: red"></span> euros à (1 100 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_haute" style="color: red"></span> euros.</b></label>
+            La fourchette de participation proposée est donc de <b>(270 + <span class="cout_transport" style="color: green"></span> + <span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_basse" style="color: red"></span> euros à (1 100 + <span class="cout_transport" style="color: green"></span>+<span class="cout_prepa" style="color: blue"></span> =) <span id="cout_fourchette_haute" style="color: red"></span> euros.</b></label>
         </div>
+		
+		<div class="form-group row">
+            <label class="col-form-label col-sm-2" for="code">J'ai reçu un code</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" name="code" id="code"> <span id="code_rep"></span>
+            </div>
+			<div id="affichage_montant_code"></div>
+			
+        </div>
+
 
         <div class="form-group row">
             <label class="col-form-label col-sm-4" for="paiement_declare">Je choisis de payer le montant suivant <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Notez bien ce montant, il vous sera redemandé au moment du paiement.."></label>
@@ -443,7 +478,7 @@ else {
             </div>
             <label class="col-form-label col-sm-2" for="ce_mail"  id="ce_mail_libelle">Courriel du comité d'entreprise</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="ce_mail" id="ce_mail">
+                <input type="mail" class="form-control" name="ce_mail" id="ce_mail">
             </div>
         </div>
 
@@ -497,8 +532,12 @@ else {
 
         <div class="form-check form-check-inline">
             <label class="form-check-label">
-                <input class="form-check-input" type="checkbox" id="conditions_inscription" value="">Les données collectées via ce formulaire seront utilisées dans le cadre de l’organisation de ces événements, avant, pendant et après. Elles seront également utilisées par les associations de Fondacio en France afin vous présenter nos activités et nos projets, par voie email et postal. Nous vous proposons de recevoir des informations adaptées de la part de Fondacio en France afin de vous présenter nos autres activités et projets. Cochez si vous acceptez.<br>
-                Conformément à la Loi Informatique et Libertés du 06 janvier 1978 et au Règlement (UE) N)2016/679, vous bénéficiez d’un droit d’accès, de rectification, d’effacement, de limitation, de portabilité, d’opposition et d’édiction de directives anticipées, que vous pouvez faire valoir en nous écrivant par email à mesdonnees@fondacio.fr ou bien par courrier à l’adresse Fondacio France – DPD, 2 rue de l’Esvière, 49100 ANGERS
+                <input class="form-check-input" type="checkbox" id="conditions_inscription" value="" required><span style="color: red">*</span> En soumettant ce formulaire, j'accepte que les informations saisies soient exploitées pour la gestion de la session (finances, logistique, petits groupes) ainsi que pour m'informer par la suite des actualités de Fondacio, de ses actions et de ses appels aux dons*.<br>
+                * Vos informations personnelles seront utilisées aux fins d'organisation de ce camp. Elles nous permettront également de vous tenir au courant des actualités et des appels à dons de Fondacio en France : vous recevrez donc ponctuellement des emails et quelques courriers dans l'année, desquels vous pourrez vous désabonner à tout moment : <br><br>
+				• en remplissant le formulaire en ligne : <a href="http://mesdonnees.fondacio.fr"> http://mesdonnees.fondacio.fr</a><br>
+				• par courrier en écrivant à « Fondacio France – DPD » à l’adresse suivante : 2 rue de l’Esvière, 49100 ANGERS<br>
+				• par mail en écrivant à <a href="mailto:mesdonnees@fondacio.fr">mesdonnees@fondacio.fr</a><br><br>
+				Conformément à la Loi Informatique et Libertés du 06 janvier 1978 et au Règlement (UE) N)2016/679, vous bénéficiez d’un droit d’accès, de rectification, d’effacement, de limitation, de portabilité, d’opposition et d’édiction de directives anticipées, que vous pouvez faire valoir en nous écrivant par email à mesdonnees@fondacio.fr ou bien par courrier à l’adresse Fondacio France – DPD, 2 rue de l’Esvière, 49100 ANGERS
             </label>
         </div>
 
@@ -521,6 +560,7 @@ else {
             var cout_prepa = 0;
             var cout_transport_aller = 0;
             var cout_transport_retour = 0;
+			var montant_code=0;
 
             // Affichage prépa
 
@@ -534,15 +574,51 @@ else {
                     $('#prepa').prop('required',false);
                 }
             });
+			//Gestion montant code
+			$('#code').keyup(function(){
+			$('#code_rep').html('');
+			var code = $(this).val();
+			if(code!=""){
+				$.ajax({
+					type: 'POST',
+					url: 'ajax/code.php',
+				data: {'code': encodeURIComponent(code)},
+					success:function(data){
+						var reponse = data.split(',');
+						var cod= reponse[0];
+						montant_code= reponse[1];
+						var utilise= reponse[2]
+						console.log(cod);
+						if(cod==code && utilise==0){
+							$('#code_rep').text('Le code est valide, le montant de celui-ci est de  '+ montant_code + '€');
+							$('#affichage_montant_code').html('<input type="number" class="form-control" name="montant_code" id="montant_code" value="'+montant_code+'" readonly hidden/>')
+						}
+						else if (cod==code && utilise!=0){
+							$('#code_rep').text("Le code a déjà été utilisé");
+						}
+						else{
+							$('#code_rep').text("Le code n'est pas valide");
+						}							
+					}
+				});
+				
+			}
+			
+		});
+				
 
             // Gestion cout prepa
+			$('#prepa_prix').hide();
+				
 
             $('input[type=radio][name=prepa]').change(function() {
                 if (this.value == 1) {
                     cout_prepa = 60;
+					$('#prepa_prix').show();
                 }
                 else {
                     cout_prepa = 0;
+					$('#prepa_prix').hide();
                 }
                 $('.cout_transport').text(cout_transport);
                 $('.cout_prepa').text(cout_prepa);
@@ -558,6 +634,8 @@ else {
             $('#retour_voiture').hide();
             $('#retour_train').hide();
             $('#retour_bus').hide();
+			$('#transport_prix_aller').hide();
+			$('#transport_prix_retour').hide();
 
             $('#aller_transport').change(function() {
                 if (this.value == "voiture") {
@@ -565,9 +643,12 @@ else {
                     $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
+					$('#transport_prix_aller').show();
                     cout_transport_aller = 0;
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
+					$('.cout_transport_aller').text(cout_transport_aller);
+					$('.transport_aller').text("voiture");
                     $('.cout_prepa').text(cout_prepa);
                     $('#cout_revient').text(cout_transport+cout_prepa+430);
                     $('#cout_fourchette_basse').text(cout_transport+cout_prepa+270);
@@ -578,8 +659,11 @@ else {
                     $('#aller_bus_clear').append('<option value="" id="aller_bus_villes" selected></option>');
                     $('#aller_train').show();
                     $('#aller_bus').hide();
+					$('#transport_prix_aller').show();
                     cout_transport_aller = 20;
                     cout_transport = cout_transport_aller+cout_transport_retour;
+					$('.cout_transport_aller').text(cout_transport_aller);
+					$('.transport_aller').text("train");
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
                     $('#cout_revient').text(cout_transport+cout_prepa+430);
@@ -589,7 +673,10 @@ else {
                 if (this.value == "bus") {
                     $('#aller_train').hide();
                     $('#aller_bus').show();
+					$('#transport_prix_aller').show();
                     cout_transport_aller = 75;
+					$('.cout_transport_aller').text(cout_transport_aller);
+					$('.transport_aller').text("bus");
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
@@ -612,6 +699,7 @@ else {
                 if (this.value == "") {
                     $('#aller_train').hide();
                     $('#aller_bus').hide();
+					$('#transport_prix_aller').hide();
                     cout_transport_aller = 0;
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
@@ -629,7 +717,10 @@ else {
                     $('#retour_voiture').show();
                     $('#retour_train').hide();
                     $('#retour_bus').hide();
+					$('#transport_prix_retour').show();	
                     cout_transport_retour = 0;
+					$('.cout_transport_retour').text(cout_transport_retour);
+					$('.transport_retour').text("voiture");
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
@@ -643,7 +734,10 @@ else {
                     $('#retour_voiture').hide();
                     $('#retour_train').show();
                     $('#retour_bus').hide();
+					$('#transport_prix_retour').show();
                     cout_transport_retour = 20;
+					$('.cout_transport_retour').text(cout_transport_retour);
+					$('.transport_retour').text("train");
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
@@ -655,7 +749,10 @@ else {
                     $('#retour_voiture').hide();
                     $('#retour_train').hide();
                     $('#retour_bus').show();
+					$('#transport_prix_retour').show();
                     cout_transport_retour = 75;
+					$('.cout_transport_retour').text(cout_transport_retour);
+					$('.transport_retour').text("bus");
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
                     $('.cout_prepa').text(cout_prepa);
@@ -679,6 +776,7 @@ else {
                     $('#retour_voiture').hide();
                     $('#retour_train').hide();
                     $('#retour_bus').hide();
+					$('#transport_prix_retour').hide();
                     cout_transport_retour = 0;
                     cout_transport = cout_transport_aller+cout_transport_retour;
                     $('.cout_transport').text(cout_transport);
@@ -700,10 +798,10 @@ else {
 
             $('#date_naissance').change(function() {
                 console.log(this.value);
-                if (this.value < "2001-01-01") {
+                if (this.value < "2002-01-01") {
                     $('#date_naissance_alerte').text('Ce camp est à destination des jeunes de 14 à 18 ans. Nous acceptons exceptionnellement des jeunes plus âgés s’ils ne sont pas scolarisés en études supérieures. Merci de nous contacter pour en parler: jeunes.camps@fondacio.fr. Par ailleurs, nous proposons un Forum 18/30 ans pour les jeunes étudiants ou professionnels.');
                 }
-                else if (this.value > "2005-12-31") {
+                else if (this.value > "2006-12-31") {
                     $('#date_naissance_alerte').text('Ce camp est réservé aux jeunes ayant au moins 14 ans au début du camp. Votre inscription ne sera donc pas prise en compte.');
                 }
                 else {
@@ -718,12 +816,12 @@ else {
                 if (this.value == 1) {
                     $('#jeune_tel_portable').show();
                     $("#jeune_tel_portable").prop('required',true);
-                    $("#jeune_tel_portable_libelle").html('Téléphone portable du jeune <span style="color: red">*</span>');
+                    $("#jeune_tel_portable_libelle").html('Votre enfant a-t-il un téléphone portable ? <span style="color: red">*</span>');
                 }
                 else {
                     $('#jeune_tel_portable').hide();
                     $("#jeune_tel_portable").prop('required',false);
-                    $("#jeune_tel_portable_libelle").html('Téléphone portable du jeune');
+                    $("#jeune_tel_portable_libelle").html('Votre enfant a-t-il un téléphone portable ?');
                 }
             });
 

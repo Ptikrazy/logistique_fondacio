@@ -41,7 +41,7 @@ function convert_date($date, $from, $to) {
 function age($date) {
 
     $d1 = new DateTime($date);
-    $d2 = new DateTime('2019-07-07');
+    $d2 = new DateTime('2020-07-07');
     $diff = $d2->diff($d1);
 
     return $diff->y;
@@ -155,7 +155,64 @@ function delete_camp($id) {
     redirect('administration_camps.php');
 
 }
+function get_codes() {
 
+    global $bdd;
+
+    $req  = 'SELECT * FROM codes ';
+    $res = $bdd->query($req);
+    while ($d = $res->fetch()) {
+        $data[$d['id_code']] = $d;
+    }
+    $res->closeCursor();
+
+    return $data;
+
+}
+function get_code($code) {
+
+    global $bdd;
+
+    $req = "SELECT * FROM codes WHERE code LIKE '$code'";
+    $res = $bdd->query($req);
+    $data = $res->fetchALL();
+    $res->closeCursor();
+
+    return $data;
+
+}
+
+function update_code($code) {
+
+    global $bdd;
+
+   $req = "UPDATE codes SET utilise=1 WHERE code LIKE '$code'";
+    $res = $bdd->query($req);
+    $data = $res->fetch();
+    $res->closeCursor();
+
+}
+function add_code($data) {
+
+    global $bdd;
+
+    $req = $bdd->prepare('INSERT INTO codes(code, montant) VALUES (:code, :montant)');
+	$req->execute(array(
+	'code'=>$data[0],
+	'montant'=>$data[1]));
+    redirect('administration_codes.php');
+
+}
+function delete_code($id) {
+
+    global $bdd;
+
+    $req = 'DELETE FROM codes WHERE id_code = '.$id;
+    $res = $bdd->query($req);
+    $res->closeCursor();
+    redirect('administration_codes.php');
+
+}
 function get_remplissage_camps() {
 
     global $bdd;
@@ -432,14 +489,27 @@ function enregistrer_inscription_jeune($data) {
     }
     $req .= 'taille = '.$data['taille'].', ';
     $req .= 'poids = '.$data['poids'].', ';
+	$req .= 'allergies = "'.$data['allergies'].'", ';
     $req .= 'parents_nom = "'.$data['parents_nom'].'", ';
     $req .= 'parents_prenom = "'.$data['parents_prenom'].'", ';
     $req .= 'parents_adresse = "'.$data['parents_adresse'].'", ';
+	$req .= 'parents_cp = "'.$data['parents_cp'].'", ';
+	$req .= 'parents_ville = "'.$data['parents_ville'].'", ';
+	$req .= 'parents_pays = "'.$data['parents_pays'].'", ';
     $req .= 'mere_portable = "'.$data['mere_tel_portable'].'", ';
     $req .= 'pere_portable = "'.$data['pere_tel_portable'].'", ';
     $req .= 'parents_mail = "'.$data['parents_mail'].'", ';
     $req .= 'observations = "'.$data['observations'].'", ';
     $req .= 'paiement_declare = '.$data['paiement_declare'].', ';
+	$test=get_code($data['code']);
+	if($data['code']==$test['code']){
+		if($test['utilise']==0){
+			$req .= 'code = "'.$data['code'].'", ';
+			if(isset($data['montant_code'])){
+				$req .= 'montant_code = "'.$data['montant_code'].'", ';
+			}
+		}
+	}
     if (isset($data['attestation_inscription'])) {
         $req .= 'attestation_inscription = '.$data['attestation_inscription'].', ';
     }
@@ -482,6 +552,7 @@ function enregistrer_inscription_jeune($data) {
 
     $res = $bdd->query($req);
     $res->closeCursor();
+	update_code($data['code']);
 
     // Check places bus
     if (get_totaux_transport($infos_camp['numero'], 'aller', 'bus') > 47) {
@@ -537,6 +608,7 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
     }
     $str .= '<br>Taille: '.$data['taille'].' cm<br>
     Poids: '.$data['poids'].' kg<br>
+	Allergies: '.$data['allergies'].'<br>
     Nom des parents: '.$data['parents_nom'].'<br>
     Prénom des parents: '.$data['parents_prenom'].'<br>
     Tel portable de la mère: '.$data['mere_tel_portable'].'<br>
@@ -595,12 +667,12 @@ PS : Vous trouverez ci-dessous les infos que vous venez de saisir.<br><br>';
 function send_mail_totaux_bus($camp) {
 
     $str      = 'Le bus aller du camp '.$camp.' a atteint 48 places libres restantes !';
-    $to       = 'jeunes.camps@fondacio.fr';
+    $to       = 'Fondacio Jeunes <jeunes.camps@fondacio.fr>';
     $subject  = 'ALERTE bus plein camp jeunes n°'.$camp;
     $headers  = 'MIME-Version: 1.0' . "\r\n";
     $headers .= 'Content-type: text/html; charset=utf-8'."\r\n";
     $headers .= 'From: Fondacio Jeunes <jeunes.camps@fondacio.fr>'."\r\n".
-                'Reply-To: jeunes.camps@fondacio.fr';
+                'Reply-To: Fondacio Jeunes <jeunes.camps@fondacio.fr>';
 
     mail($to, $subject, $str, $headers);
 

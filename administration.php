@@ -95,7 +95,7 @@ else {
 
             $data = get_jeune($_GET['id']);
 
-            $data['rgt_montant'] = $data['cb_montant'] + $data['cheque1_montant'] + $data['cheque2_montant'] + $data['cheque3_montant'] + $data['cheque4_montant'] + $data['cheque5_montant'] + $data['cheque6_montant'] + $data['cv_montant'] + $data['caf_rgt'] + $data['bourse'] + $data['autre'] - $data['rgt_rembourse'];
+            $data['rgt_montant'] = $data['montant_code'] + $data['cb_montant'] + $data['cheque1_montant'] + $data['cheque2_montant'] + $data['cheque3_montant'] + $data['cheque4_montant'] + $data['cheque5_montant'] + $data['cheque6_montant'] + $data['cv_montant'] + $data['caf_rgt'] + $data['bourse'] + $data['autre'] - $data['rgt_rembourse'];
 
             if (!empty($_POST)) {
 
@@ -202,7 +202,7 @@ else {
                 unset($_POST['aller_train']);
                 unset($_POST['retour_train']);
 
-                $_POST['rgt_montant'] = $_POST['cb_montant'] + $_POST['cheque1_montant'] + $_POST['cheque2_montant'] + $_POST['cheque3_montant'] + $_POST['cheque4_montant'] + $_POST['cheque5_montant'] + $_POST['cheque6_montant'] + $_POST['cv_montant'] + $_POST['caf_rgt'] + $_POST['bourse'] + $_POST['autre'] - $_POST['rgt_rembourse'];
+                $_POST['rgt_montant'] = $data['montant_code'] + $_POST['cb_montant'] + $_POST['cheque1_montant'] + $_POST['cheque2_montant'] + $_POST['cheque3_montant'] + $_POST['cheque4_montant'] + $_POST['cheque5_montant'] + $_POST['cheque6_montant'] + $_POST['cv_montant'] + $_POST['caf_rgt'] + $_POST['bourse'] + $_POST['autre'] - $_POST['rgt_rembourse'];
 
                 maj_administratif_jeune($_GET['id'], $_POST);
                 $_SESSION['edit_ok'] = 1;
@@ -309,7 +309,7 @@ else {
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="parents_mail">Mail des parents</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="parents_mail" id="parents_mail" value="<?php echo $data['parents_mail']; ?>">
+                    <input type="mail" class="form-control" name="parents_mail" id="parents_mail" value="<?php echo $data['parents_mail']; ?>">
                 </div>
                 <label class="col-form-label col-sm-2" for="da_a_relancer">A relancer le</label>
                 <div class="col-sm-3">
@@ -423,11 +423,20 @@ else {
                     <input type="text" class="form-control" name="paiement_declare" id="paiement_declare" value="<?php echo $data['paiement_declare']; ?>" disabled>
                 </div>
                 <label class="col-form-label col-sm-2" for="solde">Solde</label>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <input type="text" class="form-control" name="solde" id="solde" value="<?php echo $data['rgt_montant']-$data['paiement_declare']; ?>" disabled>
                 </div>
             </div>
-
+			<?php 
+			if(!is_null($data['code'])){
+				echo '<div class="form-group row">
+				<label class="col-form-label col-sm-2" for="montant_code">Montant code</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" name="montant_code" id="montant_code" value="'.$data['montant_code'].'" disabled>
+                </div>
+			</div>';
+			}
+			?>
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="rgt_commentaire">Commentaires financier</label>
                 <div class="col-sm-10">
@@ -774,22 +783,22 @@ else {
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="tel_portable">Téléphone portable du jeune <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="A indiquer obligatoirement si le jeune vient en bus ou en train ; si le jeune n'en possède pas, indiquer celui du père ou de la mère"></label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="tel_portable" id="tel_portable" value="<?php echo $data['tel_portable']; ?>">
+                    <input type="tel" class="form-control" name="tel_portable" id="tel_portable" value="<?php echo $data['tel_portable']; ?>">
                 </div>
                 <label class="col-form-label col-sm-2" for="tel_fixe">Téléphone fixe</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="tel_fixe" id="tel_fixe" value="<?php echo $data['tel_fixe']; ?>">
+                    <input type="tel" class="form-control" name="tel_fixe" id="tel_fixe" value="<?php echo $data['tel_fixe']; ?>">
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="mail">Courriel personnel du jeune <span style="color: red">*</span> <img src="include/icons/info.svg" alt="info" class="icon" data-toggle="tooltip" data-placement="top" title="Cette adresse nous servira à envoyer au jeune un message de bienvenue et d'éventuelles invitations aux futurs évènements."></label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="mail" id="mail" value="<?php echo $data['mail']; ?>" required>
+                    <input type="mail" class="form-control" name="mail" id="mail" value="<?php echo $data['mail']; ?>" required>
                 </div>
                 <label class="col-form-label col-sm-2" for="date_naissance">Date de naissance <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <input type="date" class="form-control" name="date_naissance" id="date_naissance" value="<?php echo $data['date_naissance']; ?>" required>
+                    <input type="date" class="form-control" name="date_naissance" id="date_naissance" max="<?php echo date("Y-m-d") ?>" value="<?php echo $data['date_naissance']; ?>" required>
                 </div>
             </div>
 
@@ -855,22 +864,36 @@ else {
                     <input type="text" class="form-control" name="parents_prenom" id="parents_prenom" value="<?php echo $data['parents_prenom']; ?>" required>
                 </div>
             </div>
-
-            <div class="form-group row">
-                <label class="col-form-label col-sm-2" for="parents_adresse">Adresse (seulement si différente de celle du jeune)</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" name="parents_adresse" id="parents_adresse" value="<?php echo $data['parents_adresse']; ?>">
-                </div>
-            </div>
+			
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2" for="parents_adresse">Adresse (si différente)</label>
+				<div class="col-sm-6">
+					<input type="text" class="form-control" name="parents_adresse" id="parents_adresse" value="<?php echo $data['parents_adresse']; ?>">
+				</div>
+				<label class="col-form-label col-sm-2" for="parents_cp">Code postal</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control" name="parents_cp" id="parents_cp" value="<?php echo $data['parents_cp']; ?>">
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2" for="parents_ville">Ville</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="parents_ville" id="parents_ville" value="<?php echo $data['parents_ville']; ?>">
+				</div>
+				<label class="col-form-label col-sm-2" for="parents_pays">Pays</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="parents_pays" id="parents_pays" value="<?php echo $data['parents_pays']; ?>">
+				</div>
+			</div>
 
             <div class="form-group row">
                 <label class="col-form-label col-sm-2" for="mere_portable">Téléphone portable de la mère <span style="color: red">*</span></label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="mere_portable" id="mere_portable" value="<?php echo $data['mere_portable']; ?>" required>
+                    <input type="tel" class="form-control" name="mere_portable" id="mere_portable" value="<?php echo $data['mere_portable']; ?>" required>
                 </div>
                 <label class="col-form-label col-sm-2" for="pere_portable">Téléphone portable du père</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="pere_portable" id="pere_portable" value="<?php echo $data['pere_portable']; ?>">
+                    <input type="tel" class="form-control" name="pere_portable" id="pere_portable" value="<?php echo $data['pere_portable']; ?>">
                 </div>
             </div>
 
@@ -899,7 +922,7 @@ else {
                 </div>
                 <label class="col-form-label col-sm-2" for="ce_mail"  id="ce_mail_libelle">Courriel du comité d'entreprise</label>
                 <div class="col-sm-3">
-                    <input type="text" class="form-control" name="ce_mail" id="ce_mail" value="<?php echo $data['ce_mail']; ?>">
+                    <input type="mail" class="form-control" name="ce_mail" id="ce_mail" value="<?php echo $data['ce_mail']; ?>">
                 </div>
             </div>
 
